@@ -3,73 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitRestore</title>
+    <title>DigitRestore - Accueil</title>
 
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: "Montserrat", sans-serif;
-            background: linear-gradient(180deg, #000000, #111111, #1a1a1a);
+            background: radial-gradient(circle at 50% 0%, #1a1a1a, #0c0c0c, #000000);
+            overflow: hidden;
+            color: white;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
         }
+
+        /* === ANIMATIONS D’OBJETS FLOTTANTS HIGH-TECH === */
+
+        .floating {
+            position: absolute;
+            opacity: 0.16;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            font-weight: 500;
+            color: #ff7d7d;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); opacity: 0.12; }
+            50% { transform: translateY(-18px); opacity: 0.25; }
+            100% { transform: translateY(0px); opacity: 0.12; }
+        }
+
+        .f1 { top: 12%; left: 20%; animation-delay: 0s; }
+        .f2 { top: 65%; left: 15%; animation-delay: 1.2s; }
+        .f3 { top: 25%; right: 12%; animation-delay: 0.7s; }
+        .f4 { top: 70%; right: 25%; animation-delay: 2.4s; }
+        .f5 { top: 45%; left: 50%; animation-delay: 1.9s; }
+
+        /* === CONTENU CENTRAL === */
 
         .welcome-container {
             text-align: center;
-            animation: fadeIn 1.5s ease-out;
+            z-index: 5;
+            animation: fadeIn 1.6s ease-out;
         }
 
         .welcome-logo {
-            font-size: 40px;
+            font-size: 48px;
             font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
+            letter-spacing: 4px;
+            margin-bottom: 22px;
         }
 
         .welcome-logo span {
-            background: linear-gradient(90deg, #ff5757, #ff9966);
+            background: linear-gradient(90deg, #ff4747, #ff9966);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        .welcome-subtitle {
+            font-size: 15px;
+            color: #cccccc;
+            margin-bottom: 32px;
+            opacity: 0.85;
+            letter-spacing: 0.11em;
+        }
+
+        /* === BOUTON ENTRÉE === */
+
         .enter-btn {
-            padding: 12px 26px;
-            border-radius: 30px;
+            padding: 13px 32px;
+            border-radius: 40px;
             font-size: 15px;
             border: none;
             cursor: pointer;
-            background: linear-gradient(135deg, #e53935, #ff7043);
+            background: linear-gradient(135deg, #ff3a3a, #ff7b4b);
             color: white;
+            font-weight: 600;
+            letter-spacing: 0.07em;
             box-shadow: 0 10px 25px rgba(229, 57, 53, 0.4);
             transition: 0.2s ease;
         }
 
         .enter-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(229, 57, 53, 0.6);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 14px 32px rgba(255, 80, 80, 0.6);
         }
 
+        /* === FONDU === */
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(18px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
     </style>
 </head>
 
 <body>
+
+    <!-- Éléments flottants (icônes high-tech simulées) -->
+    <div class="floating f1">Carte mère</div>
+    <div class="floating f2">Batterie Li-ion</div>
+    <div class="floating f3">Microsoudure</div>
+    <div class="floating f4">Connecteur charge</div>
+    <div class="floating f5">Microscope</div>
+
+    <!-- Contenu principal -->
     <div class="welcome-container">
-        <div class="welcome-logo">
-            DIGIT<span>RESTORE</span>
-        </div>
+        <div class="welcome-logo">DIGIT<span>RESTORE</span></div>
+        <div class="welcome-subtitle">Réparation • Reprise • Diagnostic technique</div>
 
         <button class="enter-btn" onclick="window.location.href='site.html'">
-            Entrer dans le site
+            Entrer dans l'atelier
         </button>
     </div>
+
 </body>
 </html>
+
 
