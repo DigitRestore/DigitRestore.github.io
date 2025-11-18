@@ -13,4 +13,5 @@ document.addEventListener("DOMContentLoaded", function() {
     loadComponent("services", "components/services.html");
     loadComponent("reprise", "components/reprise.html");
     loadComponent("pourquoi", "components/pourquoi.html");
+    loadComponent("processus", "components/processus.html");
 });
