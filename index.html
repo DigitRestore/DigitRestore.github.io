@@ -3,83 +3,897 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitRestore - Réparation & Reconditionnement</title>
+    <title>DigitRestore - Réparation & Reprise de Smartphones</title>
+
+    <!-- Police moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --red: #e53935;
+            --dark: #1f1f1f;
+            --grey: #444;
+            --light-grey: #f4f4f4;
+            --border-radius: 14px;
+            --shadow-soft: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            background: #f5f5f5;
-            color: #333;
+            padding: 0;
         }
-        header {
-            background: linear-gradient(90deg, #ff3333, #555555);
-            padding: 20px;
-            text-align: center;
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
+
+        body {
+            font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #101010 0%, #181818 28%, #202020 60%, #121212 100%);
+            color: #f5f5f5;
+            line-height: 1.6;
         }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
         .container {
-            padding: 20px;
-            max-width: 900px;
-            margin: auto;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px;
         }
+
+        /* HEADER + NAV */
+
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(16px);
+            background: linear-gradient(90deg, rgba(20,20,20,0.95), rgba(40,40,40,0.9));
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: radial-gradient(circle at 0 0, #ff7961, #c62828);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .brand-logo span {
+            transform: translateY(1px);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+
+        .brand-tag {
+            font-size: 11px;
+            color: #bbbbbb;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            position: relative;
+            font-weight: 500;
+            color: #e0e0e0;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--red), #ff867c);
+            transition: width 0.25s ease-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 720px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* HERO */
+
+        .hero {
+            padding: 40px 0 60px;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+            gap: 36px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                padding-top: 20px;
+            }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(229, 57, 53, 0.08);
+            border-radius: 999px;
+            padding: 4px 12px;
+            border: 1px solid rgba(229, 57, 53, 0.5);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #ff8a80;
+            margin-bottom: 16px;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #69f0ae;
+            box-shadow: 0 0 8px rgba(105, 240, 174, 0.7);
+        }
+
+        .hero-title {
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(90deg, #ff8a80, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: #c7c7c7;
+            max-width: 420px;
+            margin-bottom: 26px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .btn-primary {
+            padding: 10px 22px;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, var(--red), #ff7043);
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(229, 57, 53, 0.4);
+            transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, filter 0.12s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px rgba(229, 57, 53, 0.6);
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            padding: 9px 18px;
+            border-radius: 999px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.22);
+            color: #e0e0e0;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .hero-note {
+            font-size: 12px;
+            color: #9e9e9e;
+        }
+
+        /* HERO CARD (visuel smartphone) */
+
+        .hero-card {
+            background: radial-gradient(circle at top, #2b2b2b 0, #171717 50%, #111 100%);
+            border-radius: 26px;
+            padding: 20px 18px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255,255,255,0.03);
+            max-width: 360px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 11px;
+            color: #bdbdbd;
+        }
+
+        .hero-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: rgba(76, 175, 80, 0.12);
+            color: #c8e6c9;
+            font-size: 10px;
+        }
+
+        .hero-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: #66bb6a;
+        }
+
+        .phone-mock {
+            margin: 0 auto 14px;
+            width: 100%;
+            max-width: 260px;
+            aspect-ratio: 9 / 18;
+            border-radius: 28px;
+            padding: 6px;
+            background: radial-gradient(circle at 0 0, #ff7043, #b71c1c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .phone-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 22px;
+            background: radial-gradient(circle at 20% 0%, #ffffff 0, #f5f5f5 18%, #212121 60%, #000000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-glow {
+            position: absolute;
+            inset: 28% 10% 40% 10%;
+            background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.45) 0, transparent 55%);
+            opacity: 0.9;
+        }
+
+        .phone-bottom-strip {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 56%;
+            height: 4px;
+            border-radius: 999px;
+            background: rgba(250,250,250,0.35);
+        }
+
+        .phone-text {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 11px;
+            color: #f5f5f5;
+            text-shadow: 0 0 8px rgba(0,0,0,0.7);
+        }
+
+        .hero-card-bottom {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 11px;
+        }
+
+        .hero-chip {
+            flex: 1;
+            padding: 8px 10px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .hero-chip-title {
+            font-size: 11px;
+            color: #eeeeee;
+            margin-bottom: 2px;
+        }
+
+        .hero-chip-value {
+            font-size: 11px;
+            color: #ffab91;
+        }
+
+        /* SECTIONS GÉNÉRALES */
+
+        .section {
+            padding: 26px 0 10px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: #a0a0a0;
+            margin-bottom: 18px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .card {
-            background: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background: radial-gradient(circle at top left, rgba(229,57,53,0.2), rgba(20,20,20,0.96));
+            border-radius: var(--border-radius);
+            padding: 14px 14px 16px;
+            border: 1px solid rgba(255,255,255,0.04);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.35);
         }
-        .title {
-            font-size: 22px;
-            font-weight: bold;
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .card-text {
+            font-size: 13px;
+            color: #d0d0d0;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.12);
+            font-size: 11px;
+            color: #f5f5f5;
+            margin-bottom: 6px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #ffcc80;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        @media (max-width: 840px) {
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .step {
+            background: #151515;
+            border-radius: var(--border-radius);
+            padding: 14px 14px 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .step-number {
+            width: 22px;
+            height: 22px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--red), #ff7043);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .step-text {
+            font-size: 13px;
+            color: #d0d0d0;
+        }
+
+        /* CONTACT */
+
+        .contact-card {
+            background: #151515;
+            border-radius: 18px;
+            padding: 18px 16px 18px;
+            border: 1px solid rgba(255,255,255,0.08);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 840px) {
+            .contact-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-info-line {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .contact-highlight {
+            font-size: 13px;
+            color: #bdbdbd;
             margin-bottom: 10px;
         }
+
+        .contact-note {
+            font-size: 12px;
+            color: #9e9e9e;
+        }
+
+        .contact-box {
+            background: radial-gradient(circle at top, rgba(229,57,53,0.23), rgba(10,10,10,0.95));
+            border-radius: 14px;
+            padding: 10px 12px 12px;
+            border: 1px solid rgba(255,255,255,0.06);
+            font-size: 12px;
+            color: #eeeeee;
+        }
+
+        /* FOOTER */
+
         footer {
-            background: #333;
-            color: #ddd;
-            text-align: center;
-            padding: 10px;
-            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 14px 0 18px;
+            margin-top: 18px;
+            font-size: 11px;
+            color: #9e9e9e;
+        }
+
+        footer .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            color: #e0e0e0;
+            font-size: 11px;
         }
     </style>
 </head>
 <body>
 
-<header>DigitRestore</header>
-
-<div class="container">
-
-    <div class="card">
-        <div class="title">Réparation & Reconditionnement Smartphone</div>
-        <p>
-            Réparations rapides, fiables et garanties.  
-            Déplacements à domicile sur rendez-vous.  
-            Diagnostic complet – Écrans, batteries, connecteurs, cartes mères, etc.
-        </p>
+<header class="main-header">
+    <div class="container nav">
+        <div class="brand">
+            <!-- Quand tu auras ton logo : remplace le bloc ci-dessous par <img src="logo.png" alt="DigitRestore" class="brand-logo-img"> -->
+            <div class="brand-logo">
+                <span>D</span>
+            </div>
+            <div class="brand-text">
+                <div class="brand-name">DigitRestore</div>
+                <div class="brand-tag">Réparation & Reprise Mobile</div>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#reprise">Reprise</a>
+            <a href="#pourquoi">Pourquoi nous</a>
+            <a href="#processus">Processus</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </div>
+</header>
 
-    <div class="card">
-        <div class="title">Rachat / Reprise</div>
-        <p>
-            Nous rachetons vos téléphones avec une procédure totalement sécurisée.  
-            Vérification IMEI, diagnostic complet, proposition immédiate.
-        </p>
-    </div>
+<main>
 
-    <div class="card">
-        <div class="title">Contact</div>
-        <p>
-            📞 Téléphone : 06 XX XX XX XX <br>
-            📧 Email : contact@digitrestore.fr
-        </p>
-    </div>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container hero-inner">
+            <div>
+                <div class="badge">
+                    <div class="badge-dot"></div>
+                    <span>Interventions sur rendez-vous</span>
+                </div>
 
-</div>
+                <h1 class="hero-title">
+                    Réparation & reprise de smartphones <span>haut de gamme</span>, en toute transparence.
+                </h1>
+
+                <p class="hero-subtitle">
+                    DigitRestore vous accompagne pour redonner vie à vos smartphones et tablettes :
+                    réparation soignée, diagnostic complet, reprise sécurisée et conseils honnêtes – sans surprise.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#contact">
+                        <button class="btn-primary">Demander un diagnostic</button>
+                    </a>
+                    <a href="#reprise">
+                        <button class="btn-secondary">Reprise / rachat sécurisé</button>
+                    </a>
+                </div>
+
+                <p class="hero-note">
+                    Intervention à domicile ou sur rendez-vous, selon disponibilité.  
+                    Possibilité d’établir un devis détaillé avant toute réparation.
+                </p>
+            </div>
+
+            <div>
+                <div class="hero-card">
+                    <div class="hero-card-top">
+                        <span>Exemple d’intervention</span>
+                        <div class="hero-status">
+                            <div class="hero-status-dot"></div>
+                            <span>Diagnostic en cours</span>
+                        </div>
+                    </div>
+
+                    <div class="phone-mock">
+                        <div class="phone-inner">
+                            <div class="phone-glow"></div>
+                            <div class="phone-text">
+                                iPhone / Samsung / Android<br>
+                                Écran – Batterie – Connecteur<br>
+                                Restauration & optimisation
+                            </div>
+                            <div class="phone-bottom-strip"></div>
+                        </div>
+                    </div>
+
+                    <div class="hero-card-bottom">
+                        <div class="hero-chip">
+                            <div class="hero-chip-title">Diagnostic complet</div>
+                            <div class="hero-chip-value">Avant toute décision</div>
+                        </div>
+                        <div class="hero-chip">
+                            <div class="hero-chip-title">Reprise possible</div>
+                            <div class="hero-chip-value">Même en panne</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Services de réparation</h2>
+            <p class="section-subtitle">
+                Une approche orientée qualité et fiabilité, pour prolonger la durée de vie de vos appareils
+                tout en maîtrisant votre budget.
+            </p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="pill">
+                        <div class="pill-dot"></div>
+                        Écran & affichage
+                    </div>
+                    <div class="card-title">Remplacement d’écrans</div>
+                    <p class="card-text">
+                        Écrans fissurés, tactiles défaillants, problèmes d’affichage.  
+                        Pièces de qualité choisies avec soin, montage propre et contrôles fonctionnels.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="pill">
+                        <div class="pill-dot"></div>
+                        Autonomie & batterie
+                    </div>
+                    <div class="card-title">Remplacement de batteries</div>
+                    <p class="card-text">
+                        Batterie qui se vide trop vite ? Redonnez une seconde vie à votre smartphone avec
+                        une batterie remplacée dans les règles de l’art, après diagnostic.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="pill">
+                        <div class="pill-dot"></div>
+                        Connectique
+                    </div>
+                    <div class="card-title">Connecteurs & charge</div>
+                    <p class="card-text">
+                        Problèmes de charge, câbles qui “accrochent mal”, connecteurs instables :
+                        nettoyage, réparation ou remplacement selon l’état réel du matériel.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="pill">
+                        <div class="pill-dot"></div>
+                        Diagnostic complet
+                    </div>
+                    <div class="card-title">Analyse & conseils</div>
+                    <p class="card-text">
+                        Diagnostic structuré : état général, composants critiques, viabilité de la réparation,
+                        intérêt économique versus remplacement ou reprise.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="pill">
+                        <div class="pill-dot"></div>
+                        Données & sécurité
+                    </div>
+                    <div class="card-title">Accompagnement sur-mesure</div>
+                    <p class="card-text">
+                        Conseils pour sécuriser vos données, préparer un reconditionnement,
+                        ou céder votre appareil dans de bonnes conditions.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="pill">
+                        <div class="pill-dot"></div>
+                        Déplacement
+                    </div>
+                    <div class="card-title">Intervention à domicile</div>
+                    <p class="card-text">
+                        Déplacements possibles selon secteur géographique et type de demande,
+                        avec prise de rendez-vous et créneaux définis en amont.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REPRISE / RACHAT -->
+    <section id="reprise" class="section">
+        <div class="container">
+            <h2 class="section-title">Reprise & rachat sécurisé</h2>
+            <p class="section-subtitle">
+                Une reprise structurée de vos appareils, avec traçabilité, contrôle IMEI et transparence
+                sur la valeur proposée.
+            </p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-title">Vérification IMEI</div>
+                    <p class="card-text">
+                        Contrôle systématique du numéro IMEI, pour éviter les appareils déclarés volés
+                        ou bloqués. Objectif : protéger le vendeur comme l’acheteur.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Diagnostic avant offre</div>
+                    <p class="card-text">
+                        État cosmétique, fonctionnement des principaux composants, batterie,
+                        stockage, version logicielle…  
+                        L’offre de reprise est basée sur des critères concrets.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Process clair & traçable</div>
+                    <p class="card-text">
+                        Offre de rachat expliquée, possibilité de refuser en toute liberté,
+                        et documents remis pour garder une trace de la cession.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POURQUOI NOUS -->
+    <section id="pourquoi" class="section">
+        <div class="container">
+            <h2 class="section-title">Pourquoi choisir DigitRestore ?</h2>
+            <p class="section-subtitle">
+                Une approche humaine, technique et transparente, pensée pour durer.
+            </p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-title">Transparence avant tout</div>
+                    <p class="step-text">
+                        Explications claires sur l’état de votre appareil, la pertinence de la réparation
+                        et l’intérêt éventuel d’une reprise plutôt qu’une réparation coûteuse.
+                    </p>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-title">Rigueur & méthode</div>
+                    <p class="step-text">
+                        Démarche structurée : diagnostic, vérifications, proposition, validation, intervention.
+                        Pas de “bricolage rapide”, mais une approche réfléchie.
+                    </p>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-title">Conseils personnalisés</div>
+                    <p class="step-text">
+                        Chaque situation est différente : utilisation, budget, contraintes.
+                        L’objectif est de vous donner une vision claire pour décider sereinement.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESSUS -->
+    <section id="processus" class="section">
+        <div class="container">
+            <h2 class="section-title">Comment se déroule une prise en charge ?</h2>
+            <p class="section-subtitle">
+                Un schéma simple, lisible, pour savoir exactement ce qui se passe à chaque étape.
+            </p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Premier contact</div>
+                    <p class="step-text">
+                        Vous décrivez votre besoin (panne, projet de reprise, doute sur l’état d’un appareil).
+                        Un premier retour permet de vérifier la faisabilité et d’estimer le temps nécessaire.
+                    </p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Diagnostic & proposition</div>
+                    <p class="step-text">
+                        Diagnostic de l’appareil, contrôle IMEI si reprise, évaluation des options possibles.
+                        Vous recevez une proposition claire : réparation, reprise, ou simple conseil.
+                    </p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Intervention & suivi</div>
+                    <p class="step-text">
+                        Réparation ou reprise selon ce qui a été validé.  
+                        Explications en fin d’intervention et, si nécessaire, conseils pour prolonger
+                        la durée de vie de l’appareil.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contact & rendez-vous</h2>
+            <p class="section-subtitle">
+                Pour toute demande de diagnostic, de réparation ou de reprise, vous pouvez utiliser
+                les coordonnées ci-dessous.
+            </p>
+
+            <div class="contact-card">
+                <div>
+                    <p class="contact-info-line">
+                        📞 <strong>Téléphone :</strong> 06 XX XX XX XX
+                    </p>
+                    <p class="contact-info-line">
+                        📧 <strong>Email :</strong> contact@digitrestore.fr
+                    </p>
+                    <p class="contact-highlight">
+                        Merci de préciser le modèle de l’appareil, le problème constaté
+                        et si vous êtes intéressé par une réparation, une reprise ou un simple diagnostic.
+                    </p>
+                    <p class="contact-note">
+                        Un délai de réponse est à prévoir en fonction de la charge de travail
+                        et des créneaux déjà réservés.
+                    </p>
+                </div>
+
+                <div class="contact-box">
+                    <strong>Formulaire (option future)</strong><br>
+                    Ce bloc pourra recevoir un formulaire en ligne (gratuit) si vous le souhaitez :  
+                    <ul>
+                        <li>Nom / Prénom</li>
+                        <li>Modèle de l’appareil</li>
+                        <li>Type de demande (réparation / reprise / info)</li>
+                        <li>Message</li>
+                    </ul>
+                    Pour l’instant, vous pouvez simplement être contacté par téléphone ou email.
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
 
 <footer>
-    © 2025 - DigitRestore - Tous droits réservés
+    <div class="container footer-inner">
+        <div>© 2025 – DigitRestore. Tous droits réservés.</div>
+        <div>
+            <a href="#">Mentions légales</a> •
+            <a href="#">Conditions générales</a>
+        </div>
+    </div>
 </footer>
 
 </body>
