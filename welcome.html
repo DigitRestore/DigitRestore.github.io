@@ -5,120 +5,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DigitRestore - Accueil</title>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Montserrat", sans-serif;
-            background: radial-gradient(circle at 50% 0%, #1a1a1a, #0c0c0c, #000000);
-            overflow: hidden;
-            color: white;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+<style>
 
-        /* === ANIMATIONS D’OBJETS FLOTTANTS HIGH-TECH === */
+/* ======== FOND ANIMÉ HAUTE QUALITÉ ======== */
 
-        .floating {
-            position: absolute;
-            opacity: 0.16;
-            animation: float 6s ease-in-out infinite;
-            pointer-events: none;
-            font-size: 13px;
-            letter-spacing: 1px;
-            font-weight: 500;
-            color: #ff7d7d;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    overflow: hidden;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-        @keyframes float {
-            0% { transform: translateY(0px); opacity: 0.12; }
-            50% { transform: translateY(-18px); opacity: 0.25; }
-            100% { transform: translateY(0px); opacity: 0.12; }
-        }
+/* ——— Effet particules tech ——— */
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ff6b5c;
+    box-shadow: 0 0 8px #ff6b5c;
+    border-radius: 50%;
+    animation: floatParticle 8s infinite ease-in-out;
+    opacity: 0.45;
+}
 
-        .f1 { top: 12%; left: 20%; animation-delay: 0s; }
-        .f2 { top: 65%; left: 15%; animation-delay: 1.2s; }
-        .f3 { top: 25%; right: 12%; animation-delay: 0.7s; }
-        .f4 { top: 70%; right: 25%; animation-delay: 2.4s; }
-        .f5 { top: 45%; left: 50%; animation-delay: 1.9s; }
+@keyframes floatParticle {
+    0% { transform: translateY(0) scale(1); opacity: 0.6; }
+    50% { transform: translateY(-80px) scale(1.4); opacity: 1; }
+    100% { transform: translateY(0) scale(1); opacity: 0.6; }
+}
 
-        /* === CONTENU CENTRAL === */
+/* Génération de particules multiples */
+.p1 { top: 20%; left: 15%; animation-delay: 0s; }
+.p2 { top: 60%; left: 10%; animation-delay: 1s; }
+.p3 { top: 35%; right: 12%; animation-delay: 2.2s; }
+.p4 { top: 75%; right: 22%; animation-delay: 1.4s; }
+.p5 { top: 50%; left: 55%; animation-delay: 0.6s; }
 
-        .welcome-container {
-            text-align: center;
-            z-index: 5;
-            animation: fadeIn 1.6s ease-out;
-        }
+/* ======== SMARTPHONE ANIMÉ ======== */
 
-        .welcome-logo {
-            font-size: 48px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            margin-bottom: 22px;
-        }
+.phone {
+    width: 210px;
+    height: 420px;
+    border-radius: 32px;
+    background: radial-gradient(circle at 50% 10%, #ffffff, #303030, #000000);
+    border: 2px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 40px rgba(255, 65, 40, 0.5);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -52%) rotate(-6deg);
+    animation: phoneFloat 4.5s ease-in-out infinite;
+}
 
-        .welcome-logo span {
-            background: linear-gradient(90deg, #ff4747, #ff9966);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+@keyframes phoneFloat {
+    0% { transform: translate(-50%, -52%) rotate(-6deg); }
+    50% { transform: translate(-50%, -57%) rotate(-3deg); }
+    100% { transform: translate(-50%, -52%) rotate(-6deg); }
+}
 
-        .welcome-subtitle {
-            font-size: 15px;
-            color: #cccccc;
-            margin-bottom: 32px;
-            opacity: 0.85;
-            letter-spacing: 0.11em;
-        }
+/* Halo autour du téléphone */
+.phone::after {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba(255, 90, 50, 0.25), transparent);
+    border-radius: 40px;
+    filter: blur(25px);
+}
 
-        /* === BOUTON ENTRÉE === */
+/* ======== CONTENU CENTRAL ======== */
 
-        .enter-btn {
-            padding: 13px 32px;
-            border-radius: 40px;
-            font-size: 15px;
-            border: none;
-            cursor: pointer;
-            background: linear-gradient(135deg, #ff3a3a, #ff7b4b);
-            color: white;
-            font-weight: 600;
-            letter-spacing: 0.07em;
-            box-shadow: 0 10px 25px rgba(229, 57, 53, 0.4);
-            transition: 0.2s ease;
-        }
+.container {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+    animation: fadeIn 1.3s ease-out;
+}
 
-        .enter-btn:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 14px 32px rgba(255, 80, 80, 0.6);
-        }
+.logo {
+    font-size: 46px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    background: linear-gradient(90deg, #ff3f3f, #ff945f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+    text-shadow: 0 0 12px rgba(255, 80, 50, 0.4);
+}
 
-        /* === FONDU === */
+.subtitle {
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    color: #c4c4c4;
+    margin-bottom: 28px;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(18px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+/* ======== BOUTON ======== */
 
-    </style>
+.btn {
+    padding: 12px 30px;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #e53935, #ff7043);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow: 0 0 18px rgba(255, 80, 50, 0.35);
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 100, 70, 0.6);
+}
+
+/* ======== ANIMATION D’ENTRÉE ======== */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- Éléments flottants (icônes high-tech simulées) -->
-    <div class="floating f1">Carte mère</div>
-    <div class="floating f2">Batterie Li-ion</div>
-    <div class="floating f3">Microsoudure</div>
-    <div class="floating f4">Connecteur charge</div>
-    <div class="floating f5">Microscope</div>
+    <!-- Particules -->
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+    <div class="particle p5"></div>
+
+    <!-- Smartphone simulé -->
+    <div class="phone"></div>
 
     <!-- Contenu principal -->
-    <div class="welcome-container">
-        <div class="welcome-logo">DIGIT<span>RESTORE</span></div>
-        <div class="welcome-subtitle">Réparation • Reprise • Diagnostic technique</div>
+    <div class="container">
+        <div class="logo">DIGIT<span style="color:#ff7043;">RESTORE</span></div>
+        <div class="subtitle">Réparation • Reprise • Expertise Technique</div>
 
-        <button class="enter-btn" onclick="window.location.href='site.html'">
+        <button class="btn" onclick="window.location.href='site.html'">
             Entrer dans l'atelier
         </button>
     </div>
