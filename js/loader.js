@@ -9,4 +9,5 @@ function loadComponent(id, file) {
 
 document.addEventListener("DOMContentLoaded", function() {
     loadComponent("header", "components/header.html");
+    loadComponent("hero", "components/hero.html");
 });
