@@ -7,129 +7,121 @@
 
 <style>
 
-/* ======== FOND ANIMÉ HAUTE QUALITÉ ======== */
-
 body {
     margin: 0;
     padding: 0;
     background: #000;
     overflow: hidden;
     font-family: "Montserrat", sans-serif;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
-/* ——— Effet particules tech ——— */
+/* --- PARTICULES --- */
+
 .particle {
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: 7px;
+    height: 7px;
     background: #ff6b5c;
-    box-shadow: 0 0 8px #ff6b5c;
     border-radius: 50%;
-    animation: floatParticle 8s infinite ease-in-out;
-    opacity: 0.45;
+    box-shadow: 0 0 10px #ff6b5c;
+    animation: float 6s infinite ease-in-out;
+    z-index: 2;
 }
 
-@keyframes floatParticle {
-    0% { transform: translateY(0) scale(1); opacity: 0.6; }
-    50% { transform: translateY(-80px) scale(1.4); opacity: 1; }
-    100% { transform: translateY(0) scale(1); opacity: 0.6; }
+@keyframes float {
+    0% { transform: translateY(0); opacity: 0.4; }
+    50% { transform: translateY(-40px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 0.4; }
 }
 
-/* Génération de particules multiples */
 .p1 { top: 20%; left: 15%; animation-delay: 0s; }
 .p2 { top: 60%; left: 10%; animation-delay: 1s; }
-.p3 { top: 35%; right: 12%; animation-delay: 2.2s; }
+.p3 { top: 35%; right: 12%; animation-delay: 2s; }
 .p4 { top: 75%; right: 22%; animation-delay: 1.4s; }
 .p5 { top: 50%; left: 55%; animation-delay: 0.6s; }
 
-/* ======== SMARTPHONE ANIMÉ ======== */
+/* --- SMARTPHONE --- */
 
 .phone {
-    width: 210px;
-    height: 420px;
+    width: 230px;
+    height: 450px;
     border-radius: 32px;
-    background: radial-gradient(circle at 50% 10%, #ffffff, #303030, #000000);
-    border: 2px solid rgba(255,255,255,0.08);
-    box-shadow: 0 0 40px rgba(255, 65, 40, 0.5);
+    background: radial-gradient(circle at 50% 10%, #ffffff, #3a3a3a, #000000);
+    border: 3px solid rgba(255,255,255,0.06);
     position: absolute;
-    top: 50%;
+    top: 48%;
     left: 50%;
-    transform: translate(-50%, -52%) rotate(-6deg);
-    animation: phoneFloat 4.5s ease-in-out infinite;
+    transform: translate(-50%, -50%) rotate(-8deg);
+    animation: floatPhone 4s ease-in-out infinite;
+    z-index: 3;
+    box-shadow: 0 0 50px rgba(255, 80, 50, 0.7);
 }
 
-@keyframes phoneFloat {
-    0% { transform: translate(-50%, -52%) rotate(-6deg); }
-    50% { transform: translate(-50%, -57%) rotate(-3deg); }
-    100% { transform: translate(-50%, -52%) rotate(-6deg); }
+@keyframes floatPhone {
+    0% { transform: translate(-50%, -50%) rotate(-8deg); }
+    50% { transform: translate(-50%, -55%) rotate(-4deg); }
+    100% { transform: translate(-50%, -50%) rotate(-8deg); }
 }
 
-/* Halo autour du téléphone */
+/* HALO DU TELEPHONE */
 .phone::after {
     content: "";
     position: absolute;
-    inset: -20px;
-    background: radial-gradient(circle, rgba(255, 90, 50, 0.25), transparent);
+    inset: -30px;
     border-radius: 40px;
-    filter: blur(25px);
+    background: radial-gradient(circle, rgba(255,80,50,0.4), transparent);
+    filter: blur(35px);
+    z-index: -1;
 }
 
-/* ======== CONTENU CENTRAL ======== */
+/* --- CONTENUS --- */
 
 .container {
-    position: relative;
     text-align: center;
     z-index: 10;
-    animation: fadeIn 1.3s ease-out;
+    position: relative;
+    margin-top: 300px;
 }
 
 .logo {
-    font-size: 46px;
+    font-size: 45px;
     font-weight: 800;
     letter-spacing: 4px;
     background: linear-gradient(90deg, #ff3f3f, #ff945f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 8px;
-    text-shadow: 0 0 12px rgba(255, 80, 50, 0.4);
 }
 
 .subtitle {
-    font-size: 14px;
+    margin-top: 5px;
+    font-size: 15px;
+    color: #d0d0d0;
     letter-spacing: 0.12em;
-    color: #c4c4c4;
     margin-bottom: 28px;
 }
 
-/* ======== BOUTON ======== */
+/* --- BUTTON --- */
 
 .btn {
-    padding: 12px 30px;
+    padding: 14px 34px;
     border-radius: 40px;
     font-size: 16px;
     font-weight: 600;
     background: linear-gradient(135deg, #e53935, #ff7043);
-    color: #fff;
     border: none;
+    color: white;
     cursor: pointer;
     transition: 0.2s ease;
-    box-shadow: 0 0 18px rgba(255, 80, 50, 0.35);
+    box-shadow: 0 0 18px rgba(255, 80, 50, 0.4);
 }
 
 .btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 0 30px rgba(255, 100, 70, 0.6);
-}
-
-/* ======== ANIMATION D’ENTRÉE ======== */
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 0 28px rgba(255, 100, 70, 0.7);
 }
 
 </style>
@@ -137,27 +129,25 @@ body {
 
 <body>
 
-    <!-- Particules -->
-    <div class="particle p1"></div>
-    <div class="particle p2"></div>
-    <div class="particle p3"></div>
-    <div class="particle p4"></div>
-    <div class="particle p5"></div>
+<!-- PARTICULES -->
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
 
-    <!-- Smartphone simulé -->
-    <div class="phone"></div>
+<!-- TELEPHONE -->
+<div class="phone"></div>
 
-    <!-- Contenu principal -->
-    <div class="container">
-        <div class="logo">DIGIT<span style="color:#ff7043;">RESTORE</span></div>
-        <div class="subtitle">Réparation • Reprise • Expertise Technique</div>
+<!-- LOGO ET BOUTON -->
+<div class="container">
+    <div class="logo">DIGIT<span style="color:#ff7043;">RESTORE</span></div>
+    <div class="subtitle">Réparation • Reprise • Expertise Technique</div>
 
-        <button class="btn" onclick="window.location.href='site.html'">
-            Entrer dans l'atelier
-        </button>
-    </div>
+    <button class="btn" onclick="window.location.href='site.html'">
+        Entrer dans l'atelier
+    </button>
+</div>
 
 </body>
 </html>
-
-
