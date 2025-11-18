@@ -11,4 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
     loadComponent("header", "components/header.html");
     loadComponent("hero", "components/hero.html");
     loadComponent("services", "components/services.html");
+    loadComponent("reprise", "components/reprise.html");
+
 });
