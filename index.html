@@ -3,72 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitRestore - Accueil</title>
+    <title>DigitRestore - Réparation & Reprise de Smartphones</title>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Montserrat", sans-serif;
-            background: linear-gradient(180deg, #000000, #111111, #1a1a1a);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-        }
+    <!-- Redirection vers la page de garde -->
+    <script>
+        window.location.href = "welcome.html";
+    </script>
 
-        .welcome-container {
-            text-align: center;
-            animation: fadeIn 1.5s ease-out;
-        }
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
 
-        .welcome-logo {
-            font-size: 40px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
-        }
-
-        .welcome-logo span {
-            background: linear-gradient(90deg, #ff5757, #ff9966);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .enter-btn {
-            padding: 12px 26px;
-            border-radius: 30px;
-            font-size: 15px;
-            border: none;
-            cursor: pointer;
-            background: linear-gradient(135deg, #e53935, #ff7043);
-            color: white;
-            box-shadow: 0 10px 25px rgba(229, 57, 53, 0.4);
-            transition: 0.2s ease;
-        }
-
-        .enter-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(229, 57, 53, 0.6);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <!-- Police moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="welcome-container">
-        <div class="welcome-logo">
-            DIGIT<span>RESTORE</span>
-        </div>
 
-        <button class="enter-btn" onclick="window.location.href='site.html'">
-            Entrer dans le site
-        </button>
-    </div>
+    <!-- Contenu original conservé mais jamais affiché -->
+    <div id="header"></div>
+
+    <main>
+        <div id="hero"></div>
+        <div id="services"></div>
+        <div id="reprise"></div>
+        <div id="pourquoi"></div>
+        <div id="processus"></div>
+        <div id="contact"></div>
+    </main>
+
+    <div id="footer"></div>
+
+    <!-- Script de chargement automatique -->
+    <script src="js/loader.js"></script>
 </body>
 </html>
