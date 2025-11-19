@@ -10,6 +10,7 @@ function loadComponent(id, file) {
 document.addEventListener("DOMContentLoaded", function() {
     loadComponent("header", "components/header.html");
     loadComponent("hero", "components/hero.html");
+    loadComponent("onglets", "components/onglets.html");
     loadComponent("services", "components/services.html");
     loadComponent("reprise", "components/reprise.html");
     loadComponent("pourquoi", "components/pourquoi.html");
