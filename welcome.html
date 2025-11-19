@@ -14,6 +14,8 @@
         :root {
             --accent-1: #ff4b5c;
             --accent-2: #ff9153;
+            --neon-blue: #5ad8ff;
+            --text-grey: #c8ced6;
             --text-main: #f5f5f5;
             --text-muted: #9fa3b3;
         }
@@ -48,31 +50,17 @@
             padding: 40px;
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 18px;
         }
 
-        .badge {
-            display: inline-flex;
-            gap: 10px;
-            padding: 6px 14px;
-            border-radius: 999px;
-            background: rgba(8,10,18,0.8);
-            border: 1px solid rgba(255,255,255,0.08);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: .16em;
-            color: var(--text-muted);
-        }
-
-        .badge-dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #5df9ff, #00ddeb);
-            box-shadow: 0 0 10px rgba(93,249,255,.9);
+        /* Titre centré */
+        .top-header {
+            text-align: center;
+            margin-bottom: 10px;
         }
 
         .logo-main {
-            font-size: 38px;
+            font-size: 40px;
             font-weight: 800;
             letter-spacing: .26em;
         }
@@ -84,43 +72,79 @@
         }
 
         .subtitle-main {
+            margin-top: 6px;
             font-size: 14px;
-            color: var(--text-muted);
             letter-spacing: .22em;
             text-transform: uppercase;
+            color: var(--neon-blue);
         }
 
-        .pitch {
-            max-width: 460px;
-            line-height: 1.7;
-            color: #d2d5e3;
-            font-size: 14px;
+        .highlights { width: 100%; }
+
+        /* Cartes */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px 22px;
+            width: 100%;
         }
 
-        .highlights {
+        .card-feature {
+            background: rgba(10,12,20,0.35);
+            border: 1px solid rgba(255,255,255,0.06);
+            backdrop-filter: blur(4px);
+            padding: 12px 16px;
+            border-radius: 14px;
             display: flex;
-            flex-wrap: wrap;
             gap: 8px;
+            box-shadow: 0 6px 22px rgba(0,0,0,0.30);
         }
 
-        .highlight-pill {
-            padding: 7px 12px;
-            font-size: 11px;
-            border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(7,9,14,0.8);
-            color: var(--text-muted);
-            display: inline-flex;
-            gap: 6px;
+        /* Icônes à gauche */
+        .card-icon {
+            font-size: 22px;
+            opacity: 0.95;
+            min-width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: start;
         }
 
-        .dot-small {
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: var(--accent-2);
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
+        /* TITRES = BLEU NEON */
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            margin-bottom: 2px;
+            letter-spacing: .04em;
+        }
+
+        /* TEXTES = GRIS METALLIQUE */
+        .card-list li {
+            font-size: 13px;
+            color: var(--text-grey);
+            line-height: 1.4;
+        }
+
+        .card-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        /* Button */
         .btn-main {
+            margin-top: 10px;
             padding: 13px 30px;
             border-radius: 999px;
             border: none;
@@ -137,16 +161,7 @@
         }
 
         .btn-main:hover {
-            transform: translateY(-2px) scale(1.02);
             box-shadow: 0 0 35px rgba(255,75,92,0.7);
-        }
-
-        .btn-main .icon {
-            width: 18px; height: 18px;
-            display: flex; justify-content: center; align-items: center;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,.7);
-            font-size: 11px;
         }
 
         /* Téléphone */
@@ -192,7 +207,6 @@
             z-index: 3;
         }
 
-        /* Logo au centre du téléphone */
         .phone-logo-center {
             position: absolute;
             top: 42%;
@@ -212,7 +226,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* FOND DU TÉLÉPHONE */
         .phone-gradient {
             position: absolute;
             inset: 0;
@@ -220,9 +233,7 @@
             z-index: 1;
         }
 
-        /***************************************
-         * ANIMATION DES MARQUES SOUS LE LOGO *
-         ***************************************/
+        /* Marques */
         .brand-rotator {
             position: absolute;
             top: 54%;
@@ -235,7 +246,7 @@
             letter-spacing: .18em;
             text-transform: uppercase;
             color: rgba(245,245,245,0.85);
-            height: 60px; /* zone fixe */
+            height: 60px;
             overflow: hidden;
             z-index: 4;
         }
@@ -259,12 +270,21 @@
             100% { opacity: 0; transform: translateY(-12px); }
         }
 
-        /* Réactivité */
-        @media (max-width: 900px){
-            .wrapper { grid-template-columns: 1fr; }
-            .phone-shell { width: 220px; height: 440px; }
-        }
-
+.phone-btn {
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72%;
+    padding: 10px 0;
+    margin-top: 0;
+    text-align: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 20px rgba(255,75,92,0.35);
+    z-index: 5;
+}
     </style>
 </head>
 
@@ -274,47 +294,116 @@
 
     <!-- GAUCHE -->
     <div class="left">
-        <div class="badge"><div class="badge-dot"></div>Réparation & reprise haut de gamme</div>
 
-        <div class="logo-main">DIGIT<span>RESTORE</span></div>
-
-        <div class="subtitle-main">Réparation • Reprise • Reconditionnement premium</div>
-
-        <p class="pitch">
-            Diagnostics précis, pièces rigoureusement sélectionnées et transparence totale.
-        </p>
-
-        <div class="highlights">
-            <div class="highlight-pill"><span class="dot-small"></span>Dossiers clients tracés</div>
-            <div class="highlight-pill"><span class="dot-small"></span>Vérification IMEI anti-vol</div>
-            <div class="highlight-pill"><span class="dot-small"></span>Rachat & reprise sécurisés</div>
+        <div class="top-header">
+            <div class="logo-main">DIGIT<span>RESTORE</span></div>
+            <div class="subtitle-main">Réparation & reconditionnement smartphone / tablette</div>
         </div>
 
-        <button class="btn-main" onclick="window.location.href='site.html'">
-            <span>Entrer dans l’atelier</span>
-            <span class="icon">➜</span>
-        </button>
+        <div class="highlights">
+            <div class="features-grid">
+
+                <!-- 1 -->
+                <div class="card-feature">
+                    <div class="card-icon">💎</div>
+                    <div class="card-content">
+                        <div class="card-title">Qualité des pièces</div>
+                        <ul class="card-list">
+                            <li>Pièces premium ou d’origine reconditionnée</li>
+                            <li>Aucune pièce bas de gamme</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="card-feature">
+                    <div class="card-icon">🛠️</div>
+                    <div class="card-content">
+                        <div class="card-title">Expertise technique</div>
+                        <ul class="card-list">
+                            <li>Tests avant / après réparation</li>
+                            <li>Réparations sous microscope</li>
+                            <li>Microsoudure</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="card-feature">
+                    <div class="card-icon">🔎</div>
+                    <div class="card-content">
+                        <div class="card-title">Contrôle qualité</div>
+                        <ul class="card-list">
+                            <li>Double validation</li>
+                            <li>Nettoyage complet</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="card-feature">
+                    <div class="card-icon">🔐</div>
+                    <div class="card-content">
+                        <div class="card-title">Sécurité & confidentialité</div>
+                        <ul class="card-list">
+                            <li>Aucune intervention sans accord</li>
+                            <li>Protection des données</li>
+                            <li>Transparence totale</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="card-feature">
+                    <div class="card-icon">♻️</div>
+                    <div class="card-content">
+                        <div class="card-title">Reprise & reconditionnement</div>
+                        <ul class="card-list">
+                            <li>Rachat sécurisé</li>
+                            <li>Estimation rapide</li>
+                            <li>Appareils contrôlés</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 6 -->
+                <div class="card-feature">
+                    <div class="card-icon">🤝</div>
+                    <div class="card-content">
+                        <div class="card-title">Expérience client</div>
+                        <ul class="card-list">
+                            <li>Communication claire</li>
+                            <li>Suivi après réparation</li>
+                            <li>Avantages famille</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
     <!-- DROITE : TELEPHONE -->
     <div class="right">
-
         <div class="phone-shell">
             <div class="phone-inner">
 
                 <div class="phone-gradient"></div>
                 <div class="dynamic-island"></div>
 
-                <!-- LOGO CENTRE -->
                 <div class="phone-logo-center">DIGIT<span>RESTORE</span></div>
 
-                <!-- ANIMATION MARQUES -->
                 <div class="brand-rotator">
                     <span>Apple</span>
                     <span>Samsung</span>
                     <span>Xiaomi</span>
                     <span>Huawei</span>
                 </div>
+<button class="btn-main phone-btn" onclick="window.location.href='site.html'">
+    <span>Entrer dans l’atelier</span>
+    <span class="icon">➜</span>
+</button>
 
             </div>
         </div>
