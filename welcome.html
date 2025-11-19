@@ -14,648 +14,313 @@
         :root {
             --accent-1: #ff4b5c;
             --accent-2: #ff9153;
-            --accent-soft: rgba(255, 120, 80, 0.25);
-            --bg-dark: #05060a;
             --text-main: #f5f5f5;
             --text-muted: #9fa3b3;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
-            padding: 0;
-            background: radial-gradient(circle at top left, #1a1d2b 0, #05060a 45%, #000 100%);
+            padding: 24px;
+            min-height: 100vh;
             font-family: "Montserrat", sans-serif;
-            height: 100vh;
-            overflow: hidden;
+            background: radial-gradient(circle at top left, #1a1d2b 0, #05060a 45%, #000 100%);
+            color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
-            color: var(--text-main);
-            position: relative;
         }
 
-        /* Fond animé léger */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: -20%;
-            background:
-                radial-gradient(circle at 10% 0%, rgba(255, 120, 80, 0.3), transparent 55%),
-                radial-gradient(circle at 90% 100%, rgba(93, 249, 255, 0.35), transparent 60%);
-            opacity: 0.7;
-            filter: blur(18px);
-            z-index: 0;
-            animation: bgGlow 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes bgGlow {
-            0% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(-20px, 10px, 0) scale(1.05); }
-            100% { transform: translate3d(15px, -15px, 0) scale(1.03); }
-        }
-
-        /* Container global */
         .wrapper {
-            position: relative;
-            z-index: 1;
-            width: min(1100px, 100vw - 40px);
-            height: min(620px, 100vh - 40px);
+            width: min(1120px, 100%);
             border-radius: 28px;
-            background: linear-gradient(145deg, rgba(7, 9, 15, 0.96), rgba(5, 7, 12, 0.98));
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            box-shadow:
-                0 0 0 1px rgba(255, 255, 255, 0.02),
-                0 40px 120px rgba(0, 0, 0, 0.9),
-                0 0 90px rgba(255, 85, 60, 0.35);
+            background: radial-gradient(circle at top left, #151725, #06070c);
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 26px 80px rgba(0,0,0,0.9);
             display: grid;
-            grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-            gap: 10px;
+            grid-template-columns: 1.25fr 1fr;
             overflow: hidden;
         }
 
-        /* Contour lumineux */
-        .wrapper::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            padding: 1px;
-            background: linear-gradient(
-                90deg,
-                rgba(255, 75, 92, 0.8),
-                rgba(255, 145, 83, 0.6),
-                rgba(93, 249, 255, 0.7)
-            );
-            -webkit-mask:
-                linear-gradient(#000 0 0) content-box,
-                linear-gradient(#000 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        /* Particules */
-        .particle {
-            position: absolute;
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--accent-1);
-            box-shadow: 0 0 16px rgba(255, 75, 92, 0.9);
-            opacity: 0.4;
-            z-index: 0;
-            animation: float 9s infinite ease-in-out;
-        }
-
-        .particle.alt {
-            background: #5df9ff;
-            box-shadow: 0 0 16px rgba(93, 249, 255, 0.95);
-        }
-
-        .p1 { top: 12%; left: 10%; animation-delay: 0s; }
-        .p2 { top: 70%; left: 8%; animation-delay: 1.2s; }
-        .p3 { top: 25%; right: 12%; animation-delay: 2.1s; }
-        .p4 { top: 82%; right: 18%; animation-delay: 0.8s; }
-        .p5 { top: 52%; left: 50%; animation-delay: 1.8s; }
-        .p6 { top: 8%; right: 40%; animation-delay: 3.1s; }
-        .p7 { top: 88%; left: 35%; animation-delay: 2.7s; }
-
-        @keyframes float {
-            0% { transform: translate3d(0, 0, 0); opacity: 0.15; }
-            40% { transform: translate3d(0, -18px, 0); opacity: 0.9; }
-            70% { transform: translate3d(10px, -10px, 0); opacity: 0.6; }
-            100% { transform: translate3d(0, 0, 0); opacity: 0.15; }
-        }
-
-        /* Colonne gauche : texte */
+        /* Colonne gauche */
         .left {
-            position: relative;
-            padding: 36px 40px;
+            padding: 40px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             gap: 22px;
         }
 
         .badge {
             display: inline-flex;
-            align-items: center;
             gap: 10px;
             padding: 6px 14px;
             border-radius: 999px;
-            background: rgba(10, 14, 25, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(8,10,18,0.8);
+            border: 1px solid rgba(255,255,255,0.08);
             font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 0.16em;
+            letter-spacing: .16em;
             color: var(--text-muted);
         }
 
         .badge-dot {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             border-radius: 50%;
             background: radial-gradient(circle, #5df9ff, #00ddeb);
-            box-shadow: 0 0 10px rgba(93, 249, 255, 0.9);
+            box-shadow: 0 0 10px rgba(93,249,255,.9);
         }
 
         .logo-main {
-            font-size: clamp(34px, 4.2vw, 40px);
+            font-size: 38px;
             font-weight: 800;
-            letter-spacing: 0.26em;
-            text-transform: uppercase;
-            margin: 4px 0 6px;
+            letter-spacing: .26em;
         }
 
         .logo-main span {
-            background: linear-gradient(110deg, #ff4b5c, #ff9153);
+            background: linear-gradient(110deg, var(--accent-1), var(--accent-2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .subtitle-main {
-            font-size: 15px;
+            font-size: 14px;
             color: var(--text-muted);
-            letter-spacing: 0.18em;
+            letter-spacing: .22em;
             text-transform: uppercase;
         }
 
         .pitch {
-            max-width: 420px;
-            font-size: 14px;
+            max-width: 460px;
             line-height: 1.7;
             color: #d2d5e3;
+            font-size: 14px;
         }
 
         .highlights {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 6px;
+            gap: 8px;
         }
 
         .highlight-pill {
+            padding: 7px 12px;
             font-size: 11px;
-            padding: 6px 10px;
             border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: radial-gradient(circle at top left, rgba(255, 145, 83, 0.1), rgba(5, 7, 12, 0.96));
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(7,9,14,0.8);
             color: var(--text-muted);
             display: inline-flex;
-            align-items: center;
             gap: 6px;
         }
 
         .dot-small {
-            width: 5px;
-            height: 5px;
+            width: 5px; height: 5px;
             border-radius: 50%;
             background: var(--accent-2);
-        }
-
-        .cta-row {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-top: 10px;
         }
 
         .btn-main {
             padding: 13px 30px;
             border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
             font-size: 15px;
             font-weight: 600;
-            background: linear-gradient(135deg, #ff4b5c, #ff9153);
-            border: none;
-            color: white;
             cursor: pointer;
-            box-shadow:
-                0 0 24px rgba(255, 75, 92, 0.65),
-                0 0 40px rgba(255, 145, 83, 0.35);
+            box-shadow: 0 0 25px rgba(255,75,92,0.5);
             display: inline-flex;
-            align-items: center;
             gap: 10px;
-            transition:
-                transform 0.18s ease-out,
-                box-shadow 0.18s ease-out,
-                filter 0.18s ease-out;
+            align-items: center;
+            transition: .2s ease;
         }
 
         .btn-main:hover {
-            transform: translateY(-2px) scale(1.03);
-            filter: brightness(1.04);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 35px rgba(255,75,92,0.7);
         }
 
         .btn-main .icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 18px;
-            height: 18px;
-            border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.7);
-            font-size: 11px;
-        }
-
-        .cta-note {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .footer-mini {
-            margin-top: auto;
-            font-size: 11px;
-            color: #6e7384;
-            opacity: 0.8;
-        }
-
-        /* Colonne droite : téléphone */
-        .right {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-right: 26px;
-            padding-left: 10px;
-        }
-
-        .halo {
-            position: absolute;
-            width: 280px;
-            height: 280px;
+            width: 18px; height: 18px;
+            display: flex; justify-content: center; align-items: center;
             border-radius: 50%;
-            background:
-                radial-gradient(circle, rgba(255, 145, 83, 0.15), transparent 60%),
-                radial-gradient(circle, rgba(93, 249, 255, 0.12), transparent 70%);
-            filter: blur(2px);
-            transform: translateY(40px);
-            opacity: 0.85;
+            border: 1px solid rgba(255,255,255,.7);
+            font-size: 11px;
         }
 
-        /* Coque iPhone stylisée */
+        /* Téléphone */
+        .right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+        }
+
         .phone-shell {
             width: 260px;
             height: 520px;
             border-radius: 42px;
-            background: linear-gradient(145deg, #f5f5f7, #a6a6aa, #2a2b31);
-            box-shadow:
-                0 0 0 1px rgba(255, 255, 255, 0.2),
-                0 26px 70px rgba(0, 0, 0, 0.95);
-            padding: 5px;
+            background: linear-gradient(145deg,#f5f5f7,#b4b4b8,#23242a);
+            padding: 6px;
+            box-shadow: 0 26px 70px rgba(0,0,0,0.95);
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.25s ease-out;
-        }
-
-        .phone-shell:hover {
-            transform: translateY(-6px);
         }
 
         .phone-inner {
-            position: relative;
             width: 100%;
             height: 100%;
             border-radius: 34px;
-            background:
-                radial-gradient(circle at 50% 0%, rgba(255,255,255,0.2), transparent 55%),
-                linear-gradient(180deg, #151621 0%, #020308 80%);
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: linear-gradient(180deg, #11121c 0%, #05060a 80%);
         }
 
-        /* Dynamic Island */
         .dynamic-island {
             position: absolute;
             top: 16px;
             left: 50%;
-            transform: translateX(-50%);
             width: 110px;
             height: 26px;
+            background: black;
+            opacity: .92;
             border-radius: 18px;
-            background: rgba(0, 0, 0, 0.92);
-            box-shadow: 0 0 14px rgba(0, 0, 0, 0.85);
-            z-index: 20;
-        }
-
-        /* Widgets haut style iOS */
-        .widget-row {
-            position: absolute;
-            top: 60px;
-            left: 50%;
             transform: translateX(-50%);
-            width: 210px;
-            display: flex;
-            gap: 10px;
-            z-index: 5;
+            box-shadow: 0 0 14px rgba(0,0,0,.8);
+            z-index: 3;
         }
 
-        .widget {
-            border-radius: 16px;
-            padding: 10px 12px;
-            background: rgba(15, 16, 24, 0.85);
-            border: 1px solid rgba(255,255,255,0.18);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .widget-large { flex: 1.3; }
-        .widget-small { flex: 0.9; }
-
-        .widget-title {
-            font-size: 9px;
+        /* Logo au centre du téléphone */
+        .phone-logo-center {
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: .28em;
             text-transform: uppercase;
-            letter-spacing: 0.16em;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .widget-value {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .widget-sub {
-            font-size: 9px;
-            color: var(--text-muted);
-        }
-
-        /* Grille d’applications */
-        .app-grid {
-            position: absolute;
-            top: 145px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 210px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px 10px;
+            color: var(--text-main);
             z-index: 4;
         }
 
-        .app-item {
+        .phone-logo-center span {
+            background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* FOND DU TÉLÉPHONE */
+        .phone-gradient {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(255,145,83,.25), rgba(10,12,20,1) 55%);
+            z-index: 1;
+        }
+
+        /***************************************
+         * ANIMATION DES MARQUES SOUS LE LOGO *
+         ***************************************/
+        .brand-rotator {
+            position: absolute;
+            top: 54%;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
-        }
-
-        .app-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 11px;
-            background: rgba(255,255,255,0.18);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(255,255,255,0.18);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-        }
-
-        /* couleurs différentes juste pour le style */
-        .app-icon.app-1 { background: linear-gradient(135deg, #45e38b, #0c9f5a); }
-        .app-icon.app-2 { background: linear-gradient(135deg, #4da3ff, #1c4ed8); }
-        .app-icon.app-3 { background: linear-gradient(135deg, #ff6868, #c91b3b); }
-        .app-icon.app-4 { background: linear-gradient(135deg, #ffc857, #ff8f3f); }
-        .app-icon.app-5 { background: linear-gradient(135deg, #9b8bff, #5b3fd9); }
-        .app-icon.app-6 { background: linear-gradient(135deg, #ff7ab2, #ff4971); }
-        .app-icon.app-7 { background: linear-gradient(135deg, #4dd4ff, #007ea7); }
-        .app-icon.app-8 { background: linear-gradient(135deg, #6bf7c4, #12a88b); }
-
-        .app-label {
-            font-size: 8px;
-            color: #e4e6f0;
-            text-align: center;
-            max-width: 46px;
-            white-space: nowrap;
+            font-size: 12px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(245,245,245,0.85);
+            height: 60px; /* zone fixe */
             overflow: hidden;
-            text-overflow: ellipsis;
+            z-index: 4;
         }
 
-        /* Dock */
-        .dock {
-            position: absolute;
-            bottom: 26px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 210px;
-            height: 54px;
-            border-radius: 22px;
-            background: rgba(255,255,255,0.14);
-            backdrop-filter: blur(14px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            padding: 6px 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 6;
+        .brand-rotator span {
+            opacity: 0;
+            transform: translateY(12px);
+            animation: rotateBrand 6s linear infinite;
         }
 
-        .dock-inner {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 8px;
+        .brand-rotator span:nth-child(1) { animation-delay: 0s; }
+        .brand-rotator span:nth-child(2) { animation-delay: 1.5s; }
+        .brand-rotator span:nth-child(3) { animation-delay: 3s; }
+        .brand-rotator span:nth-child(4) { animation-delay: 4.5s; }
+
+        @keyframes rotateBrand {
+            0%   { opacity: 0; transform: translateY(12px); }
+            10%  { opacity: 1; transform: translateY(0); }
+            25%  { opacity: 1; transform: translateY(0); }
+            35%  { opacity: 0; transform: translateY(-12px); }
+            100% { opacity: 0; transform: translateY(-12px); }
         }
 
-        .dock-app {
-            width: 36px;
-            height: 36px;
-            border-radius: 11px;
-            background: rgba(255,255,255,0.95);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.45);
+        /* Réactivité */
+        @media (max-width: 900px){
+            .wrapper { grid-template-columns: 1fr; }
+            .phone-shell { width: 220px; height: 440px; }
         }
 
-        /* Petit texte en bas d’écran */
-        .screen-foot-note {
-            position: absolute;
-            bottom: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 9px;
-            color: var(--text-muted);
-            text-align: center;
-            opacity: 0.9;
-            z-index: 5;
-        }
-
-        .floor-glow {
-            position: absolute;
-            width: 210px;
-            height: 40px;
-            background: radial-gradient(circle, var(--accent-soft), transparent 70%);
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            filter: blur(8px);
-            opacity: 0.95;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .wrapper {
-                grid-template-columns: 1fr;
-                height: auto;
-                min-height: min(640px, 100vh);
-            }
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- PARTICULES -->
-    <div class="particle p1"></div>
-    <div class="particle p2 alt"></div>
-    <div class="particle p3"></div>
-    <div class="particle p4 alt"></div>
-    <div class="particle p5"></div>
-    <div class="particle p6 alt"></div>
-    <div class="particle p7"></div>
+<div class="wrapper">
 
-    <div class="wrapper">
+    <!-- GAUCHE -->
+    <div class="left">
+        <div class="badge"><div class="badge-dot"></div>Réparation & reprise haut de gamme</div>
 
-        <!-- Colonne gauche -->
-        <div class="left">
+        <div class="logo-main">DIGIT<span>RESTORE</span></div>
 
-            <div class="badge">
-                <div class="badge-dot"></div>
-                <span>Réparation & reprise haut de gamme</span>
-            </div>
+        <div class="subtitle-main">Réparation • Reprise • Reconditionnement premium</div>
 
-            <div class="logo-main">
-                DIGIT<span>RESTORE</span>
-            </div>
+        <p class="pitch">
+            Diagnostics précis, pièces rigoureusement sélectionnées et transparence totale.
+        </p>
 
-            <div class="subtitle-main">
-                Réparation • Reprise • Reconditionnement premium
-            </div>
-
-            <p class="pitch">
-                Diagnostics précis, pièces de qualité, transparence totale sur chaque intervention.
-                DigitRestore vous accompagne de la casse à la remise en main, comme si votre smartphone
-                sortait de sa boîte pour la première fois.
-            </p>
-
-            <div class="highlights">
-                <div class="highlight-pill"><span class="dot-small"></span>Dossiers clients tracés</div>
-                <div class="highlight-pill"><span class="dot-small"></span>Vérification IMEI anti-vol</div>
-                <div class="highlight-pill"><span class="dot-small"></span>Rachat & reprise sécurisés</div>
-            </div>
-
-            <div class="cta-row">
-                <button class="btn-main" onclick="window.location.href='site.html'">
-                    <span>Entrer dans l’atelier</span>
-                    <span class="icon">➜</span>
-                </button>
-
-                <div class="cta-note">
-                    <strong>Pas de boutique impersonnelle.</strong><br>
-                    Un atelier sur rendez-vous, taillé pour vos appareils.
-                </div>
-            </div>
-
-            <div class="footer-mini">
-                DigitRestore © – Réparation & reprise de smartphones • Interface de démonstration
-            </div>
-
+        <div class="highlights">
+            <div class="highlight-pill"><span class="dot-small"></span>Dossiers clients tracés</div>
+            <div class="highlight-pill"><span class="dot-small"></span>Vérification IMEI anti-vol</div>
+            <div class="highlight-pill"><span class="dot-small"></span>Rachat & reprise sécurisés</div>
         </div>
 
-        <!-- Colonne droite : téléphone -->
-        <div class="right">
-            <div class="halo"></div>
-
-            <div class="phone-shell">
-                <div class="phone-inner">
-
-                    <!-- Dynamic Island -->
-                    <div class="dynamic-island"></div>
-
-                    <!-- Widgets haut -->
-                    <div class="widget-row">
-                        <div class="widget widget-large">
-                            <div class="widget-title">Météo</div>
-                            <div class="widget-value">19°</div>
-                            <div class="widget-sub">Nuageux · Aujourd’hui</div>
-                        </div>
-                        <div class="widget widget-small">
-                            <div class="widget-title">Batterie</div>
-                            <div class="widget-value">87%</div>
-                            <div class="widget-sub">Appareil connecté</div>
-                        </div>
-                    </div>
-
-                    <!-- Grille d’apps -->
-                    <div class="app-grid">
-                        <div class="app-item">
-                            <div class="app-icon app-1"></div>
-                            <div class="app-label">Téléphone</div>
-                        </div>
-                        <div class="app-item">
-                            <div class="app-icon app-2"></div>
-                            <div class="app-label">Messages</div>
-                        </div>
-                        <div class="app-item">
-                            <div class="app-icon app-3"></div>
-                            <div class="app-label">Photos</div>
-                        </div>
-                        <div class="app-item">
-                            <div class="app-icon app-4"></div>
-                            <div class="app-label">Calendrier</div>
-                        </div>
-                        <div class="app-item">
-                            <div class="app-icon app-5"></div>
-                            <div class="app-label">Utilitaires</div>
-                        </div>
-                        <div class="app-item">
-                            <div class="app-icon app-6"></div>
-                            <div class="app-label">Musique</div>
-                        </div>
-                        <div class="app-item">
-                            <div class="app-icon app-7"></div>
-                            <div class="app-label">Réseaux</div>
-                        </div>
-                        <div class="app-item">
-                            <div class="app-icon app-8"></div>
-                            <div class="app-label">Notes</div>
-                        </div>
-                    </div>
-
-                    <!-- Petit texte bas d’écran -->
-                    <div class="screen-foot-note">
-                        Interface inspirée d’un écran d’accueil, à l’image de vos appareils restaurés.
-                    </div>
-
-                    <!-- Dock -->
-                    <div class="dock">
-                        <div class="dock-inner">
-                            <div class="dock-app"></div>
-                            <div class="dock-app"></div>
-                            <div class="dock-app"></div>
-                            <div class="dock-app"></div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="floor-glow"></div>
-
-            </div>
-        </div>
-
+        <button class="btn-main" onclick="window.location.href='site.html'">
+            <span>Entrer dans l’atelier</span>
+            <span class="icon">➜</span>
+        </button>
     </div>
+
+    <!-- DROITE : TELEPHONE -->
+    <div class="right">
+
+        <div class="phone-shell">
+            <div class="phone-inner">
+
+                <div class="phone-gradient"></div>
+                <div class="dynamic-island"></div>
+
+                <!-- LOGO CENTRE -->
+                <div class="phone-logo-center">DIGIT<span>RESTORE</span></div>
+
+                <!-- ANIMATION MARQUES -->
+                <div class="brand-rotator">
+                    <span>Apple</span>
+                    <span>Samsung</span>
+                    <span>Xiaomi</span>
+                    <span>Huawei</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
 </body>
 </html>
-
-
-
-
-
