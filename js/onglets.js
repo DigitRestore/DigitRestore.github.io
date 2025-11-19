@@ -1,34 +1,39 @@
-// Fonction de chargement d'un onglet
+// js/onglets.js
+
+// Charge le contenu détaillé d'un onglet (qualite, expertise, etc.)
 function loadOnglet(tab) {
     fetch(`components/onglet-${tab}.html`)
         .then(res => res.text())
         .then(html => {
-            document.getElementById("onglet-content").innerHTML = html;
+            const container = document.getElementById("onglet-content");
+            if (!container) return;
+            container.innerHTML = html;
 
-            // Mise à jour du bouton actif
+            // Met à jour l'état des boutons du bandeau
             document.querySelectorAll(".onglet-btn").forEach(b => b.classList.remove("active"));
-            document.querySelector(`.onglet-btn[data-tab="${tab}"]`).classList.add("active");
+            const btn = document.querySelector(`.onglet-btn[data-tab="${tab}"]`);
+            if (btn) btn.classList.add("active");
+        })
+        .catch(err => {
+            console.error("Erreur chargement onglet:", err);
         });
 }
 
-// Activation via le bandeau et les cartes
-document.addEventListener("DOMContentLoaded", () => {
+// Écoute les clics sur les boutons et les cartes, même si le HTML
+// a été injecté après coup par loader.js (délégation d'événement).
+document.addEventListener("click", (event) => {
+    const target = event.target.closest(".onglet-btn, .onglet-card");
+    if (!target) return;
 
-    // Clic onglets horizontaux
-    document.querySelectorAll(".onglet-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            loadOnglet(btn.dataset.tab);
-        });
-    });
+    const tab = target.dataset.tab;
+    if (!tab) return;
 
-    // Clic cartes
-    document.querySelectorAll(".onglet-card").forEach(card => {
-        card.addEventListener("click", () => {
-            loadOnglet(card.dataset.tab);
+    loadOnglet(tab);
 
-            // scroll automatique vers la zone de contenu
-            document.getElementById("onglet-content")
-                .scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-    });
+    // Scroll doux vers la zone de contenu
+    const content = document.getElementById("onglet-content");
+    if (content) {
+        content.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 });
+
