@@ -95,7 +95,7 @@
             max-width: 560px;
         }
 
-        /* BOUTON */
+        /* BOUTON GÉNÉRIQUE */
         .btn-enter {
             margin-top: 18px;
             padding: 14px 32px;
@@ -246,35 +246,41 @@
                 height: 400px;
             }
         }
-/* Bouton dans le téléphone */
-.phone-btn {
-    position: absolute;
-    bottom: 26px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 72%;
-    padding: 12px 0;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,0.15);
-    backdrop-filter: blur(4px);
-    box-shadow: 0 0 20px rgba(255,75,92,0.35);
-    z-index: 5;
-}
 
-/* Animation d'apparition premium */
-.fade-in {
-    opacity: 0;
-    transform: translateY(14px);
-    animation: fadeUp 0.6s ease-out forwards;
-}
+        /* Bouton dans le téléphone */
+        .phone-btn {
+            position: absolute;
+            bottom: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 72%;
+            padding: 12px 0;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 20px rgba(255,75,92,0.35);
+            z-index: 5;
+        }
 
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-        
+        /* Désactive le mouvement du bouton dans le téléphone au survol */
+        .phone-btn:hover {
+            transform: none !important;
+            box-shadow: 0 0 20px rgba(255,75,92,0.35) !important;
+        }
+
+        /* Animation d'apparition premium */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(14px);
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -292,19 +298,14 @@
         </div>
 
         <!-- Titre de présentation -->
-        <h1 class="intro-title">
+        <h1 class="intro-title fade-in">
             Réparation & reprise de smartphones <span>haut de gamme</span>, en toute transparence.
         </h1>
 
-        <p class="intro-text">
+        <p class="intro-text fade-in" style="animation-delay: .15s;">
             DigitRestore vous accompagne pour redonner vie à vos smartphones et tablettes :
             réparation soignée, diagnostic complet, reprise sécurisée et conseils honnêtes — sans surprise.
         </p>
-
-        <!-- BOUTON -->
-        <button class="btn-enter" onclick="window.location.href='site.html'">
-            Entrer dans l’atelier ➜
-        </button>
 
     </div>
 
@@ -324,9 +325,10 @@
                     <span>Xiaomi</span>
                     <span>Huawei</span>
                 </div>
-<button class="btn-enter phone-btn" onclick="window.location.href='site.html'">
-    Entrer dans l’atelier ➜
-</button>
+
+                <button class="btn-enter phone-btn" onclick="window.location.href='site.html'">
+                    Entrer dans l’atelier ➜
+                </button>
 
             </div>
         </div>
