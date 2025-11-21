@@ -12,107 +12,234 @@
 
     <style>
         :root {
-    --blue-main: #4A90E2;           /* Bleu professionnel */
-    --blue-soft: #6CB8FF;           /* Accent doux */
-    --turquoise-soft: #6CD4FF;      /* Remplace le magenta flashy */
-    --petrol-dark: #1FA2A1;         /* Highlight sobre */
+            --blue-main: #4A90E2;          /* Bleu professionnel */
+            --blue-soft: #6CB8FF;          /* Accent doux */
+            --turquoise-soft: #6CD4FF;     /* Turquoise technique */
+            --petrol-dark: #1FA2A1;        /* Bleu pétrole */
+            
+            --glass: rgba(255,255,255,0.06);
+            --glass-border: rgba(255,255,255,0.12);
 
-    --glass: rgba(255,255,255,0.06);
-    --glass-border: rgba(255,255,255,0.12);
+            --text-main: #ffffff;
+            --text-muted: #C8D0DD;
+        }
 
-    --text-main: #ffffff;
-    --text-muted: #C8D0DD;
-}
+        * { margin:0; padding:0; box-sizing:border-box; }
 
-/* ---- STYLE GLOBAL ---- */
-body {
-    font-family:"Montserrat",sans-serif;
-    min-height:100vh;
-    padding:24px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:radial-gradient(circle at top left,#13141a 0%,#0b0c10 45%,#000 100%);
-    color:var(--text-main);
-}
+        body {
+            font-family:"Montserrat",sans-serif;
+            min-height:100vh;
+            padding:24px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:radial-gradient(circle at top left,#13141a 0%,#0b0c10 45%,#000 100%);
+            color:var(--text-main);
+        }
 
-.logo-title span {
-    background:linear-gradient(110deg,var(--blue-main),var(--turquoise-soft));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
+        .welcome-wrapper {
+            width:min(1120px,100%);
+            display:grid;
+            grid-template-columns:1.3fr 1fr;
+            background:rgba(15,18,26,0.55);
+            backdrop-filter:blur(10px);
+            border-radius:28px;
+            overflow:hidden;
+            border:1px solid rgba(255,255,255,0.05);
+            box-shadow:0 30px 90px rgba(0,0,0,0.85);
+        }
 
-.intro-title {
-    font-size:33px;
-    font-weight:700;
-    line-height:1.3;
-    color:var(--blue-soft);
-    text-shadow:0 0 12px rgba(108,184,255,0.15);
-}
+        .left {
+            padding:70px 55px;
+            display:flex;
+            flex-direction:column;
+            gap:36px;
+        }
 
-.intro-title span {
-    background:linear-gradient(120deg,var(--blue-main),var(--turquoise-soft));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
+        .logo-title {
+            font-size:45px;
+            font-weight:800;
+            letter-spacing:.26em;
+        }
+        .logo-title span {
+            background:linear-gradient(110deg,var(--blue-main),var(--turquoise-soft));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
 
-.intro-text {
-    font-size:15px;
-    line-height:1.6;
-    color:var(--blue-main);
-    opacity:.85;
-}
+        .logo-sub {
+            font-size:13px;
+            text-transform:uppercase;
+            color:var(--text-muted);
+            letter-spacing:.22em;
+            margin-top:2px;
+        }
 
-.service-card {
-    background:var(--glass);
-    border:1px solid var(--glass-border);
-    padding:14px 18px;
-    border-radius:16px;
-    color:var(--blue-soft);
-    font-size:14px;
-    font-weight:600;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    backdrop-filter:blur(6px);
-    transition:.25s ease;
-    box-shadow:0 8px 26px rgba(0,0,0,0.35);
-}
+        .intro-block { max-width:600px; display:flex; flex-direction:column; gap:14px; }
 
-.service-card:hover {
-    color:var(--turquoise-soft);
-    border-color:var(--blue-main);
-    box-shadow:0 0 18px rgba(76,144,226,0.4),0 0 8px rgba(108,212,255,0.25);
-    transform:translateY(-2px);
-}
+        .intro-title {
+            font-size:33px;
+            font-weight:700;
+            line-height:1.3;
+            color:var(--blue-soft);
+            text-shadow:0 0 12px rgba(108,184,255,0.15);
+        }
+        .intro-title span {
+            background:linear-gradient(120deg,var(--blue-main),var(--turquoise-soft));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
 
-/* ---- BOUTON DANS LE TÉLÉPHONE ---- */
-.phone-btn {
-    position:absolute;
-    bottom:26px; left:50%;
-    transform:translateX(-50%);
-    width:72%;
-    padding:12px 0;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,0.15);
-    background:linear-gradient(120deg,var(--blue-main),var(--petrol-dark));
-    color:white;
-    font-weight:600;
-    font-size:15px;
-    backdrop-filter:blur(4px);
-    box-shadow:0 0 22px rgba(74,144,226,0.35);
-    transition:.25s ease;
-    z-index:5;
-}
+        .intro-text {
+            font-size:15px;
+            line-height:1.6;
+            color:var(--blue-main);
+            opacity:.85;
+        }
 
-.phone-btn:hover {
-    box-shadow:0 0 30px rgba(108,212,255,0.5);
-    background:linear-gradient(120deg,var(--petrol-dark),var(--turquoise-soft));
-    transform:translateX(-50%) translateY(-2px);
-}
+        .service-cards { max-width:640px; }
+        .service-grid {
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:14px 20px;
+        }
 
+        .service-card {
+            background:var(--glass);
+            border:1px solid var(--glass-border);
+            padding:14px 18px;
+            border-radius:16px;
+            color:var(--blue-soft);
+            font-size:14px;
+            font-weight:600;
+            letter-spacing:.08em;
+            text-transform:uppercase;
+            backdrop-filter:blur(6px);
+            transition:.25s ease;
+            box-shadow:0 8px 26px rgba(0,0,0,0.35);
+        }
 
-        .phone-btn span { pointer-events:none; }
+        .service-card:hover {
+            color:var(--turquoise-soft);
+            border-color:var(--blue-main);
+            box-shadow:0 0 18px rgba(76,144,226,0.4),0 0 8px rgba(108,212,255,0.25);
+            transform:translateY(-2px);
+        }
 
+        .fade-in {
+            opacity:0;
+            transform:translateY(25px);
+            animation:fadeUp 1.1s cubic-bezier(.16,.8,.38,1) forwards;
+        }
+        @keyframes fadeUp { to { opacity:1; transform:none; } }
+
+        /* --- PARTIE DROITE : LE TÉLÉPHONE --- */
+
+        .right {
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:50px 20px;
+        }
+
+        .phone-shell {
+            width:260px; height:520px;
+            border-radius:42px;
+            padding:6px;
+            background:linear-gradient(145deg,#dedfe2,#8b8c90,#1f1f22);
+            box-shadow:0 26px 70px rgba(0,0,0,0.95);
+            position:relative;
+        }
+
+        .phone-inner {
+            width:100%; height:100%;
+            border-radius:34px;
+            overflow:hidden;
+            background:linear-gradient(180deg,#0f1118 0%,#05060a 80%);
+            border:1px solid rgba(255,255,255,0.15);
+            position:relative;
+        }
+
+        .dynamic-island {
+            position:absolute; top:16px; left:50%;
+            width:110px; height:26px;
+            background:black; border-radius:18px;
+            transform:translateX(-50%);
+            opacity:.92;
+            box-shadow:0 0 14px rgba(0,0,0,.8);
+            z-index:3;
+        }
+
+        .phone-logo-center {
+            position:absolute;
+            top:42%; left:50%;
+            transform:translate(-50%,-50%);
+            font-size:20px;
+            letter-spacing:.28em;
+            text-transform:uppercase;
+            font-weight:700;
+            z-index:4;
+        }
+        .phone-logo-center span {
+            background:linear-gradient(110deg,var(--blue-main),var(--turquoise-soft));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .phone-gradient {
+            position:absolute; inset:0;
+            background:radial-gradient(circle at top right, rgba(108,212,255,0.18), rgba(10,12,20,1) 60%);
+            z-index:1;
+        }
+
+        .brand-rotator {
+            position:absolute; top:54%; left:50%;
+            transform:translateX(-50%);
+            height:60px; overflow:hidden;
+            display:flex; flex-direction:column; align-items:center;
+            font-size:12px; letter-spacing:.18em;
+            color:rgba(245,245,245,0.85);
+            z-index:4;
+        }
+
+        .brand-rotator span {
+            opacity:0; transform:translateY(12px);
+            animation:rotateBrand 6s linear infinite;
+        }
+
+        @keyframes rotateBrand {
+            0% { opacity:0; transform:translateY(12px); }
+            10% { opacity:1; transform:none; }
+            25% { opacity:1; transform:none; }
+            35% { opacity:0; transform:translateY(-12px); }
+            100% { opacity:0; transform:translateY(-12px); }
+        }
+
+        /* --- BOUTON DANS LE TÉLÉPHONE --- */
+
+        .phone-btn {
+            position:absolute;
+            bottom:26px; left:50%;
+            transform:translateX(-50%);
+            width:72%;
+            padding:12px 0;
+            border-radius:999px;
+            border:1px solid rgba(255,255,255,0.15);
+            background:linear-gradient(120deg,var(--blue-main),var(--petrol-dark));
+            color:white;
+            font-weight:600;
+            font-size:15px;
+            backdrop-filter:blur(4px);
+            box-shadow:0 0 22px rgba(74,144,226,0.35);
+            transition:.25s ease;
+            z-index:5;
+        }
+
+        .phone-btn:hover {
+            box-shadow:0 0 30px rgba(108,212,255,0.5);
+            background:linear-gradient(120deg,var(--petrol-dark),var(--turquoise-soft));
+            transform:translateX(-50%) translateY(-2px);
+        }
     </style>
 </head>
 
