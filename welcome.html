@@ -72,19 +72,64 @@
         }
 
         .brand-block { display: flex; align-items: center; gap: 14px; }
+/* Nouveau bloc texte à 4 lignes */
+.brand-text-4lines {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.05;
+}
 
-        /* Nouveau conteneur pour le logo image */
-        .logo-mark {
-            width: 52px;
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            box-shadow:
-                0 0 12px rgba(79,210,255,0.85),
-                0 0 24px rgba(79,210,255,0.45);
-        }
+/* LIGNE 1 – DIGIT */
+.line-1-digit {
+    font-family: "Montserrat";
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.22em;
+}
+
+/* LIGNE 2 – RESTORE (rouge + italique) */
+.line-2-restore {
+    font-family: "Montserrat";
+    font-size: 22px;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: 0.22em;
+    background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* LIGNE 3 – Réparation & Reconditionnement */
+.line-3-tag {
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent-3);
+}
+
+/* LIGNE 4 – Smartphones & Tablettes */
+.line-4-tag {
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent-3);
+}
+
+/* Logo halo bleu – agrandi */
+.logo-mark {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    box-shadow:
+        0 0 18px rgba(79,210,255,0.85),
+        0 0 36px rgba(79,210,255,0.45);
+}
+
 
         .logo-mark img {
             width: 100%;
@@ -93,34 +138,7 @@
             display: block;
         }
 
-        .brand-text { display: flex; flex-direction: column; gap: 2px; }
-
-        .brand-name {
-            font-family: "Montserrat";
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: .24em;
-        }
-
-        .brand-name span {
-            background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% 100%;
-            animation: logoShine 14s ease-in-out infinite;
-        }
-
-        .brand-tagline {
-            font-size: 11px;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-            color: var(--accent-3);
-        }
-
-        .brand-tagline::after {
-            content: " — Smartphones & tablettes";
-            color: var(--accent-3);
-        }
+        
 
         /* BOUTON HEADER (CTA UNIQUE) */
         .header-button {
@@ -520,22 +538,36 @@
 
     <!-- HEADER -->
     <header class="site-header">
-        <div class="brand-block">
-            <div class="logo-mark">
-                <img src="logo.png" alt="Logo DigitRestore">
-            </div>
-            <div class="brand-text">
-                <div class="brand-name">DIGIT<span>RESTORE</span></div>
-                <div class="brand-tagline">
-                    Réparation & reconditionnement
-                </div>
-            </div>
+    <div class="brand-block">
+
+        <!-- LOGO AGRANDI + HALO BLEU -->
+        <div class="logo-mark">
+            <img src="logo.png" alt="Logo DigitRestore">
         </div>
 
-        <button class="header-button" onclick="window.location.href='site.html'">
-            Accéder à l’atelier
-        </button>
-    </header>
+        <!-- BLOC TEXTE À 4 NIVEAUX -->
+        <div class="brand-text-4lines">
+
+            <!-- LIGNE 1 : DIGIT -->
+            <div class="line-1-digit">DIGIT</div>
+
+            <!-- LIGNE 2 : RESTORE -->
+            <div class="line-2-restore">RESTORE</div>
+
+            <!-- LIGNE 3 -->
+            <div class="line-3-tag">RÉPARATION & RECONDITIONNEMENT</div>
+
+            <!-- LIGNE 4 -->
+            <div class="line-4-tag">SMARTPHONES & TABLETTES</div>
+
+        </div>
+    </div>
+
+    <button class="header-button" onclick="window.location.href='site.html'">
+        Accéder à l’atelier
+    </button>
+</header>
+
 
     <!-- HERO -->
     <section class="hero">
