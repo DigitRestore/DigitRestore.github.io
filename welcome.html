@@ -18,7 +18,6 @@
             --text-muted: #b7bbc9;
         }
 
-        /* GLOBAL */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
@@ -32,7 +31,6 @@
             padding: 24px;
         }
 
-        /* WRAPPER PRINCIPAL */
         .welcome-wrapper {
             width: min(1120px, 100%);
             display: grid;
@@ -45,7 +43,6 @@
             box-shadow: 0 26px 80px rgba(0,0,0,0.9);
         }
 
-        /* GAUCHE */
         .left {
             padding: 60px 50px;
             display: flex;
@@ -54,7 +51,6 @@
             gap: 26px;
         }
 
-        /* Logo */
         .logo-title {
             font-size: 42px;
             font-weight: 800;
@@ -75,7 +71,6 @@
             margin-top: 4px;
         }
 
-        /* TITRE PRINCIPAL */
         .intro-title {
             font-size: 32px;
             line-height: 1.3;
@@ -87,7 +82,6 @@
             color: var(--accent-2);
         }
 
-        /* TEXTE */
         .intro-text {
             font-size: 15px;
             line-height: 1.6;
@@ -95,9 +89,7 @@
             max-width: 560px;
         }
 
-        /* BOUTON GÉNÉRIQUE */
         .btn-enter {
-            margin-top: 18px;
             padding: 14px 32px;
             border-radius: 999px;
             background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
@@ -107,10 +99,8 @@
             border: none;
             cursor: pointer;
             box-shadow: 0 0 25px rgba(255,75,92,0.4);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
             transition: 0.25s ease;
+            text-align: center;
         }
 
         .btn-enter:hover {
@@ -118,7 +108,6 @@
             transform: translateY(-2px);
         }
 
-        /* TELEPHONE */
         .right {
             display: flex;
             justify-content: center;
@@ -186,7 +175,6 @@
             z-index: 1;
         }
 
-        /* Marques */
         .brand-rotator {
             position: absolute;
             top: 54%;
@@ -223,67 +211,30 @@
             100% { opacity: 0; transform: translateY(-12px); }
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 850px) {
-            .welcome-wrapper {
-                grid-template-columns: 1fr;
-            }
+        /* == BOUTON STABILISÉ DANS LE TÉLÉPHONE == */
+        .phone-btn {
+            position: absolute;
+            bottom: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 72%;
+            padding: 12px 0;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 20px rgba(255,75,92,0.35);
+            z-index: 5;
 
-            .left {
-                padding: 40px 30px;
-            }
-
-            .intro-title {
-                font-size: 26px;
-            }
-
-            .right {
-                padding: 30px 0 40px;
-            }
-
-            .phone-shell {
-                width: 200px;
-                height: 400px;
-            }
+            /* Correction anti-microbouge */
+            display: block;
         }
 
-       /* Bouton dans le téléphone */
-.phone-btn {
-    position: absolute;
-    bottom: 26px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 72%;
-    padding: 12px 0;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,0.15);
-    backdrop-filter: blur(4px);
-    box-shadow: 0 0 20px rgba(255,75,92,0.35);
-    z-index: 5;
-
-    /* Correction anti-bouge */
-    display: block !important;
-    gap: 0 !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
-
-/* Désactive le mouvement du bouton dans le téléphone */
-.phone-btn:hover {
-    transform: none !important;
-    box-shadow: 0 0 20px rgba(255,75,92,0.35) !important;
-}
-
-/* Empêche l'intérieur de perturber le hover */
-.phone-btn span {
-    pointer-events: none;
-}
-
-
-        /* Désactive le mouvement du bouton dans le téléphone au survol */
         .phone-btn:hover {
-            transform: none !important;
-            box-shadow: 0 0 20px rgba(255,75,92,0.35) !important;
+            transform: translateX(-50%) !important;
+        }
+
+        .phone-btn span {
+            pointer-events: none;
         }
 
         /* Animation d'apparition premium */
@@ -299,6 +250,7 @@
                 transform: translateY(0);
             }
         }
+
     </style>
 </head>
 
@@ -306,16 +258,13 @@
 
 <div class="welcome-wrapper">
 
-    <!-- GAUCHE -->
     <div class="left">
 
-        <!-- Logo -->
         <div>
             <div class="logo-title">DIGIT<span>RESTORE</span></div>
             <div class="logo-sub">Réparation & reconditionnement smartphone / tablette</div>
         </div>
 
-        <!-- Titre de présentation -->
         <h1 class="intro-title fade-in">
             Réparation & reprise de smartphones <span>haut de gamme</span>, en toute transparence.
         </h1>
@@ -327,7 +276,6 @@
 
     </div>
 
-    <!-- TELEPHONE -->
     <div class="right">
         <div class="phone-shell">
             <div class="phone-inner">
@@ -344,8 +292,9 @@
                     <span>Huawei</span>
                 </div>
 
+                <!-- BOUTON STABILISÉ -->
                 <button class="btn-enter phone-btn" onclick="window.location.href='site.html'">
-                    Entrer dans l’atelier ➜
+                    <span>Entrer dans l’atelier</span>
                 </button>
 
             </div>
