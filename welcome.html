@@ -12,30 +12,19 @@
 
     <style>
         :root {
-            /* Palette principale – nouveau thème */
             --bg-main: #050814;
             --bg-alt: #070c1c;
-            --bg-card: rgba(15, 20, 45, 0.9);
-            --glass: rgba(255,255,255,0.04);
-            --glass-strong: rgba(255,255,255,0.08);
 
-            --accent-1: #ff4b5c;    /* rouge corail (gardé) */
-            --accent-2: #ff9153;    /* orange (gardé) */
-            --accent-3: #4fd2ff;    /* cyan néon */
-            --accent-soft: #9b8cff; /* violet doux */
+            --accent-1: #ff4b5c;
+            --accent-2: #ff9153;
+            --accent-3: #4fd2ff;
 
             --text-main: #f5f5f7;
             --text-muted: #a6adc9;
             --text-soft: #c3c8df;
-
-            --border-subtle: rgba(255,255,255,0.08);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             min-height: 100vh;
@@ -57,9 +46,6 @@
             background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(7,12,28,0.98));
             border: 1px solid rgba(255,255,255,0.06);
             backdrop-filter: blur(18px);
-            box-shadow:
-                0 32px 90px rgba(0,0,0,0.85),
-                0 0 60px rgba(79,210,255,0.18);
             padding: 28px 34px 40px;
             display: flex;
             flex-direction: column;
@@ -72,14 +58,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 24px;
         }
 
-        .brand-block {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
+        .brand-block { display: flex; align-items: center; gap: 14px; }
 
         .logo-mark {
             width: 42px;
@@ -92,20 +73,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: "Montserrat", sans-serif;
+            font-family: "Montserrat";
             font-weight: 800;
-            font-size: 18px;
-            letter-spacing: .06em;
         }
 
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
+        .brand-text { display: flex; flex-direction: column; gap: 2px; }
 
         .brand-name {
-            font-family: "Montserrat", sans-serif;
+            font-family: "Montserrat";
             font-size: 20px;
             font-weight: 800;
             letter-spacing: .24em;
@@ -119,51 +94,41 @@
 
         .brand-tagline {
             font-size: 11px;
-            text-transform: uppercase;
             letter-spacing: .18em;
+            text-transform: uppercase;
             color: var(--accent-3);
         }
 
-        .header-cta {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        /* LIGNE FUSIONNÉE */
+        .brand-tagline::after {
+            content: " — Smartphones & tablettes";
+            color: var(--accent-3);
         }
 
-        .header-pill {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: .2em;
-            color: var(--text-muted);
-            padding: 6px 14px;
-            border-radius: 999px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.10);
-        }
-
+        /* BOUTON HEADER (CTA UNIQUE) */
         .header-button {
-            padding: 9px 18px;
+            padding: 12px 26px;
             border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.18);
-            background: linear-gradient(120deg, var(--accent-3), var(--accent-soft));
+            border: none;
+            background: linear-gradient(125deg, var(--accent-1), var(--accent-2));
             color: #050814;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 0 26px rgba(79,210,255,0.5);
-            transition: transform .18s ease, box-shadow .18s ease;
+            box-shadow: 0 0 30px rgba(255,75,92,0.6);
+            transition: .18s ease;
         }
 
         .header-button:hover {
             transform: translateY(-1px);
-            box-shadow: 0 0 34px rgba(155,140,255,0.7);
+            box-shadow: 0 0 40px rgba(255,145,83,0.8);
         }
 
         /* =================== HERO =================== */
 
         .hero {
             display: grid;
-            grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+            grid-template-columns: 1.35fr 1fr;
             gap: 40px;
             align-items: center;
         }
@@ -171,35 +136,13 @@
         .hero-left {
             display: flex;
             flex-direction: column;
-            gap: 26px;
-        }
-
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 12px;
-            border-radius: 999px;
-            background: rgba(0,0,0,0.45);
-            border: 1px solid rgba(255,255,255,0.15);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: .18em;
-            color: var(--text-soft);
-        }
-
-        .hero-eyebrow-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 999px;
-            background: var(--accent-3);
-            box-shadow: 0 0 12px rgba(79,210,255,0.9);
+            gap: 22px;
         }
 
         .hero-title {
             font-size: 34px;
-            line-height: 1.25;
             font-weight: 600;
+            line-height: 1.25;
         }
 
         .hero-title span {
@@ -221,126 +164,58 @@
             font-style: normal;
         }
 
-        .hero-cta-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .btn-primary {
-            padding: 12px 26px;
-            border-radius: 999px;
-            border: none;
-            background: linear-gradient(125deg, var(--accent-1), var(--accent-2));
-            color: #050814;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 0 30px rgba(255,75,92,0.6);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform .18s ease, box-shadow .18s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 0 40px rgba(255,145,83,0.8);
-        }
-
-        .btn-secondary {
-            padding: 12px 20px;
-            border-radius: 999px;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.22);
-            color: var(--text-soft);
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: background .18s ease, color .18s ease, transform .18s ease;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(0,0,0,0.4);
-            transform: translateY(-1px);
-        }
-
-        .hero-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 4px;
-        }
-
-        .hero-badge {
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.10);
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
         /* =================== SERVICES =================== */
 
         .services {
-            margin-top: 8px;
-            padding: 16px 18px;
+            margin-top: 10px;
+            padding: 26px 22px;
             border-radius: 20px;
-            background: radial-gradient(circle at top left, rgba(79,210,255,0.18), transparent 65%),
-                        radial-gradient(circle at bottom right, rgba(255,145,83,0.22), transparent 60%),
-                        rgba(4,6,18,0.85);
+            background:
+                radial-gradient(circle at top left, rgba(79,210,255,0.18), transparent 65%),
+                radial-gradient(circle at bottom right, rgba(255,145,83,0.22), transparent 60%),
+                rgba(4,6,18,0.85);
             border: 1px solid rgba(255,255,255,0.08);
         }
 
         .services-title {
             font-size: 13px;
-            text-transform: uppercase;
             letter-spacing: .18em;
+            text-transform: uppercase;
             color: var(--text-muted);
-            margin-bottom: 10px;
+            margin-bottom: 16px;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
         }
 
         .service-pill {
-            padding: 8px 10px;
-            border-radius: 999px;
+            padding: 12px 14px;
+            border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.16);
             background: rgba(0,0,0,0.45);
-            font-size: 11px;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: .12em;
             color: var(--text-soft);
             text-align: center;
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
-        /* =================== PHONE (CONSERVÉ) =================== */
+        /* =================== PHONE =================== */
 
-        .hero-right {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .hero-right { display: flex; justify-content: center; }
 
         .phone-stage {
             position: relative;
-            padding: 26px 18px 26px 18px;
+            padding: 26px;
             border-radius: 28px;
             background:
                 radial-gradient(circle at top, rgba(79,210,255,0.32), transparent 60%),
                 radial-gradient(circle at bottom, rgba(255,145,83,0.32), transparent 55%),
-                rgba(3,5,14, 0.95);
+                rgba(3,5,14,0.95);
             border: 1px solid rgba(255,255,255,0.10);
             box-shadow: 0 30px 80px rgba(0,0,0,0.9);
         }
@@ -375,8 +250,6 @@
             border-radius: 18px;
             transform: translateX(-50%);
             opacity: .92;
-            box-shadow: 0 0 14px rgba(0,0,0,.8);
-            z-index: 3;
         }
 
         .phone-logo-center {
@@ -385,10 +258,8 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 20px;
-            letter-spacing: .28em;
-            text-transform: uppercase;
             font-weight: 700;
-            z-index: 4;
+            letter-spacing: .28em;
         }
 
         .phone-logo-center span {
@@ -402,125 +273,48 @@
             top: 57%;
             left: 50%;
             transform: translateX(-50%);
-            height: 72px;               /* fenêtre un peu plus grande */
+            height: 72px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 4;
         }
 
         .brand-rotator span {
             opacity: 0;
             transform: translateY(6px);
             animation: rotateBrand 10s linear infinite;
-            font-size: 11px;            /* plus petit pour Huawei */
+            font-size: 11px;
             font-weight: 500;
             letter-spacing: .24em;
             text-transform: uppercase;
             color: rgba(245,245,245,0.9);
-            -webkit-font-smoothing: antialiased;
             line-height: 1.2;
         }
 
-        /* 4 marques = 10s / 4 = 2.5s */
         .brand-rotator span:nth-child(1) { animation-delay: 0s; }
         .brand-rotator span:nth-child(2) { animation-delay: 2.5s; }
         .brand-rotator span:nth-child(3) { animation-delay: 5s; }
         .brand-rotator span:nth-child(4) { animation-delay: 7.5s; }
 
         @keyframes rotateBrand {
-            0%   { opacity: 0; transform: translateY(6px); }
-            10%  { opacity: 1; transform: translateY(0); }
-            25%  { opacity: 1; transform: translateY(0); }
-            35%  { opacity: 0; transform: translateY(-6px); }
+            0% { opacity: 0; transform: translateY(6px); }
+            10% { opacity: 1; transform: translateY(0); }
+            25% { opacity: 1; transform: translateY(0); }
+            35% { opacity: 0; transform: translateY(-6px); }
             100% { opacity: 0; transform: translateY(-6px); }
         }
 
-        .phone-btn {
-            position: absolute;
-            bottom: 26px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 72%;
-            padding: 12px 0;
-            border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: linear-gradient(120deg,var(--accent-1),var(--accent-2));
-            color: white;
-            font-weight: 600;
-            font-size: 15px;
-            box-shadow: 0 0 22px rgba(255,75,92,0.35);
-            transition: .25s ease;
-            z-index: 5;
-            cursor: pointer;
-        }
-
-        .phone-btn:hover {
-            box-shadow: 0 0 30px rgba(255,145,83,0.55);
-            transform: translateX(-50%) translateY(-2px);
-        }
-
-        /* =================== RESPONSIVE =================== */
-
+        /* Responsive */
         @media (max-width: 960px) {
-            .page {
-                padding: 22px 18px 28px;
-            }
-
-            .hero {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-right {
-                order: -1;
-            }
-
-            .phone-stage {
-                margin-inline: auto;
-            }
-
-            .services-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 640px) {
-            body {
-                padding: 18px;
-            }
-
-            .page {
-                border-radius: 24px;
-            }
-
-            .site-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .hero-title {
-                font-size: 26px;
-            }
-
-            .phone-shell {
-                width: 220px;
-                height: 440px;
-            }
-
-            .brand-rotator {
-                top: 56%;
-                height: 64px;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero { grid-template-columns: 1fr; }
+            .hero-right { order: -1; margin-bottom: 20px; }
+            .services-grid { grid-template-columns: 1fr; }
         }
 
     </style>
 </head>
+
 <body>
 
 <div class="page">
@@ -531,16 +325,15 @@
             <div class="logo-mark">DR</div>
             <div class="brand-text">
                 <div class="brand-name">DIGIT<span>RESTORE</span></div>
-                <div class="brand-tagline">Réparation & reconditionnement</div>
+                <div class="brand-tagline">
+                    Réparation & reconditionnement
+                </div>
             </div>
         </div>
 
-        <div class="header-cta">
-            <div class="header-pill">Smartphones & tablettes</div>
-            <button class="header-button" onclick="window.location.href='site.html'">
-                Accéder à l’atelier
-            </button>
-        </div>
+        <button class="header-button" onclick="window.location.href='site.html'">
+            Accéder à l’atelier
+        </button>
     </header>
 
     <!-- HERO -->
@@ -548,10 +341,6 @@
 
         <!-- HERO LEFT -->
         <div class="hero-left">
-            <div class="hero-eyebrow">
-                <div class="hero-eyebrow-dot"></div>
-                Service indépendant & transparent
-            </div>
 
             <h1 class="hero-title">
                 Redonnez une <span>seconde vie</span> à vos smartphones et tablettes.
@@ -563,26 +352,10 @@
                 travail soigné, suivi clair et protection de vos données du début à la fin.
             </p>
 
-            <div class="hero-cta-row">
-                <button class="btn-primary" onclick="window.location.href='site.html'">
-                    Entrer dans l’atelier
-                    <span>➜</span>
-                </button>
-
-                <button class="btn-secondary">
-                    Comprendre la méthode DigitRestore
-                </button>
-            </div>
-
-            <div class="hero-badges">
-                <div class="hero-badge">Diagnostic complet</div>
-                <div class="hero-badge">Reprise sécurisée</div>
-                <div class="hero-badge">Data & confidentialité</div>
-                <div class="hero-badge">Accompagnement personnalisé</div>
-            </div>
-
+            <!-- SERVICES -->
             <div class="services">
                 <div class="services-title">Ce que propose DigitRestore</div>
+
                 <div class="services-grid">
                     <div class="service-pill">Réparation</div>
                     <div class="service-pill">Reprise</div>
@@ -596,7 +369,7 @@
             </div>
         </div>
 
-        <!-- HERO RIGHT (PHONE CONSERVÉ) -->
+        <!-- HERO RIGHT (PHONE) -->
         <div class="hero-right">
             <div class="phone-stage">
                 <div class="phone-shell">
@@ -604,9 +377,7 @@
 
                         <div class="dynamic-island"></div>
 
-                        <div class="phone-logo-center">
-                            DIGIT<span>RESTORE</span>
-                        </div>
+                        <div class="phone-logo-center">DIGIT<span>RESTORE</span></div>
 
                         <div class="brand-rotator">
                             <span>Apple</span>
@@ -615,17 +386,12 @@
                             <span>Huawei</span>
                         </div>
 
-                        <button class="phone-btn" onclick="window.location.href='site.html'">
-                            Entrer dans l’atelier
-                        </button>
-
                     </div>
                 </div>
             </div>
         </div>
 
     </section>
-
 </div>
 
 </body>
