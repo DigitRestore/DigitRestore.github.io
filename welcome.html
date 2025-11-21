@@ -33,12 +33,15 @@
                 radial-gradient(circle at top left, #111634 0%, transparent 55%),
                 radial-gradient(circle at bottom right, #171a2b 0%, transparent 55%),
                 var(--bg-main);
+            background-position: 0 0, 100% 100%, 0 0;
+            background-size: 130% 130%, 130% 130%, auto;
             color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 32px;
             overflow-x: hidden;
+            animation: bgMove 28s ease-in-out infinite alternate;
         }
 
         .page {
@@ -52,8 +55,8 @@
             flex-direction: column;
             gap: 32px;
             opacity: 0;
-            transform: translateY(12px);
-            animation: pageIn 0.7s ease-out forwards;
+            transform: translateY(16px);
+            animation: pageIn 0.8s cubic-bezier(.16,.8,.33,1) forwards;
         }
 
         /* =================== HEADER =================== */
@@ -63,8 +66,8 @@
             align-items: center;
             justify-content: space-between;
             opacity: 0;
-            transform: translateY(-10px);
-            animation: fadeDown 0.7s ease-out 0.1s forwards;
+            transform: translateY(-14px);
+            animation: fadeDown 0.9s cubic-bezier(.16,.8,.33,1) 0.15s forwards;
         }
 
         .brand-block { display: flex; align-items: center; gap: 14px; }
@@ -97,6 +100,8 @@
             background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-size: 200% 100%;
+            animation: logoShine 14s ease-in-out infinite;
         }
 
         .brand-tagline {
@@ -117,18 +122,20 @@
             border-radius: 999px;
             border: none;
             background: linear-gradient(125deg, var(--accent-1), var(--accent-2));
+            background-size: 220% 220%;
+            background-position: 0% 50%;
             color: #050814;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 0 30px rgba(255,75,92,0.6);
             transition: transform .18s ease, box-shadow .18s ease;
-            animation: ctaPulse 7s ease-in-out 1.2s infinite;
+            animation: ctaPulse 7s ease-in-out 1.1s infinite, gradientShift 16s ease-in-out 0s infinite;
         }
 
         .header-button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 0 40px rgba(255,145,83,0.8);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 46px rgba(255,145,83,0.95);
         }
 
         /* =================== HERO =================== */
@@ -145,14 +152,17 @@
             flex-direction: column;
             gap: 22px;
             opacity: 0;
-            transform: translateY(18px);
-            animation: fadeUp 0.8s ease-out 0.35s forwards;
+            transform: translateY(24px);
+            animation: fadeUp 0.9s cubic-bezier(.16,.8,.33,1) 0.35s forwards;
         }
 
         .hero-title {
             font-size: 34px;
             font-weight: 600;
             line-height: 1.25;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.8s cubic-bezier(.16,.8,.33,1) 0.4s forwards;
         }
 
         .hero-title span {
@@ -166,6 +176,9 @@
             color: var(--text-soft);
             max-width: 520px;
             font-style: italic;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.8s cubic-bezier(.16,.8,.33,1) 0.55s forwards;
         }
 
         .hero-subtitle strong {
@@ -186,8 +199,8 @@
                 rgba(4,6,18,0.85);
             border: 1px solid rgba(255,255,255,0.08);
             opacity: 0;
-            transform: translateY(16px);
-            animation: fadeUp 0.8s ease-out 0.6s forwards;
+            transform: translateY(18px);
+            animation: fadeUp 0.85s cubic-bezier(.16,.8,.33,1) 0.7s forwards;
         }
 
         .services-title {
@@ -205,6 +218,7 @@
         }
 
         .service-pill {
+            position: relative;
             padding: 12px 14px;
             border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.16);
@@ -215,20 +229,54 @@
             color: var(--text-soft);
             text-align: center;
             white-space: nowrap;
+            overflow: hidden;
             opacity: 0;
-            transform: translateY(10px);
-            animation: pillIn 0.45s ease-out forwards;
+            transform: translateY(14px) scale(0.98);
+            transition:
+                transform .22s ease,
+                box-shadow .22s ease,
+                background .22s ease,
+                border-color .22s ease,
+                color .22s ease;
+            animation: pillIn 0.45s cubic-bezier(.19,.8,.37,1) forwards;
+        }
+
+        .service-pill::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg,
+                rgba(255,255,255,0.12),
+                rgba(255,255,255,0.32),
+                rgba(255,255,255,0.05)
+            );
+            transform: translateX(-130%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .service-pill:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+            background: radial-gradient(circle at top, rgba(79,210,255,0.25), rgba(0,0,0,0.8));
+            border-color: rgba(79,210,255,0.85);
+            color: var(--text-main);
+        }
+
+        .service-pill:hover::before {
+            opacity: 1;
+            animation: sweep 0.6s ease-out forwards;
         }
 
         /* Stagger sur les 8 pastilles */
-        .services-grid .service-pill:nth-child(1) { animation-delay: 0.70s; }
-        .services-grid .service-pill:nth-child(2) { animation-delay: 0.78s; }
-        .services-grid .service-pill:nth-child(3) { animation-delay: 0.86s; }
-        .services-grid .service-pill:nth-child(4) { animation-delay: 0.94s; }
-        .services-grid .service-pill:nth-child(5) { animation-delay: 1.02s; }
-        .services-grid .service-pill:nth-child(6) { animation-delay: 1.10s; }
-        .services-grid .service-pill:nth-child(7) { animation-delay: 1.18s; }
-        .services-grid .service-pill:nth-child(8) { animation-delay: 1.26s; }
+        .services-grid .service-pill:nth-child(1) { animation-delay: 0.80s; }
+        .services-grid .service-pill:nth-child(2) { animation-delay: 0.90s; }
+        .services-grid .service-pill:nth-child(3) { animation-delay: 1.00s; }
+        .services-grid .service-pill:nth-child(4) { animation-delay: 1.10s; }
+        .services-grid .service-pill:nth-child(5) { animation-delay: 1.20s; }
+        .services-grid .service-pill:nth-child(6) { animation-delay: 1.30s; }
+        .services-grid .service-pill:nth-child(7) { animation-delay: 1.40s; }
+        .services-grid .service-pill:nth-child(8) { animation-delay: 1.50s; }
 
         /* =================== PHONE =================== */
 
@@ -236,8 +284,8 @@
             display: flex;
             justify-content: center;
             opacity: 0;
-            transform: translateY(18px);
-            animation: fadeUp 0.8s ease-out 0.5s forwards;
+            transform: translateY(26px);
+            animation: fadeUp 0.9s cubic-bezier(.16,.8,.33,1) 0.6s forwards;
         }
 
         .phone-stage {
@@ -250,7 +298,9 @@
                 rgba(3,5,14,0.95);
             border: 1px solid rgba(255,255,255,0.10);
             box-shadow: 0 30px 80px rgba(0,0,0,0.9);
-            animation: floatPhone 9s ease-in-out 1.5s infinite;
+            animation:
+                floatPhone 9s ease-in-out 1.5s infinite,
+                phoneGlow 14s ease-in-out 2s infinite;
         }
 
         .phone-shell {
@@ -261,6 +311,24 @@
             background: linear-gradient(145deg,#f5f5f7,#b4b4b8,#23242a);
             box-shadow: 0 26px 70px rgba(0,0,0,0.95);
             position: relative;
+            overflow: hidden;
+        }
+
+        .phone-shell::before {
+            content: "";
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 60%;
+            height: 180%;
+            background: linear-gradient(130deg,
+                rgba(255,255,255,0.32),
+                rgba(255,255,255,0.03)
+            );
+            transform: translateY(0) rotate(12deg);
+            opacity: 0;
+            animation: phoneHighlight 12s ease-in-out 3s infinite;
+            pointer-events: none;
         }
 
         .phone-inner {
@@ -340,30 +408,65 @@
 
         /* =================== ANIMATIONS GLOBALES =================== */
 
+        @keyframes bgMove {
+            0% {
+                background-position: 0% 0%, 100% 100%, 0 0;
+            }
+            50% {
+                background-position: 15% -10%, 90% 110%, 0 0;
+            }
+            100% {
+                background-position: 30% 0%, 80% 90%, 0 0;
+            }
+        }
+
         @keyframes pageIn {
-            0% { opacity: 0; transform: translateY(12px); }
+            0% { opacity: 0; transform: translateY(16px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeUp {
-            0% { opacity: 0; transform: translateY(18px); }
+            0% { opacity: 0; transform: translateY(24px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeDown {
-            0% { opacity: 0; transform: translateY(-10px); }
+            0% { opacity: 0; transform: translateY(-18px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes pillIn {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; transform: translateY(18px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes sweep {
+            0%   { transform: translateX(-130%); opacity: 0; }
+            20%  { opacity: 1; }
+            80%  { opacity: 1; }
+            100% { transform: translateX(130%); opacity: 0; }
         }
 
         @keyframes floatPhone {
             0%   { transform: translateY(0); }
-            50%  { transform: translateY(-4px); }
+            50%  { transform: translateY(-5px); }
             100% { transform: translateY(0); }
+        }
+
+        @keyframes phoneGlow {
+            0%, 100% {
+                box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+            }
+            50% {
+                box-shadow: 0 40px 95px rgba(79,210,255,0.55);
+            }
+        }
+
+        @keyframes phoneHighlight {
+            0%   { opacity: 0; transform: translateY(0) rotate(12deg); }
+            10%  { opacity: 1; }
+            40%  { opacity: 0; transform: translateY(140%) rotate(12deg); }
+            100% { opacity: 0; transform: translateY(140%) rotate(12deg); }
         }
 
         @keyframes ctaPulse {
@@ -372,8 +475,26 @@
                 transform: translateY(0);
             }
             50% {
-                box-shadow: 0 0 40px rgba(255,145,83,0.9);
+                box-shadow: 0 0 46px rgba(255,145,83,0.95);
                 transform: translateY(-1px);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes logoShine {
+            0%, 70%, 100% {
+                background-position: 0% 50%;
+            }
+            80% {
+                background-position: 100% 50%;
+            }
+            90% {
+                background-position: 0% 50%;
             }
         }
 
