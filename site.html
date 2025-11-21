@@ -5,35 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DigitRestore - Réparation & Reprise de Smartphones</title>
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css">
-
     <!-- Police moderne -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
+<body class="site-body">
 
-<body>
-
+    <!-- Bandeau + logo chargés depuis components/header.html -->
     <div id="header"></div>
 
-    <main>
-       
+    <main class="main-layout">
+        <!-- Hero : intro pro, plein écran (components/hero.html) -->
         <div id="hero"></div>
+
+        <!-- Onglets “Pourquoi nous” (cartes + bandeau onglets.html) -->
+        <div id="onglets"></div>
+
+        <!-- Services de réparation -->
         <div id="services"></div>
+
+        <!-- Reprise / rachat -->
         <div id="reprise"></div>
+
+        <!-- Pourquoi DigitRestore -->
         <div id="pourquoi"></div>
+
+        <!-- Processus en plusieurs étapes -->
         <div id="processus"></div>
+
+        <!-- Contact -->
         <div id="contact"></div>
     </main>
 
+    <!-- Pied de page -->
     <div id="footer"></div>
 
-    <!-- Script de chargement automatique -->
+    <!-- Scripts de chargement des composants & onglets -->
     <script src="js/loader.js"></script>
-<script src="js/onglets.js"></script>
+    <script src="js/onglets.js"></script>
 </body>
 </html>
-
-
