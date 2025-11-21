@@ -72,35 +72,41 @@
         }
 
         .brand-block { display: flex; align-items: center; gap: 14px; }
-
-
-/* Nouveau texte premium pour le header */
-.brand-text-4lines {
+.brand-text-inline {
     display: flex;
     flex-direction: column;
+    gap: 6px;
     line-height: 1.12;
-    gap: 4px;
 }
 
-/* DIGIT – blanc massif, propre */
-.line-1-digit {
+/* Ligne 1 = DIGIT + RESTORE sur la même ligne */
+.brand-line.merge {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+/* DIGIT – blanc, massif, propre */
+.brand-line.merge .digit {
     font-family: "Montserrat";
-    font-size: 23px;
+    font-size: 25px;
     font-weight: 800;
     color: #ffffff;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.10em;
 }
 
-/* RESTORE – rouge métallique cohérent avec le logo */
-.line-2-restore {
+/* RESTORE – rouge métallique comme ton logo */
+.brand-line.merge .restore {
     font-family: "Montserrat";
-    font-size: 24px;
+    font-size: 25px;
     font-weight: 900;
-    letter-spacing: 0.12em;
-    background: linear-gradient(120deg, #d0151b, #ff2a31);
+    letter-spacing: 0.10em;
+    background: linear-gradient(120deg, #c01015, #ff1e26);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+
 
 /* Lignes fines */
 .line-3-tag,
@@ -543,21 +549,18 @@
         </div>
 
         <!-- BLOC TEXTE À 4 NIVEAUX -->
-        <div class="brand-text-4lines">
+        <div class="brand-text-inline">
 
-            <!-- LIGNE 1 : DIGIT -->
-            <div class="line-1-digit">DIGIT</div>
+    <div class="brand-line merge">
+        <span class="digit">DIGIT</span>
+        <span class="restore">RESTORE</span>
+    </div>
 
-            <!-- LIGNE 2 : RESTORE -->
-            <div class="line-2-restore">RESTORE</div>
+    <div class="line-3-tag">RÉPARATION & RECONDITIONNEMENT</div>
+    <div class="line-4-tag">SMARTPHONES & TABLETTES</div>
 
-            <!-- LIGNE 3 -->
-            <div class="line-3-tag">RÉPARATION & RECONDITIONNEMENT</div>
+</div>
 
-            <!-- LIGNE 4 -->
-            <div class="line-4-tag">SMARTPHONES & TABLETTES</div>
-
-        </div>
     </div>
 
     <button class="header-button" onclick="window.location.href='site.html'">
