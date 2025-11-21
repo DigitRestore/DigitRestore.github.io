@@ -246,6 +246,35 @@
                 height: 400px;
             }
         }
+/* Bouton dans le téléphone */
+.phone-btn {
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72%;
+    padding: 12px 0;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 20px rgba(255,75,92,0.35);
+    z-index: 5;
+}
+
+/* Animation d'apparition premium */
+.fade-in {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+        
     </style>
 </head>
 
@@ -295,6 +324,9 @@
                     <span>Xiaomi</span>
                     <span>Huawei</span>
                 </div>
+<button class="btn-enter phone-btn" onclick="window.location.href='site.html'">
+    Entrer dans l’atelier ➜
+</button>
 
             </div>
         </div>
