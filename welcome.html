@@ -2,21 +2,21 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta viewport="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DigitRestore - Accueil</title>
 
-    <!-- Police (Poppins) -->
+    <!-- Poppins + Montserrat pour le logo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* === PALETTE ORIGINALE — NE PAS MODIFIER === */
-            --accent-1: #ff4b5c;       /* Rouge corail */
-            --accent-2: #ff9153;       /* Orange premium */
-            --neon-blue: #5ad8ff;      /* Bleu glacé */
-            --text-grey: #c8ced6;      /* Gris métallique */
+            /* Couleurs ORIGINALES - strictement conservées */
+            --accent-1: #ff4b5c;
+            --accent-2: #ff9153;
+            --neon-blue: #5ad8ff;
+            --text-grey: #c8ced6;
             --text-main: #f5f5f5;
             --text-muted: #9fa3b3;
 
@@ -33,160 +33,112 @@
         }
 
         body {
-            font-family: "Poppins", sans-serif; /* NOUVELLE POLICE */
+            font-family: "Poppins", sans-serif;
             min-height: 100vh;
-            padding: 24px;
+            padding: 30px;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             background: radial-gradient(circle at top left, #1a1d2b 0%, #0e0f11 45%, #000 100%);
             color: var(--text-main);
         }
 
-        .welcome-wrapper {
-            width: min(1120px, 100%);
+        .main-wrapper {
+            width: min(1200px, 100%);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 32px;
+            padding: 60px;
             display: grid;
             grid-template-columns: 1.3fr 1fr;
-            background: rgba(15,17,20,0.55);
-            backdrop-filter: blur(10px);
-            border-radius: 28px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 30px 90px rgba(0,0,0,0.85);
+            gap: 40px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 30px 90px rgba(0,0,0,0.75);
         }
 
-        /* ==============================================================
-           COLONNE GAUCHE
-        ============================================================== */
+        /* ----------------------------- GAUCHE ----------------------------- */
 
-        .left {
-            padding: 70px 55px;
-            display: flex;
-            flex-direction: column;
-            gap: 36px;
-        }
-
-        .logo-title {
-            font-family: "Montserrat", sans-serif; /* POLICE DU LOGO CONSERVÉE */
-            font-size: 45px;
+        .logo {
+            font-family: "Montserrat", sans-serif;
+            font-size: 44px;
             font-weight: 800;
             letter-spacing: .26em;
+            margin-bottom: 12px;
         }
 
-        .logo-title span {
+        .logo span {
             background: linear-gradient(110deg, var(--accent-1), var(--accent-2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .logo-sub {
-            font-size: 13px;
+        .subtitle {
+            font-size: 15px;
             text-transform: uppercase;
-            color: var(--neon-blue);
             letter-spacing: .22em;
-            margin-top: 2px;
-        }
-
-        .intro-block {
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .intro-title {
-            font-size: 33px;
-            font-weight: 700;
-            line-height: 1.3;
-            color: var(--text-grey);
-        }
-
-        .intro-title span {
-            background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--neon-blue);
+            margin-bottom: 30px;
         }
 
         .intro-text {
-            font-size: 15px;
-            line-height: 1.6;
-            color: var(--text-muted);
-            opacity: 0.9;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-grey);
+            font-style: italic;
+            max-width: 600px;
+            margin-bottom: 40px;
         }
 
-        .service-cards {
-            max-width: 640px;
-        }
-
-        .service-grid {
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 14px 20px;
+            gap: 18px 22px;
         }
 
-        .service-card {
+        .service-box {
             background: var(--graphite-light);
             border: 1px solid var(--glass-border);
-            padding: 14px 18px;
+            padding: 16px 20px;
             border-radius: 16px;
-            color: var(--neon-blue);
+            text-transform: uppercase;
             font-size: 14px;
             font-weight: 600;
             letter-spacing: .08em;
-            text-transform: uppercase;
+            color: var(--neon-blue);
             transition: .25s ease;
-            box-shadow: 0 8px 26px rgba(0,0,0,0.35);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 8px 26px rgba(0,0,0,0.40);
         }
 
-        .service-card:hover {
+        .service-box:hover {
             color: var(--accent-2);
             border-color: var(--accent-1);
-            box-shadow: 0 0 14px rgba(255,145,83,0.4);
-            transform: translateY(-2px);
+            box-shadow: 0 0 16px rgba(255,145,83,0.45);
+            transform: translateY(-3px);
         }
 
-        /* ==============================================================
-           ANIMATIONS
-        ============================================================== */
+        /* ----------------------------- TÉLÉPHONE ----------------------------- */
 
-        .fade-in {
-            opacity: 0;
-            transform: translateY(25px);
-            animation: fadeUp 1.1s cubic-bezier(.16, .8, .38, 1) forwards;
-        }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: none;
-            }
-        }
-
-        /* ==============================================================
-           TÉLÉPHONE
-        ============================================================== */
-
-        .right {
+        .phone-wrapper {
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 50px 20px;
+            justify-content: center;
         }
 
         .phone-shell {
-            width: 260px;
-            height: 520px;
-            border-radius: 42px;
-            padding: 6px;
+            width: 280px;
+            height: 560px;
+            border-radius: 46px;
             background: linear-gradient(145deg,#f5f5f7,#b4b4b8,#23242a);
-            box-shadow: 0 26px 70px rgba(0,0,0,0.95);
+            padding: 8px;
+            box-shadow: 0 26px 90px rgba(0,0,0,0.95);
             position: relative;
         }
 
         .phone-inner {
             width: 100%;
             height: 100%;
-            border-radius: 34px;
+            border-radius: 36px;
             overflow: hidden;
             background: linear-gradient(180deg,#11121c 0%,#05060a 80%);
             border: 1px solid rgba(255,255,255,0.15);
@@ -197,26 +149,24 @@
             position: absolute;
             top: 16px;
             left: 50%;
-            width: 110px;
-            height: 26px;
+            width: 120px;
+            height: 28px;
             background: black;
-            opacity: .92;
             border-radius: 18px;
             transform: translateX(-50%);
-            box-shadow: 0 0 14px rgba(0,0,0,.8);
-            z-index: 3;
+            box-shadow: 0 0 14px rgba(0,0,0,.9);
+            opacity: .9;
+            z-index: 4;
         }
 
         .phone-logo-center {
             position: absolute;
-            top: 42%;
+            top: 41%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 20px;
-            letter-spacing: .28em;
-            text-transform: uppercase;
+            font-size: 22px;
             font-weight: 700;
-            z-index: 4;
+            letter-spacing: .28em;
         }
 
         .phone-logo-center span {
@@ -225,123 +175,113 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .phone-gradient {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at top right, rgba(255,145,83,.22), rgba(10,12,20,1) 60%);
-            z-index: 1;
-        }
-
-        /* ==============================================================
-           ROTATION DES MARQUES — 10 SECONDES
-        ============================================================== */
-
         .brand-rotator {
             position: absolute;
-            top: 54%;
+            top: 57%;
             left: 50%;
             transform: translateX(-50%);
-            height: 60px;
+            height: 70px; /* augmenté pour Huawei */
             overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 12px;
+            font-size: 13px;
             letter-spacing: .18em;
             color: rgba(245,245,245,0.85);
-            z-index: 4;
+            z-index: 5;
         }
 
         .brand-rotator span {
             opacity: 0;
-            transform: translateY(12px);
-            animation: rotateBrand 10s linear infinite; /* NOUVELLE DURÉE */
+            transform: translateY(8px);
+            animation: rotateBrand 10s linear infinite;
         }
 
-        /* DÉLAIS POUR 4 MARQUES (10s / 4 = 2.5s) */
+        /* 4 marques = 10s / 4 = 2.5s */
         .brand-rotator span:nth-child(1) { animation-delay: 0s; }
         .brand-rotator span:nth-child(2) { animation-delay: 2.5s; }
         .brand-rotator span:nth-child(3) { animation-delay: 5s; }
         .brand-rotator span:nth-child(4) { animation-delay: 7.5s; }
 
         @keyframes rotateBrand {
-            0%   { opacity: 0; transform: translateY(12px); }
+            0%   { opacity: 0; transform: translateY(8px); }
             10%  { opacity: 1; transform: translateY(0); }
             25%  { opacity: 1; transform: translateY(0); }
-            35%  { opacity: 0; transform: translateY(-12px); }
-            100% { opacity: 0; transform: translateY(-12px); }
+            35%  { opacity: 0; transform: translateY(-8px); }
+            100% { opacity: 0; transform: translateY(-8px); }
         }
-
-        /* ==============================================================
-           BOUTON
-        ============================================================== */
 
         .phone-btn {
             position: absolute;
-            bottom: 26px;
+            bottom: 28px;
             left: 50%;
             transform: translateX(-50%);
-            width: 72%;
+            width: 75%;
             padding: 12px 0;
             border-radius: 999px;
             border: 1px solid rgba(255,255,255,0.15);
             background: linear-gradient(120deg,var(--accent-1),var(--accent-2));
             color: white;
             font-weight: 600;
-            font-size: 15px;
-            box-shadow: 0 0 22px rgba(255,75,92,0.35);
-            transition: .25s ease;
-            z-index: 5;
+            font-size: 16px;
+            box-shadow: 0 0 28px rgba(255,75,92,0.35);
             cursor: pointer;
+            transition: .25s;
+            z-index: 6;
         }
 
         .phone-btn:hover {
-            box-shadow: 0 0 30px rgba(255,145,83,0.55);
-            transform: translateX(-50%) translateY(-2px);
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 0 36px rgba(255,145,83,0.55);
+        }
+
+        /* ----------------------------- RESPONSIVE ----------------------------- */
+
+        @media(max-width: 900px){
+            .main-wrapper {
+                grid-template-columns: 1fr;
+                padding: 40px 30px;
+            }
+            .phone-wrapper {
+                margin-top: 40px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<div class="welcome-wrapper">
+<div class="main-wrapper">
 
-    <!-- GAUCHE -->
-    <div class="left">
+    <!-- LEFT ----------------------------------- -->
+    <div class="left-side">
+        <div class="logo">DIGIT<span>RESTORE</span></div>
+        <div class="subtitle">Réparation & reconditionnement smartphone / tablette</div>
 
-        <div class="fade-in" style="animation-delay:0s;">
-            <div class="logo-title">DIGIT<span>RESTORE</span></div>
-            <div class="logo-sub">Réparation & reconditionnement de smartphones et tablettes</div>
+        <p class="intro-text">
+            DigitRestore vous accompagne pour redonner vie à vos appareils :
+            réparation soignée, diagnostic complet, reprise sécurisée et
+            accompagnement personnalisé.
+        </p>
+
+        <div class="services-grid">
+            <div class="service-box">Réparation</div>
+            <div class="service-box">Reprise</div>
+            <div class="service-box">Diagnostic</div>
+            <div class="service-box">Reconditionnement</div>
+            <div class="service-box">Garantie</div>
+            <div class="service-box">Conseils & accompagnement</div>
+            <div class="service-box">Data & sécurité</div>
+            <div class="service-box">Vente d’accessoires</div>
         </div>
-
-        <div class="intro-block fade-in" style="animation-delay:0.15s;">
-            <p class="intro-text">
-                DigitRestore vous accompagne pour redonner vie à vos smartphones et tablettes :
-                réparation soignée, diagnostic complet, reprise sécurisée et accompagnement personnalisé.
-            </p>
-        </div>
-
-        <div class="service-cards fade-in" style="animation-delay:0.35s;">
-            <div class="service-grid">
-                <div class="service-card">Réparation</div>
-                <div class="service-card">Reprise</div>
-                <div class="service-card">Diagnostic</div>
-                <div class="service-card">Reconditionnement</div>
-                <div class="service-card">Garantie</div>
-                <div class="service-card">Conseils & accompagnement</div>
-                <div class="service-card">Data & sécurité</div>
-                <div class="service-card">Vente d’accessoires</div>
-            </div>
-        </div>
-
     </div>
 
-    <!-- DROITE -->
-    <div class="right">
+    <!-- RIGHT ----------------------------------- -->
+    <div class="phone-wrapper">
+
         <div class="phone-shell">
             <div class="phone-inner">
 
-                <div class="phone-gradient"></div>
                 <div class="dynamic-island"></div>
 
                 <div class="phone-logo-center">DIGIT<span>RESTORE</span></div>
@@ -359,6 +299,7 @@
 
             </div>
         </div>
+
     </div>
 
 </div>
