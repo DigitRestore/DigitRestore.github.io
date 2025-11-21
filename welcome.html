@@ -79,24 +79,36 @@
         .intro-block { max-width:600px; display:flex; flex-direction:column; gap:14px; }
 
         .intro-title {
-            font-size:33px;
-            font-weight:700;
-            line-height:1.3;
-            color:var(--cyan-soft);
-            text-shadow:0 0 10px rgba(79,212,255,0.25);
-        }
-        .intro-title span {
-            background:linear-gradient(120deg,var(--magenta-tech),var(--magenta-soft));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-        }
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.28;
+    letter-spacing: .02em;
 
-        .intro-text {
-            font-size:15px;
-            line-height:1.6;
-            color:var(--cyan-tech);
-            opacity:.85;
-        }
+    background: linear-gradient(120deg, var(--magenta-tech), var(--cyan-tech));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 0 0 18px rgba(255, 63, 168, 0.18);
+}
+
+/* Partie mise en évidence du titre */
+.intro-title span {
+    background: linear-gradient(120deg, var(--cyan-tech), var(--green-neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 0 0 22px rgba(79,212,255,0.25);
+}
+
+/* TEXTE DE PRÉSENTATION – style gris techno élégant */
+.intro-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #d6d8e0;
+    opacity: 0.95;
+
+    text-shadow: 0 0 10px rgba(79, 212, 255, 0.15);
+}
 
         .service-cards { max-width:640px; }
         .service-grid {
