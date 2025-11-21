@@ -38,6 +38,7 @@
             justify-content: center;
             align-items: center;
             padding: 32px;
+            overflow-x: hidden;
         }
 
         .page {
@@ -50,6 +51,9 @@
             display: flex;
             flex-direction: column;
             gap: 32px;
+            opacity: 0;
+            transform: translateY(12px);
+            animation: pageIn 0.7s ease-out forwards;
         }
 
         /* =================== HEADER =================== */
@@ -58,6 +62,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: fadeDown 0.7s ease-out 0.1s forwards;
         }
 
         .brand-block { display: flex; align-items: center; gap: 14px; }
@@ -99,7 +106,6 @@
             color: var(--accent-3);
         }
 
-        /* LIGNE FUSIONNÉE */
         .brand-tagline::after {
             content: " — Smartphones & tablettes";
             color: var(--accent-3);
@@ -116,7 +122,8 @@
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 0 30px rgba(255,75,92,0.6);
-            transition: .18s ease;
+            transition: transform .18s ease, box-shadow .18s ease;
+            animation: ctaPulse 7s ease-in-out 1.2s infinite;
         }
 
         .header-button:hover {
@@ -137,6 +144,9 @@
             display: flex;
             flex-direction: column;
             gap: 22px;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.8s ease-out 0.35s forwards;
         }
 
         .hero-title {
@@ -175,6 +185,9 @@
                 radial-gradient(circle at bottom right, rgba(255,145,83,0.22), transparent 60%),
                 rgba(4,6,18,0.85);
             border: 1px solid rgba(255,255,255,0.08);
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeUp 0.8s ease-out 0.6s forwards;
         }
 
         .services-title {
@@ -202,11 +215,30 @@
             color: var(--text-soft);
             text-align: center;
             white-space: nowrap;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: pillIn 0.45s ease-out forwards;
         }
+
+        /* Stagger sur les 8 pastilles */
+        .services-grid .service-pill:nth-child(1) { animation-delay: 0.70s; }
+        .services-grid .service-pill:nth-child(2) { animation-delay: 0.78s; }
+        .services-grid .service-pill:nth-child(3) { animation-delay: 0.86s; }
+        .services-grid .service-pill:nth-child(4) { animation-delay: 0.94s; }
+        .services-grid .service-pill:nth-child(5) { animation-delay: 1.02s; }
+        .services-grid .service-pill:nth-child(6) { animation-delay: 1.10s; }
+        .services-grid .service-pill:nth-child(7) { animation-delay: 1.18s; }
+        .services-grid .service-pill:nth-child(8) { animation-delay: 1.26s; }
 
         /* =================== PHONE =================== */
 
-        .hero-right { display: flex; justify-content: center; }
+        .hero-right {
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.8s ease-out 0.5s forwards;
+        }
 
         .phone-stage {
             position: relative;
@@ -218,6 +250,7 @@
                 rgba(3,5,14,0.95);
             border: 1px solid rgba(255,255,255,0.10);
             box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+            animation: floatPhone 9s ease-in-out 1.5s infinite;
         }
 
         .phone-shell {
@@ -303,6 +336,45 @@
             25% { opacity: 1; transform: translateY(0); }
             35% { opacity: 0; transform: translateY(-6px); }
             100% { opacity: 0; transform: translateY(-6px); }
+        }
+
+        /* =================== ANIMATIONS GLOBALES =================== */
+
+        @keyframes pageIn {
+            0% { opacity: 0; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(18px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeDown {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pillIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatPhone {
+            0%   { transform: translateY(0); }
+            50%  { transform: translateY(-4px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes ctaPulse {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(255,75,92,0.6);
+                transform: translateY(0);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255,145,83,0.9);
+                transform: translateY(-1px);
+            }
         }
 
         /* Responsive */
