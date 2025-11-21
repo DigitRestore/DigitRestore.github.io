@@ -12,17 +12,19 @@
 
     <style>
         :root {
-            --graphite: #0e0f11;              /* Fond atelier premium */
-            --graphite-light: #1b1d21;        /* Surfaces */
-            --silver: #b8c2cc;                /* Accents gris acier */
-            --soft-silver: #c9d1d9;           /* Textes subtils */
-            --blue-ice: #87b5e2;              /* Bleu glacé (accent ponctuel discret) */
-            --green-studio: #4fa58d;          /* Petit highlight très sobre */
-            --glass: rgba(255,255,255,0.05);
-            --glass-border: rgba(255,255,255,0.12);
+            /* === PALETTE REPRISE DE TON ANCIEN SITE === */
+            --accent-1: #ff4b5c;       /* Rouge corail */
+            --accent-2: #ff9153;       /* Orange premium */
+            --neon-blue: #5ad8ff;      /* Bleu glacé */
+            --text-grey: #c8ced6;      /* Gris métallique */
+            --text-main: #f5f5f5;
+            --text-muted: #9fa3b3;
 
-            --text-main: #ffffff;
-            --text-muted: #c3c7d0;
+            /* === STRUCTURE ACTUELLE (graphite + verre) === */
+            --graphite: #0e0f11;
+            --graphite-light: #1b1d21;
+            --glass: rgba(255,255,255,0.05);
+            --glass-border: rgba(255,255,255,0.10);
         }
 
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -34,7 +36,7 @@
             display:flex;
             justify-content:center;
             align-items:center;
-            background:radial-gradient(circle at top left,#181a1e 0%,#0e0f11 50%,#000 100%);
+            background:radial-gradient(circle at top left,#1a1d2b 0%,#0e0f11 45%,#000 100%);
             color:var(--text-main);
         }
 
@@ -46,9 +48,13 @@
             backdrop-filter:blur(10px);
             border-radius:28px;
             overflow:hidden;
-            border:1px solid rgba(255,255,255,0.04);
+            border:1px solid rgba(255,255,255,0.05);
             box-shadow:0 30px 90px rgba(0,0,0,0.85);
         }
+
+        /* ==============================================================
+                                 COLONNE GAUCHE
+        ============================================================== */
 
         .left {
             padding:70px 55px;
@@ -65,13 +71,15 @@
         }
 
         .logo-title span {
-            color:var(--blue-ice);
+            background:linear-gradient(110deg,var(--accent-1),var(--accent-2));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
         }
 
         .logo-sub {
             font-size:13px;
             text-transform:uppercase;
-            color:var(--soft-silver);
+            color:var(--neon-blue);
             letter-spacing:.22em;
             margin-top:2px;
         }
@@ -82,18 +90,20 @@
             font-size:33px;
             font-weight:700;
             line-height:1.3;
-            color:var(--silver);
+            color:var(--text-grey);
         }
 
         .intro-title span {
-            color:var(--blue-ice);
+            background:linear-gradient(120deg,var(--accent-1),var(--accent-2));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
         }
 
         .intro-text {
             font-size:15px;
             line-height:1.6;
-            color:var(--soft-silver);
-            opacity:.9;
+            color:var(--text-muted);
+            opacity:0.9;
         }
 
         .service-cards { max-width:640px; }
@@ -108,7 +118,7 @@
             border:1px solid var(--glass-border);
             padding:14px 18px;
             border-radius:16px;
-            color:var(--silver);
+            color:var(--neon-blue); /* titre bleu glacé pro */
             font-size:14px;
             font-weight:600;
             letter-spacing:.08em;
@@ -119,11 +129,15 @@
         }
 
         .service-card:hover {
-            color:var(--green-studio);
-            border-color:var(--green-studio);
-            box-shadow:0 0 14px rgba(79,165,141,0.35);
+            color:var(--accent-2);
+            border-color:var(--accent-1);
+            box-shadow:0 0 14px rgba(255,145,83,0.4);
             transform:translateY(-2px);
         }
+
+        /* ==============================================================
+                                   ANIMATIONS
+        ============================================================== */
 
         .fade-in {
             opacity:0;
@@ -132,7 +146,9 @@
         }
         @keyframes fadeUp { to { opacity:1; transform:none; } }
 
-        /* --- TÉLÉPHONE --- */
+        /* ==============================================================
+                                   TÉLÉPHONE
+        ============================================================== */
 
         .right {
             display:flex;
@@ -145,7 +161,7 @@
             width:260px; height:520px;
             border-radius:42px;
             padding:6px;
-            background:linear-gradient(145deg,#d8d9da,#9c9fa3,#2b2c2f);
+            background:linear-gradient(145deg,#f5f5f7,#b4b4b8,#23242a);
             box-shadow:0 26px 70px rgba(0,0,0,0.95);
             position:relative;
         }
@@ -154,15 +170,15 @@
             width:100%; height:100%;
             border-radius:34px;
             overflow:hidden;
-            background:linear-gradient(180deg,#121418 0%,#08090c 80%);
-            border:1px solid rgba(255,255,255,0.12);
+            background:linear-gradient(180deg,#11121c 0%,#05060a 80%);
+            border:1px solid rgba(255,255,255,0.15);
             position:relative;
         }
 
         .dynamic-island {
             position:absolute; top:16px; left:50%;
             width:110px; height:26px;
-            background:#000; border-radius:18px;
+            background:black; border-radius:18px;
             transform:translateX(-50%);
             opacity:.92;
             box-shadow:0 0 14px rgba(0,0,0,.8);
@@ -178,16 +194,18 @@
             text-transform:uppercase;
             font-weight:700;
             z-index:4;
-            color:var(--silver);
+            color:var(--text-main);
         }
 
         .phone-logo-center span {
-            color:var(--blue-ice);
+            background:linear-gradient(120deg,var(--accent-1),var(--accent-2));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
         }
 
         .phone-gradient {
             position:absolute; inset:0;
-            background:radial-gradient(circle at top right, rgba(135,181,226,0.12), rgba(8,9,12,1) 65%);
+            background:radial-gradient(circle at top right, rgba(255,145,83,.22), rgba(10,12,20,1) 60%);
             z-index:1;
         }
 
@@ -197,7 +215,7 @@
             height:60px; overflow:hidden;
             display:flex; flex-direction:column; align-items:center;
             font-size:12px; letter-spacing:.18em;
-            color:rgba(220,220,220,0.85);
+            color:rgba(245,245,245,0.85);
             z-index:4;
         }
 
@@ -214,7 +232,9 @@
             100% { opacity:0; transform:translateY(-12px); }
         }
 
-        /* --- BOUTON --- */
+        /* ==============================================================
+                                  BOUTON TÉLÉPHONE
+        ============================================================== */
 
         .phone-btn {
             position:absolute;
@@ -223,21 +243,19 @@
             width:72%;
             padding:12px 0;
             border-radius:999px;
-            border:1px solid rgba(255,255,255,0.18);
-            background:linear-gradient(120deg,#2a2c2f,#17181b);
-            color:var(--soft-silver);
+            border:1px solid rgba(255,255,255,0.15);
+            background:linear-gradient(120deg,var(--accent-1),var(--accent-2));
+            color:white;
             font-weight:600;
             font-size:15px;
             backdrop-filter:blur(4px);
-            box-shadow:0 0 22px rgba(255,255,255,0.08);
+            box-shadow:0 0 22px rgba(255,75,92,0.35);
             transition:.25s ease;
             z-index:5;
         }
 
         .phone-btn:hover {
-            background:linear-gradient(120deg,#1c1d1f,#101113);
-            box-shadow:0 0 26px rgba(135,181,226,0.25);
-            color:var(--blue-ice);
+            box-shadow:0 0 30px rgba(255,145,83,0.55);
             transform:translateX(-50%) translateY(-2px);
         }
     </style>
