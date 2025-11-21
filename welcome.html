@@ -72,50 +72,47 @@
         }
 
         .brand-block { display: flex; align-items: center; gap: 14px; }
-/* Nouveau bloc texte à 4 lignes */
+
+
+/* Nouveau texte premium pour le header */
 .brand-text-4lines {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    line-height: 1.05;
+    line-height: 1.12;
+    gap: 4px;
 }
 
-/* LIGNE 1 – DIGIT */
+/* DIGIT – blanc massif, propre */
 .line-1-digit {
     font-family: "Montserrat";
-    font-size: 22px;
+    font-size: 23px;
     font-weight: 800;
     color: #ffffff;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.14em;
 }
 
-/* LIGNE 2 – RESTORE (rouge + italique) */
+/* RESTORE – rouge métallique cohérent avec le logo */
 .line-2-restore {
     font-family: "Montserrat";
-    font-size: 22px;
-    font-weight: 800;
-    font-style: italic;
-    letter-spacing: 0.22em;
-    background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    background: linear-gradient(120deg, #d0151b, #ff2a31);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* LIGNE 3 – Réparation & Reconditionnement */
-.line-3-tag {
-    font-size: 11px;
-    letter-spacing: .18em;
+/* Lignes fines */
+.line-3-tag,
+.line-4-tag {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent-3);
+    color: #4fd2ff;
+    opacity: 0.95;
 }
 
-/* LIGNE 4 – Smartphones & Tablettes */
-.line-4-tag {
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--accent-3);
-}
 
 /* Logo halo bleu – agrandi */
 .logo-mark {
