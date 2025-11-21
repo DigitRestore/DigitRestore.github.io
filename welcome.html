@@ -77,13 +77,13 @@
         }
 
         .logo-sub {
-            font-size:13px;
-            text-transform:uppercase;
+            font-size:16px;
+            font-weight:500;
             color:var(--neon-blue);
-            letter-spacing:.22em;
-            margin-top:2px;
+            letter-spacing:.05em;
+            text-transform:none;
+            opacity:0.95;
         }
-
         .intro-block { max-width:600px; display:flex; flex-direction:column; gap:14px; }
 
         .intro-title {
@@ -100,11 +100,14 @@
         }
 
         .intro-text {
-            font-size:15px;
-            line-height:1.6;
-            color:var(--text-muted);
-            opacity:0.9;
+            font-size:17px;
+            line-height:1.7;
+            color:var(--text-grey);
+            font-weight:400;
+            opacity:0.95;
+            max-width:620px;
         }
+
 
         .service-cards { max-width:640px; }
         .service-grid {
@@ -116,17 +119,18 @@
         .service-card {
             background:var(--graphite-light);
             border:1px solid var(--glass-border);
-            padding:14px 18px;
-            border-radius:16px;
-            color:var(--neon-blue); /* titre bleu glacé pro */
-            font-size:14px;
+            padding:16px 20px;
+            border-radius:14px;
+            color:var(--text-grey);
+            font-size:15px;
             font-weight:600;
-            letter-spacing:.08em;
-            text-transform:uppercase;
+            letter-spacing:.03em;
+            text-transform:none;
             backdrop-filter:blur(6px);
             transition:.25s ease;
-            box-shadow:0 8px 26px rgba(0,0,0,0.35);
+            box-shadow:0 6px 22px rgba(0,0,0,0.28);
         }
+
 
         .service-card:hover {
             color:var(--accent-2);
