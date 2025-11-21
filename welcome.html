@@ -247,20 +247,38 @@
             }
         }
 
-        /* Bouton dans le téléphone */
-        .phone-btn {
-            position: absolute;
-            bottom: 26px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 72%;
-            padding: 12px 0;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.15);
-            backdrop-filter: blur(4px);
-            box-shadow: 0 0 20px rgba(255,75,92,0.35);
-            z-index: 5;
-        }
+       /* Bouton dans le téléphone */
+.phone-btn {
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72%;
+    padding: 12px 0;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 20px rgba(255,75,92,0.35);
+    z-index: 5;
+
+    /* Correction anti-bouge */
+    display: block !important;
+    gap: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Désactive le mouvement du bouton dans le téléphone */
+.phone-btn:hover {
+    transform: none !important;
+    box-shadow: 0 0 20px rgba(255,75,92,0.35) !important;
+}
+
+/* Empêche l'intérieur de perturber le hover */
+.phone-btn span {
+    pointer-events: none;
+}
+
 
         /* Désactive le mouvement du bouton dans le téléphone au survol */
         .phone-btn:hover {
