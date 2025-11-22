@@ -282,12 +282,15 @@
         }
 
         .service-pill:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.7);
-            background: radial-gradient(circle at top, rgba(79,210,255,0.25), rgba(0,0,0,0.8));
-            border-color: rgba(79,210,255,0.85);
-            color: var(--text-main);
-        }
+    transform: translateY(-4px) scale(1.03);
+    
+    /* 🔥 CONTOUR ROUGE GLOW DIGITRESTORE */
+    border-color: rgba(255,75,92,0.95);
+    box-shadow: 0 0 12px rgba(255,75,92,0.55);
+
+    background: radial-gradient(circle at top, rgba(79,210,255,0.25), rgba(0,0,0,0.8)); /* inchangé */
+    color: var(--text-main); /* inchangé */
+}
 
         .service-pill:hover::before {
             opacity: 1;
