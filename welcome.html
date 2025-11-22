@@ -342,22 +342,31 @@
       .phone-shell::before {
     content: "";
     position: absolute;
-    inset: -8px;
-    border-radius: 50px;
-    background: linear-gradient(90deg, #ff4b5c, #4fd2ff);
+    inset: -10px;
+    border-radius: 60px;
+
+    /* Disque complet, aucune zone noire */
+    background: conic-gradient(
+        #ff4b5c,
+        #4fd2ff,
+        #ff4b5c
+    );
+
+    /* Masque : on garde uniquement un anneau */
+    -webkit-mask: 
+        radial-gradient(farthest-side, transparent calc(100% - 10px), black calc(100% - 9px));
+    mask: 
+        radial-gradient(farthest-side, transparent calc(100% - 10px), black calc(100% - 9px));
+
     z-index: 0;
+    animation: ringSpin 6s linear infinite;
     opacity: 1;
 
-    /* ❤️ Glow constant, jamais noir */
-    box-shadow:
-        0 0 18px #ff4b5c,
-        0 0 30px #4fd2ff,
-        0 0 40px #ff4b5c;
-
-    /* 🎛️ On crée la rotation par transform, non pas par gradient */
-    animation: neonSweep 4s linear infinite;
-    transform-origin: center;
+    /* Glow constant autour */
+    filter: drop-shadow(0 0 10px #ff4b5c)
+            drop-shadow(0 0 18px #4fd2ff);
 }
+
 
 
 
@@ -494,6 +503,10 @@
 @keyframes neonSweep {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
+}
+@keyframes ringSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
         
