@@ -245,14 +245,12 @@
     position: relative;
     padding: 12px 14px;
     border-radius: 12px;
-    background: rgba(0,0,0,0.45);
     border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(0,0,0,0.45); /* inchangé */
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: .12em;
-    color: var(--accent-1);   /* Rouge DigitRestore */
-    text-shadow: 0 0 6px rgba(255,75,92,0.55);   /* Glow subtil */
-    filter: drop-shadow(0 0 2px rgba(255,75,92,0.35));  /* Volume léger */
+    color: var(--accent-1);   
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -263,10 +261,10 @@
         box-shadow .22s ease,
         background .22s ease,
         border-color .22s ease,
-        color .22s ease,
-        text-shadow .22s ease;
+        color .22s ease;
     animation: pillIn 0.45s cubic-bezier(.19,.8,.37,1) forwards;
 }
+
 
 
         .service-pill::before {
