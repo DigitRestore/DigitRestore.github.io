@@ -338,28 +338,7 @@
             box-shadow: 0 26px 70px rgba(0,0,0,0.95);
             position: relative;
         }
-/* === ANNEAU LUMINEUX AUTOUR DU TÉLÉPHONE === */
-.phone-shell::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 42px;
-    padding: 3px; /* Épaisseur du halo */
-    pointer-events: none;
-    
-    border: 3px solid transparent;
-    border-image: conic-gradient(
-        from 0deg,
-        #4fd2ff,
-        #7a66ff,
-        #ff4b5c,
-        #4fd2ff
-    ) 1;
 
-    animation: ringRotate 6s linear infinite;
-
-    z-index: 5;
-}
         .phone-shell::before {
             content: "";
             position: absolute;
@@ -487,10 +466,7 @@
             40% { opacity: 0; transform: translateY(140%) rotate(12deg); }
             100% { opacity: 0; }
         }
-@keyframes ringRotate {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+
         @keyframes ctaPulse {
             0%,100% {
                 transform: translateY(0);
