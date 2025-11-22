@@ -339,20 +339,22 @@
             position: relative;
         }
 
-       .phone-shell::before {
+      .phone-shell::before {
     content: "";
     position: absolute;
-    inset: -8px; /* crée un vrai cadre autour */
-    border-radius: 50px; /* ajusté pour suivre la forme */
+    inset: -8px;
+    border-radius: 50px;
     background: conic-gradient(
         from 0deg,
         #ff4b5c,
         #4fd2ff,
         #ff4b5c
     );
-    z-index: 0; /* derrière l'écran, devant la coque */
+    z-index: 0;
     opacity: 1;
+    animation: neonRotate 6s linear infinite, neonPulse 3s ease-in-out infinite;
 }
+
 
 
         .phone-inner {
