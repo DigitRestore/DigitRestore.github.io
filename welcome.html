@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DigitRestore - Accueil</title>
 
     <!-- Police principale : Poppins + logo en Montserrat -->
@@ -13,12 +13,9 @@
     <style>
         :root {
             --bg-main: #050814;
-            --bg-alt: #070c1c;
-
-            /* Rouge principal (logo) */
-            --accent-1: #ff4b5c;      /* rouge corail DigitRestore */
-            --accent-2: #ff4b5c;      /* on remplace l'orange par le même rouge */
-            --accent-3: #4fd2ff;      /* bleu néon */
+            --accent-1: #ff4b5c;
+            --accent-2: #ff4b5c;
+            --accent-3: #4fd2ff;
 
             --text-main: #f5f5f7;
             --text-muted: #a6adc9;
@@ -34,14 +31,13 @@
                 radial-gradient(circle at top left, #111634 0%, transparent 55%),
                 radial-gradient(circle at bottom right, #171a2b 0%, transparent 55%),
                 var(--bg-main);
-            background-position: 0 0, 100% 100%, 0 0;
             background-size: 130% 130%, 130% 130%, auto;
             color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 12px 16px;              /* réduit pour gagner en hauteur */
-            overflow: hidden;                /* pas de scroll du tout */
+            padding: 32px;
+            overflow-x: hidden;
             animation: bgMove 28s ease-in-out infinite alternate;
         }
 
@@ -51,10 +47,10 @@
             background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(7,12,28,0.98));
             border: 1px solid rgba(255,255,255,0.06);
             backdrop-filter: blur(18px);
-            padding: 20px 26px 24px;         /* légèrement réduit */
+            padding: 28px 34px 40px;
             display: flex;
             flex-direction: column;
-            gap: 22px;                       /* un peu moins d’espace vertical */
+            gap: 32px;
             opacity: 0;
             transform: translateY(16px);
             animation: pageIn 0.8s cubic-bezier(.16,.8,.33,1) forwards;
@@ -69,42 +65,34 @@
             opacity: 0;
             transform: translateY(-14px);
             animation: fadeDown 0.9s cubic-bezier(.16,.8,.33,1) 0.15s forwards;
-            margin-bottom: -6px;             /* remonte légèrement le bloc suivant */
         }
 
-        .brand-block { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px;                       /* un peu moins large */
-        }
+        .brand-block { display: flex; align-items: center; gap: 14px; }
 
         .brand-text-inline {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
             line-height: 1.12;
         }
 
-        /* Ligne 1 = DIGIT + RESTORE sur la même ligne */
         .brand-line.merge {
             display: flex;
             align-items: baseline;
-            gap: 3px;
+            gap: 12px;
         }
 
-        /* DIGIT – blanc, massif, propre */
         .brand-line.merge .digit {
             font-family: "Montserrat";
-            font-size: 23px;                 /* 25 → 23 pour compacter un peu */
+            font-size: 25px;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: 0.10em;
         }
 
-        /* RESTORE – rouge métallique */
         .brand-line.merge .restore {
             font-family: "Montserrat";
-            font-size: 23px;                 /* idem */
+            font-size: 25px;
             font-weight: 900;
             letter-spacing: 0.10em;
             background: linear-gradient(120deg, #c01015, #ff1e26);
@@ -112,43 +100,35 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Lignes fines */
         .line-3-tag,
         .line-4-tag {
-            font-size: 11px;                 /* 12 → 11 */
+            font-size: 12px;
             font-weight: 500;
             letter-spacing: 0.22em;
             text-transform: uppercase;
             color: #4fd2ff;
-            opacity: 0.95;
         }
 
-        /* Logo halo bleu */
         .logo-mark {
-            width: 96px;                     /* 110 → 96 */
-            height: 96px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 110px;
+            height: 110px;
         }
 
         .logo-mark img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            display: block;
         }
 
         /* BOUTON HEADER */
         .header-button {
-            padding: 10px 22px;              /* légèrement réduit */
+            padding: 12px 26px;
             border-radius: 999px;
             border: none;
             background: linear-gradient(125deg, var(--accent-1), var(--accent-2));
             background-size: 220% 220%;
-            background-position: 0% 50%;
             color: #050814;
-            font-size: 13px;                 /* un poil plus compact */
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 0 30px rgba(255,75,92,0.6);
@@ -165,28 +145,26 @@
 
         .hero {
             display: grid;
-            grid-template-columns: 1.3fr 1fr; /* un poil resserré */
-            gap: 26px;                        /* 40 → 26 */
+            grid-template-columns: 1.35fr 1fr;
+            gap: 40px;
             align-items: center;
-            margin-top: -10px;                /* remonte le bloc texte/phone */
         }
 
         .hero-left {
             display: flex;
             flex-direction: column;
-            gap: 16px;                        /* 22 → 16 */
+            gap: 22px;
+            animation: fadeUp 0.9s cubic-bezier(.16,.8,.33,1) 0.35s forwards;
             opacity: 0;
             transform: translateY(24px);
-            animation: fadeUp 0.9s cubic-bezier(.16,.8,.33,1) 0.35s forwards;
         }
 
         .hero-title {
-            font-size: 30px;                  /* 34 → 30 */
+            font-size: 34px;
             font-weight: 600;
-            line-height: 1.22;
-            opacity: 0;
-            transform: translateY(18px);
+            line-height: 1.25;
             animation: fadeUp 0.8s cubic-bezier(.16,.8,.33,1) 0.4s forwards;
+            opacity: 0;
         }
 
         .hero-title span {
@@ -196,202 +174,78 @@
         }
 
         .hero-subtitle {
-            font-size: 13px;                  /* 14 → 13 */
+            font-size: 14px;
             color: var(--text-soft);
-            max-width: 480px;                 /* légèrement réduit */
+            max-width: 520px;
             font-style: italic;
-            opacity: 0;
-            transform: translateY(18px);
             animation: fadeUp 0.8s cubic-bezier(.16,.8,.33,1) 0.55s forwards;
+            opacity: 0;
         }
 
         .hero-subtitle strong {
             font-weight: 600;
             color: var(--accent-3);
-            font-style: italic;
         }
 
-        /* =================== SERVICES =================== */
-
-        .services {
-            margin-top: 8px;                  /* très léger ajustement */
-            padding: 26px 22px;
-            border-radius: 20px;
-            background:
-                radial-gradient(circle at top left, rgba(79,210,255,0.18), transparent 65%),
-                radial-gradient(circle at bottom right, rgba(255,75,92,0.22), transparent 60%),
-                rgba(4,6,18,0.85);
-            border: 1px solid rgba(255,255,255,0.08);
-            opacity: 0;
-            transform: translateY(18px);
-            animation: fadeUp 0.85s cubic-bezier(.16,.8,.33,1) 0.7s forwards;
-        }
-
-        .services-title {
-            font-size: 13px;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-        }
-
-        .service-pill {
-    position: relative;
-    padding: 12px 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.16);
-    background: rgba(0,0,0,0.45); /* inchangé */
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    color: rgba(79,210,255,0.55);   
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(14px) scale(0.98);
-    transition:
-        transform .22s ease,
-        box-shadow .22s ease,
-        background .22s ease,
-        border-color .22s ease,
-        color .22s ease;
-    animation: pillIn 0.45s cubic-bezier(.19,.8,.37,1) forwards;
-}
-
-
-
-        .service-pill::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg,
-                rgba(255,255,255,0.12),
-                rgba(255,255,255,0.32),
-                rgba(255,255,255,0.05)
-            );
-            transform: translateX(-130%);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .service-pill:hover {
-    transform: translateY(-4px) scale(1.03);
-    
-    /* 🔥 CONTOUR ROUGE GLOW DIGITRESTORE */
-    border-color: rgba(255,75,92,0.95);
-    box-shadow: 0 0 12px rgba(255,75,92,0.55);
-
-    background: radial-gradient(circle at top, rgba(79,210,255,0.25), rgba(0,0,0,0.8)); /* inchangé */
-    color: var(--text-main); /* inchangé */
-}
-
-        .service-pill:hover::before {
-            opacity: 1;
-            animation: sweep 0.6s ease-out forwards;
-        }
-
-        /* Stagger sur les 8 pastilles */
-        .services-grid .service-pill:nth-child(1) { animation-delay: 0.80s; }
-        .services-grid .service-pill:nth-child(2) { animation-delay: 0.90s; }
-        .services-grid .service-pill:nth-child(3) { animation-delay: 1.00s; }
-        .services-grid .service-pill:nth-child(4) { animation-delay: 1.10s; }
-        .services-grid .service-pill:nth-child(5) { animation-delay: 1.20s; }
-        .services-grid .service-pill:nth-child(6) { animation-delay: 1.30s; }
-        .services-grid .service-pill:nth-child(7) { animation-delay: 1.40s; }
-        .services-grid .service-pill:nth-child(8) { animation-delay: 1.50s; }
-
-        /* =================== PHONE =================== */
+        /* =================== PHONE (VERSION ORIGINALE) =================== */
 
         .hero-right {
             display: flex;
             justify-content: center;
+            animation: fadeUp 0.9s cubic-bezier(.16,.8,.33,1) 0.6s forwards;
             opacity: 0;
             transform: translateY(26px);
-            animation: fadeUp 0.9s cubic-bezier(.16,.8,.33,1) 0.6s forwards;
-            margin-top: -14px;                /* remonte un peu le téléphone */
         }
 
         .phone-stage {
             position: relative;
-            padding: 20px;                    /* 26 → 20 : plus compact globalement */
-            border-radius: 26px;
+            padding: 26px;
+            border-radius: 28px;
             background:
                 radial-gradient(circle at top, rgba(79,210,255,0.32), transparent 60%),
                 radial-gradient(circle at bottom, rgba(255,75,92,0.32), transparent 55%),
                 rgba(3,5,14,0.95);
             border: 1px solid rgba(255,255,255,0.10);
             box-shadow: 0 30px 80px rgba(0,0,0,0.9);
-            animation:
-                floatPhone 9s ease-in-out 1.5s infinite,
-                phoneGlow 14s ease-in-out 2s infinite;
+            animation: floatPhone 9s ease-in-out 1.5s infinite, phoneGlow 14s ease-in-out 2s infinite;
         }
 
         .phone-shell {
-    width: 250px;
-    height: 500px;
-    border-radius: 42px;
-    padding: 6px;
-    background: #000; /* On neutralise le blanc d'origine */
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 26px 70px rgba(0,0,0,0.95);
-}
+            width: 260px;
+            height: 520px;
+            border-radius: 42px;
+            padding: 6px;
+            background: linear-gradient(145deg,#f5f5f7,#b4b4b8,#23242a);
+            box-shadow: 0 26px 70px rgba(0,0,0,0.95);
+            position: relative;
+            overflow: hidden;
+        }
 
-/* 🌀 Contour RGB animé autour du téléphone */
-/* ANNEAU RGB COMPATIBLE TOUS NAVIGATEURS */
-.phone-shell::after {
-    content: "";
-    position: absolute;
-    inset: -6px; /* largeur de l’anneau */
-    border-radius: inherit;
-    background: conic-gradient(
-        #ff003c,
-        #ff6a00,
-        #ffbb00,
-        #e3ff00,
-        #00ff6a,
-        #00ffd5,
-        #00aaff,
-        #0040ff,
-        #7a00ff,
-        #ff00e6,
-        #ff003c
-    );
-    animation: rotateRGB 6s linear infinite;
-    z-index: -1;
-}
-
-
-/* 🌀 Animation */
-@keyframes rotateRGB {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-
-        /* ANNEAU NOIR INTERNE POUR CREER LE TROU */
-.phone-shell::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: #000;
-    z-index: 2;
-    pointer-events: none;
-}
+        .phone-shell::before {
+            content: "";
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 60%;
+            height: 180%;
+            background: linear-gradient(130deg,
+                rgba(255,255,255,0.32),
+                rgba(255,255,255,0.03)
+            );
+            transform: rotate(12deg);
+            opacity: 0;
+            animation: phoneHighlight 12s ease-in-out 3s infinite;
+        }
 
         .phone-inner {
-    position: relative;
-    z-index: 5; /* IMPORTANT */
-}
-
+            width: 100%;
+            height: 100%;
+            border-radius: 34px;
+            overflow: hidden;
+            background: linear-gradient(180deg,#11121c 0%,#05060a 80%);
+            border: 1px solid rgba(255,255,255,0.15);
+            position: relative;
+        }
 
         .dynamic-island {
             position: absolute;
@@ -402,7 +256,6 @@
             background: black;
             border-radius: 18px;
             transform: translateX(-50%);
-            opacity: .92;
         }
 
         .phone-logo-center {
@@ -430,7 +283,6 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            align-items: center;
         }
 
         .brand-rotator span {
@@ -440,9 +292,7 @@
             font-size: 11px;
             font-weight: 500;
             letter-spacing: .24em;
-            text-transform: uppercase;
             color: rgba(245,245,245,0.9);
-            line-height: 1.2;
         }
 
         .brand-rotator span:nth-child(1) { animation-delay: 0s; }
@@ -452,24 +302,69 @@
 
         @keyframes rotateBrand {
             0% { opacity: 0; transform: translateY(6px); }
-            10% { opacity: 1; transform: translateY(0); }
-            25% { opacity: 1; transform: translateY(0); }
-            35% { opacity: 0; transform: translateY(-6px); }
-            100% { opacity: 0; transform: translateY(-6px); }
+            10%,25% { opacity: 1; transform: translateY(0); }
+            35%,100% { opacity: 0; transform: translateY(-6px); }
+        }
+
+        /* =================== SERVICES =================== */
+
+        .services {
+            margin-top: 10px;
+            padding: 26px 22px;
+            border-radius: 20px;
+            background:
+                radial-gradient(circle at top left, rgba(79,210,255,0.18), transparent 65%),
+                radial-gradient(circle at bottom right, rgba(255,75,92,0.22), transparent 60%),
+                rgba(4,6,18,0.85);
+            border: 1px solid rgba(255,255,255,0.08);
+            animation: fadeUp 0.85s cubic-bezier(.16,.8,.33,1) 0.7s forwards;
+            opacity: 0;
+            transform: translateY(18px);
+        }
+
+        .services-title {
+            font-size: 13px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .service-pill {
+            position: relative;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.16);
+            background: rgba(0,0,0,0.45);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--text-soft);
+            text-align: center;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(14px) scale(0.98);
+            animation: pillIn 0.45s cubic-bezier(.19,.8,.37,1) forwards;
+            transition: all .22s ease;
+        }
+
+        @keyframes pillIn {
+            0% { opacity: 0; transform: translateY(18px) scale(.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         /* =================== ANIMATIONS GLOBALES =================== */
 
         @keyframes bgMove {
-            0% {
-                background-position: 0% 0%, 100% 100%, 0 0;
-            }
-            50% {
-                background-position: 15% -10%, 90% 110%, 0 0;
-            }
-            100% {
-                background-position: 30% 0%, 80% 90%, 0 0;
-            }
+            0% { background-position: 0% 0%, 100% 100%, 0 0; }
+            50% { background-position: 15% -10%, 90% 110%, 0 0; }
+            100% { background-position: 30% 0%, 80% 90%, 0 0; }
         }
 
         @keyframes pageIn {
@@ -487,76 +382,23 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes pillIn {
-            0% { opacity: 0; transform: translateY(18px) scale(0.96); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        @keyframes sweep {
-            0%   { transform: translateX(-130%); opacity: 0; }
-            20%  { opacity: 1; }
-            80%  { opacity: 1; }
-            100% { transform: translateX(130%); opacity: 0; }
-        }
-
         @keyframes floatPhone {
-            0%   { transform: translateY(0); }
-            50%  { transform: translateY(-5px); }
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
             100% { transform: translateY(0); }
         }
 
         @keyframes phoneGlow {
-            0%, 100% {
-                box-shadow: 0 30px 80px rgba(0,0,0,0.9);
-            }
-            50% {
-                box-shadow: 0 40px 95px rgba(79,210,255,0.55);
-            }
+            0%, 100% { box-shadow: 0 30px 80px rgba(0,0,0,0.9); }
+            50% { box-shadow: 0 40px 95px rgba(79,210,255,0.55); }
         }
 
         @keyframes phoneHighlight {
-            0%   { opacity: 0; transform: translateY(0) rotate(12deg); }
-            10%  { opacity: 1; }
-            40%  { opacity: 0; transform: translateY(140%) rotate(12deg); }
+            0% { opacity: 0; transform: translateY(0) rotate(12deg); }
+            10% { opacity: 1; }
+            40% { opacity: 0; transform: translateY(140%) rotate(12deg); }
             100% { opacity: 0; transform: translateY(140%) rotate(12deg); }
         }
-
-        @keyframes ctaPulse {
-            0%, 100% {
-                box-shadow: 0 0 30px rgba(255,75,92,0.6);
-                transform: translateY(0);
-            }
-            50% {
-                box-shadow: 0 0 46px rgba(255,75,92,0.95);
-                transform: translateY(-1px);
-            }
-        }
-
-        @keyframes gradientShift {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes logoShine {
-            0%, 70%, 100% {
-                background-position: 0% 50%;
-            }
-            80% {
-                background-position: 100% 50%;
-            }
-            90% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 960px) {
-            .hero { grid-template-columns: 1fr; }
-            .hero-right { order: -1; margin-bottom: 20px; }
-            .services-grid { grid-template-columns: 1fr; }
-        }
-
     </style>
 </head>
 
@@ -567,25 +409,18 @@
     <!-- HEADER -->
     <header class="site-header">
         <div class="brand-block">
-
-            <!-- LOGO AGRANDI + HALO BLEU -->
             <div class="logo-mark">
                 <img src="logo.png" alt="Logo DigitRestore">
             </div>
 
-            <!-- BLOC TEXTE À 4 NIVEAUX -->
             <div class="brand-text-inline">
-
                 <div class="brand-line merge">
                     <span class="digit">DIGIT</span>
                     <span class="restore">RESTORE</span>
                 </div>
-
                 <div class="line-3-tag">RÉPARATION & RECONDITIONNEMENT</div>
                 <div class="line-4-tag">SMARTPHONES & TABLETTES</div>
-
             </div>
-
         </div>
 
         <button class="header-button" onclick="window.location.href='site.html'">
@@ -593,11 +428,10 @@
         </button>
     </header>
 
-
     <!-- HERO -->
     <section class="hero">
 
-        <!-- HERO LEFT -->
+        <!-- LEFT -->
         <div class="hero-left">
 
             <h1 class="hero-title">
@@ -605,12 +439,11 @@
             </h1>
 
             <p class="hero-subtitle">
-                <em>DigitRestore vous accompagne pour 
-                <strong>les réparations, le diagnostic et le reconditionnement de vos appareils</strong>, 
-                avec un travail soigné, un suivi clair et une protection de vos données du début à la fin.</em>
+                DigitRestore accompagne chaque appareil avec une approche
+                <strong>diagnostic + réparation + reprise</strong> :
+                travail soigné, suivi clair et protection de vos données du début à la fin.
             </p>
 
-            <!-- SERVICES -->
             <div class="services">
                 <div class="services-title">Ce que propose DigitRestore</div>
 
@@ -627,7 +460,7 @@
             </div>
         </div>
 
-        <!-- HERO RIGHT (PHONE) -->
+        <!-- RIGHT -->
         <div class="hero-right">
             <div class="phone-stage">
                 <div class="phone-shell">
