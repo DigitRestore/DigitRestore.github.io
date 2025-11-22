@@ -342,11 +342,8 @@
 .phone-shell::after {
     content: "";
     position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    border-radius: 45px; /* légèrement > 42px */
+    inset: -3px;
+    border-radius: 46px;
     pointer-events: none;
 
     background: conic-gradient(
@@ -355,18 +352,21 @@
         #ff4b5c,
         #4fd2ff
     );
+    animation: ringRotate 6s linear infinite;
 
-    /* masque pour n’afficher QUE le contour */
-    mask: 
-        radial-gradient(
-            farthest-side,
-            transparent calc(100% - 4px),
-            black calc(100% - 3px)
-        );
+    /* masque pour NE GARDER QUE LE CONTOUR */
+    -webkit-mask:
+        /* bord extérieur */
+        radial-gradient(closest-side, transparent calc(100% - 3px), black calc(100% - 2px)) content-box,
+        /* zone intérieure à exclure */
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
 
     opacity: 0.35;
-    animation: ringRotate 8s linear infinite;
+    z-index: 10;
 }
+
 
 
   
