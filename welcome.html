@@ -338,6 +338,32 @@
             box-shadow: 0 26px 70px rgba(0,0,0,0.95);
             position: relative;
         }
+/* === ANNEAU LUMINEUX AUTOUR DU TÉLÉPHONE === */
+.phone-shell::after {
+    content: "";
+    position: absolute;
+    inset: -4px; /* dépasse légèrement autour du cadre blanc */
+    border-radius: 48px; /* un peu plus que 42px pour suivre le contour */
+    padding: 4px;
+
+    /* Dégradé technique : bleu → violet → rouge → bleu */
+    background: conic-gradient(
+        #4fd2ff,
+        #7a66ff,
+        #ff4b5c,
+        #4fd2ff
+    );
+
+    /* Masquage pour n'afficher QUE le contour */
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+    animation: ringRotate 6s linear infinite;
+
+    opacity: 0.32; /* s*
 
         .phone-shell::before {
             content: "";
@@ -466,7 +492,10 @@
             40% { opacity: 0; transform: translateY(140%) rotate(12deg); }
             100% { opacity: 0; }
         }
-
+@keyframes ringRotate {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
         @keyframes ctaPulse {
             0%,100% {
                 transform: translateY(0);
