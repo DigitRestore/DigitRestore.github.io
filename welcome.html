@@ -339,20 +339,13 @@
             position: relative;
         }
 
-        .phone-shell::before {
+       .phone-shell::before {
     content: "";
     position: absolute;
-    inset: -3px; /* Le contour dépasse légèrement (on ajustera plus tard) */
-    border-radius: 46px; /* ajusté pour suivre la forme */
-    background: conic-gradient(
-        from 0deg,
-        #ff4b5c,
-        #4fd2ff,
-        #ff4b5c
-    );
-    z-index: -1;
-    filter: none;
-    animation: neonRotate 4s linear infinite, neonPulse 2.4s ease-in-out infinite;
+    inset: 0;
+    background: red !important;
+    opacity: 1 !important;
+    z-index: 999 !important;
 }
 
         .phone-inner {
