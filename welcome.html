@@ -344,16 +344,32 @@
     position: absolute;
     inset: -8px;
     border-radius: 50px;
-    background: conic-gradient(
-        from 0deg,
-        #ff4b5c,
-        #4fd2ff,
-        #ff4b5c
-    );
+    
+    /* Double glow : constant + animé */
+    background:
+        conic-gradient(
+            from 0deg,
+            #ff4b5c,
+            #4fd2ff,
+            #ff4b5c
+        ),
+        radial-gradient(circle, rgba(255,75,92,0.35), rgba(0,0,0,0));
+    
+    background-blend-mode: screen;
+    
     z-index: 0;
     opacity: 1;
-    animation: neonRotate 6s linear infinite, neonPulse 3s ease-in-out infinite;
+
+    /* Glow constant */
+    box-shadow:
+        0 0 14px #ff4b5c,
+        0 0 22px #4fd2ff,
+        0 0 32px #ff4b5c;
+
+    /* Rotation ultra fluide */
+    animation: neonRotateSmooth 5s linear infinite;
 }
+
 
 
 
@@ -480,6 +496,10 @@
 @keyframes neonPulse {
     0%,100% { opacity: 0.8; filter: blur(6px); }
     50%     { opacity: 1; filter: blur(9px); }
+}
+@keyframes neonRotateSmooth {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
 }
 
         
