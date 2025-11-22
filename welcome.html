@@ -344,31 +344,21 @@
     position: absolute;
     inset: -8px;
     border-radius: 50px;
-    
-    /* Double glow : constant + animé */
-    background:
-        conic-gradient(
-            from 0deg,
-            #ff4b5c,
-            #4fd2ff,
-            #ff4b5c
-        ),
-        radial-gradient(circle, rgba(255,75,92,0.35), rgba(0,0,0,0));
-    
-    background-blend-mode: screen;
-    
+    background: linear-gradient(90deg, #ff4b5c, #4fd2ff);
     z-index: 0;
     opacity: 1;
 
-    /* Glow constant */
+    /* ❤️ Glow constant, jamais noir */
     box-shadow:
-        0 0 14px #ff4b5c,
-        0 0 22px #4fd2ff,
-        0 0 32px #ff4b5c;
+        0 0 18px #ff4b5c,
+        0 0 30px #4fd2ff,
+        0 0 40px #ff4b5c;
 
-    /* Rotation ultra fluide */
-    animation: neonRotateSmooth 5s linear infinite;
+    /* 🎛️ On crée la rotation par transform, non pas par gradient */
+    animation: neonSweep 4s linear infinite;
+    transform-origin: center;
 }
+
 
 
 
@@ -498,6 +488,10 @@
     50%     { opacity: 1; filter: blur(9px); }
 }
 @keyframes neonRotateSmooth {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+@keyframes neonSweep {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
 }
