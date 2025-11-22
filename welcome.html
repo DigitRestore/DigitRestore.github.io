@@ -339,58 +339,23 @@
             position: relative;
         }
 
-      /* === CONTOUR PERMANENT (anneau fixe propre) === */
-.phone-shell::before {
-    content: "";
-    position: absolute;
-    inset: -8px;           /* contour extérieur */
-    border-radius: 58px;
-    border: 4px solid transparent;
-
-    background: linear-gradient(90deg, #ff4b5c, #4fd2ff) border-box;
-
-    /* masque pour transformer le rectangle en ANNEAU */
-    -webkit-mask:
-        linear-gradient(#fff 0 0) padding-box,
-        linear-gradient(#fff 0 0);
-    mask:
-        linear-gradient(#fff 0 0) padding-box,
-        linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-
-    /* glow stable */
-    box-shadow:
-        0 0 15px #ff4b5c,
-        0 0 25px #4fd2ff;
-    z-index: 0;
-}
-
-/* === ANNEAU ANIMÉ AU-DESSUS === */
-.phone-shell::after {
+      .phone-shell::before {
     content: "";
     position: absolute;
     inset: -8px;
-    border-radius: 58px;
-    border: 4px solid transparent;
-
-    background: linear-gradient(90deg, #ff4b5c, #4fd2ff) border-box;
-
-    -webkit-mask:
-        linear-gradient(#fff 0 0) padding-box,
-        linear-gradient(#fff 0 0);
-    mask:
-        linear-gradient(#fff 0 0) padding-box,
-        linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-
-    animation: spinRing 4s linear infinite;
-    opacity: 0.8;
+    border-radius: 50px;
+    background: conic-gradient(
+        from 0deg,
+        #ff4b5c,
+        #4fd2ff,
+        #ff4b5c
+    );
     z-index: 0;
+    opacity: 1;
+    animation: neonRotate 6s linear infinite, neonPulse 3s ease-in-out infinite;
 }
+
+
 
         .phone-inner {
             width: 100%;
@@ -516,19 +481,8 @@
     0%,100% { opacity: 0.8; filter: blur(6px); }
     50%     { opacity: 1; filter: blur(9px); }
 }
-@keyframes neonRotateSmooth {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-}
-@keyframes neonSweep {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-}
 
-@keyframes spinRing {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-}        
+        
         @keyframes ctaPulse {
             0%,100% {
                 transform: translateY(0);
