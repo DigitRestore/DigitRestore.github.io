@@ -1,145 +1,174 @@
-<!-- HEADER DIGITRESTORE (Version Welcome Style) -->
+<!-- ===== HEADER DIGITRESTORE – STYLE WELCOME (CORRIGÉ) ===== -->
 <header class="dr-header">
 
-    <div class="dr-header-left">
+    <!-- Left block: Logo + Brand -->
+    <div class="dr-left">
         <img src="../logo.png" alt="DigitRestore Logo" class="dr-logo">
 
-        <div class="dr-title-block">
-            <div class="dr-title-line">
+        <div class="dr-brand">
+            <div class="dr-brand-main">
                 <span class="dr-digit">DIGIT</span>
                 <span class="dr-restore">RESTORE</span>
             </div>
-            <div class="dr-sub-1">RÉPARATION & RECONDITIONNEMENT</div>
-            <div class="dr-sub-2">SMARTPHONES & TABLETTES</div>
+            <div class="dr-tagline">RÉPARATION & RECONDITIONNEMENT</div>
+            <div class="dr-tagline2">SMARTPHONES & TABLETTES</div>
         </div>
     </div>
 
+    <!-- Navigation -->
     <nav class="dr-nav">
-        <a href="#" class="dr-nav-item">Services</a>
-        <a href="#" class="dr-nav-item">Reprise</a>
-        <a href="#" class="dr-nav-item">Pourquoi Nous</a>
-        <a href="#" class="dr-nav-item">Processus</a>
-        <a href="#" class="dr-nav-item">Contact</a>
+        <a href="#" class="dr-item">Services</a>
+        <a href="#" class="dr-item">Reprise</a>
+        <a href="#" class="dr-item">Pourquoi Nous</a>
+        <a href="#" class="dr-item">Processus</a>
+        <a href="#" class="dr-item">Contact</a>
     </nav>
 
 </header>
 
+
+
 <style>
 
-    /* === POLICES === */
+    /* ===== FONTS ===== */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@800;900&display=swap');
 
-    /* === HEADER WRAPPER === */
+    /* ===== GLOBAL HEADER STYLE ===== */
     .dr-header {
         width: 100%;
-        padding: 22px 48px;
+
+        /* IMPORTANT : padding fluide = plus de débordement */
+        padding: 20px clamp(12px, 4vw, 48px);
+
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
 
-        /* Même fond que welcome : bleu très sombre */
+        /* EXACT background Welcome */
         background:
             radial-gradient(circle at top left, #111634 0%, transparent 55%),
             radial-gradient(circle at bottom right, #171a2b 0%, transparent 55%),
             #050814;
 
-        border-bottom: 1px solid rgba(255,255,255,0.06);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+
+        box-sizing: border-box;
+        overflow: hidden;
     }
 
-    /* === LOGO === */
-    .dr-logo {
-        height: 62px;
-        width: 62px;
-        object-fit: contain;
-        margin-right: 16px;
-    }
 
-    /* === TITLE BLOCK === */
-    .dr-header-left {
+    /* ===== LOGO SECTION ===== */
+    .dr-left {
         display: flex;
         align-items: center;
+        gap: 16px;
     }
 
-    .dr-title-block {
+    .dr-logo {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+    }
+
+    .dr-brand {
         display: flex;
         flex-direction: column;
         gap: 3px;
+        line-height: 1.15;
     }
 
-    .dr-title-line {
+    .dr-brand-main {
         display: flex;
         gap: 6px;
         align-items: baseline;
     }
 
+
+    /* ===== TITLE DIGITRESTORE ===== */
     .dr-digit {
-        font-family: "Montserrat";
+        font-family: "Montserrat", sans-serif;
         font-size: 22px;
         font-weight: 800;
-        letter-spacing: .10em;
+        letter-spacing: 0.10em;
         color: #ffffff;
     }
 
     .dr-restore {
-        font-family: "Montserrat";
+        font-family: "Montserrat", sans-serif;
         font-size: 22px;
         font-weight: 900;
-
-        /* Dégradé rouge EXACT de Welcome */
         background: linear-gradient(120deg, #c01015, #ff1e26);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-
-        letter-spacing: .10em;
+        letter-spacing: 0.10em;
     }
 
-    .dr-sub-1, .dr-sub-2 {
+    .dr-tagline,
+    .dr-tagline2 {
         font-size: 10px;
-        letter-spacing: .22em;
+        letter-spacing: 0.22em;
         text-transform: uppercase;
-        color: #4fd2ff; /* bleu accent Welcome */
-        opacity: .92;
+        color: #4fd2ff; /* bleu néon Welcome */
+        opacity: 0.85;
         font-weight: 500;
     }
 
-    /* === NAVIGATION === */
+    /* ===== NAVIGATION ===== */
     .dr-nav {
         display: flex;
-        gap: 32px;
+        align-items: center;
+        gap: 36px;
     }
 
-    .dr-nav-item {
-        font-family: "Poppins";
+    .dr-item {
+        font-family: "Poppins", sans-serif;
         font-size: 13px;
-        letter-spacing: .08em;
-        color: #e4e7f2;
+        color: #e6e9f3;
         text-decoration: none;
         font-weight: 500;
-        transition: .25s ease;
+        letter-spacing: 0.05em;
         position: relative;
+        transition: 0.3s ease;
     }
 
-    .dr-nav-item:hover {
+    /* Hover effect bleu/rouge comme Welcome */
+    .dr-item:hover {
         color: #4fd2ff;
     }
 
-    .dr-nav-item:hover::after {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    .dr-nav-item::after {
+    .dr-item::after {
         content: "";
         position: absolute;
         left: 0;
         bottom: -4px;
         width: 100%;
-        height: 1px;
+        height: 2px;
         background: linear-gradient(120deg, #ff4b5c, #4fd2ff);
         opacity: 0;
-        transform: translateX(-6px);
+        transform: scaleX(0.6);
         transition: 0.3s ease;
+    }
+
+    .dr-item:hover::after {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+        .dr-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .dr-nav {
+            flex-wrap: wrap;
+            gap: 22px;
+        }
     }
 
 </style>
