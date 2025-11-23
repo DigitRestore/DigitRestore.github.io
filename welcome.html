@@ -32,7 +32,10 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+/* Bouton mobile caché par défaut */
+.mobile-cta {
+    display: none;
+}
         /* ========= BODY ========= */
         body {
             height: 100vh;                /* page calée sur la hauteur d’écran */
@@ -579,6 +582,28 @@
     .hero-right {
         justify-content: center !important;
     }
+/* Masquer le bouton du header sur mobile */
+.header-button {
+    display: none !important;
+}
+
+/* Bouton mobile sous les étiquettes */
+.mobile-cta {
+    display: block !important;
+    margin: 20px auto 10px;
+    padding: 12px 24px;
+    width: 90%;
+    max-width: 320px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(125deg, var(--accent-1), var(--accent-2));
+    color: #050814;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 0 26px rgba(255,75,92,0.6);
+    animation: ctaPulse 6s ease-in-out infinite, gradientShift 12s ease-in-out infinite;
+}
 
 }
 
@@ -666,7 +691,10 @@
         </div>
 
     </section>
-
+<!-- Bouton mobile uniquement -->
+<button class="mobile-cta" onclick="window.location.href='site.html'">
+    Accéder à l’atelier
+</button>
 </div>
 
 </body>
