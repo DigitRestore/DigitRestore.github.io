@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <title>DigitRestore - Atelier</title>
 
-    <!-- Polices identiques à Welcome -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* ===== FOND IDENTIQUE À WELCOME ===== */
         body {
             margin: 0;
             padding: 0;
@@ -18,10 +16,10 @@
                 radial-gradient(circle at bottom right, #171a2b 0%, transparent 55%),
                 #050814;
 
-            background-size: 130% 130%, 130% 130%, auto;
             animation: bgMove 28s ease-in-out infinite alternate;
+            background-size: 130% 130%, 130% 130%, auto;
 
-            font-family: 'Poppins', sans-serif;
+            font-family: "Poppins", sans-serif;
             color: white;
             overflow-x: hidden;
         }
@@ -33,44 +31,35 @@
         }
 
         .content {
-            padding: 40px clamp(20px, 4vw, 60px);
-            min-height: 100vh;
+            padding: 42px clamp(20px, 4vw, 60px);
         }
 
         h2 {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 600;
-            letter-spacing: .02em;
             margin-top: 40px;
         }
     </style>
 
-    <!-- Script pour charger le header -->
     <script>
         async function includeComponent(selector, file) {
-            const el = document.querySelector(selector);
             const res = await fetch(file);
-            const code = await res.text();
-            el.innerHTML = code;
+            const html = await res.text();
+            document.querySelector(selector).innerHTML = html;
         }
-
         window.onload = () => {
             includeComponent("#header", "components/header.html");
         };
     </script>
-
 </head>
 
 <body>
 
-    <!-- Header -->
     <div id="header"></div>
 
-    <!-- Contenu principal -->
     <div class="content">
         <h2>Bienvenue dans l’atelier DigitRestore 🚀</h2>
     </div>
 
 </body>
 </html>
-
