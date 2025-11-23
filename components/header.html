@@ -1,15 +1,14 @@
-<!-- ===== HEADER DIGITRESTORE – VERSION PREMIUM (Avec bouton retour à gauche) ===== -->
+<!-- ===== HEADER PREMIUM DIGITRESTORE ===== -->
 <header class="dr-header">
 
-    <!-- Bouton retour -->
-    <a href="welcome.html" class="dr-back-btn">
+    <!-- Bouton retour PRENIUM -->
+    <a href="welcome.html" class="dr-back-circle">
         <span class="dr-back-icon">⟵</span>
-        <span class="dr-back-text">Retour</span>
     </a>
 
-    <!-- Logo + Marque -->
+    <!-- Bloc Logo + Nom -->
     <div class="dr-left">
-        <img src="logo.png" alt="DigitRestore Logo" class="dr-logo">
+        <img src="logo.png" alt="DigitRestore" class="dr-logo">
 
         <div class="dr-brand">
             <div class="dr-brand-main">
@@ -23,25 +22,23 @@
 
     <!-- Navigation -->
     <nav class="dr-nav">
-        <a href="#" class="dr-item">Services</a>
-        <a href="#" class="dr-item">Reprise</a>
-        <a href="#" class="dr-item">Pourquoi Nous</a>
-        <a href="#" class="dr-item">Processus</a>
-        <a href="#" class="dr-item">Contact</a>
+        <a class="dr-item" href="#">Services</a>
+        <a class="dr-item" href="#">Reprise</a>
+        <a class="dr-item" href="#">Pourquoi Nous</a>
+        <a class="dr-item" href="#">Processus</a>
+        <a class="dr-item" href="#">Contact</a>
     </nav>
 
 </header>
 
 
 <style>
-
-    /* ===== POLICES ===== */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@800;900&display=swap');
 
     /* ===== HEADER ===== */
     .dr-header {
         width: 100%;
-        padding: 18px clamp(14px, 4vw, 48px);
+        padding: 18px clamp(14px, 4vw, 40px);
 
         display: flex;
         justify-content: space-between;
@@ -52,52 +49,66 @@
             radial-gradient(circle at bottom right, #171a2b 0%, transparent 55%),
             #050814;
 
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+
+        position: relative;
+        box-sizing: border-box;
     }
 
-    /* ===== BOUTON RETOUR ===== */
-    .dr-back-btn {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+    /* ===== BOUTON RETOUR ROND ===== */
+    .dr-back-circle {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
 
-        padding: 8px 14px;
-        border-radius: 999px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+
+        background: rgba(255, 75, 92, 0.22);
+        border: 1px solid rgba(255,75,92,0.45);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         text-decoration: none;
-        color: #e6e9f3;
-
-        background: rgba(255, 75, 92, 0.14);
-        border: 1px solid rgba(255, 75, 92, 0.34);
-
-        font-family: "Poppins";
-        font-size: 13px;
-        font-weight: 600;
-
         transition: 0.25s ease;
-        box-shadow: 0 0 10px rgba(255,75,92,0.25);
+
+        box-shadow:
+            0 0 10px rgba(255,75,92,0.35),
+            0 0 6px rgba(79,210,255,0.35);
     }
 
-    .dr-back-btn:hover {
-        transform: translateX(-3px) scale(1.04);
-        box-shadow: 0 0 20px rgba(255,75,92,0.55);
-        background: rgba(255, 75, 92, 0.30);
-        color: #4fd2ff;
+    .dr-back-circle:hover {
+        transform: translateY(-50%) scale(1.12);
+        background: rgba(255, 75, 92, 0.35);
         border-color: rgba(79,210,255,0.65);
+
+        box-shadow:
+            0 0 24px rgba(255,75,92,0.75),
+            0 0 14px rgba(79,210,255,0.70);
     }
 
     .dr-back-icon {
-        font-size: 16px;
-        line-height: 1;
+        font-size: 20px;
+        color: #e6e9f3;
+        transition: 0.25s;
     }
 
-    /* ===== LOGO & TITRE ===== */
+    .dr-back-circle:hover .dr-back-icon {
+        color: #4fd2ff;
+    }
+
+    /* ===== LOGO + TEXTE ===== */
     .dr-left {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 12px;
+        margin-left: 60px; /* compense le bouton sans décaler le header */
     }
 
     .dr-logo {
@@ -110,13 +121,11 @@
         display: flex;
         flex-direction: column;
         gap: 3px;
-        line-height: 1.15;
     }
 
     .dr-brand-main {
         display: flex;
         gap: 6px;
-        align-items: baseline;
     }
 
     .dr-digit {
@@ -141,28 +150,24 @@
     .dr-tagline2 {
         font-size: 10px;
         letter-spacing: .22em;
-        text-transform: uppercase;
         color: #4fd2ff;
         opacity: .88;
-        font-weight: 500;
     }
 
-    /* ===== NAVIGATION ===== */
+    /* ===== NAV ===== */
     .dr-nav {
         display: flex;
         align-items: center;
-        gap: 32px;
+        gap: 28px;
     }
 
     .dr-item {
         font-family: "Poppins";
         font-size: 13px;
-        text-decoration: none;
         color: #e6e9f3;
-        font-weight: 500;
-        letter-spacing: 0.05em;
+        text-decoration: none;
         position: relative;
-        transition: 0.3s ease;
+        transition: .3s;
     }
 
     .dr-item:hover {
@@ -176,10 +181,11 @@
         bottom: -4px;
         width: 100%;
         height: 2px;
+
         background: linear-gradient(120deg, #ff4b5c, #4fd2ff);
         opacity: 0;
-        transform: scaleX(0.6);
-        transition: 0.3s ease;
+        transform: scaleX(0.5);
+        transition: .3s;
     }
 
     .dr-item:hover::after {
