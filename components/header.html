@@ -1,5 +1,11 @@
-<!-- ===== HEADER DIGITRESTORE – STYLE WELCOME (FINAL + BOUTON RETOUR) ===== -->
+<!-- ===== HEADER DIGITRESTORE – VERSION PREMIUM (Avec bouton retour à gauche) ===== -->
 <header class="dr-header">
+
+    <!-- Bouton retour -->
+    <a href="welcome.html" class="dr-back-btn">
+        <span class="dr-back-icon">⟵</span>
+        <span class="dr-back-text">Retour</span>
+    </a>
 
     <!-- Logo + Marque -->
     <div class="dr-left">
@@ -22,9 +28,6 @@
         <a href="#" class="dr-item">Pourquoi Nous</a>
         <a href="#" class="dr-item">Processus</a>
         <a href="#" class="dr-item">Contact</a>
-
-        <!-- Bouton retour -->
-        <a href="welcome.html" class="dr-return">Retour à l’accueil</a>
     </nav>
 
 </header>
@@ -35,28 +38,60 @@
     /* ===== POLICES ===== */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@800;900&display=swap');
 
-
     /* ===== HEADER ===== */
     .dr-header {
         width: 100%;
-        padding: 20px clamp(12px, 4vw, 48px);
+        padding: 18px clamp(14px, 4vw, 48px);
 
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
 
         background:
             radial-gradient(circle at top left, #111634 0%, transparent 55%),
             radial-gradient(circle at bottom right, #171a2b 0%, transparent 55%),
             #050814;
 
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        box-sizing: border-box;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
     }
 
+    /* ===== BOUTON RETOUR ===== */
+    .dr-back-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        padding: 8px 14px;
+        border-radius: 999px;
+
+        text-decoration: none;
+        color: #e6e9f3;
+
+        background: rgba(255, 75, 92, 0.14);
+        border: 1px solid rgba(255, 75, 92, 0.34);
+
+        font-family: "Poppins";
+        font-size: 13px;
+        font-weight: 600;
+
+        transition: 0.25s ease;
+        box-shadow: 0 0 10px rgba(255,75,92,0.25);
+    }
+
+    .dr-back-btn:hover {
+        transform: translateX(-3px) scale(1.04);
+        box-shadow: 0 0 20px rgba(255,75,92,0.55);
+        background: rgba(255, 75, 92, 0.30);
+        color: #4fd2ff;
+        border-color: rgba(79,210,255,0.65);
+    }
+
+    .dr-back-icon {
+        font-size: 16px;
+        line-height: 1;
+    }
 
     /* ===== LOGO & TITRE ===== */
     .dr-left {
@@ -81,6 +116,7 @@
     .dr-brand-main {
         display: flex;
         gap: 6px;
+        align-items: baseline;
     }
 
     .dr-digit {
@@ -95,7 +131,7 @@
         font-family: "Montserrat";
         font-size: 22px;
         font-weight: 900;
-        background: linear-gradient(120deg, #c01015, #ff1e26);
+        background: linear-gradient(130deg, #c01015, #ff1e26);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         letter-spacing: .10em;
@@ -111,16 +147,14 @@
         font-weight: 500;
     }
 
-
     /* ===== NAVIGATION ===== */
     .dr-nav {
         display: flex;
         align-items: center;
-        gap: 30px;
+        gap: 32px;
     }
 
-    .dr-item,
-    .dr-return {
+    .dr-item {
         font-family: "Poppins";
         font-size: 13px;
         text-decoration: none;
@@ -128,17 +162,14 @@
         font-weight: 500;
         letter-spacing: 0.05em;
         position: relative;
-        transition: 0.3s;
+        transition: 0.3s ease;
     }
 
-    /* Effet hover néon bleu */
-    .dr-item:hover,
-    .dr-return:hover {
+    .dr-item:hover {
         color: #4fd2ff;
     }
 
-    .dr-item::after,
-    .dr-return::after {
+    .dr-item::after {
         content: "";
         position: absolute;
         left: 0;
@@ -148,28 +179,12 @@
         background: linear-gradient(120deg, #ff4b5c, #4fd2ff);
         opacity: 0;
         transform: scaleX(0.6);
-        transition: 0.3s;
+        transition: 0.3s ease;
     }
 
-    .dr-item:hover::after,
-    .dr-return:hover::after {
+    .dr-item:hover::after {
         opacity: 1;
         transform: scaleX(1);
-    }
-
-    /* ----- RESPONSIVE ----- */
-    @media (max-width: 900px) {
-
-        .dr-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 16px;
-        }
-
-        .dr-nav {
-            flex-wrap: wrap;
-            gap: 18px;
-        }
     }
 
 </style>
