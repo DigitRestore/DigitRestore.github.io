@@ -568,6 +568,55 @@
     .hero-right {
         justify-content: center !important;
     }
+/* ===== Déplacement du bouton sur mobile ===== */
+.site-header {
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: center !important;
+}
+
+.header-button {
+    order: 99; /* on le pousse en bas du header */
+    width: auto;
+    margin-top: 10px;
+}
+
+/* On déplace réellement le bouton sous le téléphone */
+.hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-right::after {
+    content: "";
+    display: block;
+    height: 1px;
+}
+
+/* Bouton recopié visuellement sous le téléphone */
+.hero-right .header-button {
+    display: block !important;
+}
+
+/* Et on cache le bouton original dans le header uniquement mobile */
+.site-header .header-button {
+    display: none !important;
+}
+
+/* Bouton réintroduit sous le téléphone */
+.hero-right {
+    position: relative;
+}
+
+.hero-right::after {
+    display: none;
+}
+
+.hero-right .header-button {
+    display: inline-block !important;
+    margin-top: 18px;
+}
 
 } 
 
