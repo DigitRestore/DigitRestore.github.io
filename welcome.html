@@ -507,26 +507,69 @@
         }
 
         /* ========= RESPONSIVE ========= */
-        @media (max-width: 960px) {
-            body {
-                padding: 10px;
-                overflow-y: auto; /* sur mobile, on laisse scroller si besoin */
-            }
-            .page {
-                height: auto;
-            }
-            .hero {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .hero-right {
-                order: -1;
-                margin-bottom: 10px;
-            }
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+@media (max-width: 960px) {
+    body {
+        padding: 10px;
+        overflow-y: auto; /* sur mobile, on laisse scroller si besoin */
+    }
+    .page {
+        height: auto;
+    }
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .hero-right {
+        order: -1;
+        margin-bottom: 10px;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ===== FIX MOBILE ===== */
+
+    /* 1. Le body doit se libérer de la hauteur fixe */
+    body {
+        height: auto !important;
+        overflow-y: auto !important;
+        padding: 16px 10px;
+    }
+
+    /* 2. Page fluide */
+    .page {
+        height: auto !important;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    /* 3. Section hero adaptée */
+    .hero {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* 4. Centrer & réduire le téléphone */
+    .phone-stage {
+        transform: scale(0.75);
+        transform-origin: top center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.7) !important;
+    }
+
+    /* 5. Taille du téléphone */
+    .phone-shell {
+        width: 235px !important;
+        height: 470px !important;
+    }
+
+    /* 6. Centrage parfait */
+    .hero-right {
+        justify-content: center !important;
+    }
+
+} 
 
     </style>
 </head>
