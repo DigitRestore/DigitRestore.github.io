@@ -506,50 +506,32 @@
             35%,100% { opacity: 0; transform: translateY(-6px); }
         }
 
-        /* ========= RESPONSIVE ========= */
+       /* ========= RESPONSIVE ========= */
 @media (max-width: 960px) {
-    body {
-        padding: 10px;
-        overflow-y: auto; /* sur mobile, on laisse scroller si besoin */
-    }
-    .page {
-        height: auto;
-    }
-    .hero {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    .hero-right {
-        order: -1;
-        margin-bottom: 10px;
-    }
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
 
-    /* ===== FIX MOBILE ===== */
-
-    /* 1. Le body doit se libérer de la hauteur fixe */
+    /* ===== Réglages mobile généraux ===== */
     body {
+        padding: 16px 10px !important;
         height: auto !important;
         overflow-y: auto !important;
-        padding: 16px 10px;
     }
 
-    /* 2. Page fluide */
     .page {
         height: auto !important;
         margin-top: 10px;
         margin-bottom: 20px;
     }
 
-    /* 3. Section hero adaptée */
     .hero {
         grid-template-columns: 1fr !important;
         gap: 12px !important;
     }
 
-    /* 4. Centrer & réduire le téléphone */
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ===== Téléphone réduit ===== */
     .phone-stage {
         transform: scale(0.75);
         transform-origin: top center;
@@ -558,154 +540,126 @@
         box-shadow: 0 15px 35px rgba(0,0,0,0.7) !important;
     }
 
-    /* 5. Taille du téléphone */
     .phone-shell {
         width: 235px !important;
         height: 470px !important;
     }
 
-    /* 6. Centrage parfait */
     .hero-right {
         justify-content: center !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
     }
-/* ===== Déplacement du bouton sur mobile ===== */
-.site-header {
-    flex-direction: column !important;
-    gap: 12px !important;
-    align-items: center !important;
+
+    /* ===== Cacher le bouton original ===== */
+    .site-header .header-button {
+        display: none !important;
+    }
+
+    /* ===== Affichage du bouton sous le téléphone ===== */
+    .hero-right::after {
+        content: "Accéder à l’atelier";
+        display: inline-block;
+        margin-top: 18px;
+        padding: 12px 26px;
+        border-radius: 999px;
+        background: linear-gradient(125deg, #ff4b5c, #ff4b5c);
+        font-size: 14px;
+        font-weight: 600;
+        color: #050814;
+        box-shadow: 0 0 26px rgba(255,75,92,0.6);
+        text-align: center;
+        cursor: pointer;
+    }
 }
 
-.header-button {
-    order: 99; /* on le pousse en bas du header */
-    width: auto;
-    margin-top: 10px;
-}
-
-/* On déplace réellement le bouton sous le téléphone */
-.hero-right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.hero-right::after {
-    content: "";
-    display: block;
-    height: 1px;
-}
-
-/* Bouton recopié visuellement sous le téléphone */
-.hero-right .header-button {
-    display: block !important;
-}
-
-/* Et on cache le bouton original dans le header uniquement mobile */
-.site-header .header-button {
-    display: none !important;
-}
-
-/* Bouton réintroduit sous le téléphone */
-.hero-right {
-    position: relative;
-}
-
-.hero-right::after {
-    display: none;
-}
-
-.hero-right .header-button {
-    display: inline-block !important;
-    margin-top: 18px;
-}
-
-} 
-
-    </style>
-</head>
-
-<body>
-
-<div class="page">
-
-    <!-- ===== HEADER ===== -->
-    <header class="site-header">
-        <div class="brand-block">
-            <div class="logo-mark">
-                <img src="logo.png" alt="Logo DigitRestore">
-            </div>
-
-            <div class="brand-text-inline">
-                <div class="brand-line merge">
-                    <span class="digit">DIGIT</span>
-                    <span class="restore">RESTORE</span>
-                </div>
-                <div class="line-3-tag">RÉPARATION & RECONDITIONNEMENT</div>
-                <div class="line-4-tag">SMARTPHONES & TABLETTES</div>
-            </div>
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+    <div class="brand-block">
+        <div class="logo-mark">
+            <img src="logo.png" alt="Logo DigitRestore">
         </div>
 
-        <button class="header-button" onclick="window.location.href='site.html'">
-            Accéder à l’atelier
-        </button>
-    </header>
+        <div class="brand-text-inline">
+            <div class="brand-line merge">
+                <span class="digit">DIGIT</span>
+                <span class="restore">RESTORE</span>
+            </div>
+            <div class="line-3-tag">RÉPARATION & RECONDITIONNEMENT</div>
+            <div class="line-4-tag">SMARTPHONES & TABLETTES</div>
+        </div>
+    </div>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero">
+    <button class="header-button" onclick="window.location.href='site.html'">
+        Accéder à l’atelier
+    </button>
+</header>
 
-        <!-- LEFT -->
-        <div class="hero-left">
+<!-- ===== HERO ===== -->
+<section class="hero">
 
-            <h1 class="hero-title">
-                Redonnez une <span>seconde vie</span> à vos smartphones et tablettes.
-            </h1>
+    <!-- LEFT -->
+    <div class="hero-left">
 
-            <p class="hero-subtitle">
-    <em>DigitRestore vous accompagne pour 
-    <strong>les réparations, le diagnostic et le reconditionnement de vos appareils</strong>, 
-    avec un travail soigné, un suivi clair et une protection de vos données du début à la fin.</em>
-</p>
+        <h1 class="hero-title">
+            Redonnez une <span>seconde vie</span> à vos smartphones et tablettes.
+        </h1>
 
-            <div class="services">
-                <div class="services-title">Ce que propose DigitRestore</div>
+        <p class="hero-subtitle">
+            <em>DigitRestore vous accompagne pour 
+            <strong>les réparations, le diagnostic et le reconditionnement de vos appareils</strong>, 
+            avec un travail soigné, un suivi clair et une protection de vos données du début à la fin.</em>
+        </p>
 
-                <div class="services-grid">
-                    <div class="service-pill">Réparation</div>
-                    <div class="service-pill">Reprise</div>
-                    <div class="service-pill">Diagnostic</div>
-                    <div class="service-pill">Reconditionnement</div>
-                    <div class="service-pill">Garantie</div>
-                    <div class="service-pill">Conseils & accompagnement</div>
-                    <div class="service-pill">Data & sécurité</div>
-                    <div class="service-pill">Vente d’accessoires</div>
-                </div>
+        <div class="services">
+            <div class="services-title">Ce que propose DigitRestore</div>
+
+            <div class="services-grid">
+                <div class="service-pill">Réparation</div>
+                <div class="service-pill">Reprise</div>
+                <div class="service-pill">Diagnostic</div>
+                <div class="service-pill">Reconditionnement</div>
+                <div class="service-pill">Garantie</div>
+                <div class="service-pill">Conseils & accompagnement</div>
+                <div class="service-pill">Data & sécurité</div>
+                <div class="service-pill">Vente d’accessoires</div>
             </div>
         </div>
+    </div>
 
-        <!-- RIGHT -->
-        <div class="hero-right">
-            <div class="phone-stage">
-                <div class="phone-shell">
-                    <div class="phone-inner">
+    <!-- RIGHT -->
+    <div class="hero-right">
+        <div class="phone-stage">
+            <div class="phone-shell">
+                <div class="phone-inner">
 
-                        <div class="dynamic-island"></div>
+                    <div class="dynamic-island"></div>
 
-                        <div class="phone-logo-center">DIGIT<span>RESTORE</span></div>
+                    <div class="phone-logo-center">DIGIT<span>RESTORE</span></div>
 
-                        <div class="brand-rotator">
-                            <span>Apple</span>
-                            <span>Samsung</span>
-                            <span>Xiaomi</span>
-                            <span>Huawei</span>
-                        </div>
-
+                    <div class="brand-rotator">
+                        <span>Apple</span>
+                        <span>Samsung</span>
+                        <span>Xiaomi</span>
+                        <span>Huawei</span>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
 
-    </section>
+</section>
 
 </div>
+
+<script>
+document.querySelector('.hero-right').addEventListener('click', function(e) {
+    window.location.href = 'site.html';
+});
+</script>
 
 </body>
 </html>
