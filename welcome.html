@@ -163,6 +163,39 @@
             transition: 0.25s ease;
         }
 
+        /* ==== Style du bouton large sous le téléphone ==== */
+.cta-desktop {
+    display: block;
+    margin: 20px auto 10px;  /* Centré automatiquement */
+    padding: 16px 40px;      /* Grand bouton */
+    width: 80%;
+    max-width: 420px;
+
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+
+    background: linear-gradient(135deg, #0f1524, #1a2033);
+    color: #e6e9f3;
+    border: 1px solid rgba(255,75,92,0.45);
+    border-radius: 999px;
+    cursor: pointer;
+
+    box-shadow:
+        0 0 18px rgba(79,210,255,0.25),
+        0 0 10px rgba(255,75,92,0.35);
+
+    animation: callMe 2.8s ease-in-out infinite;
+    transition: 0.25s ease;
+}
+
+.cta-desktop:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow:
+        0 0 34px rgba(79,210,255,0.55),
+        0 0 22px rgba(255,75,92,0.55);
+}
+
         .header-button:hover,
         .mobile-cta:hover {
             transform: translateY(-3px) scale(1.04);
@@ -322,7 +355,7 @@
             display: flex;
             justify-content: center;
             opacity: 0;
-            transform: translateY(26px);
+            transform: translateY(8px);
             animation: fadeUp 0.9s cubic-bezier(.16,.8,.33,1) 0.6s forwards;
         }
 
@@ -519,31 +552,49 @@
         }
         /* Animation "viens cliquer" pour le bouton */
         @keyframes callMe {
-            0% {
-                transform: scale(1);
-                box-shadow:
-                    0 0 16px rgba(79,210,255,0.25),
-                    0 0 8px rgba(255,75,92,0.25);
-            }
-            40% {
-                transform: scale(1.03);
-                box-shadow:
-                    0 0 26px rgba(79,210,255,0.45),
-                    0 0 16px rgba(255,75,92,0.45);
-            }
-            65% {
-                transform: scale(0.98);
-                box-shadow:
-                    0 0 10px rgba(79,210,255,0.15),
-                    0 0 6px rgba(255,75,92,0.15);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow:
-                    0 0 16px rgba(79,210,255,0.25),
-                    0 0 8px rgba(255,75,92,0.25);
-            }
-        }
+    0% {
+        transform: scale(1) rotate(0deg);
+        box-shadow:
+            0 0 16px rgba(79,210,255,0.25),
+            0 0 8px rgba(255,75,92,0.25);
+    }
+
+    25% {
+        transform: scale(1.04) rotate(0.6deg);
+        box-shadow:
+            0 0 32px rgba(79,210,255,0.45),
+            0 0 18px rgba(255,75,92,0.45);
+    }
+
+    40% {
+        transform: scale(0.99) rotate(-0.6deg);
+        box-shadow:
+            0 0 12px rgba(79,210,255,0.20),
+            0 0 6px rgba(255,75,92,0.20);
+    }
+
+    55% {
+        transform: scale(1.03) rotate(0.3deg);
+        box-shadow:
+            0 0 26px rgba(79,210,255,0.38),
+            0 0 14px rgba(255,75,92,0.38);
+    }
+
+    75% {
+        transform: scale(1);
+        box-shadow:
+            0 0 18px rgba(79,210,255,0.22),
+            0 0 10px rgba(255,75,92,0.22);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        box-shadow:
+            0 0 16px rgba(79,210,255,0.25),
+            0 0 8px rgba(255,75,92,0.25);
+    }
+}
+
 
         /* ========= RESPONSIVE ========= */
 @media (max-width: 960px) {
@@ -622,7 +673,10 @@
 .header-button {
     display: none !important;
 }
-
+/* Cacher le bouton large sur mobile */
+.cta-desktop {
+    display: none !important;
+}
 /* Bouton mobile sous les étiquettes */
 .mobile-cta {
     display: block !important;
@@ -659,9 +713,7 @@
             </div>
         </div>
 
-        <button class="header-button" onclick="window.location.href='site.html'">
-            Accéder à l’atelier
-        </button>
+        
     </header>
 
     <!-- ===== HERO ===== -->
@@ -719,6 +771,12 @@
         </div>
 
     </section>
+
+  <!-- Bouton principal sous le téléphone (PC + style large) -->
+<button class="cta-desktop" onclick="window.location.href='site.html'">
+    Accéder à l’atelier
+</button>
+  
 <!-- Bouton mobile uniquement -->
 <button class="mobile-cta" onclick="window.location.href='site.html'">
     Accéder à l’atelier
