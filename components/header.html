@@ -1,7 +1,7 @@
-<!-- ===== HEADER DIGITRESTORE – STYLE WELCOME (CORRIGÉ) ===== -->
+<!-- ===== HEADER DIGITRESTORE – STYLE WELCOME (FINAL + BOUTON RETOUR) ===== -->
 <header class="dr-header">
 
-    <!-- Left block: Logo + Brand -->
+    <!-- Logo + Marque -->
     <div class="dr-left">
         <img src="../logo.png" alt="DigitRestore Logo" class="dr-logo">
 
@@ -22,22 +22,23 @@
         <a href="#" class="dr-item">Pourquoi Nous</a>
         <a href="#" class="dr-item">Processus</a>
         <a href="#" class="dr-item">Contact</a>
+
+        <!-- Bouton retour -->
+        <a href="../welcome.html" class="dr-return">Retour à l’accueil</a>
     </nav>
 
 </header>
 
 
-
 <style>
 
-    /* ===== FONTS ===== */
+    /* ===== POLICES ===== */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@800;900&display=swap');
 
-    /* ===== GLOBAL HEADER STYLE ===== */
+
+    /* ===== HEADER ===== */
     .dr-header {
         width: 100%;
-
-        /* IMPORTANT : padding fluide = plus de débordement */
         padding: 20px clamp(12px, 4vw, 48px);
 
         display: flex;
@@ -45,7 +46,6 @@
         align-items: center;
         flex-wrap: wrap;
 
-        /* EXACT background Welcome */
         background:
             radial-gradient(circle at top left, #111634 0%, transparent 55%),
             radial-gradient(circle at bottom right, #171a2b 0%, transparent 55%),
@@ -54,13 +54,11 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
-
         box-sizing: border-box;
-        overflow: hidden;
     }
 
 
-    /* ===== LOGO SECTION ===== */
+    /* ===== LOGO & TITRE ===== */
     .dr-left {
         display: flex;
         align-items: center;
@@ -83,63 +81,64 @@
     .dr-brand-main {
         display: flex;
         gap: 6px;
-        align-items: baseline;
     }
 
-
-    /* ===== TITLE DIGITRESTORE ===== */
     .dr-digit {
-        font-family: "Montserrat", sans-serif;
+        font-family: "Montserrat";
         font-size: 22px;
         font-weight: 800;
-        letter-spacing: 0.10em;
-        color: #ffffff;
+        color: #fff;
+        letter-spacing: .10em;
     }
 
     .dr-restore {
-        font-family: "Montserrat", sans-serif;
+        font-family: "Montserrat";
         font-size: 22px;
         font-weight: 900;
         background: linear-gradient(120deg, #c01015, #ff1e26);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        letter-spacing: 0.10em;
+        letter-spacing: .10em;
     }
 
     .dr-tagline,
     .dr-tagline2 {
         font-size: 10px;
-        letter-spacing: 0.22em;
+        letter-spacing: .22em;
         text-transform: uppercase;
-        color: #4fd2ff; /* bleu néon Welcome */
-        opacity: 0.85;
+        color: #4fd2ff;
+        opacity: .88;
         font-weight: 500;
     }
+
 
     /* ===== NAVIGATION ===== */
     .dr-nav {
         display: flex;
         align-items: center;
-        gap: 36px;
+        gap: 30px;
     }
 
-    .dr-item {
-        font-family: "Poppins", sans-serif;
+    .dr-item,
+    .dr-return {
+        font-family: "Poppins";
         font-size: 13px;
-        color: #e6e9f3;
         text-decoration: none;
+        color: #e6e9f3;
         font-weight: 500;
         letter-spacing: 0.05em;
         position: relative;
-        transition: 0.3s ease;
+        transition: 0.3s;
     }
 
-    /* Hover effect bleu/rouge comme Welcome */
-    .dr-item:hover {
+    /* Effet hover néon bleu */
+    .dr-item:hover,
+    .dr-return:hover {
         color: #4fd2ff;
     }
 
-    .dr-item::after {
+    .dr-item::after,
+    .dr-return::after {
         content: "";
         position: absolute;
         left: 0;
@@ -149,16 +148,18 @@
         background: linear-gradient(120deg, #ff4b5c, #4fd2ff);
         opacity: 0;
         transform: scaleX(0.6);
-        transition: 0.3s ease;
+        transition: 0.3s;
     }
 
-    .dr-item:hover::after {
+    .dr-item:hover::after,
+    .dr-return:hover::after {
         opacity: 1;
         transform: scaleX(1);
     }
 
-    /* ===== RESPONSIVE ===== */
+    /* ----- RESPONSIVE ----- */
     @media (max-width: 900px) {
+
         .dr-header {
             flex-direction: column;
             align-items: flex-start;
@@ -167,7 +168,7 @@
 
         .dr-nav {
             flex-wrap: wrap;
-            gap: 22px;
+            gap: 18px;
         }
     }
 
