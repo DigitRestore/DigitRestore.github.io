@@ -1,52 +1,179 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>DigitRestore - Atelier</title>
+<!-- ===== HEADER DIGITRESTORE – STYLE WELCOME ===== -->
+<header class="dr-header">
 
-    <!-- Polices identiques à Welcome -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Left block: Logo + Brand -->
+    <div class="dr-left">
+        <img src="../logo.png" alt="DigitRestore Logo" class="dr-logo">
 
-    <!-- Style de base pour le fond -->
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #0b0b0b, #1c1c1c, #2e0000);
-            font-family: 'Poppins', sans-serif;
-            color: white;
-        }
-
-        .content {
-            padding: 40px;
-            min-height: 100vh;
-        }
-    </style>
-
-    <!-- Script qui va charger le header -->
-    <script>
-        async function includeComponent(selector, file) {
-            const element = document.querySelector(selector);
-            const response = await fetch(file);
-            const content = await response.text();
-            element.innerHTML = content;
-        }
-
-        window.onload = () => {
-            includeComponent("#header", "components/header.html");
-        };
-    </script>
-
-</head>
-<body>
-
-    <!-- Header -->
-    <div id="header"></div>
-
-    <!-- Zone vide pour ton futur contenu -->
-    <div class="content">
-        <h2>Page vierge prête pour la construction 🚀</h2>
+        <div class="dr-brand">
+            <div class="dr-brand-main">
+                <span class="dr-digit">DIGIT</span>
+                <span class="dr-restore">RESTORE</span>
+            </div>
+            <div class="dr-tagline">RÉPARATION & RECONDITIONNEMENT</div>
+            <div class="dr-tagline2">SMARTPHONES & TABLETTES</div>
+        </div>
     </div>
 
-</body>
-</html>
+    <!-- Navigation -->
+    <nav class="dr-nav">
+        <a href="#" class="dr-item">Services</a>
+        <a href="#" class="dr-item">Reprise</a>
+        <a href="#" class="dr-item">Pourquoi Nous</a>
+        <a href="#" class="dr-item">Processus</a>
+        <a href="#" class="dr-item">Contact</a>
+    </nav>
+
+</header>
+
+
+
+<style>
+
+    /* ===== FONTS ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@800;900&display=swap');
+
+    /* ===== GLOBAL HEADER STYLE ===== */
+    .dr-header {
+        width: 100%;
+        padding: 20px 48px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        /* Identique à l'ambiance de Welcome */
+        background:
+            radial-gradient(circle at top left, #111634 0%, transparent 55%),
+            radial-gradient(circle at bottom right, #171a2b 0%, transparent 55%),
+            #050814;
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+
+    /* ===== LOGO SECTION ===== */
+    .dr-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .dr-logo {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+    }
+
+    .dr-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        line-height: 1.15;
+    }
+
+    .dr-brand-main {
+        display: flex;
+        gap: 6px;
+        align-items: baseline;
+    }
+
+
+    /* ===== TITLE DIGITRESTORE ===== */
+    .dr-digit {
+        font-family: "Montserrat", sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 0.10em;
+        color: #ffffff;
+    }
+
+    .dr-restore {
+        font-family: "Montserrat", sans-serif;
+        font-size: 22px;
+        font-weight: 900;
+        background: linear-gradient(120deg, #c01015, #ff1e26);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 0.10em;
+    }
+
+    .dr-tagline,
+    .dr-tagline2 {
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #4fd2ff; /* bleu néon Welcome */
+        opacity: 0.85;
+        font-weight: 500;
+    }
+
+    /* ===== NAVIGATION ===== */
+    .dr-nav {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+    }
+
+    .dr-item {
+        font-family: "Poppins", sans-serif;
+        font-size: 13px;
+        color: #e6e9f3;
+        text-decoration: none;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        position: relative;
+        transition: 0.3s ease;
+    }
+
+    /* Hover effect bleu/rouge comme Welcome */
+    .dr-item:hover {
+        color: #4fd2ff;
+    }
+
+    .dr-item::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(120deg, #ff4b5c, #4fd2ff);
+        opacity: 0;
+        transform: scaleX(0.6);
+        transition: 0.3s ease;
+    }
+
+    .dr-item:hover::after {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+        .dr-header {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px 24px;
+            gap: 16px;
+        }
+
+        .dr-nav {
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        .dr-logo {
+            width: 52px;
+            height: 52px;
+        }
+
+        .dr-brand-main span {
+            font-size: 20px !important;
+        }
+    }
+
+</style>
