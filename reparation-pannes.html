@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitRestore – Types de réparation</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent-1: #ff4b5c;
+            --accent-2: #ff2c47;
+            --accent-3: #4fd2ff;
+            --text-main: #f5f5f7;
+            --text-soft: #c3c8df;
+            --badge-blue: #1f75ff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: "Poppins", sans-serif;
+            color: var(--text-main);
+
+            background:
+                radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18) 0%, transparent 60%),
+                radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16) 0%, transparent 60%),
+                #050814;
+            background-size: cover;
+            animation: bgMove 30s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgMove {
+            0%   { background-position: 0% 0%; }
+            100% { background-position: 12% 16%; }
+        }
+
+        /* --- HEADER --- */
+        header {
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 26px;
+            opacity: 0;
+            animation: fadeDown 0.9s ease forwards;
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(255,75,92,0.22);
+            border: 1px solid rgba(255,75,92,0.45);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: .25s;
+            box-shadow: 0 0 14px rgba(255,75,92,0.35);
+        }
+
+        .back-btn span {
+            font-size: 22px;
+            color: white;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.12);
+            box-shadow:
+                0 0 24px rgba(255,75,92,0.55),
+                0 0 18px rgba(79,210,255,0.55);
+            border-color: rgba(79,210,255,0.65);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand img {
+            width: 68px;
+            height: 68px;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.18;
+        }
+
+        .digit {
+            font-family: "Montserrat";
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .restore {
+            font-size: 22px;
+            font-family: "Montserrat";
+            font-weight: 900;
+            background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tag {
+            font-size: 10px;
+            letter-spacing: .22em;
+            color: var(--accent-3);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            margin-left: auto;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 14px;
+            transition: .25s;
+            opacity: .85;
+        }
+
+        nav a:hover {
+            color: var(--accent-3);
+            opacity: 1;
+        }
+
+        /* --- CONTENU --- */
+
+        .content {
+            padding: 20px 40px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeUp 1s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-title {
+            font-size: 34px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(79,210,255,0.28);
+        }
+
+        .model-info {
+            font-size: 16px;
+            color: var(--text-soft);
+            margin-bottom: 25px;
+        }
+
+        .model-info strong {
+            color: var(--accent-3);
+        }
+
+        .hint {
+            font-size: 14px;
+            color: var(--text-soft);
+            margin-bottom: 20px;
+        }
+
+        /* --- GRILLE DES PANNES --- */
+
+        .faults-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-top: 10px;
+        }
+
+        .fault-card {
+            position: relative;
+            background: rgba(5, 8, 20, 0.96);
+            border-radius: 16px;
+            padding: 16px 14px 18px;
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease,
+                border-color .3s ease,
+                background .3s ease;
+        }
+
+        .fault-card:hover {
+            transform: translateY(-8px) rotateX(2deg);
+            border-color: rgba(255,75,92,0.9);
+            box-shadow:
+                0 0 26px rgba(255,75,92,0.55),
+                0 0 18px rgba(79,210,255,0.55),
+                0 20px 40px rgba(0,0,0,0.9);
+            background:
+                radial-gradient(circle at top, rgba(79,210,255,0.22), transparent 60%),
+                rgba(5, 8, 20, 0.98);
+        }
+
+        .fault-badge {
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: var(--badge-blue);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+
+        .fault-icon {
+            font-size: 26px;
+            margin-top: 10px;
+        }
+
+        .fault-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .fault-hint {
+            font-size: 12px;
+            color: var(--text-soft);
+            margin-top: 4px;
+        }
+
+        /* --- INFOS BAS DE PAGE --- */
+
+        .bottom-info {
+            margin-top: 26px;
+            font-size: 13px;
+            color: var(--text-soft);
+            max-width: 700px;
+        }
+
+        .bottom-info strong {
+            color: var(--accent-3);
+        }
+
+        /* --- RESPONSIVE --- */
+
+        @media (max-width: 1024px) {
+            .faults-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            body { overflow-y: auto; }
+
+            header {
+                padding: 16px 20px;
+                gap: 18px;
+            }
+
+            nav { display: none; }
+
+            .content {
+                padding: 18px 18px 30px;
+            }
+
+            .page-title {
+                font-size: 26px;
+            }
+
+            .faults-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .fault-card {
+                padding: 14px 10px 16px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <!-- retour vers la page de sélection (reparation.html) -->
+    <a href="reparation.html" class="back-btn"><span>⟵</span></a>
+
+    <div class="brand">
+        <img src="logo.png" alt="Logo DigitRestore">
+        <div class="brand-text">
+            <span class="digit">DIGIT <span class="restore">RESTORE</span></span>
+            <span class="tag">RÉPARATION & RECONDITIONNEMENT</span>
+            <span class="tag">SMARTPHONES & TABLETTES</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="site.html">Atelier</a>
+        <a href="reparation.html">Réparation</a>
+        <a href="#">Reprise / Achat</a>
+        <a href="#">Reconditionnement</a>
+        <a href="#">Téléphones & Accessoires</a>
+        <a href="#">Qualité</a>
+        <a href="#">Conditions générales</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<div class="content">
+
+    <div class="page-title">Choisissez le type de réparation</div>
+    <p class="model-info">
+        Vous consultez les réparations disponibles pour votre appareil. <br>
+        <strong>Modèle sélectionné :</strong> à définir dans une prochaine étape (iPhone 12 Pro, Galaxy S21, etc.).
+    </p>
+
+    <p class="hint">
+        Cliquez sur la panne qui correspond à votre besoin pour afficher une estimation de prix adaptée.
+    </p>
+
+    <div class="faults-grid">
+
+        <!-- Quelques exemples de pannes premium façon DigitRestore -->
+
+        <div class="fault-card">
+            <div class="fault-badge">QualiRépar</div>
+            <div class="fault-icon">📱</div>
+            <div class="fault-title">Façade avant (écran)</div>
+            <div class="fault-hint">Cassé, fissuré, tactile ou affichage défectueux.</div>
+        </div>
+
+        <div class="fault-card">
+            <div class="fault-badge">QualiRépar</div>
+            <div class="fault-icon">🔋</div>
+            <div class="fault-title">Batterie</div>
+            <div class="fault-hint">Autonomie faible, extinction soudaine, batterie gonflée.</div>
+        </div>
+
+        <div class="fault-card">
+            <div class="fault-icon">📷</div>
+            <div class="fault-title">Appareil photo arrière</div>
+            <div class="fault-hint">Flou, taches, objectif rayé ou cassé.</div>
+        </div>
+
+        <div class="fault-card">
+            <div class="fault-badge">QualiRépar</div>
+            <div class="fault-icon">🔌</div>
+            <div class="fault-title">Connecteur de charge</div>
+            <div class="fault-hint">Charge difficile, faux-contact, aucun démarrage.</div>
+        </div>
+
+        <div class="fault-card">
+            <div class="fault-icon">🎧</div>
+            <div class="fault-title">Écouteur / haut-parleur oreille</div>
+            <div class="fault-hint">Volume faible, son coupé, grésillements.</div>
+        </div>
+
+        <div class="fault-card">
+            <div class="fault-icon">🔊</div>
+            <div class="fault-title">Haut-parleur bas</div>
+            <div class="fault-hint">Son faible, saturé ou totalement absent.</div>
+        </div>
+
+        <div class="fault-card">
+            <div class="fault-icon">📸</div>
+            <div class="fault-title">Lentille appareil photo</div>
+            <div class="fault-hint">Vitre de protection cassée ou rayée.</div>
+        </div>
+
+        <div class="fault-card">
+            <div class="fault-icon">📦</div>
+            <div class="fault-title">Façade arrière</div>
+            <div class="fault-hint">Vitre arrière cassée ou abîmée.</div>
+        </div>
+
+        <div class="fault-card">
+            <div class="fault-icon">📶</div>
+            <div class="fault-title">Tiroir carte SIM</div>
+            <div class="fault-hint">Cassé, bloqué ou non reconnu.</div>
+        </div>
+
+        <div class="fault-card">
+            <div class="fault-icon">⏻</div>
+            <div class="fault-title">Bouton power</div>
+            <div class="fault-hint">Ne répond plus, reste bloqué ou déclenche mal.</div>
+        </div>
+
+        <div class="fault-card">
+            <div class="fault-icon">➕</div>
+            <div class="fault-title">Autres pannes</div>
+            <div class="fault-hint">Un souci particulier ? Nous l’étudions au cas par cas.</div>
+        </div>
+
+        <div class="fault-card">
+            <div class="fault-icon">📋</div>
+            <div class="fault-title">Diagnostic complet</div>
+            <div class="fault-hint">Vous ne savez pas d’où vient le problème ? On s’en charge.</div>
+        </div>
+
+    </div>
+
+    <p class="bottom-info">
+        Les tarifs peuvent varier en fonction du modèle, de la gamme de pièces choisie et de la disponibilité.
+        <br>
+        <strong>L’objectif DigitRestore :</strong> une réparation claire, transparente, et adaptée à la valeur réelle de votre appareil.
+    </p>
+
+</div>
+
+</body>
+</html>
