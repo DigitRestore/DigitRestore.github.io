@@ -173,7 +173,7 @@
             margin-bottom: 8px;
         }
 
-        /* ⛔ Correctif majeur : les <select> maintenant visibles et stables */
+        /* SELECTS */
         select {
             width: 100%;
             padding: 16px;
@@ -307,72 +307,152 @@
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const typeSelect = document.getElementById("typeSelect");
-    const brandSelect = document.getElementById("brandSelect");
-    const modelSelect = document.getElementById("modelSelect");
-    const continueBtn = document.getElementById("continueBtn");
-    const errorMsg = document.getElementById("error-message");
+    const typeSelect   = document.getElementById("typeSelect");
+    const brandSelect  = document.getElementById("brandSelect");
+    const modelSelect  = document.getElementById("modelSelect");
+    const continueBtn  = document.getElementById("continueBtn");
+    const errorMsg     = document.getElementById("error-message");
 
-    let data = {};
+    // Contient le contenu de donnees/types-et-marques.json
+    let typesData = {};
 
-    /* 📌 Charger donnees.json */
-    try {
-        const response = await fetch("donnees.json");
-        data = await response.json();
-    } catch (e) {
-        console.error("Erreur JSON :", e);
+    // Contient le contenu du fichier JSON pour la combinaison type + marque sélectionnée
+    let currentBrandData = null;
+
+    /* 🔹 Utils : normaliser une marque pour le nom du fichier (apple → apple, "Honor " → honor) */
+    function slugifyBrand(brand) {
+        return brand
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, "-")       // espaces → tirets (au cas où tu changes le naming plus tard)
+            .replace(/[^a-z0-9\-]/g, ""); // on garde lettre/chiffre/tiret
     }
 
-    /* 📌 Remplir types */
-    Object.keys(data).forEach(type => {
+    /* 🔹 Charger la liste des types et marques */
+    try {
+        const response = await fetch("donnees/types-et-marques.json", { cache: "no-cache" });
+        if (!response.ok) {
+            throw new Error("HTTP " + response.status);
+        }
+        typesData = await response.json();
+    } catch (e) {
+        console.error("Erreur lors du chargement de donnees/types-et-marques.json :", e);
+        errorMsg.textContent = "Une erreur est survenue lors du chargement des données. Merci de réessayer plus tard.";
+        errorMsg.style.display = "block";
+        return;
+    }
+
+    /* 🔹 Remplir le select des types à partir des clés du JSON */
+    Object.keys(typesData).forEach(typeKey => {
         const opt = document.createElement("option");
-        opt.value = type;
-        opt.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+        opt.value = typeKey; // ex: "smartphones", "tablettes"
+        // On met une jolie majuscule
+        opt.textContent = typeKey.charAt(0).toUpperCase() + typeKey.slice(1);
         typeSelect.appendChild(opt);
     });
 
-    /* 📌 Sélection type */
+    /* 🔹 Quand on change de type */
     typeSelect.addEventListener("change", () => {
+        // Reset des listes dépendantes
         brandSelect.innerHTML = '<option value="">Sélectionnez une marque…</option>';
         modelSelect.innerHTML = '<option value="">Sélectionnez une marque…</option>';
+        currentBrandData = null;
         errorMsg.style.display = "none";
-
-        if (!typeSelect.value) return;
-
-        Object.keys(data[typeSelect.value]).forEach(brand => {
-            const opt = document.createElement("option");
-            opt.value = brand;
-            opt.textContent = brand;
-            brandSelect.appendChild(opt);
-        });
-
         updateButtonState();
+
+        const selectedType = typeSelect.value;
+        if (!selectedType) {
+            return;
+        }
+
+        // Récupérer les marques pour ce type
+        const brandsForType = typesData[selectedType];
+
+        if (Array.isArray(brandsForType)) {
+            // Cas normal : tableau de marques
+            brandsForType.forEach(brand => {
+                const opt = document.createElement("option");
+                opt.value = brand;
+                opt.textContent = brand;
+                brandSelect.appendChild(opt);
+            });
+        } else if (brandsForType && typeof brandsForType === "object") {
+            // Au cas où tu préfères un jour passer à un objet { "Apple": {...}, "Samsung": {...} }
+            Object.keys(brandsForType).forEach(brand => {
+                const opt = document.createElement("option");
+                opt.value = brand;
+                opt.textContent = brand;
+                brandSelect.appendChild(opt);
+            });
+        }
     });
 
-    /* 📌 Sélection marque */
-    brandSelect.addEventListener("change", () => {
+    /* 🔹 Quand on change de marque */
+    brandSelect.addEventListener("change", async () => {
         modelSelect.innerHTML = '<option value="">Sélectionnez un modèle…</option>';
         errorMsg.style.display = "none";
+        currentBrandData = null;
+        updateButtonState();
 
-        if (!brandSelect.value) return;
+        const selectedType  = typeSelect.value;
+        const selectedBrand = brandSelect.value;
 
-        data[typeSelect.value][brandSelect.value].models.forEach(model => {
-            const opt = document.createElement("option");
-            opt.value = model;
-            opt.textContent = model;
-            modelSelect.appendChild(opt);
-        });
+        if (!selectedType || !selectedBrand) {
+            return;
+        }
+
+        const brandSlug = slugifyBrand(selectedBrand);
+        const jsonPath  = `donnees/${selectedType}-${brandSlug}.json`;
+
+        try {
+            const response = await fetch(jsonPath, { cache: "no-cache" });
+            if (!response.ok) {
+                throw new Error("HTTP " + response.status);
+            }
+            currentBrandData = await response.json();
+        } catch (e) {
+            console.error("Erreur lors du chargement du fichier de modèles :", e);
+            errorMsg.textContent = "Aucun modèle disponible pour cette combinaison type / marque pour le moment.";
+            errorMsg.style.display = "block";
+            return;
+        }
+
+        // On remplit la liste des modèles
+        if (!currentBrandData || !currentBrandData.models) {
+            errorMsg.textContent = "Aucun modèle disponible pour cette combinaison.";
+            errorMsg.style.display = "block";
+            return;
+        }
+
+        // Si models est un tableau : ["iPhone 12", "iPhone 13", ...]
+        if (Array.isArray(currentBrandData.models)) {
+            currentBrandData.models.forEach(model => {
+                const opt = document.createElement("option");
+                opt.value = model;
+                opt.textContent = model;
+                modelSelect.appendChild(opt);
+            });
+        }
+        // Si models est un objet : { "iPhone 12": [...repairs], "iPhone 13": [...] }
+        else if (typeof currentBrandData.models === "object") {
+            Object.keys(currentBrandData.models).forEach(modelName => {
+                const opt = document.createElement("option");
+                opt.value = modelName;
+                opt.textContent = modelName;
+                modelSelect.appendChild(opt);
+            });
+        }
 
         updateButtonState();
     });
 
-    /* 📌 Sélection modèle */
+    /* 🔹 Quand on choisit un modèle */
     modelSelect.addEventListener("change", () => {
         errorMsg.style.display = "none";
         updateButtonState();
     });
 
-    /* 📌 Gestion du bouton */
+    /* 🔹 Gestion du bouton "Continuer" */
     function updateButtonState() {
         if (typeSelect.value && brandSelect.value && modelSelect.value) {
             continueBtn.classList.add("enabled");
@@ -383,19 +463,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    /* 📌 Clic bouton */
+    /* 🔹 Clic sur "Continuer" */
     continueBtn.addEventListener("click", () => {
         if (!continueBtn.classList.contains("enabled")) {
+            errorMsg.textContent = "Veuillez remplir les trois champs pour continuer.";
             errorMsg.style.display = "block";
             return;
         }
 
-        const type = typeSelect.value;
-        const brand = brandSelect.value;
-        const model = modelSelect.value;
+        const type  = typeSelect.value;   // ex: "smartphones"
+        const brand = brandSelect.value;  // ex: "Apple"
+        const model = modelSelect.value;  // ex: "iPhone 12"
 
+        // Redirection identique à ton fonctionnement actuel
         window.location.href =
-            `reparation-pannes.html?type=${type}&marque=${brand}&modele=${model}`;
+            `reparation-pannes.html?type=${encodeURIComponent(type)}&marque=${encodeURIComponent(brand)}&modele=${encodeURIComponent(model)}`;
     });
 
 });
