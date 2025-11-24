@@ -25,8 +25,8 @@
             font-family: "Poppins", sans-serif;
             color: var(--text-main);
             background:
-                radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18), transparent 60%),
-                radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16), transparent 60%),
+                radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18) 0%, transparent 60%),
+                radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16) 0%, transparent 60%),
                 #050814;
             background-size: cover;
             animation: bgMove 30s ease-in-out infinite alternate;
@@ -37,6 +37,7 @@
             100% { background-position: 12% 16%; }
         }
 
+        /* HEADER */
         header {
             width: 100%;
             padding: 20px 40px;
@@ -126,6 +127,7 @@
 
         nav a:hover { opacity: 1; color: var(--accent-3); }
 
+        /* CONTENT */
         .content {
             padding: 20px 40px;
             max-width: 1400px;
@@ -171,23 +173,36 @@
             margin-bottom: 8px;
         }
 
+        /* ⛔ Correctif majeur : les <select> maintenant visibles et stables */
         select {
             width: 100%;
             padding: 16px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.25);
             border-radius: 12px;
             color: var(--text-main);
             font-size: 16px;
             transition: .25s;
+
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            position: relative;
+            z-index: 3;
+        }
+
+        select option {
+            background: #050814;
+            color: var(--text-main);
         }
 
         select:focus {
             outline: none;
             border-color: var(--accent-3);
-            background: rgba(79,210,255,0.08);
+            background: rgba(79,210,255,0.12);
         }
 
+        /* CONTINUE BUTTON */
         .continue-btn {
             margin-top: 40px;
             padding: 14px 26px;
@@ -252,7 +267,7 @@
 
 <div class="content">
 
-    <h1>Réparation de votre smartphone</h1>
+    <h1>Réparation de votre appareil</h1>
     <p class="intro-text">
         Sélectionnez votre appareil pour obtenir une estimation de réparation personnalisée.
     </p>
@@ -300,7 +315,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     let data = {};
 
-    // Charger le JSON
+    /* 📌 Charger donnees.json */
     try {
         const response = await fetch("donnees.json");
         data = await response.json();
@@ -308,7 +323,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Erreur JSON :", e);
     }
 
-    // Remplir types d’appareils
+    /* 📌 Remplir types */
     Object.keys(data).forEach(type => {
         const opt = document.createElement("option");
         opt.value = type;
@@ -316,13 +331,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         typeSelect.appendChild(opt);
     });
 
-    // Quand on choisit un type
+    /* 📌 Sélection type */
     typeSelect.addEventListener("change", () => {
         brandSelect.innerHTML = '<option value="">Sélectionnez une marque…</option>';
         modelSelect.innerHTML = '<option value="">Sélectionnez une marque…</option>';
         errorMsg.style.display = "none";
 
-        if (typeSelect.value === "") return;
+        if (!typeSelect.value) return;
 
         Object.keys(data[typeSelect.value]).forEach(brand => {
             const opt = document.createElement("option");
@@ -334,12 +349,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         updateButtonState();
     });
 
-    // Quand on choisit une marque
+    /* 📌 Sélection marque */
     brandSelect.addEventListener("change", () => {
         modelSelect.innerHTML = '<option value="">Sélectionnez un modèle…</option>';
         errorMsg.style.display = "none";
 
-        if (brandSelect.value === "") return;
+        if (!brandSelect.value) return;
 
         data[typeSelect.value][brandSelect.value].models.forEach(model => {
             const opt = document.createElement("option");
@@ -351,12 +366,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         updateButtonState();
     });
 
-    // Quand on choisit un modèle
+    /* 📌 Sélection modèle */
     modelSelect.addEventListener("change", () => {
         errorMsg.style.display = "none";
         updateButtonState();
     });
 
+    /* 📌 Gestion du bouton */
     function updateButtonState() {
         if (typeSelect.value && brandSelect.value && modelSelect.value) {
             continueBtn.classList.add("enabled");
@@ -367,7 +383,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // ACTION clic → vérifier avant de continuer
+    /* 📌 Clic bouton */
     continueBtn.addEventListener("click", () => {
         if (!continueBtn.classList.contains("enabled")) {
             errorMsg.style.display = "block";
@@ -378,14 +394,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         const brand = brandSelect.value;
         const model = modelSelect.value;
 
-        // Redirection avec paramètres
         window.location.href =
             `reparation-pannes.html?type=${type}&marque=${brand}&modele=${model}`;
     });
 
 });
 </script>
-
 
 </body>
 </html>
