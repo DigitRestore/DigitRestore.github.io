@@ -14,7 +14,6 @@
             --accent-3: #4fd2ff;
             --text-main: #f5f5f7;
             --text-soft: #c3c8df;
-            --badge-blue: #1f75ff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,8 +26,8 @@
             color: var(--text-main);
 
             background:
-                radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18) 0%, transparent 60%),
-                radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16) 0%, transparent 60%),
+                radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18), transparent 60%),
+                radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16), transparent 60%),
                 #050814;
             background-size: cover;
             animation: bgMove 30s ease-in-out infinite alternate;
@@ -39,13 +38,13 @@
             100% { background-position: 12% 16%; }
         }
 
-        /* --- HEADER --- */
+        /* HEADER --------------------------------------------------- */
+
         header {
             width: 100%;
             padding: 20px 40px;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
             gap: 26px;
             opacity: 0;
             animation: fadeDown 0.9s ease forwards;
@@ -77,7 +76,7 @@
 
         .back-btn:hover {
             transform: scale(1.12);
-            box-shadow:
+            box-shadow: 
                 0 0 24px rgba(255,75,92,0.55),
                 0 0 18px rgba(79,210,255,0.55);
             border-color: rgba(79,210,255,0.65);
@@ -89,16 +88,9 @@
             gap: 14px;
         }
 
-        .brand img {
-            width: 68px;
-            height: 68px;
-        }
+        .brand img { width: 68px; height: 68px; }
 
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.18;
-        }
+        .brand-text { display: flex; flex-direction: column; line-height: 1.18; }
 
         .digit {
             font-family: "Montserrat";
@@ -122,25 +114,25 @@
         }
 
         nav {
+            margin-left: auto;
             display: flex;
             gap: 32px;
-            margin-left: auto;
         }
 
         nav a {
             text-decoration: none;
             color: var(--text-main);
             font-size: 14px;
-            transition: .25s;
             opacity: .85;
+            transition: .25s;
         }
 
         nav a:hover {
-            color: var(--accent-3);
             opacity: 1;
+            color: var(--accent-3);
         }
 
-        /* --- CONTENU --- */
+        /* CONTENT --------------------------------------------------- */
 
         .content {
             padding: 20px 40px 40px;
@@ -158,18 +150,8 @@
         .page-title {
             font-size: 34px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             text-shadow: 0 0 10px rgba(79,210,255,0.28);
-        }
-
-        .model-info {
-            font-size: 16px;
-            color: var(--text-soft);
-            margin-bottom: 25px;
-        }
-
-        .model-info strong {
-            color: var(--accent-3);
         }
 
         .hint {
@@ -178,115 +160,53 @@
             margin-bottom: 20px;
         }
 
-        /* --- GRILLE DES PANNES --- */
+        /* GRID --------------------------------------------------- */
 
         .faults-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-            margin-top: 10px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 22px;
         }
 
         .fault-card {
-            position: relative;
-            background: rgba(5, 8, 20, 0.96);
-            border-radius: 16px;
-            padding: 16px 14px 18px;
+            background: rgba(5,8,20,0.96);
+            border-radius: 14px;
+            padding: 16px 6px;
             border: 1px solid rgba(255,255,255,0.06);
-            box-shadow: 0 16px 32px rgba(0,0,0,0.7);
+            width: 85%;
+            margin: 0 auto;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
+            align-items: center;
+            gap: 8px;
             cursor: pointer;
-
             text-decoration: none;
             color: inherit;
-
-            transition:
-                transform .3s ease,
-                box-shadow .3s ease,
-                border-color .3s ease,
-                background .3s ease;
+            transition: .3s ease;
         }
 
         .fault-card:hover {
-            transform: translateY(-8px) rotateX(2deg);
+            transform: translateY(-8px);
             border-color: rgba(255,75,92,0.9);
             box-shadow:
                 0 0 26px rgba(255,75,92,0.55),
                 0 0 18px rgba(79,210,255,0.55),
                 0 20px 40px rgba(0,0,0,0.9);
-            background:
-                radial-gradient(circle at top, rgba(79,210,255,0.22), transparent 60%),
-                rgba(5, 8, 20, 0.98);
         }
 
-        .fault-icon {
-            font-size: 26px;
-            margin-top: 10px;
-        }
+        .fault-icon { font-size: 28px; }
+        .fault-title { font-size: 15px; font-weight: 600; text-align: center; }
 
-        .fault-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-top: 2px;
-        }
+        /* MOBILE --------------------------------------------------- */
 
-        .fault-hint {
-            font-size: 12px;
-            color: var(--text-soft);
-            margin-top: 4px;
-        }
-
-        /* --- INFOS BAS DE PAGE --- */
-
-        .bottom-info {
-            margin-top: 26px;
-            font-size: 13px;
-            color: var(--text-soft);
-            max-width: 700px;
-        }
-
-        .bottom-info strong {
-            color: var(--accent-3);
-        }
-
-        /* --- RESPONSIVE --- */
-
-        @media (max-width: 1024px) {
-            .faults-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        @media (max-width: 968px) {
+            .faults-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         @media (max-width: 768px) {
-
-            body { overflow-y: auto; }
-
-            header {
-                padding: 16px 20px;
-                gap: 18px;
-            }
-
             nav { display: none; }
-
-            .content {
-                padding: 18px 18px 30px;
-            }
-
-            .page-title {
-                font-size: 26px;
-            }
-
-            .faults-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 14px;
-            }
-
-            .fault-card {
-                padding: 14px 10px 16px;
-            }
+            .faults-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
     </style>
@@ -295,7 +215,6 @@
 <body>
 
 <header>
-    <!-- retour vers la page de sélection (reparation.html) -->
     <a href="reparation.html" class="back-btn"><span>⟵</span></a>
 
     <div class="brand">
@@ -322,87 +241,31 @@
 <div class="content">
 
     <div class="page-title">Choisissez le type de réparation</div>
-    <p class="model-info">
-        Vous consultez les réparations disponibles pour votre appareil. <br>
-        <strong>Modèle sélectionné :</strong> à définir dans une prochaine étape (iPhone 12 Pro, Galaxy S21, etc.).
-    </p>
-
-    <p class="hint">
-        Cliquez sur la panne qui correspond à votre besoin pour afficher une estimation de prix adaptée.
-    </p>
+    <p class="hint">Cliquez sur une panne pour continuer.</p>
 
     <div class="faults-grid">
 
-        <!-- Façade avant (écran) -->
-        <a href="#" class="fault-card" data-fault="facade-avant">
-            <div class="fault-icon">📱</div>
-            <div class="fault-title">Façade avant (écran)</div>
-            <div class="fault-hint">Cassé, fissuré, tactile ou affichage défectueux.</div>
-        </a>
+        <a href="#" class="fault-card"><div class="fault-icon">📱</div><div class="fault-title">Façade avant</div></a>
 
-        <!-- Batterie -->
-        <a href="#" class="fault-card" data-fault="batterie">
-            <div class="fault-icon">🔋</div>
-            <div class="fault-title">Batterie</div>
-            <div class="fault-hint">Autonomie faible, extinction soudaine, batterie gonflée.</div>
-        </a>
+        <a href="#" class="fault-card"><div class="fault-icon">📘</div><div class="fault-title">Façade arrière</div></a>
 
-        <!-- Appareil photo arrière -->
-        <a href="#" class="fault-card" data-fault="apn-arriere">
-            <div class="fault-icon">📷</div>
-            <div class="fault-title">Appareil photo arrière</div>
-            <div class="fault-hint">Flou, taches, objectif rayé ou cassé.</div>
-        </a>
+        <a href="#" class="fault-card"><div class="fault-icon">🔋</div><div class="fault-title">Batterie</div></a>
 
-        <!-- Connecteur de charge -->
-        <a href="#" class="fault-card" data-fault="connecteur-charge">
-            <div class="fault-icon">🔌</div>
-            <div class="fault-title">Connecteur de charge</div>
-            <div class="fault-hint">Charge difficile, faux-contact, aucun démarrage.</div>
-        </a>
+        <a href="#" class="fault-card"><div class="fault-icon">🔌</div><div class="fault-title">Charge</div></a>
 
-        <!-- Écouteur / haut-parleur oreille -->
-        <a href="#" class="fault-card" data-fault="ecouteur-oreille">
-            <div class="fault-icon">🎧</div>
-            <div class="fault-title">Écouteur / haut-parleur oreille</div>
-            <div class="fault-hint">Volume faible, son coupé, grésillements.</div>
-        </a>
+        <a href="#" class="fault-card"><div class="fault-icon">🎥</div><div class="fault-title">Caméra arrière</div></a>
 
-        <!-- Haut-parleur bas -->
-        <a href="#" class="fault-card" data-fault="hp-bas">
-            <div class="fault-icon">🔊</div>
-            <div class="fault-title">Haut-parleur bas</div>
-            <div class="fault-hint">Son faible, saturé ou totalement absent.</div>
-        </a>
+        <a href="#" class="fault-card"><div class="fault-icon">📷</div><div class="fault-title">Caméra avant</div></a>
 
-        <!-- Façade arrière -->
-        <a href="#" class="fault-card" data-fault="facade-arriere">
-            <div class="fault-icon">📦</div>
-            <div class="fault-title">Façade arrière</div>
-            <div class="fault-hint">Vitre arrière cassée ou abîmée.</div>
-        </a>
+        <a href="#" class="fault-card"><div class="fault-icon">🎤</div><div class="fault-title">Micro</div></a>
 
-        <!-- Bouton power -->
-        <a href="#" class="fault-card" data-fault="bouton-power">
-            <div class="fault-icon">⏻</div>
-            <div class="fault-title">Bouton power</div>
-            <div class="fault-hint">Ne répond plus, reste bloqué ou déclenche mal.</div>
-        </a>
+        <a href="#" class="fault-card"><div class="fault-icon">🔈</div><div class="fault-title">Haut-parleur</div></a>
 
-        <!-- Boutons volume -->
-        <a href="#" class="fault-card" data-fault="boutons-volume">
-            <div class="fault-icon">🔉</div>
-            <div class="fault-title">Boutons volume</div>
-            <div class="fault-hint">Boutons + / - ne répondent plus ou restent bloqués.</div>
-        </a>
+        <a href="#" class="fault-card"><div class="fault-icon">⏻</div><div class="fault-title">Bouton power</div></a>
+
+        <a href="#" class="fault-card"><div class="fault-icon">🔉</div><div class="fault-title">Boutons volume</div></a>
 
     </div>
-
-    <p class="bottom-info">
-        Les tarifs peuvent varier en fonction du modèle, de la gamme de pièces choisie et de la disponibilité.
-        <br>
-        <strong>L’objectif DigitRestore :</strong> une réparation claire, transparente, et adaptée à la valeur réelle de votre appareil.
-    </p>
 
 </div>
 
