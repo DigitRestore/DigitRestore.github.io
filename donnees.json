@@ -1,0 +1,60 @@
+{
+  "appareils": {
+    "smartphone": {
+      "Apple": {
+        "iPhone 12": {
+          "pannes": ["facade-avant", "batterie"]
+        },
+        "iPhone 13": {
+          "pannes": ["facade-avant", "batterie"]
+        }
+      },
+      "Samsung": {
+        "Galaxy S21": {
+          "pannes": ["facade-avant", "batterie"]
+        },
+        "Galaxy A52": {
+          "pannes": ["facade-avant", "batterie"]
+        }
+      }
+    },
+
+    "tablette": {
+      "Apple": {
+        "iPad Air 4": {
+          "pannes": ["facade-avant", "batterie"]
+        },
+        "iPad 9": {
+          "pannes": ["facade-avant", "batterie"]
+        }
+      },
+      "Samsung": {
+        "Galaxy Tab S6": {
+          "pannes": ["facade-avant", "batterie"]
+        },
+        "Galaxy Tab A7": {
+          "pannes": ["facade-avant", "batterie"]
+        }
+      }
+    }
+  },
+
+  "pannes": {
+    "facade-avant": {
+      "label": "Façade avant",
+      "icone": "📱"
+    },
+    "batterie": {
+      "label": "Batterie",
+      "icone": "🔋"
+    }
+  },
+
+  "fournisseurs": {},
+
+  "regles_prix": {
+    "marge": 0.10,
+    "arrondi": "sup",
+    "minimum": 5
+  }
+}
