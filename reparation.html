@@ -24,7 +24,6 @@
             overflow-x: hidden;
             font-family: "Poppins", sans-serif;
             color: var(--text-main);
-
             background:
                 radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18), transparent 60%),
                 radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16), transparent 60%),
@@ -38,7 +37,6 @@
             100% { background-position: 12% 16%; }
         }
 
-        /* HEADER */
         header {
             width: 100%;
             padding: 20px 40px;
@@ -122,13 +120,12 @@
             text-decoration: none;
             color: var(--text-main);
             font-size: 14px;
-            transition: .25s;
             opacity: .85;
+            transition: .25s;
         }
 
         nav a:hover { opacity: 1; color: var(--accent-3); }
 
-        /* CONTENT */
         .content {
             padding: 20px 40px;
             max-width: 1400px;
@@ -157,7 +154,6 @@
             line-height: 1.6;
         }
 
-        /* --- AJOUT IMPORTANT : ligne horizontale --- */
         .selection-row {
             display: flex;
             gap: 26px;
@@ -192,7 +188,6 @@
             background: rgba(79,210,255,0.08);
         }
 
-        /* BUTTON DIGITRESTORE */
         .continue-btn {
             margin-top: 40px;
             padding: 14px 26px;
@@ -201,28 +196,32 @@
             font-weight: 600;
             text-decoration: none;
             color: white;
-
             background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
             box-shadow: 0 0 20px rgba(79,210,255,0.4), 0 0 30px rgba(255,75,92,0.25);
-
             display: inline-block;
             transition: .25s;
+            cursor: not-allowed;
+            opacity: .45;
         }
 
-        .continue-btn:hover {
-            transform: translateY(-3px);
-            box-shadow:
-                0 0 30px rgba(255,75,92,0.55),
-                0 0 40px rgba(79,210,255,0.55);
+        .continue-btn.enabled {
+            cursor: pointer;
+            opacity: 1;
         }
 
-        /* RESPONSIVE */
+        #error-message {
+            margin-top: 18px;
+            font-size: 15px;
+            color: var(--accent-1);
+            font-weight: 500;
+            display: none;
+        }
+
         @media (max-width: 968px) {
             .selection-row {
                 flex-direction: column;
             }
         }
-
     </style>
 </head>
 
@@ -258,43 +257,135 @@
         Sélectionnez votre appareil pour obtenir une estimation de réparation personnalisée.
     </p>
 
-    <!-- LIGNE HORIZONTALE DES 3 CHAMPS -->
     <div class="selection-row">
 
         <div class="selection-block">
             <div class="section-title">Type d'appareil</div>
-            <select>
-                <option>Smartphone</option>
-                <option>Tablette</option>
+            <select id="typeSelect">
+                <option value="">Sélectionnez…</option>
             </select>
         </div>
 
         <div class="selection-block">
             <div class="section-title">Marque</div>
-            <select>
-                <option>Choisissez une marque…</option>
-                <option>Apple</option>
-                <option>Samsung</option>
-                <option>Xiaomi</option>
-                <option>Huawei</option>
-                <option>Google</option>
-                <option>OnePlus</option>
+            <select id="brandSelect">
+                <option value="">Sélectionnez un type d'appareil…</option>
             </select>
         </div>
 
         <div class="selection-block">
             <div class="section-title">Modèle</div>
-            <select>
-                <option>Choisissez un modèle…</option>
+            <select id="modelSelect">
+                <option value="">Sélectionnez une marque…</option>
             </select>
         </div>
 
     </div>
 
-    <!-- BOUTON CONTINUER -->
-    <a href="reparation-pannes.html" class="continue-btn">Continuer</a>
+    <a id="continueBtn" class="continue-btn">Continuer</a>
+    <div id="error-message">Veuillez remplir les trois champs pour continuer.</div>
 
 </div>
+
+
+<!-- SCRIPT JSON -->
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+
+    const typeSelect = document.getElementById("typeSelect");
+    const brandSelect = document.getElementById("brandSelect");
+    const modelSelect = document.getElementById("modelSelect");
+    const continueBtn = document.getElementById("continueBtn");
+    const errorMsg = document.getElementById("error-message");
+
+    let data = {};
+
+    // Charger le JSON
+    try {
+        const response = await fetch("donnees.json");
+        data = await response.json();
+    } catch (e) {
+        console.error("Erreur JSON :", e);
+    }
+
+    // Remplir types d’appareils
+    Object.keys(data).forEach(type => {
+        const opt = document.createElement("option");
+        opt.value = type;
+        opt.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+        typeSelect.appendChild(opt);
+    });
+
+    // Quand on choisit un type
+    typeSelect.addEventListener("change", () => {
+        brandSelect.innerHTML = '<option value="">Sélectionnez une marque…</option>';
+        modelSelect.innerHTML = '<option value="">Sélectionnez une marque…</option>';
+        errorMsg.style.display = "none";
+
+        if (typeSelect.value === "") return;
+
+        Object.keys(data[typeSelect.value]).forEach(brand => {
+            const opt = document.createElement("option");
+            opt.value = brand;
+            opt.textContent = brand;
+            brandSelect.appendChild(opt);
+        });
+
+        updateButtonState();
+    });
+
+    // Quand on choisit une marque
+    brandSelect.addEventListener("change", () => {
+        modelSelect.innerHTML = '<option value="">Sélectionnez un modèle…</option>';
+        errorMsg.style.display = "none";
+
+        if (brandSelect.value === "") return;
+
+        data[typeSelect.value][brandSelect.value].models.forEach(model => {
+            const opt = document.createElement("option");
+            opt.value = model;
+            opt.textContent = model;
+            modelSelect.appendChild(opt);
+        });
+
+        updateButtonState();
+    });
+
+    // Quand on choisit un modèle
+    modelSelect.addEventListener("change", () => {
+        errorMsg.style.display = "none";
+        updateButtonState();
+    });
+
+    function updateButtonState() {
+        if (typeSelect.value && brandSelect.value && modelSelect.value) {
+            continueBtn.classList.add("enabled");
+            continueBtn.style.cursor = "pointer";
+        } else {
+            continueBtn.classList.remove("enabled");
+            continueBtn.style.cursor = "not-allowed";
+        }
+    }
+
+    // ACTION clic → vérifier avant de continuer
+    continueBtn.addEventListener("click", () => {
+        if (!continueBtn.classList.contains("enabled")) {
+            errorMsg.style.display = "block";
+            return;
+        }
+
+        const type = typeSelect.value;
+        const brand = brandSelect.value;
+        const model = modelSelect.value;
+
+        // Redirection avec paramètres
+        window.location.href =
+            `reparation-pannes.html?type=${type}&marque=${brand}&modele=${model}`;
+    });
+
+});
+</script>
+
 
 </body>
 </html>
