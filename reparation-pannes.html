@@ -314,22 +314,55 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     /* 1 — Récupérer type/marque/modèle depuis l'URL */
     const params = new URLSearchParams(window.location.search);
-    const type   = params.get("type");
-    const marque = params.get("marque");
-    const modele = params.get("modele");
+    const type   = params.get("type");   // ex: "smartphones", "tablettes"
+    const marque = params.get("marque"); // ex: "Apple"
+    const modele = params.get("modele"); // ex: "iPhone 12"
 
-    /* 2 — Charger le JSON local */
-    let data = {};
-    try {
-        const response = await fetch("donnees.json");
-        data = await response.json();
-    } catch (e) {
-        console.error("Erreur JSON :", e);
+    if (!type || !marque || !modele) {
+        console.error("Paramètres manquants dans l'URL.");
         return;
     }
 
-    /* 3 — Récupération des réparations du modèle */
-    const repairs = data[type]?.[marque]?.repairs?.[modele] || [];
+    /* Utilitaire : normaliser une marque pour le nom de fichier (Apple → apple) */
+    function slugifyBrand(brand) {
+        return brand
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, "-")
+            .replace(/[^a-z0-9\-]/g, "");
+    }
+
+    const brandSlug = slugifyBrand(marque);
+    const jsonPath  = `donnees/${type}-${brandSlug}.json`;
+
+    /* 2 — Charger le JSON correspondant au type + marque */
+    let data = {};
+    try {
+        const response = await fetch(jsonPath, { cache: "no-cache" });
+        if (!response.ok) {
+            throw new Error("HTTP " + response.status);
+        }
+        data = await response.json();
+    } catch (e) {
+        console.error("Erreur lors du chargement du JSON de réparations :", e);
+        return;
+    }
+
+    /* 3 — Récupération des réparations pour ce modèle */
+    let repairs = [];
+
+    // Cas privilégié : nouveau format { models: { "iPhone 12": ["facade_avant", ...] } }
+    if (data.models && typeof data.models === "object") {
+        repairs = data.models[modele] || [];
+    }
+    // Cas de secours : ancien format éventuel { repairs: { "iPhone 12": [...] } }
+    else if (data.repairs && typeof data.repairs === "object") {
+        repairs = data.repairs[modele] || [];
+    }
+
+    if (!Array.isArray(repairs)) {
+        repairs = [];
+    }
 
     /* 4 — Table de correspondance */
     const REPAIR_MAP = {
@@ -346,29 +379,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     /* 5 — Génération des cartes */
-    repairs.forEach(repairId => {
+    if (repairs.length === 0) {
+        const infoDiv = document.createElement("div");
+        infoDiv.textContent = "Aucune réparation n'est définie pour ce modèle pour le moment.";
+        infoDiv.style.gridColumn = "1 / -1";
+        infoDiv.style.textAlign = "center";
+        faultsGrid.appendChild(infoDiv);
+    } else {
+        repairs.forEach(repairId => {
 
-        const info = REPAIR_MAP[repairId] || {
-            label: repairId,
-            icon: "🔧"
-        };
+            const info = REPAIR_MAP[repairId] || {
+                label: repairId,
+                icon: "🔧"
+            };
 
-        const card = document.createElement("a");
-        card.href = "#";
-        card.className = "fault-card";
+            const card = document.createElement("a");
+            card.href = "#";
+            card.className = "fault-card";
 
-        card.innerHTML = `
-            <div class="fault-icon">${info.icon}</div>
-            <div class="fault-title">${info.label}</div>
-        `;
+            card.innerHTML = `
+                <div class="fault-icon">${info.icon}</div>
+                <div class="fault-title">${info.label}</div>
+            `;
 
-        card.addEventListener("click", async (e) => {
-            e.preventDefault();
-            await getPriceFromAPI(repairId, info.label);
+            card.addEventListener("click", async (e) => {
+                e.preventDefault();
+                await getPriceFromAPI(repairId, info.label);
+            });
+
+            faultsGrid.appendChild(card);
         });
-
-        faultsGrid.appendChild(card);
-    });
+    }
 
 
     /* 6 — APPEL API CLOUDFLARE */
@@ -413,9 +454,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function openPanel(label, price) {
         panelTitle.textContent = label;
-        panelPrice.textContent = (price === "Erreur API") ?
-            "Erreur lors du calcul" :
-            price + " €";
+        panelPrice.textContent = (price === "Erreur API")
+            ? "Erreur lors du calcul"
+            : price + " €";
 
         pricePanel.classList.add("show");
     }
