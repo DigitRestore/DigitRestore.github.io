@@ -200,6 +200,9 @@
             gap: 10px;
             cursor: pointer;
 
+            text-decoration: none;
+            color: inherit;
+
             transition:
                 transform .3s ease,
                 box-shadow .3s ease,
@@ -217,19 +220,6 @@
             background:
                 radial-gradient(circle at top, rgba(79,210,255,0.22), transparent 60%),
                 rgba(5, 8, 20, 0.98);
-        }
-
-        .fault-badge {
-            position: absolute;
-            top: 8px;
-            left: 10px;
-            font-size: 10px;
-            padding: 4px 10px;
-            border-radius: 999px;
-            background: var(--badge-blue);
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: .05em;
         }
 
         .fault-icon {
@@ -343,82 +333,68 @@
 
     <div class="faults-grid">
 
-        <!-- Quelques exemples de pannes premium façon DigitRestore -->
-
-        <div class="fault-card">
-            <div class="fault-badge">QualiRépar</div>
+        <!-- Façade avant (écran) -->
+        <a href="#" class="fault-card" data-fault="facade-avant">
             <div class="fault-icon">📱</div>
             <div class="fault-title">Façade avant (écran)</div>
             <div class="fault-hint">Cassé, fissuré, tactile ou affichage défectueux.</div>
-        </div>
+        </a>
 
-        <div class="fault-card">
-            <div class="fault-badge">QualiRépar</div>
+        <!-- Batterie -->
+        <a href="#" class="fault-card" data-fault="batterie">
             <div class="fault-icon">🔋</div>
             <div class="fault-title">Batterie</div>
             <div class="fault-hint">Autonomie faible, extinction soudaine, batterie gonflée.</div>
-        </div>
+        </a>
 
-        <div class="fault-card">
+        <!-- Appareil photo arrière -->
+        <a href="#" class="fault-card" data-fault="apn-arriere">
             <div class="fault-icon">📷</div>
             <div class="fault-title">Appareil photo arrière</div>
             <div class="fault-hint">Flou, taches, objectif rayé ou cassé.</div>
-        </div>
+        </a>
 
-        <div class="fault-card">
-            <div class="fault-badge">QualiRépar</div>
+        <!-- Connecteur de charge -->
+        <a href="#" class="fault-card" data-fault="connecteur-charge">
             <div class="fault-icon">🔌</div>
             <div class="fault-title">Connecteur de charge</div>
             <div class="fault-hint">Charge difficile, faux-contact, aucun démarrage.</div>
-        </div>
+        </a>
 
-        <div class="fault-card">
+        <!-- Écouteur / haut-parleur oreille -->
+        <a href="#" class="fault-card" data-fault="ecouteur-oreille">
             <div class="fault-icon">🎧</div>
             <div class="fault-title">Écouteur / haut-parleur oreille</div>
             <div class="fault-hint">Volume faible, son coupé, grésillements.</div>
-        </div>
+        </a>
 
-        <div class="fault-card">
+        <!-- Haut-parleur bas -->
+        <a href="#" class="fault-card" data-fault="hp-bas">
             <div class="fault-icon">🔊</div>
             <div class="fault-title">Haut-parleur bas</div>
             <div class="fault-hint">Son faible, saturé ou totalement absent.</div>
-        </div>
+        </a>
 
-        <div class="fault-card">
-            <div class="fault-icon">📸</div>
-            <div class="fault-title">Lentille appareil photo</div>
-            <div class="fault-hint">Vitre de protection cassée ou rayée.</div>
-        </div>
-
-        <div class="fault-card">
+        <!-- Façade arrière -->
+        <a href="#" class="fault-card" data-fault="facade-arriere">
             <div class="fault-icon">📦</div>
             <div class="fault-title">Façade arrière</div>
             <div class="fault-hint">Vitre arrière cassée ou abîmée.</div>
-        </div>
+        </a>
 
-        <div class="fault-card">
-            <div class="fault-icon">📶</div>
-            <div class="fault-title">Tiroir carte SIM</div>
-            <div class="fault-hint">Cassé, bloqué ou non reconnu.</div>
-        </div>
-
-        <div class="fault-card">
+        <!-- Bouton power -->
+        <a href="#" class="fault-card" data-fault="bouton-power">
             <div class="fault-icon">⏻</div>
             <div class="fault-title">Bouton power</div>
             <div class="fault-hint">Ne répond plus, reste bloqué ou déclenche mal.</div>
-        </div>
+        </a>
 
-        <div class="fault-card">
-            <div class="fault-icon">➕</div>
-            <div class="fault-title">Autres pannes</div>
-            <div class="fault-hint">Un souci particulier ? Nous l’étudions au cas par cas.</div>
-        </div>
-
-        <div class="fault-card">
-            <div class="fault-icon">📋</div>
-            <div class="fault-title">Diagnostic complet</div>
-            <div class="fault-hint">Vous ne savez pas d’où vient le problème ? On s’en charge.</div>
-        </div>
+        <!-- Boutons volume -->
+        <a href="#" class="fault-card" data-fault="boutons-volume">
+            <div class="fault-icon">🔉</div>
+            <div class="fault-title">Boutons volume</div>
+            <div class="fault-hint">Boutons + / - ne répondent plus ou restent bloqués.</div>
+        </a>
 
     </div>
 
