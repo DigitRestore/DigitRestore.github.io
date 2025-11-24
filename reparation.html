@@ -38,7 +38,7 @@
             100% { background-position: 12% 16%; }
         }
 
-        /* --- HEADER --- */
+        /* HEADER */
         header {
             width: 100%;
             padding: 20px 40px;
@@ -106,8 +106,8 @@
         }
 
         .restore {
-            font-size: 22px;
             font-family: "Montserrat";
+            font-size: 22px;
             font-weight: 900;
             background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
             -webkit-background-clip: text;
@@ -130,15 +130,13 @@
             text-decoration: none;
             color: var(--text-main);
             font-size: 14px;
-            transition: .25s;
             opacity: .85;
+            transition: .25s;
         }
 
-        nav a:hover {
-            color: var(--accent-3);
-        }
+        nav a:hover { color: var(--accent-3); opacity: 1; }
 
-        /* --- CONTENU --- */
+        /* CONTENT */
         .content {
             padding: 20px 40px;
             max-width: 1400px;
@@ -159,61 +157,29 @@
             text-shadow: 0 0 12px rgba(79,210,255,0.32);
         }
 
-        .intro {
+        .intro-text {
             font-size: 18px;
             color: var(--text-soft);
             margin-bottom: 35px;
-            max-width: 800px;
+            max-width: 850px;
             line-height: 1.6;
         }
-
-
-        /* --- BLOCS DE SÉLECTION --- */
 
         .section-title {
             font-size: 20px;
             font-weight: 600;
-            margin-top: 30px;
-            margin-bottom: 16px;
-        }
-
-        .brand-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 20px;
-        }
-
-        .brand-box {
-            padding: 16px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: .25s;
-        }
-
-        .brand-box:hover {
-            background: rgba(79,210,255,0.12);
-            transform: translateY(-4px);
-            border-color: var(--accent-3);
-        }
-
-        .brand-box img {
-            width: 42px;
-            height: 42px;
-            margin-bottom: 8px;
+            margin-top: 32px;
+            margin-bottom: 12px;
         }
 
         select {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 10px;
+            border-radius: 12px;
             color: var(--text-main);
             font-size: 16px;
-            margin-top: 10px;
             transition: .25s;
         }
 
@@ -223,42 +189,36 @@
             background: rgba(79,210,255,0.08);
         }
 
-        /* --- ESTIMATION --- */
-        .estimate-box {
+        /* BUTTON - PREMIUM DIGITRESTORE */
+        .continue-btn {
             margin-top: 40px;
-            padding: 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 14px;
-            max-width: 420px;
-        }
-
-        .estimate-value {
-            font-size: 28px;
+            padding: 14px 26px;
+            border-radius: 50px;
+            font-size: 16px;
             font-weight: 600;
-            margin-top: 10px;
-            color: var(--accent-3);
+            text-decoration: none;
+            color: white;
+
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+            box-shadow: 0 0 20px rgba(79,210,255,0.4), 0 0 30px rgba(255,75,92,0.25);
+
+            display: inline-block;
+            transition: .25s;
         }
 
-        /* --- RESPONSIVE --- */
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 0 30px rgba(255,75,92,0.55),
+                0 0 40px rgba(79,210,255,0.55);
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-
             body { overflow-y: auto; }
-
-            header {
-                padding: 16px 20px;
-                gap: 18px;
-            }
-
-            nav { display: none; }
-
+            .content { padding: 18px; }
             h1 { font-size: 28px; }
-
-            .brand-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .content { padding: 20px; }
+            nav { display: none; }
         }
     </style>
 </head>
@@ -291,47 +251,37 @@
 <div class="content">
 
     <h1>Réparation de votre smartphone</h1>
-    <p class="intro">
-        Choisissez votre marque, votre modèle et la pièce à remplacer. Vous obtiendrez une estimation de prix immédiate.
+    <p class="intro-text">
+        Sélectionnez votre appareil pour obtenir une estimation de réparation personnalisée.
     </p>
 
-    <!-- ÉTAPE 1 - Sélection Marque -->
-    <div class="section-title">1. Choisissez la marque</div>
+    <!-- ÉTAPE 1 -->
+    <div class="section-title">1. Type d'appareil</div>
+    <select>
+        <option>Smartphone</option>
+        <option>Tablette</option>
+    </select>
 
-    <div class="brand-grid">
-
-        <div class="brand-box"><img src="https://img.icons8.com/ios-filled/50/apple-logo.png"><br>Apple</div>
-        <div class="brand-box"><img src="https://img.icons8.com/ios-filled/50/samsung.png"><br>Samsung</div>
-        <div class="brand-box"><img src="https://img.icons8.com/ios-filled/50/xiaomi.png"><br>Xiaomi</div>
-        <div class="brand-box"><img src="https://img.icons8.com/ios-filled/50/huawei-logo.png"><br>Huawei</div>
-        <div class="brand-box"><img src="https://img.icons8.com/ios-filled/50/google-logo.png"><br>Google</div>
-        <div class="brand-box"><img src="https://img.icons8.com/ios-filled/50/oneplus.png"><br>OnePlus</div>
-
-    </div>
-
-    <!-- ÉTAPE 2 - Sélection modèle -->
-    <div class="section-title">2. Sélectionnez le modèle</div>
+    <!-- ÉTAPE 2 -->
+    <div class="section-title">2. Marque</div>
     <select>
         <option>Choisissez une marque…</option>
+        <option>Apple</option>
+        <option>Samsung</option>
+        <option>Xiaomi</option>
+        <option>Huawei</option>
+        <option>Google</option>
+        <option>OnePlus</option>
     </select>
 
-    <!-- ÉTAPE 3 - Sélection réparations -->
-    <div class="section-title">3. Quel type de réparation ?</div>
+    <!-- ÉTAPE 3 -->
+    <div class="section-title">3. Modèle</div>
     <select>
-        <option>Écran</option>
-        <option>Batterie</option>
-        <option>Connecteur de charge</option>
-        <option>Caméra</option>
-        <option>Haut-parleur</option>
-        <option>Bouton power</option>
-        <option>Boutons volume</option>
+        <option>Choisissez un modèle…</option>
     </select>
 
-    <!-- ESTIMATION -->
-    <div class="estimate-box">
-        <div>Estimation :</div>
-        <div class="estimate-value">— €</div>
-    </div>
+    <!-- BOUTON CONTINUER -->
+    <a href="reparation-pannes.html" class="continue-btn">Continuer</a>
 
 </div>
 
