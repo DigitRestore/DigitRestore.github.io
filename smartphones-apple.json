@@ -1,0 +1,8 @@
+{
+  "type": "smartphones",
+  "marque": "Apple",
+  "models": {
+    "iPhone 12": ["facade_avant", "batterie"],
+    "iPhone 13": ["facade_avant"]
+  }
+}
