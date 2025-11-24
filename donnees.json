@@ -3,15 +3,15 @@
         "Apple": {
             "models": ["iPhone 12", "iPhone 13"],
             "repairs": {
-                "facade-avant": { "price": 199 },
-                "batterie": { "price": 89 }
+                "iPhone 12": ["facade_avant", "batterie"],
+                "iPhone 13": ["facade_avant"]
             }
         },
         "Samsung": {
             "models": ["Galaxy S21", "Galaxy S22"],
             "repairs": {
-                "facade-avant": { "price": 179 },
-                "batterie": { "price": 79 }
+                "Galaxy S21": ["facade_avant", "batterie"],
+                "Galaxy S22": ["facade_avant"]
             }
         }
     },
@@ -20,15 +20,15 @@
         "Apple": {
             "models": ["iPad Mini 5", "iPad Pro 11"],
             "repairs": {
-                "facade-avant": { "price": 249 },
-                "batterie": { "price": 119 }
+                "iPad Mini 5": ["facade_avant", "batterie"],
+                "iPad Pro 11": ["facade_avant"]
             }
         },
         "Samsung": {
             "models": ["Galaxy Tab A7", "Galaxy Tab S7"],
             "repairs": {
-                "facade-avant": { "price": 199 },
-                "batterie": { "price": 99 }
+                "Galaxy Tab A7": ["facade_avant", "batterie"],
+                "Galaxy Tab S7": ["facade_avant"]
             }
         }
     }
