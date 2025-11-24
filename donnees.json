@@ -1,60 +1,35 @@
 {
-  "appareils": {
     "smartphone": {
-      "Apple": {
-        "iPhone 12": {
-          "pannes": ["facade-avant", "batterie"]
+        "Apple": {
+            "models": ["iPhone 12", "iPhone 13"],
+            "repairs": {
+                "facade-avant": { "price": 199 },
+                "batterie": { "price": 89 }
+            }
         },
-        "iPhone 13": {
-          "pannes": ["facade-avant", "batterie"]
+        "Samsung": {
+            "models": ["Galaxy S21", "Galaxy S22"],
+            "repairs": {
+                "facade-avant": { "price": 179 },
+                "batterie": { "price": 79 }
+            }
         }
-      },
-      "Samsung": {
-        "Galaxy S21": {
-          "pannes": ["facade-avant", "batterie"]
-        },
-        "Galaxy A52": {
-          "pannes": ["facade-avant", "batterie"]
-        }
-      }
     },
 
     "tablette": {
-      "Apple": {
-        "iPad Air 4": {
-          "pannes": ["facade-avant", "batterie"]
+        "Apple": {
+            "models": ["iPad Mini 5", "iPad Pro 11"],
+            "repairs": {
+                "facade-avant": { "price": 249 },
+                "batterie": { "price": 119 }
+            }
         },
-        "iPad 9": {
-          "pannes": ["facade-avant", "batterie"]
+        "Samsung": {
+            "models": ["Galaxy Tab A7", "Galaxy Tab S7"],
+            "repairs": {
+                "facade-avant": { "price": 199 },
+                "batterie": { "price": 99 }
+            }
         }
-      },
-      "Samsung": {
-        "Galaxy Tab S6": {
-          "pannes": ["facade-avant", "batterie"]
-        },
-        "Galaxy Tab A7": {
-          "pannes": ["facade-avant", "batterie"]
-        }
-      }
     }
-  },
-
-  "pannes": {
-    "facade-avant": {
-      "label": "Façade avant",
-      "icone": "📱"
-    },
-    "batterie": {
-      "label": "Batterie",
-      "icone": "🔋"
-    }
-  },
-
-  "fournisseurs": {},
-
-  "regles_prix": {
-    "marge": 0.10,
-    "arrondi": "sup",
-    "minimum": 5
-  }
 }
