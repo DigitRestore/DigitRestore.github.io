@@ -1,0 +1,8 @@
+{
+  "type": "tablettes",
+  "marque": "Apple",
+  "models": {
+    "iPad Mini 5": ["facade_avant", "batterie"],
+    "iPad Pro 11": ["facade_avant"]
+  }
+}
