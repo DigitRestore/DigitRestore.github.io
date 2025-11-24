@@ -2,63 +2,348 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>DigitRestore - Atelier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitRestore – Atelier</title>
 
-    <link rel="stylesheet" href="css/header.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --accent-1: #ff4b5c;
+            --accent-2: #ff2c47;
+            --accent-3: #4fd2ff;
+            --text-main: #f5f5f7;
+            --text-soft: #c3c8df;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            margin: 0;
-            padding: 0;
+            min-height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            font-family: "Poppins", sans-serif;
+            color: var(--text-main);
 
             background:
-                radial-gradient(circle at top left, #111634 0%, transparent 55%),
-                radial-gradient(circle at bottom right, #171a2b 0%, transparent 55%),
+                radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18) 0%, transparent 60%),
+                radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16) 0%, transparent 60%),
                 #050814;
-
-            background-size: 130% 130%, 130% 130%, auto;
-            animation: bgMove 28s ease-in-out infinite alternate;
-
-            font-family: "Poppins", sans-serif;
-            color: white;
-            overflow-x: hidden;
+            background-size: cover;
+            animation: bgMove 30s ease-in-out infinite alternate;
         }
 
         @keyframes bgMove {
-            0% { background-position: 0 0, 100% 100%, 0 0; }
-            50% { background-position: 14% -10%, 86% 110%, 0 0; }
-            100% { background-position: 28% 0, 78% 90%, 0 0; }
+            0%   { background-position: 0% 0%; }
+            100% { background-position: 12% 16%; }
         }
 
+        /* --- HEADER --- */
+        header {
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 26px;
+            background: transparent;
+            opacity: 0;
+            animation: fadeDown 0.9s ease forwards;
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(255,75,92,0.22);
+            border: 1px solid rgba(255,75,92,0.45);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: .25s;
+            box-shadow: 0 0 14px rgba(255,75,92,0.35);
+        }
+
+        .back-btn span {
+            font-size: 22px;
+            color: white;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.12);
+            box-shadow:
+                0 0 24px rgba(255,75,92,0.55),
+                0 0 18px rgba(79,210,255,0.55);
+            border-color: rgba(79,210,255,0.65);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand img {
+            width: 68px;
+            height: 68px;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.18;
+        }
+
+        .digit {
+            font-family: "Montserrat";
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .restore {
+            font-family: "Montserrat";
+            font-size: 22px;
+            font-weight: 900;
+            background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tag {
+            font-size: 10px;
+            letter-spacing: .22em;
+            color: var(--accent-3);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            margin-left: auto;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 14px;
+            transition: .25s;
+            opacity: .85;
+        }
+
+        nav a:hover {
+            color: var(--accent-3);
+            opacity: 1;
+        }
+
+        /* --- CONTENU PRINCIPAL --- */
         .content {
-            padding: 50px clamp(20px, 4vw, 60px);
+            padding: 20px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeUp 1s ease forwards;
+            opacity: 0;
         }
 
-        h2 {
-            font-size: 30px;
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 40px;
             font-weight: 600;
-            margin-top: 40px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(79,210,255,0.28);
         }
+
+        .intro-text {
+            font-size: 18px;
+            color: var(--text-soft);
+            max-width: 780px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .intro-text strong {
+            color: var(--accent-3);
+            font-weight: 600;
+        }
+
+        /* --- GRILLE 100% LIGNE UNIQUE --- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 26px;
+            margin-top: 20px;
+        }
+
+        /* --- PASTILLES --- */
+        .service-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+
+            background:
+                linear-gradient(135deg, rgba(255,75,92,0.12), rgba(79,210,255,0.12)),
+                rgba(5, 8, 20, 0.92);
+
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 22px 22px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            box-shadow: 0 20px 40px rgba(0,0,0,0.55);
+
+            transition:
+                transform .35s ease,
+                box-shadow .35s ease,
+                border-color .35s ease,
+                background .35s ease;
+        }
+
+        /* --- Effet 3D Premium --- */
+        .service-card:hover {
+            transform: translateY(-10px) rotateX(3deg) rotateY(-1.5deg);
+            border-color: rgba(255,75,92,0.9);
+            box-shadow:
+                0 0 26px rgba(255,75,92,0.55),
+                0 0 20px rgba(79,210,255,0.55),
+                0 26px 46px rgba(0,0,0,0.8);
+
+            background:
+                linear-gradient(135deg, rgba(255,75,92,0.16), rgba(79,210,255,0.16)),
+                rgba(5,8,20,0.96);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .service-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .service-text {
+            font-size: 14px;
+            color: var(--text-soft);
+            line-height: 1.75;
+            opacity: .9;
+            max-width: 95%;
+        }
+
+        /* --- CTA séparé & mis en valeur --- */
+        .service-cta {
+            margin-top: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-3);
+            line-height: 1.7;
+            opacity: .95;
+        }
+
     </style>
-
-    <script>
-        async function includeComponent(sel, file) {
-            const html = await (await fetch(file)).text();
-            document.querySelector(sel).innerHTML = html;
-        }
-        window.onload = () => includeComponent("#header", "components/header.html");
-    </script>
-
 </head>
 
 <body>
 
-    <div id="header"></div>
+    <header>
+        <a href="welcome.html" class="back-btn"><span>⟵</span></a>
+
+        <div class="brand">
+            <img src="logo.png" alt="Logo">
+            <div class="brand-text">
+                <div class="brand-line">
+                    <span class="digit">DIGIT</span>
+                    <span class="restore">RESTORE</span>
+                </div>
+                <span class="tag">RÉPARATION & RECONDITIONNEMENT</span>
+                <span class="tag">SMARTPHONES & TABLETTES</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#">Réparation</a>
+            <a href="#">Reprise / Achat</a>
+            <a href="#">Reconditionnement</a>
+            <a href="#">Téléphones & Accessoires</a>
+            <a href="#">Qualité</a>
+            <a href="#">Conditions générales</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
 
     <div class="content">
-        <h2>Bienvenue dans l’atelier DigitRestore 🚀</h2>
+
+        <h1>Bienvenue dans l’Atelier DigitRestore</h1>
+
+        <p class="intro-text">
+            Chez <strong>DigitRestore</strong>, nous vous proposons la réparation de vos appareils, le rachat de vos anciens modèles, et des téléphones neufs ou reconditionnés.
+        </p>
+
+        <div class="cards-grid">
+
+            <!-- 🔧 Réparation -->
+            <a href="#" class="service-card">
+                <div class="card-icon">🔧</div>
+                <div class="service-title">Réparation</div>
+
+                <p class="service-text">
+                    Écran cassé, batterie fatiguée, connecteur ou bouton HS : nous réalisons des réparations fiables avec des pièces de haute qualité.
+                </p>
+
+                <p class="service-cta">Cliquez ici pour une estimation.</p>
+            </a>
+
+            <!-- 💸 Reprise -->
+            <a href="#" class="service-card">
+                <div class="card-icon">💸</div>
+                <div class="service-title">Reprise / Achat</div>
+
+                <p class="service-text">
+                    Vous ne gardez plus votre smartphone ? Nous le rachetons à sa juste valeur, avec une estimation claire et transparente.
+                </p>
+
+                <p class="service-cta">Cliquez ici pour connaître le montant de votre reprise.</p>
+            </a>
+
+            <!-- ♻️ Reconditionnement -->
+            <a href="#" class="service-card">
+                <div class="card-icon">♻️</div>
+                <div class="service-title">Reconditionnement</div>
+
+                <p class="service-text">
+                    Chaque appareil fait l’objet d’un contrôle complet, permettant son reconditionnement ou son recyclage responsable selon son état.
+                </p>
+            </a>
+
+            <!-- 📱 Téléphones & Accessoires -->
+            <a href="#" class="service-card">
+                <div class="card-icon">📱</div>
+                <div class="service-title">Téléphones & Accessoires</div>
+
+                <p class="service-text">
+                    Téléphones reconditionnés et rigoureusement contrôlés, accompagnés d’accessoires de haute qualité.
+                </p>
+            </a>
+
+        </div>
     </div>
 
 </body>
