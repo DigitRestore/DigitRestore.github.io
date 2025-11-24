@@ -26,8 +26,8 @@
             color: var(--text-main);
 
             background:
-                radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18) 0%, transparent 60%),
-                radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16) 0%, transparent 60%),
+                radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18), transparent 60%),
+                radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16), transparent 60%),
                 #050814;
             background-size: cover;
             animation: bgMove 30s ease-in-out infinite alternate;
@@ -44,7 +44,6 @@
             padding: 20px 40px;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
             gap: 26px;
             opacity: 0;
             animation: fadeDown 0.9s ease forwards;
@@ -76,7 +75,7 @@
 
         .back-btn:hover {
             transform: scale(1.12);
-            box-shadow:
+            box-shadow: 
                 0 0 24px rgba(255,75,92,0.55),
                 0 0 18px rgba(79,210,255,0.55);
             border-color: rgba(79,210,255,0.65);
@@ -88,16 +87,9 @@
             gap: 14px;
         }
 
-        .brand img {
-            width: 68px;
-            height: 68px;
-        }
+        .brand img { width: 68px; height: 68px; }
 
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.18;
-        }
+        .brand-text { display: flex; flex-direction: column; line-height: 1.18; }
 
         .digit {
             font-family: "Montserrat";
@@ -106,8 +98,8 @@
         }
 
         .restore {
-            font-family: "Montserrat";
             font-size: 22px;
+            font-family: "Montserrat";
             font-weight: 900;
             background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
             -webkit-background-clip: text;
@@ -130,11 +122,11 @@
             text-decoration: none;
             color: var(--text-main);
             font-size: 14px;
-            opacity: .85;
             transition: .25s;
+            opacity: .85;
         }
 
-        nav a:hover { color: var(--accent-3); opacity: 1; }
+        nav a:hover { opacity: 1; color: var(--accent-3); }
 
         /* CONTENT */
         .content {
@@ -165,11 +157,22 @@
             line-height: 1.6;
         }
 
+        /* --- AJOUT IMPORTANT : ligne horizontale --- */
+        .selection-row {
+            display: flex;
+            gap: 26px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .selection-block {
+            flex: 1;
+        }
+
         .section-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
-            margin-top: 32px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         select {
@@ -189,7 +192,7 @@
             background: rgba(79,210,255,0.08);
         }
 
-        /* BUTTON - PREMIUM DIGITRESTORE */
+        /* BUTTON DIGITRESTORE */
         .continue-btn {
             margin-top: 40px;
             padding: 14px 26px;
@@ -214,12 +217,12 @@
         }
 
         /* RESPONSIVE */
-        @media (max-width: 768px) {
-            body { overflow-y: auto; }
-            .content { padding: 18px; }
-            h1 { font-size: 28px; }
-            nav { display: none; }
+        @media (max-width: 968px) {
+            .selection-row {
+                flex-direction: column;
+            }
         }
+
     </style>
 </head>
 
@@ -255,30 +258,38 @@
         Sélectionnez votre appareil pour obtenir une estimation de réparation personnalisée.
     </p>
 
-    <!-- ÉTAPE 1 -->
-    <div class="section-title">1. Type d'appareil</div>
-    <select>
-        <option>Smartphone</option>
-        <option>Tablette</option>
-    </select>
+    <!-- LIGNE HORIZONTALE DES 3 CHAMPS -->
+    <div class="selection-row">
 
-    <!-- ÉTAPE 2 -->
-    <div class="section-title">2. Marque</div>
-    <select>
-        <option>Choisissez une marque…</option>
-        <option>Apple</option>
-        <option>Samsung</option>
-        <option>Xiaomi</option>
-        <option>Huawei</option>
-        <option>Google</option>
-        <option>OnePlus</option>
-    </select>
+        <div class="selection-block">
+            <div class="section-title">Type d'appareil</div>
+            <select>
+                <option>Smartphone</option>
+                <option>Tablette</option>
+            </select>
+        </div>
 
-    <!-- ÉTAPE 3 -->
-    <div class="section-title">3. Modèle</div>
-    <select>
-        <option>Choisissez un modèle…</option>
-    </select>
+        <div class="selection-block">
+            <div class="section-title">Marque</div>
+            <select>
+                <option>Choisissez une marque…</option>
+                <option>Apple</option>
+                <option>Samsung</option>
+                <option>Xiaomi</option>
+                <option>Huawei</option>
+                <option>Google</option>
+                <option>OnePlus</option>
+            </select>
+        </div>
+
+        <div class="selection-block">
+            <div class="section-title">Modèle</div>
+            <select>
+                <option>Choisissez un modèle…</option>
+            </select>
+        </div>
+
+    </div>
 
     <!-- BOUTON CONTINUER -->
     <a href="reparation-pannes.html" class="continue-btn">Continuer</a>
