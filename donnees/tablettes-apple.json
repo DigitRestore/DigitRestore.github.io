@@ -1,5 +1,5 @@
 {
-  "type": "tablettes",
+  "type": "tablette",
   "marque": "Apple",
   "models": {
     "iPad Mini 5": ["facade_avant", "batterie"],
