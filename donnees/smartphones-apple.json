@@ -1,5 +1,5 @@
 {
-  "type": "smartphones",
+  "type": "smartphone",
   "marque": "Apple",
   "models": {
     "iPhone 12": ["facade_avant", "batterie"],
