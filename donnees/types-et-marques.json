@@ -1,4 +1,4 @@
 {
-  "smartphones": ["Apple", "Samsung"],
-  "tablettes": ["Apple", "Samsung"]
+  "smartphone": ["Apple", "Samsung"],
+  "tablette": ["Apple", "Samsung"]
 }
