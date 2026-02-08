@@ -27,7 +27,7 @@
     "iPhone 11 Pro": ["Ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume"],
     "iPhone 11 Pro Max": ["Ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume"],
     "iPhone SE 2": ["Ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume"],
-    "iPhone 12": ["Ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume"],
+    "iPhone 12": ["ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume"],
     "iPhone 12 Mini": ["Ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume"],
     "iPhone 12 Pro": ["Ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume"],
     "iPhone 12 Pro Max": ["Ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume"],
