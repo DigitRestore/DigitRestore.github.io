@@ -2,7 +2,7 @@
   "type": "smartphones",
   "marque": "Apple",
   "models": {
-    "IPhone 11": ["ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "volume", "nfc", "face_id"],
+    "IPhone 11": ["ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume", "nfc", "face_id"],
     "IPhone 11 Pro": ["ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume", "nfc", "face_id"],
     "IPhone 11 Pro Max": ["ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume", "nfc", "face_id"],
     "IPhone 12": ["ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume", "nfc", "face_id"],
@@ -50,6 +50,4 @@
     "IPhone X": ["ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume", "nfc", "face_id"],
     "IPhone XR": ["ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume", "nfc", "face_id"],
     "IPhone XS": ["ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume", "nfc", "face_id"],
-    "IPhone XS Max": ["ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume", "nfc", "face_id"]
-  }
-}
+    "IPhone XS Max": ["ecran", "facade_arriere", "batterie", "connecteur_de_charge", "camera_avant", "camera_arriere", "micro", "haut_parleur", "power", "volume", "nfc", "face_id
