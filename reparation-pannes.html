@@ -310,6 +310,15 @@
           .replace(/\s+/g, "-")
           .replace(/[^a-z0-9\-]/g, "");
       }
+    /* Utilitaire : normaliser un ID de réparation (Ecran -> ecran, espaces -> _, accents -> sans accent) */
+    function normalizeRepairId(value) {
+        return String(value || "")
+            .trim()
+            .toLowerCase()
+            .normalize("NFD")                 // sépare lettres et accents
+            .replace(/[\u0300-\u036f]/g, "")   // supprime accents
+            .replace(/\s+/g, "_");            // espaces -> underscore
+    }
 
       const brandSlug = slugifyBrand(marque);
       const jsonPath  = `donnees/${type}-${brandSlug}.json`;
@@ -351,33 +360,48 @@
       };
 
       /* 5 — Génération des cartes */
-      if (repairs.length === 0) {
-        const infoDiv = document.createElement("div");
-        infoDiv.textContent = "Aucune réparation n'est définie pour ce modèle pour le moment.";
-        infoDiv.style.gridColumn = "1 / -1";
-        infoDiv.style.textAlign = "center";
-        faultsGrid.appendChild(infoDiv);
-      } else {
-        repairs.forEach(repairId => {
-          const info = REPAIR_MAP[repairId] || { label: repairId, icon: "🔧" };
+if (repairs.length === 0) {
+    const infoDiv = document.createElement("div");
+    infoDiv.textContent = "Aucune réparation n'est définie pour ce modèle pour le moment.";
+    infoDiv.style.gridColumn = "1 / -1";
+    infoDiv.style.textAlign = "center";
+    faultsGrid.appendChild(infoDiv);
+} else {
+    repairs.forEach((repairId) => {
 
-          const card = document.createElement("a");
-          card.href = "#";
-          card.className = "fault-card";
+        // ✅ Normalisation : "Ecran" -> "ecran" (et accents/espaces gérés)
+        const key = String(repairId || "")
+            .trim()
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/\s+/g, "_");
 
-          card.innerHTML = `
+        // ✅ On récupère l'icône + le label depuis la table
+        // (sinon fallback)
+        const info = REPAIR_MAP[key] || {
+            label: String(repairId),
+            icon: "🔧"
+        };
+
+        const card = document.createElement("a");
+        card.href = "#";
+        card.className = "fault-card";
+
+        card.innerHTML = `
             <div class="fault-icon">${info.icon}</div>
             <div class="fault-title">${info.label}</div>
-          `;
+        `;
 
-          card.addEventListener("click", async (e) => {
+        card.addEventListener("click", async (e) => {
             e.preventDefault();
-            await getPriceFromAPI(repairId, info.label);
-          });
-
-          faultsGrid.appendChild(card);
+            // ✅ On envoie la clé normalisée au Worker
+            await getPriceFromAPI(key, info.label);
         });
-      }
+
+        faultsGrid.appendChild(card);
+    });
+}
 
       /* 6 — APPEL API CLOUDFLARE */
       async function getPriceFromAPI(repairId, label) {
