@@ -1,392 +1,356 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DigitRestore – Types de réparation</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DigitRestore – Types de réparation</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --accent-1: #ff4b5c;
-      --accent-2: #ff2c47;
-      --accent-3: #4fd2ff;
-      --text-main: #f5f5f7;
-      --text-soft: #c3c8df;
-    }
+    <style>
+        :root {
+            --accent-1: #ff4b5c;
+            --accent-2: #ff2c47;
+            --accent-3: #4fd2ff;
+            --text-main: #f5f5f7;
+            --text-soft: #c3c8df;
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      min-height: 100vh;
-      width: 100%;
-      overflow-x: hidden;
-      font-family: "Poppins", sans-serif;
-      color: var(--text-main);
-      background:
-        radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18), transparent 60%),
-        radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16), transparent 60%),
-        #050814;
-      background-size: cover;
-      animation: bgMove 30s ease-in-out infinite alternate;
-    }
+        body {
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: "Poppins", sans-serif;
+            color: var(--text-main);
+            background:
+                radial-gradient(circle at 20% 10%, rgba(255, 75, 92, 0.18), transparent 60%),
+                radial-gradient(circle at 80% 90%, rgba(79, 210, 255, 0.16), transparent 60%),
+                #050814;
+            background-size: cover;
+            animation: bgMove 30s ease-in-out infinite alternate;
+        }
 
-    @keyframes bgMove {
-      0%   { background-position: 0% 0%; }
-      100% { background-position: 12% 16%; }
-    }
+        @keyframes bgMove {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 12% 16%; }
+        }
 
-    /* HEADER --------------------------------------------------- */
-    header {
-      width: 100%;
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      opacity: 0;
-      animation: fadeDown 0.9s ease forwards;
-    }
+        header {
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            opacity: 0;
+            animation: fadeDown 0.9s ease forwards;
+        }
 
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .back-btn {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: rgba(255,75,92,0.22);
-      border: 1px solid rgba(255,75,92,0.45);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-      transition: .25s;
-      box-shadow: 0 0 14px rgba(255,75,92,0.35);
-    }
+        .back-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(255,75,92,0.22);
+            border: 1px solid rgba(255,75,92,0.45);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: .25s;
+            box-shadow: 0 0 14px rgba(255,75,92,0.35);
+        }
 
-    .back-btn span { font-size: 22px; color: white; }
+        .back-btn span {
+            font-size: 22px;
+            color: white;
+        }
 
-    .back-btn:hover {
-      transform: scale(1.12);
-      box-shadow:
-        0 0 24px rgba(255,75,92,0.55),
-        0 0 18px rgba(79,210,255,0.55);
-      border-color: rgba(79,210,255,0.65);
-    }
+        .back-btn:hover {
+            transform: scale(1.12);
+            box-shadow: 0 0 24px rgba(255,75,92,0.55), 0 0 18px rgba(79,210,255,0.55);
+            border-color: rgba(79,210,255,0.65);
+        }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
 
-    .brand img { width: 68px; height: 68px; }
+        .brand img {
+            width: 68px;
+            height: 68px;
+        }
 
-    .brand-text { display: flex; flex-direction: column; line-height: 1.18; }
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.18;
+        }
 
-    .digit {
-      font-family: "Montserrat";
-      font-size: 22px;
-      font-weight: 800;
-    }
+        .digit {
+            font-family: "Montserrat";
+            font-size: 22px;
+            font-weight: 800;
+        }
 
-    .restore {
-      font-size: 22px;
-      font-family: "Montserrat";
-      font-weight: 900;
-      background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+        .restore {
+            font-size: 22px;
+            font-family: "Montserrat";
+            font-weight: 900;
+            background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .tag {
-      font-size: 10px;
-      letter-spacing: .22em;
-      color: var(--accent-3);
-    }
+        .tag {
+            font-size: 10px;
+            letter-spacing: .22em;
+            color: var(--accent-3);
+        }
 
-    nav {
-      margin-left: auto;
-      display: flex;
-      gap: 32px;
-    }
+        nav {
+            margin-left: auto;
+            display: flex;
+            gap: 32px;
+        }
 
-    nav a {
-      text-decoration: none;
-      color: var(--text-main);
-      font-size: 14px;
-      opacity: .85;
-      transition: .25s;
-    }
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 14px;
+            opacity: .85;
+            transition: .25s;
+        }
 
-    nav a:hover { opacity: 1; color: var(--accent-3); }
+        nav a:hover {
+            opacity: 1;
+            color: var(--accent-3);
+        }
 
-    /* CONTENT --------------------------------------------------- */
-    .content {
-      padding: 20px 40px 40px;
-      max-width: 1400px;
-      margin: 0 auto;
-      animation: fadeUp 1s ease forwards;
-      opacity: 0;
-    }
+        .content {
+            padding: 20px 40px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeUp 1s ease forwards;
+            opacity: 0;
+        }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .page-title {
-      font-size: 34px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(79,210,255,0.28);
-    }
+        .page-title {
+            font-size: 34px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(79,210,255,0.28);
+        }
 
-    .hint {
-      font-size: 14px;
-      color: var(--text-soft);
-      margin-bottom: 20px;
-    }
+        .hint {
+            font-size: 14px;
+            color: var(--text-soft);
+            margin-bottom: 20px;
+        }
 
-    /* GRID --------------------------------------------------- */
-    .faults-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 22px;
-    }
+        .faults-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 22px;
+        }
 
-    .fault-card {
-      background: rgba(5,8,20,0.96);
-      border-radius: 14px;
-      padding: 16px 6px;
-      border: 1px solid rgba(255,255,255,0.06);
-      width: 85%;
-      margin: 0 auto;
-      box-shadow: 0 14px 28px rgba(0,0,0,0.6);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      transition: .3s ease;
-    }
+        .fault-card {
+            background: rgba(5,8,20,0.96);
+            border-radius: 14px;
+            padding: 16px 6px;
+            border: 1px solid rgba(255,255,255,0.06);
+            width: 85%;
+            margin: 0 auto;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            transition: .3s ease;
+        }
 
-    .fault-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(255,75,92,0.9);
-      box-shadow:
-        0 0 26px rgba(255,75,92,0.55),
-        0 0 18px rgba(79,210,255,0.55),
-        0 20px 40px rgba(0,0,0,0.9);
-    }
+        .fault-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,75,92,0.9);
+            box-shadow: 0 0 26px rgba(255,75,92,0.55), 0 0 18px rgba(79,210,255,0.55), 0 20px 40px rgba(0,0,0,0.9);
+        }
 
-    .fault-icon { font-size: 28px; }
-    .fault-title { font-size: 15px; font-weight: 600; text-align: center; }
+        .fault-icon {
+            font-size: 28px;
+        }
 
-    @media (max-width: 968px) {
-      .faults-grid { grid-template-columns: repeat(3, 1fr); }
-    }
+        .fault-title {
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+        }
 
-    @media (max-width: 768px) {
-      nav { display: none; }
-      .faults-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+        @media (max-width: 968px) {
+            .faults-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
 
-    /* PANEL COULISSANT --------------------------------------------------- */
-    .price-panel {
-      position: fixed;
-      left: 0;
-      bottom: -350px;
-      width: 100%;
-      background: rgba(5, 8, 20, 0.96);
-      box-shadow: 0 -8px 30px rgba(0,0,0,0.5);
-      border-top: 1px solid rgba(79,210,255,0.3);
-      padding: 25px;
-      transition: bottom 0.45s ease;
-      z-index: 9999;
-    }
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .faults-grid { grid-template-columns: repeat(2, 1fr); }
+        }
 
-    .price-panel.show { bottom: 0; }
+        .price-panel {
+            position: fixed;
+            left: 0;
+            bottom: -350px;
+            width: 100%;
+            background: rgba(5, 8, 20, 0.96);
+            box-shadow: 0 -8px 30px rgba(0,0,0,0.5);
+            border-top: 1px solid rgba(79,210,255,0.3);
+            padding: 25px;
+            transition: bottom 0.45s ease;
+            z-index: 9999;
+        }
 
-    .panel-title {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      text-align: center;
-    }
+        .price-panel.show {
+            bottom: 0;
+        }
 
-    .panel-price {
-      font-size: 32px;
-      font-weight: 700;
-      text-align: center;
-      color: var(--accent-3);
-      margin-bottom: 22px;
-    }
+        .panel-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+        }
 
-    .close-panel {
-      display: block;
-      margin: 0 auto;
-      padding: 12px 20px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-      transition: 0.25s;
-    }
+        .panel-price {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--accent-3);
+            margin-bottom: 22px;
+        }
 
-    .close-panel:hover { transform: scale(1.08); }
-  </style>
+        .close-panel {
+            display: block;
+            margin: 0 auto;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        .close-panel:hover {
+            transform: scale(1.08);
+        }
+    </style>
 </head>
 
 <body>
-  <header>
+
+<header>
     <a href="reparation.html" class="back-btn"><span>⟵</span></a>
 
     <div class="brand">
-      <img src="logo.png" alt="Logo DigitRestore">
-      <div class="brand-text">
-        <span class="digit">DIGIT <span class="restore">RESTORE</span></span>
-        <span class="tag">RÉPARATION & RECONDITIONNEMENT</span>
-        <span class="tag">SMARTPHONES & TABLETTES</span>
-      </div>
+        <img src="logo.png" alt="Logo DigitRestore">
+        <div class="brand-text">
+            <span class="digit">DIGIT <span class="restore">RESTORE</span></span>
+            <span class="tag">RÉPARATION & RECONDITIONNEMENT</span>
+            <span class="tag">SMARTPHONES & TABLETTES</span>
+        </div>
     </div>
 
     <nav>
-      <a href="site.html">Atelier</a>
-      <a href="reparation.html">Réparation</a>
-      <a href="#">Reprise / Achat</a>
-      <a href="#">Reconditionnement</a>
-      <a href="#">Téléphones & Accessoires</a>
-      <a href="#">Qualité</a>
-      <a href="#">Conditions générales</a>
-      <a href="#">Contact</a>
+        <a href="site.html">Atelier</a>
+        <a href="reparation.html">Réparation</a>
+        <a href="#">Reprise / Achat</a>
+        <a href="#">Reconditionnement</a>
+        <a href="#">Téléphones & Accessoires</a>
+        <a href="#">Qualité</a>
+        <a href="#">Conditions générales</a>
+        <a href="#">Contact</a>
     </nav>
-  </header>
+</header>
 
-  <div class="content">
+<div class="content">
     <div class="page-title">Choisissez le type de réparation</div>
     <p class="hint">Cliquez sur une panne pour continuer.</p>
     <div class="faults-grid" id="faultsGrid"></div>
-  </div>
+</div>
 
-  <!-- PANEL PRICE -->
-  <div id="pricePanel" class="price-panel">
+<div id="pricePanel" class="price-panel">
     <div class="panel-content">
-      <div id="panelRepairName" class="panel-title"></div>
-      <div id="panelPrice" class="panel-price"></div>
-      <button id="closePanelBtn" class="close-panel">Fermer</button>
+        <div id="panelRepairName" class="panel-title"></div>
+        <div id="panelPrice" class="panel-price"></div>
+        <button id="closePanelBtn" class="close-panel">Fermer</button>
     </div>
-  </div>
+</div>
 
-  <!-- SCRIPT -->
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      const faultsGrid = document.getElementById("faultsGrid");
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
 
-      /* 1 — Récupérer type/marque/modèle depuis l'URL */
-      const params = new URLSearchParams(window.location.search);
-      const type   = params.get("type");   // ex: "smartphones", "tablettes"
-      const marque = params.get("marque"); // ex: "Apple"
-      const modele = params.get("modele"); // ex: "iPhone 12"
+    const faultsGrid = document.getElementById("faultsGrid");
 
-      if (!type || !marque || !modele) {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+    const marque = params.get("marque");
+    const modele = params.get("modele");
+
+    if (!type || !marque || !modele) {
         console.error("Paramètres manquants dans l'URL.");
         return;
-      }
-
-      /* Utilitaire : normaliser une marque pour le nom de fichier (Apple → apple) */
-      function slugifyBrand(brand) {
-        return brand
-          .toLowerCase()
-          .trim()
-          .replace(/\s+/g, "-")
-          .replace(/[^a-z0-9\-]/g, "");
-      }
-    /* Utilitaire : normaliser un ID de réparation (Ecran -> ecran, espaces -> _, accents -> sans accent) */
-    function normalizeRepairId(value) {
-        return String(value || "")
-            .trim()
-            .toLowerCase()
-            .normalize("NFD")                 // sépare lettres et accents
-            .replace(/[\u0300-\u036f]/g, "")   // supprime accents
-            .replace(/\s+/g, "_");            // espaces -> underscore
     }
 
-      const brandSlug = slugifyBrand(marque);
-      const jsonPath  = `donnees/${type}-${brandSlug}.json`;
+    function slugifyBrand(brand) {
+        return brand.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9\-]/g, "");
+    }
 
-      /* 2 — Charger le JSON correspondant au type + marque */
-      let data = {};
-      try {
+    const brandSlug = slugifyBrand(marque);
+    const jsonPath = `donnees/${type}-${brandSlug}.json`;
+
+    let data = {};
+    try {
         const response = await fetch(jsonPath, { cache: "no-cache" });
-        if (!response.ok) throw new Error("HTTP " + response.status);
         data = await response.json();
-      } catch (e) {
-        console.error("Erreur lors du chargement du JSON de réparations :", e);
+    } catch (e) {
+        console.error("Erreur JSON :", e);
         return;
-      }
+    }
 
-      /* 3 — Récupération des réparations pour ce modèle */
-      let repairs = [];
+    let repairs = data.models?.[modele] || [];
 
-      if (data.models && typeof data.models === "object") {
-        repairs = data.models[modele] || [];
-      } else if (data.repairs && typeof data.repairs === "object") {
-        repairs = data.repairs[modele] || [];
-      }
+    const REPAIR_MAP = {
+        "ecran": { label: "Écran", icon: "📱" },
+        "batterie": { label: "Batterie", icon: "🔋" }
+    };
 
-      if (!Array.isArray(repairs)) repairs = [];
-
-      /* 4 — Table de correspondance des réparations */
-      const REPAIR_MAP = {
-    "ecran":                { label: "Écran",                 icon: "📱" },
-    "facade_arriere":       { label: "Façade arrière",        icon: "📘" },
-    "batterie":             { label: "Batterie",              icon: "🔋" },
-    "connecteur_de_charge": { label: "Connecteur de charge",  icon: "🔌" },
-    "camera_avant":         { label: "Caméra avant",          icon: "📷" },
-    "camera_arriere":       { label: "Caméra arrière",        icon: "🎥" },
-    "micro":                { label: "Micro",                 icon: "🎤" },
-    "haut_parleur":         { label: "Haut-parleur",          icon: "🔈" },
-    "power":                { label: "Bouton power",          icon: "⏻" },
-    "volume":               { label: "Boutons volume",        icon: "🔊" },
-    "nfc":                  { label: "NFC",                   icon: "💳" },
-    "capteur_de_proximite": { label: "Capteur de proximité",  icon: "📡" },
-    "bluetooth":            { label: "Bluetooth",             icon: "🔷" }
-    "face_id":              { label: "Face ID",               icon: "👁️" }
-};
-
-      /* 5 — Génération des cartes */
-if (repairs.length === 0) {
-    const infoDiv = document.createElement("div");
-    infoDiv.textContent = "Aucune réparation n'est définie pour ce modèle pour le moment.";
-    infoDiv.style.gridColumn = "1 / -1";
-    infoDiv.style.textAlign = "center";
-    faultsGrid.appendChild(infoDiv);
-} else {
     repairs.forEach((repairId) => {
 
-        // ✅ Normalisation : "Ecran" -> "ecran" (et accents/espaces gérés)
-        const key = String(repairId || "")
-            .trim()
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/\s+/g, "_");
+        const key = repairId.toLowerCase().replace(/\s+/g, "_");
 
-        // ✅ On récupère l'icône + le label depuis la table
-        // (sinon fallback)
-        const info = REPAIR_MAP[key] || {
-            label: String(repairId),
-            icon: "🔧"
-        };
+        const info = REPAIR_MAP[key] || { label: repairId, icon: "🔧" };
 
         const card = document.createElement("a");
         card.href = "#";
@@ -397,54 +361,11 @@ if (repairs.length === 0) {
             <div class="fault-title">${info.label}</div>
         `;
 
-        card.addEventListener("click", async (e) => {
-            e.preventDefault();
-            // ✅ On envoie la clé normalisée au Worker
-            await getPriceFromAPI(key, info.label);
-        });
-
         faultsGrid.appendChild(card);
     });
-}
 
-      /* 6 — APPEL API CLOUDFLARE */
-      async function getPriceFromAPI(repairId, label) {
-        const url = "https://royal-wind-ec1e.kinny.workers.dev"; // ton Worker 🔥
+});
+</script>
 
-        try {
-          const response = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ type, marque, modele, reparation: repairId })
-          });
-
-          if (!response.ok) throw new Error("Erreur API : " + response.status);
-
-          const result = await response.json();
-          openPanel(label, result.prix_final);
-
-        } catch (err) {
-          console.error("Erreur Worker :", err);
-          openPanel(label, "Erreur API");
-        }
-      }
-
-      /* 7 — PANEL COULISSANT */
-      const pricePanel = document.getElementById("pricePanel");
-      const panelTitle = document.getElementById("panelRepairName");
-      const panelPrice = document.getElementById("panelPrice");
-      const closeBtn   = document.getElementById("closePanelBtn");
-
-      function openPanel(label, price) {
-        panelTitle.textContent = label;
-        panelPrice.textContent = (price === "Erreur API") ? "Erreur lors du calcul" : price + " €";
-        pricePanel.classList.add("show");
-      }
-
-      closeBtn.addEventListener("click", () => {
-        pricePanel.classList.remove("show");
-      });
-    });
-  </script>
 </body>
 </html>
