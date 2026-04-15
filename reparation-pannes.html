@@ -333,6 +333,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     let data = {};
     try {
         const response = await fetch(jsonPath, { cache: "no-cache" });
+
+if (!response.ok) {
+    throw new Error("HTTP " + response.status);
+}
         data = await response.json();
     } catch (e) {
         console.error("Erreur JSON :", e);
@@ -340,6 +344,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     let repairs = data.models?.[modele] || [];
+if (!Array.isArray(repairs)) repairs = [];
 
     /* 4 — Table de correspondance des réparations */
 const REPAIR_MAP = {
@@ -360,7 +365,12 @@ const REPAIR_MAP = {
 };
     repairs.forEach((repairId) => {
 
-        const key = repairId.toLowerCase().replace(/\s+/g, "_");
+        const key = String(repairId || "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "_");
 
         const info = REPAIR_MAP[key] || { label: repairId, icon: "🔧" };
 
