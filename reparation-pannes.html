@@ -38,8 +38,13 @@
         }
 
         @keyframes bgMove {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 12% 16%; }
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 12% 16%;
+            }
         }
 
         header {
@@ -53,22 +58,29 @@
         }
 
         @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-18px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .back-btn {
             width: 46px;
             height: 46px;
             border-radius: 50%;
-            background: rgba(255,75,92,0.22);
-            border: 1px solid rgba(255,75,92,0.45);
+            background: rgba(255, 75, 92, 0.22);
+            border: 1px solid rgba(255, 75, 92, 0.45);
             display: flex;
             justify-content: center;
             align-items: center;
             text-decoration: none;
             transition: .25s;
-            box-shadow: 0 0 14px rgba(255,75,92,0.35);
+            box-shadow: 0 0 14px rgba(255, 75, 92, 0.35);
         }
 
         .back-btn span {
@@ -78,8 +90,8 @@
 
         .back-btn:hover {
             transform: scale(1.12);
-            box-shadow: 0 0 24px rgba(255,75,92,0.55), 0 0 18px rgba(79,210,255,0.55);
-            border-color: rgba(79,210,255,0.65);
+            box-shadow: 0 0 24px rgba(255, 75, 92, 0.55), 0 0 18px rgba(79, 210, 255, 0.55);
+            border-color: rgba(79, 210, 255, 0.65);
         }
 
         .brand {
@@ -100,14 +112,14 @@
         }
 
         .digit {
-            font-family: "Montserrat";
+            font-family: "Montserrat", sans-serif;
             font-size: 22px;
             font-weight: 800;
         }
 
         .restore {
             font-size: 22px;
-            font-family: "Montserrat";
+            font-family: "Montserrat", sans-serif;
             font-weight: 900;
             background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
             -webkit-background-clip: text;
@@ -148,15 +160,22 @@
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .page-title {
             font-size: 34px;
             font-weight: 600;
             margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(79,210,255,0.28);
+            text-shadow: 0 0 10px rgba(79, 210, 255, 0.28);
         }
 
         .hint {
@@ -172,13 +191,13 @@
         }
 
         .fault-card {
-            background: rgba(5,8,20,0.96);
+            background: rgba(5, 8, 20, 0.96);
             border-radius: 14px;
             padding: 16px 6px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             width: 85%;
             margin: 0 auto;
-            box-shadow: 0 14px 28px rgba(0,0,0,0.6);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.6);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -191,8 +210,11 @@
 
         .fault-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(255,75,92,0.9);
-            box-shadow: 0 0 26px rgba(255,75,92,0.55), 0 0 18px rgba(79,210,255,0.55), 0 20px 40px rgba(0,0,0,0.9);
+            border-color: rgba(255, 75, 92, 0.9);
+            box-shadow:
+                0 0 26px rgba(255, 75, 92, 0.55),
+                0 0 18px rgba(79, 210, 255, 0.55),
+                0 20px 40px rgba(0, 0, 0, 0.9);
         }
 
         .fault-icon {
@@ -212,8 +234,13 @@
         }
 
         @media (max-width: 768px) {
-            nav { display: none; }
-            .faults-grid { grid-template-columns: repeat(2, 1fr); }
+            nav {
+                display: none;
+            }
+
+            .faults-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .price-panel {
@@ -222,8 +249,8 @@
             bottom: -350px;
             width: 100%;
             background: rgba(5, 8, 20, 0.96);
-            box-shadow: 0 -8px 30px rgba(0,0,0,0.5);
-            border-top: 1px solid rgba(79,210,255,0.3);
+            box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(79, 210, 255, 0.3);
             padding: 25px;
             transition: bottom 0.45s ease;
             z-index: 9999;
@@ -270,136 +297,214 @@
 
 <body>
 
-<header>
-    <a href="reparation.html" class="back-btn"><span>⟵</span></a>
+    <header>
+        <a href="reparation.html" class="back-btn"><span>⟵</span></a>
 
-    <div class="brand">
-        <img src="logo.png" alt="Logo DigitRestore">
-        <div class="brand-text">
-            <span class="digit">DIGIT <span class="restore">RESTORE</span></span>
-            <span class="tag">RÉPARATION & RECONDITIONNEMENT</span>
-            <span class="tag">SMARTPHONES & TABLETTES</span>
+        <div class="brand">
+            <img src="logo.png" alt="Logo DigitRestore">
+            <div class="brand-text">
+                <span class="digit">DIGIT <span class="restore">RESTORE</span></span>
+                <span class="tag">RÉPARATION & RECONDITIONNEMENT</span>
+                <span class="tag">SMARTPHONES & TABLETTES</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="site.html">Atelier</a>
+            <a href="reparation.html">Réparation</a>
+            <a href="#">Reprise / Achat</a>
+            <a href="#">Reconditionnement</a>
+            <a href="#">Téléphones & Accessoires</a>
+            <a href="#">Qualité</a>
+            <a href="#">Conditions générales</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="page-title">Choisissez le type de réparation</div>
+        <p class="hint">Cliquez sur une panne pour continuer.</p>
+        <div class="faults-grid" id="faultsGrid"></div>
+    </div>
+
+    <div id="pricePanel" class="price-panel">
+        <div class="panel-content">
+            <div id="panelRepairName" class="panel-title"></div>
+            <div id="panelPrice" class="panel-price"></div>
+            <button id="closePanelBtn" class="close-panel">Fermer</button>
         </div>
     </div>
 
-    <nav>
-        <a href="site.html">Atelier</a>
-        <a href="reparation.html">Réparation</a>
-        <a href="#">Reprise / Achat</a>
-        <a href="#">Reconditionnement</a>
-        <a href="#">Téléphones & Accessoires</a>
-        <a href="#">Qualité</a>
-        <a href="#">Conditions générales</a>
-        <a href="#">Contact</a>
-    </nav>
-</header>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const faultsGrid = document.getElementById("faultsGrid");
 
-<div class="content">
-    <div class="page-title">Choisissez le type de réparation</div>
-    <p class="hint">Cliquez sur une panne pour continuer.</p>
-    <div class="faults-grid" id="faultsGrid"></div>
-</div>
+            const params = new URLSearchParams(window.location.search);
+            const type = params.get("type");
+            const marque = params.get("marque");
+            const modele = params.get("modele");
 
-<div id="pricePanel" class="price-panel">
-    <div class="panel-content">
-        <div id="panelRepairName" class="panel-title"></div>
-        <div id="panelPrice" class="panel-price"></div>
-        <button id="closePanelBtn" class="close-panel">Fermer</button>
-    </div>
-</div>
+            if (!type || !marque || !modele) {
+                console.error("Paramètres manquants dans l'URL.");
+                return;
+            }
 
-<script>
-document.addEventListener("DOMContentLoaded", async () => {
+            function slugifyBrand(brand) {
+                return String(brand || "")
+                    .toLowerCase()
+                    .trim()
+                    .replace(/\s+/g, "-")
+                    .replace(/[^a-z0-9\-]/g, "");
+            }
 
-    const faultsGrid = document.getElementById("faultsGrid");
+            function normalizeRepairId(value) {
+                return String(value || "")
+                    .trim()
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .replace(/\s+/g, "_");
+            }
 
-    const params = new URLSearchParams(window.location.search);
-    const type = params.get("type");
-    const marque = params.get("marque");
-    const modele = params.get("modele");
+            const brandSlug = slugifyBrand(marque);
+            const jsonPath = `donnees/${type}-${brandSlug}.json`;
 
-    if (!type || !marque || !modele) {
-        console.error("Paramètres manquants dans l'URL.");
-        return;
-    }
+            let data = {};
 
-    function slugifyBrand(brand) {
-        return brand.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9\-]/g, "");
-    }
+            try {
+                const response = await fetch(jsonPath, { cache: "no-cache" });
 
-    const brandSlug = slugifyBrand(marque);
-    const jsonPath = `donnees/${type}-${brandSlug}.json`;
+                if (!response.ok) {
+                    throw new Error("HTTP " + response.status);
+                }
 
-    let data = {};
-    try {
-        const response = await fetch(jsonPath, { cache: "no-cache" });
+                data = await response.json();
+            } catch (e) {
+                console.error("Erreur lors du chargement du JSON de réparations :", e);
+                return;
+            }
 
-if (!response.ok) {
-    throw new Error("HTTP " + response.status);
-}
-        data = await response.json();
-    } catch (e) {
-        console.error("Erreur JSON :", e);
-        return;
-    }
+            let repairs = [];
 
-    let repairs = [];
+            if (data.models && typeof data.models === "object") {
+                const modeleTrouve = Object.keys(data.models).find((key) =>
+                    key.trim().toLowerCase() === String(modele).trim().toLowerCase()
+                );
 
-if (data.models && typeof data.models === "object") {
+                if (modeleTrouve) {
+                    repairs = data.models[modeleTrouve];
+                }
+            } else if (data.repairs && typeof data.repairs === "object") {
+                const modeleTrouve = Object.keys(data.repairs).find((key) =>
+                    key.trim().toLowerCase() === String(modele).trim().toLowerCase()
+                );
 
-    const modeleTrouve = Object.keys(data.models).find(key =>
-        key.trim().toLowerCase() === String(modele).trim().toLowerCase()
-    );
+                if (modeleTrouve) {
+                    repairs = data.repairs[modeleTrouve];
+                }
+            }
 
-    if (modeleTrouve) {
-        repairs = data.models[modeleTrouve];
-    }
-}
+            if (!Array.isArray(repairs)) {
+                repairs = [];
+            }
 
-if (!Array.isArray(repairs)) repairs = [];
+            const REPAIR_MAP = {
+                "ecran": { label: "Écran", icon: "📱" },
+                "facade_arriere": { label: "Façade arrière", icon: "🔲" },
+                "batterie": { label: "Batterie", icon: "🔋" },
+                "connecteur_de_charge": { label: "Connecteur de charge", icon: "🔌" },
+                "camera_avant": { label: "Caméra avant", icon: "📷" },
+                "camera_arriere": { label: "Caméra arrière", icon: "🎥" },
+                "micro": { label: "Micro", icon: "🎤" },
+                "haut_parleur": { label: "Haut-parleur", icon: "🔈" },
+                "power": { label: "Bouton power", icon: "⏻" },
+                "volume": { label: "Boutons volume", icon: "🔊" },
+                "nfc": { label: "NFC", icon: "💳" },
+                "face_id": { label: "Face ID", icon: "👁️" },
+                "capteur_de_proximite": { label: "Capteur de proximité", icon: "📡" },
+                "bluetooth": { label: "Bluetooth", icon: "🔷" }
+            };
 
-    /* 4 — Table de correspondance des réparations */
-const REPAIR_MAP = {
-  "ecran":                { label: "Écran",                 icon: "📱" },
-  "facade_arriere":       { label: "Façade arrière",        icon: "🔲" },
-  "batterie":             { label: "Batterie",              icon: "🔋" },
-  "connecteur_de_charge": { label: "Connecteur de charge",  icon: "🔌" },
-  "camera_avant":         { label: "Caméra avant",          icon: "📷" },
-  "camera_arriere":       { label: "Caméra arrière",        icon: "🎥" },
-  "micro":                { label: "Micro",                 icon: "🎤" },
-  "haut_parleur":         { label: "Haut-parleur",          icon: "🔈" },
-  "power":                { label: "Bouton power",          icon: "⏻" },
-  "volume":               { label: "Boutons volume",        icon: "🔊" },
-  "nfc":                  { label: "NFC",                   icon: "💳" },
-  "face_id":              { label: "Face ID",               icon: "👁️" },
-  "capteur_de_proximite": { label: "Capteur de proximité",  icon: "📡" },
-  "bluetooth":            { label: "Bluetooth",             icon: "🔷" }
-};
-    repairs.forEach((repairId) => {
+            if (repairs.length === 0) {
+                const infoDiv = document.createElement("div");
+                infoDiv.textContent = "Aucune réparation n'est définie pour ce modèle pour le moment.";
+                infoDiv.style.gridColumn = "1 / -1";
+                infoDiv.style.textAlign = "center";
+                faultsGrid.appendChild(infoDiv);
+            } else {
+                repairs.forEach((repairId) => {
+                    const key = normalizeRepairId(repairId);
+                    const info = REPAIR_MAP[key] || {
+                        label: String(repairId || ""),
+                        icon: "🔧"
+                    };
 
-        const key = String(repairId || "")
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+/g, "_");
+                    const card = document.createElement("a");
+                    card.href = "#";
+                    card.className = "fault-card";
 
-        const info = REPAIR_MAP[key] || { label: repairId, icon: "🔧" };
+                    card.innerHTML = `
+                        <div class="fault-icon">${info.icon}</div>
+                        <div class="fault-title">${info.label}</div>
+                    `;
 
-        const card = document.createElement("a");
-        card.href = "#";
-        card.className = "fault-card";
+                    card.addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        await getPriceFromAPI(key, info.label);
+                    });
 
-        card.innerHTML = `
-            <div class="fault-icon">${info.icon}</div>
-            <div class="fault-title">${info.label}</div>
-        `;
+                    faultsGrid.appendChild(card);
+                });
+            }
 
-        faultsGrid.appendChild(card);
-    });
+            async function getPriceFromAPI(repairId, label) {
+                const url = "https://royal-wind-ec1e.kinny.workers.dev";
 
-});
-</script>
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            type,
+                            marque,
+                            modele,
+                            reparation: repairId
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Erreur API : " + response.status);
+                    }
+
+                    const result = await response.json();
+                    openPanel(label, result.prix_final);
+                } catch (err) {
+                    console.error("Erreur Worker :", err);
+                    openPanel(label, "Erreur API");
+                }
+            }
+
+            const pricePanel = document.getElementById("pricePanel");
+            const panelTitle = document.getElementById("panelRepairName");
+            const panelPrice = document.getElementById("panelPrice");
+            const closeBtn = document.getElementById("closePanelBtn");
+
+            function openPanel(label, price) {
+                panelTitle.textContent = label;
+                panelPrice.textContent = (price === "Erreur API")
+                    ? "Erreur lors du calcul"
+                    : price + " €";
+                pricePanel.classList.add("show");
+            }
+
+            closeBtn.addEventListener("click", () => {
+                pricePanel.classList.remove("show");
+            });
+        });
+    </script>
 
 </body>
+
 </html>
