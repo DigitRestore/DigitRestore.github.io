@@ -3,7 +3,7 @@
         "Apple": {
             "models": ["iPhone 12", "iPhone 13"],
             "repairs": {
-                "iPhone 12": ["ecran", "batterie"],
+                "iPhone 12": ["écran", "batterie"],
                 "iPhone 13": ["facade_avant"]
             }
         },
