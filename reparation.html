@@ -711,9 +711,33 @@ document.addEventListener("DOMContentLoaded", async () => {
             message: message
         };
 
-        console.log("Demande de devis :", demande);
+        fetch("https://royal-wind-ec1e.kinny.workers.dev", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(demande)
+})
+.then(response => response.json())
+.then(data => {
+    if (!data.ok) {
+        throw new Error(data.error || "Erreur lors de l’envoi");
+    }
 
-        successMessage.style.display = "block";
+    successMessage.textContent =
+        "Votre demande a bien été envoyée à DigitRestore. Nous vous recontacterons dans les plus brefs délais.";
+
+    successMessage.style.display = "block";
+    devisForm.reset();
+})
+.catch(error => {
+    console.error("Erreur d’envoi :", error);
+
+    formError.textContent =
+        "Une erreur est survenue lors de l’envoi de votre demande. Merci de réessayer plus tard.";
+
+    formError.style.display = "block";
+});
     });
 
 });
