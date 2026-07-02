@@ -1,1 +1,723 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitRestore – Demande de devis réparation</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent-1: #ff4b5c;
+            --accent-2: #ff2c47;
+            --accent-3: #4fd2ff;
+            --text-main: #f5f5f7;
+            --text-soft: #c3c8df;
+            --bg-card: rgba(5, 8, 20, 0.88);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: "Poppins", sans-serif;
+            color: var(--text-main);
+            background:
+                radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18) 0%, transparent 60%),
+                radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16) 0%, transparent 60%),
+                #050814;
+            background-size: cover;
+            animation: bgMove 30s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgMove {
+            0%   { background-position: 0% 0%; }
+            100% { background-position: 12% 16%; }
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            opacity: 0;
+            animation: fadeDown 0.9s ease forwards;
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(255,75,92,0.22);
+            border: 1px solid rgba(255,75,92,0.45);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: .25s;
+            box-shadow: 0 0 14px rgba(255,75,92,0.35);
+        }
+
+        .back-btn span {
+            font-size: 22px;
+            color: white;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.12);
+            box-shadow:
+                0 0 24px rgba(255,75,92,0.55),
+                0 0 18px rgba(79,210,255,0.55);
+            border-color: rgba(79,210,255,0.65);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand img {
+            width: 68px;
+            height: 68px;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.18;
+        }
+
+        .digit {
+            font-family: "Montserrat";
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .restore {
+            font-size: 22px;
+            font-family: "Montserrat";
+            font-weight: 900;
+            background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tag {
+            font-size: 10px;
+            letter-spacing: .22em;
+            color: var(--accent-3);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            margin-left: auto;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 14px;
+            opacity: .85;
+            transition: .25s;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            color: var(--accent-3);
+        }
+
+        .content {
+            padding: 20px 40px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeUp 1s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-shadow: 0 0 12px rgba(79,210,255,0.32);
+        }
+
+        .intro-text {
+            font-size: 18px;
+            color: var(--text-soft);
+            margin-bottom: 35px;
+            max-width: 900px;
+            line-height: 1.6;
+        }
+
+        .panel {
+            background:
+                linear-gradient(135deg, rgba(255,75,92,0.10), rgba(79,210,255,0.10)),
+                var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 24px 50px rgba(0,0,0,0.45);
+            margin-bottom: 28px;
+        }
+
+        .panel-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .selection-row,
+        .form-row {
+            display: flex;
+            gap: 26px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .selection-block,
+        .form-block {
+            flex: 1;
+        }
+
+        .section-title,
+        label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        select,
+        input,
+        textarea {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 16px;
+            font-family: "Poppins", sans-serif;
+            transition: .25s;
+        }
+
+        select option {
+            background: #050814;
+            color: var(--text-main);
+        }
+
+        select:focus,
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-3);
+            background: rgba(79,210,255,0.12);
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .continue-btn,
+        .send-btn {
+            margin-top: 10px;
+            padding: 14px 26px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+            box-shadow:
+                0 0 20px rgba(79,210,255,0.4),
+                0 0 30px rgba(255,75,92,0.25);
+            display: inline-block;
+            border: none;
+            transition: .25s;
+            cursor: pointer;
+        }
+
+        .continue-btn {
+            cursor: not-allowed;
+            opacity: .45;
+        }
+
+        .continue-btn.enabled {
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        .send-btn:hover,
+        .continue-btn.enabled:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 0 28px rgba(79,210,255,0.55),
+                0 0 35px rgba(255,75,92,0.35);
+        }
+
+        #error-message,
+        #form-error {
+            margin-top: 18px;
+            font-size: 15px;
+            color: var(--accent-1);
+            font-weight: 500;
+            display: none;
+        }
+
+        #devisFormPanel {
+            display: none;
+        }
+
+        .summary-box {
+            margin-bottom: 24px;
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: rgba(79,210,255,0.10);
+            border: 1px solid rgba(79,210,255,0.25);
+            color: var(--text-soft);
+            line-height: 1.6;
+        }
+
+        .summary-box strong {
+            color: var(--accent-3);
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 14px;
+            background: rgba(79,210,255,0.12);
+            border: 1px solid rgba(79,210,255,0.35);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 968px) {
+            header {
+                padding: 16px 20px;
+                gap: 16px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .brand img {
+                width: 54px;
+                height: 54px;
+            }
+
+            .digit,
+            .restore {
+                font-size: 18px;
+            }
+
+            .content {
+                padding: 18px 20px 50px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .intro-text {
+                font-size: 16px;
+            }
+
+            .selection-row,
+            .form-row {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .panel {
+                padding: 22px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="site.html" class="back-btn"><span>⟵</span></a>
+
+    <div class="brand">
+        <img src="logo.png" alt="logo">
+        <div class="brand-text">
+            <span class="digit">DIGIT <span class="restore">RESTORE</span></span>
+            <span class="tag">RÉPARATION & RECONDITIONNEMENT</span>
+            <span class="tag">SMARTPHONES & TABLETTES</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="reparation.html">Réparation</a>
+        <a href="#">Reprise / Achat</a>
+        <a href="#">Reconditionnement</a>
+        <a href="#">Téléphones & Accessoires</a>
+        <a href="#">Qualité</a>
+        <a href="#">Conditions générales</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<div class="content">
+
+    <h1>Demande de devis réparation</h1>
+
+    <p class="intro-text">
+        Sélectionnez votre appareil, décrivez rapidement la panne, puis envoyez votre demande.
+        DigitRestore vous répondra avec un devis personnalisé, sans mauvaise surprise ni calcul sorti d’un chapeau magique.
+    </p>
+
+    <div class="panel">
+        <div class="panel-title">1. Votre appareil</div>
+
+        <div class="selection-row">
+
+            <div class="selection-block">
+                <div class="section-title">Type d'appareil</div>
+                <select id="typeSelect">
+                    <option value="">Sélectionnez…</option>
+                </select>
+            </div>
+
+            <div class="selection-block">
+                <div class="section-title">Marque</div>
+                <select id="brandSelect">
+                    <option value="">Sélectionnez un type d'appareil…</option>
+                </select>
+            </div>
+
+            <div class="selection-block">
+                <div class="section-title">Modèle</div>
+                <select id="modelSelect">
+                    <option value="">Sélectionnez une marque…</option>
+                </select>
+            </div>
+
+        </div>
+
+        <a id="continueBtn" class="continue-btn">Continuer vers la demande de devis</a>
+        <div id="error-message">Veuillez remplir les trois champs pour continuer.</div>
+    </div>
+
+    <div class="panel" id="devisFormPanel">
+        <div class="panel-title">2. Vos coordonnées et votre demande</div>
+
+        <div class="summary-box" id="deviceSummary"></div>
+	        <form id="devisForm">
+
+            <div class="form-row">
+                <div class="form-block">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" placeholder="Votre nom">
+                </div>
+
+                <div class="form-block">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom" name="prenom" placeholder="Votre prénom">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-block">
+                    <label for="telephone">Téléphone</label>
+                    <input type="tel" id="telephone" name="telephone" placeholder="Votre numéro de téléphone">
+                </div>
+
+                <div class="form-block">
+                    <label for="email">Adresse e-mail</label>
+                    <input type="email" id="email" name="email" placeholder="Votre adresse e-mail">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-block">
+                    <label for="panne">Type de demande</label>
+                    <select id="panne" name="panne">
+                        <option value="">Sélectionnez…</option>
+                        <option value="Écran cassé / affichage">Écran cassé / affichage</option>
+                        <option value="Batterie">Batterie</option>
+                        <option value="Connecteur de charge">Connecteur de charge</option>
+                        <option value="Caméra">Caméra</option>
+                        <option value="Haut-parleur / micro">Haut-parleur / micro</option>
+                        <option value="Bouton / volume / power">Bouton / volume / power</option>
+                        <option value="Diagnostic">Diagnostic</option>
+                        <option value="Autre demande">Autre demande</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-block">
+                    <label for="message">Description de la panne</label>
+                    <textarea id="message" name="message" placeholder="Décrivez rapidement le problème : chute, écran noir, batterie qui se vide vite, téléphone qui ne charge plus, etc."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="send-btn">Envoyer ma demande de devis</button>
+
+            <div id="form-error">Veuillez remplir les champs obligatoires.</div>
+
+            <div class="success-message" id="successMessage">
+                Votre demande est prête. L’envoi automatique par e-mail sera raccordé à l’étape suivante.
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+
+    const typeSelect   = document.getElementById("typeSelect");
+    const brandSelect  = document.getElementById("brandSelect");
+    const modelSelect  = document.getElementById("modelSelect");
+    const continueBtn  = document.getElementById("continueBtn");
+    const errorMsg     = document.getElementById("error-message");
+
+    const devisFormPanel = document.getElementById("devisFormPanel");
+    const deviceSummary  = document.getElementById("deviceSummary");
+    const devisForm      = document.getElementById("devisForm");
+    const formError      = document.getElementById("form-error");
+    const successMessage = document.getElementById("successMessage");
+
+    let typesData = {};
+    let currentBrandData = null;
+
+    function slugifyBrand(brand) {
+        return brand
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, "-")
+            .replace(/[^a-z0-9\-]/g, "");
+    }
+
+    try {
+        const response = await fetch("donnees/types-et-marques.json", { cache: "no-cache" });
+
+        if (!response.ok) {
+            throw new Error("HTTP " + response.status);
+        }
+
+        typesData = await response.json();
+    } catch (e) {
+        console.error("Erreur lors du chargement de donnees/types-et-marques.json :", e);
+        errorMsg.textContent = "Une erreur est survenue lors du chargement des données. Merci de réessayer plus tard.";
+        errorMsg.style.display = "block";
+        return;
+    }
+
+    Object.keys(typesData).forEach(typeKey => {
+        const opt = document.createElement("option");
+        opt.value = typeKey;
+        opt.textContent = typeKey.charAt(0).toUpperCase() + typeKey.slice(1);
+        typeSelect.appendChild(opt);
+    });
+
+    typeSelect.addEventListener("change", () => {
+        brandSelect.innerHTML = '<option value="">Sélectionnez une marque…</option>';
+        modelSelect.innerHTML = '<option value="">Sélectionnez une marque…</option>';
+        currentBrandData = null;
+
+        devisFormPanel.style.display = "none";
+        errorMsg.style.display = "none";
+        successMessage.style.display = "none";
+
+        updateButtonState();
+
+        const selectedType = typeSelect.value;
+
+        if (!selectedType) {
+            return;
+        }
+
+        const brandsForType = typesData[selectedType];
+
+        if (Array.isArray(brandsForType)) {
+            brandsForType.forEach(brand => {
+                const opt = document.createElement("option");
+                opt.value = brand;
+                opt.textContent = brand;
+                brandSelect.appendChild(opt);
+            });
+        } else if (brandsForType && typeof brandsForType === "object") {
+            Object.keys(brandsForType).forEach(brand => {
+                const opt = document.createElement("option");
+                opt.value = brand;
+                opt.textContent = brand;
+                brandSelect.appendChild(opt);
+            });
+        }
+    });
+
+    brandSelect.addEventListener("change", async () => {
+        modelSelect.innerHTML = '<option value="">Sélectionnez un modèle…</option>';
+        currentBrandData = null;
+
+        devisFormPanel.style.display = "none";
+        errorMsg.style.display = "none";
+        successMessage.style.display = "none";
+
+        updateButtonState();
+
+        const selectedType  = typeSelect.value;
+        const selectedBrand = brandSelect.value;
+
+        if (!selectedType || !selectedBrand) {
+            return;
+        }
+
+        const brandSlug = slugifyBrand(selectedBrand);
+        const jsonPath  = `donnees/${selectedType}-${brandSlug}.json`;
+
+        try {
+            const response = await fetch(jsonPath, { cache: "no-cache" });
+
+            if (!response.ok) {
+                throw new Error("HTTP " + response.status);
+            }
+
+            currentBrandData = await response.json();
+        } catch (e) {
+            console.error("Erreur lors du chargement du fichier de modèles :", e);
+            errorMsg.textContent = "Aucun modèle disponible pour cette combinaison type / marque pour le moment.";
+            errorMsg.style.display = "block";
+            return;
+        }
+
+        if (!currentBrandData || !currentBrandData.models) {
+            errorMsg.textContent = "Aucun modèle disponible pour cette combinaison.";
+            errorMsg.style.display = "block";
+            return;
+        }
+
+        if (Array.isArray(currentBrandData.models)) {
+            currentBrandData.models.forEach(model => {
+                const opt = document.createElement("option");
+                opt.value = model;
+                opt.textContent = model;
+                modelSelect.appendChild(opt);
+            });
+        } else if (typeof currentBrandData.models === "object") {
+            Object.keys(currentBrandData.models).forEach(modelName => {
+                const opt = document.createElement("option");
+                opt.value = modelName;
+                opt.textContent = modelName;
+                modelSelect.appendChild(opt);
+            });
+        }
+
+        updateButtonState();
+    });
+
+    modelSelect.addEventListener("change", () => {
+        devisFormPanel.style.display = "none";
+        errorMsg.style.display = "none";
+        successMessage.style.display = "none";
+        updateButtonState();
+    });
+
+    function updateButtonState() {
+        if (typeSelect.value && brandSelect.value && modelSelect.value) {
+            continueBtn.classList.add("enabled");
+            continueBtn.style.cursor = "pointer";
+        } else {
+            continueBtn.classList.remove("enabled");
+            continueBtn.style.cursor = "not-allowed";
+        }
+    }
+
+    continueBtn.addEventListener("click", () => {
+        if (!continueBtn.classList.contains("enabled")) {
+            errorMsg.textContent = "Veuillez remplir les trois champs pour continuer.";
+            errorMsg.style.display = "block";
+            return;
+        }
+
+        const type  = typeSelect.value;
+        const brand = brandSelect.value;
+        const model = modelSelect.value;
+
+        deviceSummary.innerHTML =
+            `Appareil sélectionné : <strong>${type}</strong> / <strong>${brand}</strong> / <strong>${model}</strong>`;
+
+        devisFormPanel.style.display = "block";
+        errorMsg.style.display = "none";
+        successMessage.style.display = "none";
+
+        devisFormPanel.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
+
+    devisForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        formError.style.display = "none";
+        successMessage.style.display = "none";
+
+        const nom       = document.getElementById("nom").value.trim();
+        const prenom    = document.getElementById("prenom").value.trim();
+        const telephone = document.getElementById("telephone").value.trim();
+        const email     = document.getElementById("email").value.trim();
+        const panne     = document.getElementById("panne").value.trim();
+        const message   = document.getElementById("message").value.trim();
+
+        if (!nom || !prenom || !telephone || !email || !panne || !message) {
+            formError.textContent = "Veuillez remplir tous les champs avant d’envoyer votre demande.";
+            formError.style.display = "block";
+            return;
+        }
+
+        const demande = {
+            type: typeSelect.value,
+            marque: brandSelect.value,
+            modele: modelSelect.value,
+            nom: nom,
+            prenom: prenom,
+            telephone: telephone,
+            email: email,
+            panne: panne,
+            message: message
+        };
+
+        console.log("Demande de devis :", demande);
+
+        successMessage.style.display = "block";
+    });
+
+});
+</script>
+
+</body>
+</html>
