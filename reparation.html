@@ -391,12 +391,12 @@
     <h1>Demande de devis réparation</h1>
 
     <p class="intro-text">
-        Sélectionnez votre appareil, décrivez rapidement la panne, puis envoyez votre demande.
+        Sélectionnez votre appareil, indiquez la panne ou la pièce concernée, puis renseignez vos coordonnées.
         DigitRestore vous répondra avec un devis personnalisé, sans mauvaise surprise ni calcul sorti d’un chapeau magique.
     </p>
 
     <div class="panel">
-        <div class="panel-title">1. Votre appareil</div>
+        <div class="panel-title">1. Votre appareil et votre demande</div>
 
         <div class="selection-row">
 
@@ -423,15 +423,40 @@
 
         </div>
 
-        <a id="continueBtn" class="continue-btn">Continuer vers la demande de devis</a>
-        <div id="error-message">Veuillez remplir les trois champs pour continuer.</div>
+        <div class="form-row">
+            <div class="form-block">
+                <label for="panne">Pièce à changer / panne connue</label>
+                <select id="panne" name="panne">
+                    <option value="">Sélectionnez…</option>
+                    <option value="Écran cassé / affichage">Écran cassé / affichage</option>
+                    <option value="Batterie">Batterie</option>
+                    <option value="Connecteur de charge">Connecteur de charge</option>
+                    <option value="Caméra">Caméra</option>
+                    <option value="Haut-parleur / micro">Haut-parleur / micro</option>
+                    <option value="Bouton / volume / power">Bouton / volume / power</option>
+                    <option value="Diagnostic">Diagnostic</option>
+                    <option value="Autre demande">Autre demande</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-block">
+                <label for="message">Description de la panne ou demande particulière</label>
+                <textarea id="message" name="message" placeholder="Décrivez rapidement le problème : chute, écran noir, batterie qui se vide vite, téléphone qui ne charge plus, demande particulière, etc."></textarea>
+            </div>
+        </div>
+
+        <a id="continueBtn" class="continue-btn">Continuer pour renseigner vos coordonnées</a>
+        <div id="error-message">Veuillez sélectionner votre appareil, indiquer le type de demande et décrire la panne.</div>
     </div>
 
     <div class="panel" id="devisFormPanel">
-        <div class="panel-title">2. Vos coordonnées et votre demande</div>
+        <div class="panel-title">2. Vos coordonnées</div>
 
         <div class="summary-box" id="deviceSummary"></div>
-	        <form id="devisForm">
+
+        <form id="devisForm">
 
             <div class="form-row">
                 <div class="form-block">
@@ -457,44 +482,18 @@
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-block">
-                    <label for="panne">Type de demande</label>
-                    <select id="panne" name="panne">
-                        <option value="">Sélectionnez…</option>
-                        <option value="Écran cassé / affichage">Écran cassé / affichage</option>
-                        <option value="Batterie">Batterie</option>
-                        <option value="Connecteur de charge">Connecteur de charge</option>
-                        <option value="Caméra">Caméra</option>
-                        <option value="Haut-parleur / micro">Haut-parleur / micro</option>
-                        <option value="Bouton / volume / power">Bouton / volume / power</option>
-                        <option value="Diagnostic">Diagnostic</option>
-                        <option value="Autre demande">Autre demande</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-block">
-                    <label for="message">Description de la panne</label>
-                    <textarea id="message" name="message" placeholder="Décrivez rapidement le problème : chute, écran noir, batterie qui se vide vite, téléphone qui ne charge plus, etc."></textarea>
-                </div>
-            </div>
-
             <button type="submit" class="send-btn">Envoyer ma demande de devis</button>
 
-            <div id="form-error">Veuillez remplir les champs obligatoires.</div>
+            <div id="form-error">Veuillez remplir vos coordonnées avant d’envoyer votre demande.</div>
 
             <div class="success-message" id="successMessage">
-                Votre demande est prête. L’envoi automatique par e-mail sera raccordé à l’étape suivante.
+                Votre demande a bien été envoyée à DigitRestore. Nous vous recontacterons dans les plus brefs délais.
             </div>
 
         </form>
     </div>
 
 </div>
-
-
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -646,8 +645,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         updateButtonState();
     });
 
+    document.getElementById("panne").addEventListener("change", () => {
+        devisFormPanel.style.display = "none";
+        errorMsg.style.display = "none";
+        successMessage.style.display = "none";
+        updateButtonState();
+    });
+
+    document.getElementById("message").addEventListener("input", () => {
+        devisFormPanel.style.display = "none";
+        errorMsg.style.display = "none";
+        successMessage.style.display = "none";
+        updateButtonState();
+    });
+
     function updateButtonState() {
-        if (typeSelect.value && brandSelect.value && modelSelect.value) {
+        const panne = document.getElementById("panne").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (typeSelect.value && brandSelect.value && modelSelect.value && panne && message) {
             continueBtn.classList.add("enabled");
             continueBtn.style.cursor = "pointer";
         } else {
@@ -658,17 +674,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     continueBtn.addEventListener("click", () => {
         if (!continueBtn.classList.contains("enabled")) {
-            errorMsg.textContent = "Veuillez remplir les trois champs pour continuer.";
+            errorMsg.textContent = "Veuillez sélectionner votre appareil, indiquer le type de demande et décrire la panne.";
             errorMsg.style.display = "block";
             return;
         }
 
-        const type  = typeSelect.value;
-        const brand = brandSelect.value;
-        const model = modelSelect.value;
-
         deviceSummary.innerHTML =
-            `Appareil sélectionné : <strong>${type}</strong> / <strong>${brand}</strong> / <strong>${model}</strong>`;
+            `Demande sélectionnée : <strong>${typeSelect.value}</strong> / <strong>${brandSelect.value}</strong> / <strong>${modelSelect.value}</strong><br>
+            Panne ou pièce concernée : <strong>${document.getElementById("panne").value}</strong>`;
 
         devisFormPanel.style.display = "block";
         errorMsg.style.display = "none";
@@ -693,8 +706,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const panne     = document.getElementById("panne").value.trim();
         const message   = document.getElementById("message").value.trim();
 
-        if (!nom || !prenom || !telephone || !email || !panne || !message) {
-            formError.textContent = "Veuillez remplir tous les champs avant d’envoyer votre demande.";
+        if (!nom || !prenom || !telephone || !email) {
+            formError.textContent = "Veuillez remplir vos coordonnées avant d’envoyer votre demande.";
             formError.style.display = "block";
             return;
         }
@@ -712,32 +725,38 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
 
         fetch("https://royal-wind-ec1e.kinny.workers.dev", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(demande)
-})
-.then(response => response.json())
-.then(data => {
-    if (!data.ok) {
-        throw new Error(data.error || "Erreur lors de l’envoi");
-    }
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(demande)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.ok) {
+                throw new Error(data.error || "Erreur lors de l’envoi");
+            }
 
-    successMessage.textContent =
-        "Votre demande a bien été envoyée à DigitRestore. Nous vous recontacterons dans les plus brefs délais.";
+            successMessage.textContent =
+                "Votre demande a bien été envoyée à DigitRestore. Nous vous recontacterons dans les plus brefs délais.";
 
-    successMessage.style.display = "block";
-    devisForm.reset();
-})
-.catch(error => {
-    console.error("Erreur d’envoi :", error);
+            successMessage.style.display = "block";
+            devisForm.reset();
 
-    formError.textContent =
-        "Une erreur est survenue lors de l’envoi de votre demande. Merci de réessayer plus tard.";
+            typeSelect.value = "";
+            brandSelect.innerHTML = '<option value="">Sélectionnez un type d’appareil…</option>';
+            modelSelect.innerHTML = '<option value="">Sélectionnez une marque…</option>';
+            devisFormPanel.style.display = "none";
+            updateButtonState();
+        })
+        .catch(error => {
+            console.error("Erreur d’envoi :", error);
 
-    formError.style.display = "block";
-});
+            formError.textContent =
+                "Une erreur est survenue lors de l’envoi de votre demande. Merci de réessayer plus tard.";
+
+            formError.style.display = "block";
+        });
     });
 
 });
