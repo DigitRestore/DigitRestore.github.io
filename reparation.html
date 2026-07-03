@@ -242,7 +242,8 @@
         }
 
         .continue-btn,
-        .send-btn {
+        .send-btn,
+        .new-request-btn {
             margin-top: 10px;
             padding: 14px 26px;
             border-radius: 50px;
@@ -271,6 +272,7 @@
         }
 
         .send-btn:hover,
+        .new-request-btn:hover,
         .continue-btn.enabled:hover {
             transform: translateY(-3px);
             box-shadow:
@@ -287,7 +289,8 @@
             display: none;
         }
 
-        #devisFormPanel {
+        #devisFormPanel,
+        #successPanel {
             display: none;
         }
 
@@ -305,15 +308,63 @@
             color: var(--accent-3);
         }
 
-        .success-message {
-            display: none;
-            margin-top: 20px;
-            padding: 18px;
-            border-radius: 14px;
-            background: rgba(79,210,255,0.12);
+        .success-card {
+            text-align: center;
+            background:
+                radial-gradient(circle at top, rgba(79,210,255,0.22), transparent 55%),
+                linear-gradient(135deg, rgba(255,75,92,0.12), rgba(79,210,255,0.12)),
+                var(--bg-card);
             border: 1px solid rgba(79,210,255,0.35);
-            color: var(--text-main);
+            border-radius: 26px;
+            padding: 38px 28px;
+            box-shadow:
+                0 0 32px rgba(79,210,255,0.22),
+                0 24px 50px rgba(0,0,0,0.55);
+        }
+
+        .success-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+            color: white;
+            font-size: 36px;
+            box-shadow:
+                0 0 28px rgba(79,210,255,0.55),
+                0 0 30px rgba(255,75,92,0.35);
+        }
+
+        .success-card h2 {
+            font-size: 30px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .success-card p {
+            color: var(--text-soft);
+            font-size: 16px;
+            line-height: 1.7;
+            max-width: 720px;
+            margin: 0 auto 14px;
+        }
+
+        .success-detail {
+            margin: 22px auto;
+            max-width: 620px;
+            padding: 18px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.10);
+            color: var(--text-soft);
             line-height: 1.6;
+        }
+
+        .success-detail strong {
+            color: var(--accent-3);
         }
 
         @media (max-width: 968px) {
@@ -357,6 +408,10 @@
             .panel {
                 padding: 22px 18px;
             }
+
+            .success-card h2 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
@@ -385,17 +440,16 @@
         <a href="#">Contact</a>
     </nav>
 </header>
-
 <div class="content">
 
     <h1>Demande de devis réparation</h1>
 
     <p class="intro-text">
         Sélectionnez votre appareil, indiquez la panne ou la pièce concernée, puis renseignez vos coordonnées.
-        DigitRestore vous répondra avec un devis personnalisé, sans mauvaise surprise ni calcul sorti d’un chapeau magique.
+        DigitRestore vous répondra avec un devis personnalisé, clair et adapté à votre demande.
     </p>
 
-    <div class="panel">
+    <div class="panel" id="requestPanel">
         <div class="panel-title">1. Votre appareil et votre demande</div>
 
         <div class="selection-row">
@@ -486,28 +540,49 @@
 
             <div id="form-error">Veuillez remplir vos coordonnées avant d’envoyer votre demande.</div>
 
-            <div class="success-message" id="successMessage">
-                Votre demande a bien été envoyée à DigitRestore. Nous vous recontacterons dans les plus brefs délais.
-            </div>
-
         </form>
     </div>
 
+    <div id="successPanel" class="success-card">
+        <div class="success-icon">✓</div>
+
+        <h2>Demande envoyée avec succès</h2>
+
+        <p>
+            Votre demande a bien été transmise à <strong>DigitRestore</strong>.
+            Nous reviendrons vers vous dans les plus brefs délais avec une réponse personnalisée.
+        </p>
+
+        <div class="success-detail" id="successDetail"></div>
+
+        <button type="button" class="new-request-btn" id="newRequestBtn">
+            Faire une nouvelle demande
+        </button>
+    </div>
+
 </div>
+
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
 
     const typeSelect   = document.getElementById("typeSelect");
     const brandSelect  = document.getElementById("brandSelect");
     const modelSelect  = document.getElementById("modelSelect");
+    const panneSelect  = document.getElementById("panne");
+    const messageInput = document.getElementById("message");
+
     const continueBtn  = document.getElementById("continueBtn");
     const errorMsg     = document.getElementById("error-message");
 
+    const requestPanel   = document.getElementById("requestPanel");
     const devisFormPanel = document.getElementById("devisFormPanel");
     const deviceSummary  = document.getElementById("deviceSummary");
     const devisForm      = document.getElementById("devisForm");
     const formError      = document.getElementById("form-error");
-    const successMessage = document.getElementById("successMessage");
+
+    const successPanel  = document.getElementById("successPanel");
+    const successDetail = document.getElementById("successDetail");
+    const newRequestBtn = document.getElementById("newRequestBtn");
 
     let typesData = {};
     let currentBrandData = null;
@@ -518,6 +593,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             .trim()
             .replace(/\s+/g, "-")
             .replace(/[^a-z0-9\-]/g, "");
+    }
+
+    function resetAfterChange() {
+        devisFormPanel.style.display = "none";
+        successPanel.style.display = "none";
+        errorMsg.style.display = "none";
+        formError.style.display = "none";
+        updateButtonState();
     }
 
     try {
@@ -547,11 +630,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         modelSelect.innerHTML = '<option value="">Sélectionnez une marque…</option>';
         currentBrandData = null;
 
-        devisFormPanel.style.display = "none";
-        errorMsg.style.display = "none";
-        successMessage.style.display = "none";
-
-        updateButtonState();
+        resetAfterChange();
 
         const selectedType = typeSelect.value;
 
@@ -582,11 +661,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         modelSelect.innerHTML = '<option value="">Sélectionnez un modèle…</option>';
         currentBrandData = null;
 
-        devisFormPanel.style.display = "none";
-        errorMsg.style.display = "none";
-        successMessage.style.display = "none";
-
-        updateButtonState();
+        resetAfterChange();
 
         const selectedType  = typeSelect.value;
         const selectedBrand = brandSelect.value;
@@ -638,30 +713,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         updateButtonState();
     });
 
-    modelSelect.addEventListener("change", () => {
-        devisFormPanel.style.display = "none";
-        errorMsg.style.display = "none";
-        successMessage.style.display = "none";
-        updateButtonState();
-    });
-
-    document.getElementById("panne").addEventListener("change", () => {
-        devisFormPanel.style.display = "none";
-        errorMsg.style.display = "none";
-        successMessage.style.display = "none";
-        updateButtonState();
-    });
-
-    document.getElementById("message").addEventListener("input", () => {
-        devisFormPanel.style.display = "none";
-        errorMsg.style.display = "none";
-        successMessage.style.display = "none";
-        updateButtonState();
-    });
+    modelSelect.addEventListener("change", resetAfterChange);
+    panneSelect.addEventListener("change", resetAfterChange);
+    messageInput.addEventListener("input", resetAfterChange);
 
     function updateButtonState() {
-        const panne = document.getElementById("panne").value.trim();
-        const message = document.getElementById("message").value.trim();
+        const panne = panneSelect.value.trim();
+        const message = messageInput.value.trim();
 
         if (typeSelect.value && brandSelect.value && modelSelect.value && panne && message) {
             continueBtn.classList.add("enabled");
@@ -681,11 +739,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         deviceSummary.innerHTML =
             `Demande sélectionnée : <strong>${typeSelect.value}</strong> / <strong>${brandSelect.value}</strong> / <strong>${modelSelect.value}</strong><br>
-            Panne ou pièce concernée : <strong>${document.getElementById("panne").value}</strong>`;
+            Panne ou pièce concernée : <strong>${panneSelect.value}</strong>`;
 
         devisFormPanel.style.display = "block";
+        successPanel.style.display = "none";
         errorMsg.style.display = "none";
-        successMessage.style.display = "none";
+        formError.style.display = "none";
 
         devisFormPanel.scrollIntoView({
             behavior: "smooth",
@@ -697,14 +756,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         event.preventDefault();
 
         formError.style.display = "none";
-        successMessage.style.display = "none";
 
         const nom       = document.getElementById("nom").value.trim();
         const prenom    = document.getElementById("prenom").value.trim();
         const telephone = document.getElementById("telephone").value.trim();
         const email     = document.getElementById("email").value.trim();
-        const panne     = document.getElementById("panne").value.trim();
-        const message   = document.getElementById("message").value.trim();
+        const panne     = panneSelect.value.trim();
+        const message   = messageInput.value.trim();
 
         if (!nom || !prenom || !telephone || !email) {
             formError.textContent = "Veuillez remplir vos coordonnées avant d’envoyer votre demande.";
@@ -716,12 +774,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             type: typeSelect.value,
             marque: brandSelect.value,
             modele: modelSelect.value,
+            panne: panne,
+            message: message,
             nom: nom,
             prenom: prenom,
             telephone: telephone,
-            email: email,
-            panne: panne,
-            message: message
+            email: email
         };
 
         fetch("https://royal-wind-ec1e.kinny.workers.dev", {
@@ -737,17 +795,29 @@ document.addEventListener("DOMContentLoaded", async () => {
                 throw new Error(data.error || "Erreur lors de l’envoi");
             }
 
-            successMessage.textContent =
-                "Votre demande a bien été envoyée à DigitRestore. Nous vous recontacterons dans les plus brefs délais.";
+            successDetail.innerHTML =
+                `Résumé de votre demande : <br>
+                <strong>${demande.marque} ${demande.modele}</strong><br>
+                ${demande.panne}`;
 
-            successMessage.style.display = "block";
+            requestPanel.style.display = "none";
+            devisFormPanel.style.display = "none";
+            successPanel.style.display = "block";
+
             devisForm.reset();
 
             typeSelect.value = "";
             brandSelect.innerHTML = '<option value="">Sélectionnez un type d’appareil…</option>';
             modelSelect.innerHTML = '<option value="">Sélectionnez une marque…</option>';
-            devisFormPanel.style.display = "none";
+            panneSelect.value = "";
+            messageInput.value = "";
+
             updateButtonState();
+
+            successPanel.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
         })
         .catch(error => {
             console.error("Erreur d’envoi :", error);
@@ -756,6 +826,19 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "Une erreur est survenue lors de l’envoi de votre demande. Merci de réessayer plus tard.";
 
             formError.style.display = "block";
+        });
+    });
+
+    newRequestBtn.addEventListener("click", () => {
+        requestPanel.style.display = "block";
+        devisFormPanel.style.display = "none";
+        successPanel.style.display = "none";
+        errorMsg.style.display = "none";
+        formError.style.display = "none";
+
+        requestPanel.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
         });
     });
 
