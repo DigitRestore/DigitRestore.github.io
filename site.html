@@ -5,16 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DigitRestore – Atelier</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --accent-1: #ff4b5c;
-            --accent-2: #ff2c47;
-            --accent-3: #4fd2ff;
-            --text-main: #f5f5f7;
-            --text-soft: #c3c8df;
-            --bg-card: rgba(5, 8, 20, 0.88);
+            --red: #ff3655;
+            --red-dark: #b81835;
+            --cyan: #35d8ff;
+            --blue: #1e9bff;
+            --green: #16c878;
+            --purple: #9b3cff;
+            --orange: #f3a51b;
+
+            --text-main: #ffffff;
+            --text-soft: #c8cbe0;
+            --text-muted: #8f96b3;
+
+            --bg-main: #050814;
+            --bg-card: rgba(8, 14, 31, 0.82);
+            --border-soft: rgba(255, 255, 255, 0.10);
         }
 
         * {
@@ -23,165 +32,258 @@
             box-sizing: border-box;
         }
 
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
         body {
             min-height: 100vh;
-            width: 100%;
             overflow: hidden;
             font-family: "Poppins", sans-serif;
             color: var(--text-main);
             background:
-                radial-gradient(circle at 20% 10%, rgba(255,75,92,0.18) 0%, transparent 60%),
-                radial-gradient(circle at 80% 90%, rgba(79,210,255,0.16) 0%, transparent 60%),
-                #050814;
-            animation: bgMove 30s ease-in-out infinite alternate;
+                radial-gradient(circle at 8% 18%, rgba(255, 54, 85, 0.20), transparent 34%),
+                radial-gradient(circle at 88% 22%, rgba(53, 216, 255, 0.17), transparent 36%),
+                radial-gradient(circle at 50% 100%, rgba(30, 155, 255, 0.12), transparent 42%),
+                linear-gradient(135deg, #070512 0%, #050814 42%, #061324 100%);
         }
 
-        @keyframes bgMove {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 12% 16%; }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 54px 54px;
+            mask-image: radial-gradient(circle at center, black 0%, transparent 78%);
+            opacity: .18;
         }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 2px),
+                radial-gradient(circle at 78% 18%, rgba(53,216,255,0.12), transparent 2px),
+                radial-gradient(circle at 83% 71%, rgba(255,54,85,0.12), transparent 2px);
+            opacity: .55;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
 
         header {
-            height: 96px;
-            padding: 16px 34px;
+            height: 92px;
+            padding: 18px 34px 12px;
             display: flex;
             align-items: center;
             gap: 24px;
-            opacity: 0;
-            animation: fadeDown 0.8s ease forwards;
+            animation: fadeDown .75s ease forwards;
         }
 
         @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-18px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .back-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(255,75,92,0.22);
-            border: 1px solid rgba(255,75,92,0.45);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            transition: .25s;
-            box-shadow: 0 0 14px rgba(255,75,92,0.35);
+            width: 48px;
+            height: 48px;
             flex-shrink: 0;
-        }
-
-        .back-btn span {
-            font-size: 22px;
-            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 25px;
+            background:
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), transparent 34%),
+                rgba(255, 54, 85, 0.18);
+            border: 1px solid rgba(255, 54, 85, 0.75);
+            box-shadow:
+                0 0 20px rgba(255, 54, 85, 0.35),
+                inset 0 0 18px rgba(255, 54, 85, 0.16);
+            transition: .25s ease;
         }
 
         .back-btn:hover {
-            transform: scale(1.1);
+            transform: translateX(-3px) scale(1.05);
+            border-color: rgba(53,216,255,.85);
             box-shadow:
-                0 0 24px rgba(255,75,92,0.55),
-                0 0 18px rgba(79,210,255,0.55);
-            border-color: rgba(79,210,255,0.65);
+                0 0 24px rgba(255, 54, 85, 0.45),
+                0 0 24px rgba(53, 216, 255, 0.28);
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 13px;
+            gap: 14px;
             flex-shrink: 0;
         }
 
         .brand img {
-            width: 62px;
-            height: 62px;
+            width: 66px;
+            height: 66px;
             object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(53,216,255,0.22));
         }
 
         .brand-text {
             display: flex;
             flex-direction: column;
-            line-height: 1.18;
+            line-height: 1.05;
+        }
+
+        .brand-line {
+            display: flex;
+            align-items: baseline;
+            gap: 7px;
         }
 
         .digit,
         .restore {
             font-family: "Montserrat", sans-serif;
-            font-size: 21px;
+            font-size: 24px;
             font-weight: 900;
+            letter-spacing: .02em;
         }
 
         .restore {
-            background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--red);
+            text-shadow: 0 0 14px rgba(255, 54, 85, 0.28);
         }
 
         .tag {
-            font-size: 9.5px;
-            letter-spacing: .2em;
-            color: var(--accent-3);
+            margin-top: 4px;
+            font-size: 9px;
+            letter-spacing: .245em;
+            color: var(--cyan);
+            font-weight: 600;
         }
 
         nav {
             margin-left: auto;
             display: flex;
             align-items: center;
-            gap: 20px;
-            flex-wrap: nowrap;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-size: 13px;
-            opacity: .82;
-            transition: .25s;
+            gap: 28px;
             white-space: nowrap;
         }
 
-        nav a:hover {
-            color: var(--accent-3);
-            opacity: 1;
+        nav a {
+            position: relative;
+            text-decoration: none;
+            color: rgba(255,255,255,.88);
+            font-size: 14px;
+            font-weight: 400;
+            transition: .25s ease;
         }
 
-        .content {
-            height: calc(100vh - 96px);
-            max-width: 1380px;
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            width: 0;
+            height: 2px;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--red), var(--cyan));
+            transition: .25s ease;
+        }
+
+        nav a:hover {
+            color: #fff;
+            text-shadow: 0 0 12px rgba(53,216,255,.35);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* CONTENU */
+
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 1500px;
             margin: 0 auto;
-            padding: 10px 34px 26px;
+            padding: 34px 56px 30px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            animation: fadeUp 0.95s ease forwards;
-            opacity: 0;
+            animation: fadeUp .85s ease forwards;
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(26px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+            from {
+                opacity: 0;
+                transform: translateY(26px);
+            }
 
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         .hero {
-            margin-bottom: 20px;
+            max-width: 650px;
+            margin-bottom: 30px;
         }
 
         h1 {
-            font-size: clamp(30px, 3vw, 42px);
-            font-weight: 600;
-            margin-bottom: 8px;
-            text-shadow: 0 0 10px rgba(79,210,255,0.28);
+            font-size: clamp(44px, 5vw, 68px);
+            line-height: 1.08;
+            font-weight: 800;
+            letter-spacing: -0.045em;
+            margin-bottom: 24px;
+            text-shadow: 0 0 22px rgba(255,255,255,0.16);
+        }
+
+        h1 .highlight {
+            background: linear-gradient(90deg, var(--cyan), #8c74ff, var(--red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-line {
+            width: 66px;
+            height: 3px;
+            border-radius: 99px;
+            margin-bottom: 24px;
+            background: linear-gradient(90deg, var(--cyan), var(--red));
+            box-shadow:
+                0 0 14px rgba(53,216,255,.55),
+                0 0 14px rgba(255,54,85,.35);
         }
 
         .intro-text {
-            font-size: 16px;
-            color: var(--text-soft);
-            max-width: 850px;
-            line-height: 1.55;
+            font-size: 18px;
+            line-height: 1.65;
+            color: rgba(255,255,255,.88);
         }
 
         .intro-text strong {
-            color: var(--accent-3);
-            font-weight: 600;
+            color: var(--cyan);
+            font-weight: 700;
         }
 
         .cards-wrapper {
@@ -195,43 +297,49 @@
             gap: 18px;
         }
 
-        .cards-grid.main-services {
+        .main-services {
             grid-template-columns: repeat(3, 1fr);
         }
 
-        .cards-grid.info-services {
+        .info-services {
             grid-template-columns: repeat(4, 1fr);
         }
 
         .service-card {
+            --card-color: var(--cyan);
             position: relative;
             overflow: hidden;
+            min-height: 255px;
+            padding: 24px 26px;
+            border-radius: 18px;
+            text-decoration: none;
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
-            min-height: 178px;
-            padding: 18px 18px 16px;
-            text-decoration: none;
-            color: inherit;
-            border-radius: 18px;
-            border: 1px solid rgba(255,255,255,0.07);
             background:
-                linear-gradient(135deg, rgba(255,75,92,0.11), rgba(79,210,255,0.1)),
-                var(--bg-card);
-            box-shadow: 0 18px 38px rgba(0,0,0,0.5);
-            transition:
-                transform .3s ease,
-                box-shadow .3s ease,
-                border-color .3s ease,
-                background .3s ease;
+                radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--card-color) 16%, transparent), transparent 34%),
+                linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.02)),
+                rgba(8, 14, 31, 0.82);
+            border: 1px solid color-mix(in srgb, var(--card-color) 46%, rgba(255,255,255,.12));
+            box-shadow:
+                0 22px 46px rgba(0,0,0,.42),
+                inset 0 0 0 1px rgba(255,255,255,.025);
+            transition: .3s ease;
         }
 
         .service-card::before {
             content: "";
             position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.06), transparent);
+            inset: -1px;
+            border-radius: inherit;
+            background:
+                linear-gradient(120deg,
+                    transparent 0%,
+                    rgba(255,255,255,.12) 35%,
+                    transparent 70%);
             transform: translateX(-120%);
-            transition: transform .65s ease;
+            transition: .65s ease;
+            pointer-events: none;
         }
 
         .service-card:hover::before {
@@ -239,98 +347,118 @@
         }
 
         .service-card:hover {
-            transform: translateY(-7px);
-            border-color: rgba(255,75,92,0.85);
+            transform: translateY(-8px);
             box-shadow:
-                0 0 24px rgba(255,75,92,0.42),
-                0 0 18px rgba(79,210,255,0.42),
-                0 24px 44px rgba(0,0,0,0.76);
+                0 0 28px color-mix(in srgb, var(--card-color) 34%, transparent),
+                0 26px 54px rgba(0,0,0,.62);
         }
 
         .service-card.primary {
-            min-height: 210px;
-            padding: 22px 22px 18px;
+            min-height: 285px;
+            padding: 28px;
+        }
+
+        .repair { --card-color: var(--red); }
+        .buyback { --card-color: var(--green); }
+        .phones { --card-color: var(--blue); }
+        .recondition { --card-color: var(--purple); }
+        .quality { --card-color: #23d6c8; }
+        .contact { --card-color: var(--orange); }
+        .terms { --card-color: var(--red); }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 22px;
         }
 
         .card-icon {
-            width: 46px;
-            height: 46px;
-            border-radius: 15px;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            width: 74px;
+            height: 74px;
+            flex-shrink: 0;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 23px;
-            margin-bottom: 12px;
-            box-shadow: 0 0 18px rgba(79,210,255,0.25);
-        }
-
-        .service-card.primary .card-icon {
-            width: 52px;
-            height: 52px;
-            font-size: 26px;
+            font-size: 32px;
+            background:
+                radial-gradient(circle at 35% 25%, rgba(255,255,255,.32), transparent 35%),
+                linear-gradient(135deg, color-mix(in srgb, var(--card-color) 86%, #ffffff 6%), rgba(255,255,255,.04));
+            border: 1px solid color-mix(in srgb, var(--card-color) 85%, white);
+            box-shadow:
+                0 0 20px color-mix(in srgb, var(--card-color) 55%, transparent),
+                inset 0 0 22px rgba(255,255,255,.12);
         }
 
         .service-title {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 7px;
-        }
-
-        .service-card.primary .service-title {
-            font-size: 20px;
+            font-size: 21px;
+            line-height: 1.2;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -.02em;
         }
 
         .service-text {
-            font-size: 13px;
-            color: var(--text-soft);
+            max-width: 92%;
+            color: rgba(255,255,255,.86);
+            font-size: 15px;
             line-height: 1.55;
-            opacity: .92;
-        }
-
-        .service-card.primary .service-text {
-            font-size: 14px;
-            line-height: 1.6;
         }
 
         .service-cta {
+            width: fit-content;
             margin-top: auto;
-            padding-top: 12px;
+            padding: 10px 22px;
+            border-radius: 7px;
+            color: #fff;
             font-size: 13px;
-            font-weight: 600;
-            color: var(--accent-3);
-            line-height: 1.4;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -.01em;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--card-color) 92%, #fff 4%), color-mix(in srgb, var(--card-color) 66%, #000 22%));
+            box-shadow: 0 0 18px color-mix(in srgb, var(--card-color) 30%, transparent);
         }
 
-        .service-card.primary .service-cta {
-            font-size: 14px;
-        }
-
-        @media (max-width: 1180px) {
+        @media (max-width: 1280px) {
             nav {
-                gap: 13px;
+                gap: 18px;
             }
 
             nav a {
-                font-size: 12px;
+                font-size: 13px;
             }
 
-            .service-card {
-                min-height: 168px;
-                padding: 16px;
+            main {
+                padding: 24px 44px 26px;
             }
 
+            h1 {
+                font-size: clamp(40px, 4.5vw, 58px);
+            }
+
+            .service-card,
             .service-card.primary {
-                min-height: 200px;
-                padding: 20px;
+                min-height: 245px;
+                padding: 22px;
+            }
+
+            .card-icon {
+                width: 64px;
+                height: 64px;
+                font-size: 28px;
+            }
+
+            .service-title {
+                font-size: 19px;
             }
 
             .service-text {
-                font-size: 12.5px;
+                font-size: 14px;
             }
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 980px) {
             body {
                 overflow-y: auto;
             }
@@ -342,72 +470,52 @@
             }
 
             .brand img {
-                width: 52px;
-                height: 52px;
+                width: 54px;
+                height: 54px;
             }
 
             .digit,
             .restore {
-                font-size: 18px;
+                font-size: 19px;
             }
 
             .tag {
-                font-size: 8.5px;
+                font-size: 8px;
             }
 
             nav {
                 display: none;
             }
 
-            .content {
-                height: auto;
-                min-height: calc(100vh - 84px);
-                padding: 22px 20px 42px;
-                justify-content: flex-start;
+            main {
+                padding: 28px 20px 44px;
             }
 
-            h1 {
-                font-size: 28px;
-                margin-bottom: 14px;
-            }
-
-            .intro-text {
-                font-size: 15px;
+            .hero {
                 max-width: 100%;
             }
 
-            .cards-grid.main-services,
-            .cards-grid.info-services {
+            h1 {
+                font-size: 38px;
+            }
+
+            .intro-text {
+                font-size: 16px;
+            }
+
+            .main-services,
+            .info-services {
                 grid-template-columns: 1fr;
             }
 
             .service-card,
             .service-card.primary {
                 min-height: auto;
-                padding: 20px 18px;
+                padding: 22px;
             }
 
-            .service-card:hover {
-                transform: translateY(-4px);
-            }
-
-            .card-icon,
-            .service-card.primary .card-icon {
-                width: 44px;
-                height: 44px;
-                font-size: 22px;
-            }
-
-            .service-title,
-            .service-card.primary .service-title {
-                font-size: 17px;
-            }
-
-            .service-text,
-            .service-card.primary .service-text,
-            .service-cta,
-            .service-card.primary .service-cta {
-                font-size: 14px;
+            .service-text {
+                max-width: 100%;
             }
         }
     </style>
@@ -415,8 +523,10 @@
 
 <body>
 
+<div class="page">
+
     <header>
-        <a href="welcome.html" class="back-btn" aria-label="Retour à l’accueil"><span>⟵</span></a>
+        <a href="welcome.html" class="back-btn" aria-label="Retour à l’accueil">←</a>
 
         <div class="brand">
             <img src="logo.png" alt="Logo DigitRestore">
@@ -441,10 +551,15 @@
         </nav>
     </header>
 
-    <main class="content">
+    <main>
 
         <section class="hero">
-            <h1>Bienvenue dans l’Atelier DigitRestore</h1>
+            <h1>
+                Bienvenue dans<br>
+                l’Atelier <span class="highlight">DigitRestore</span>
+            </h1>
+
+            <div class="hero-line"></div>
 
             <p class="intro-text">
                 Chez <strong>DigitRestore</strong>, nous réparons, reprenons et sélectionnons vos smartphones et tablettes avec une approche claire, professionnelle et transparente.
@@ -455,9 +570,11 @@
 
             <div class="cards-grid main-services">
 
-                <a href="reparation.html" class="service-card primary">
-                    <div class="card-icon">🔧</div>
-                    <div class="service-title">Réparation</div>
+                <a href="reparation.html" class="service-card primary repair">
+                    <div class="card-top">
+                        <div class="card-icon">🔧</div>
+                        <div class="service-title">Réparation</div>
+                    </div>
 
                     <p class="service-text">
                         Écran cassé, batterie fatiguée, connecteur, caméra ou bouton défectueux : faites une demande simple et recevez une estimation adaptée à votre appareil.
@@ -466,9 +583,11 @@
                     <p class="service-cta">Faire une demande de réparation →</p>
                 </a>
 
-                <a href="#" class="service-card primary">
-                    <div class="card-icon">💸</div>
-                    <div class="service-title">Reprise / Achat</div>
+                <a href="#" class="service-card primary buyback">
+                    <div class="card-top">
+                        <div class="card-icon">💵</div>
+                        <div class="service-title">Reprise / Achat</div>
+                    </div>
 
                     <p class="service-text">
                         Vous souhaitez vendre un ancien smartphone ou une tablette ? Nous étudions son état et proposons une estimation claire, sans blabla commercial inutile.
@@ -477,9 +596,11 @@
                     <p class="service-cta">Demander une estimation de reprise →</p>
                 </a>
 
-                <a href="#" class="service-card primary">
-                    <div class="card-icon">📱</div>
-                    <div class="service-title">Téléphones & Accessoires</div>
+                <a href="#" class="service-card primary phones">
+                    <div class="card-top">
+                        <div class="card-icon">📱</div>
+                        <div class="service-title">Téléphones & Accessoires</div>
+                    </div>
 
                     <p class="service-text">
                         Retrouvez prochainement une sélection d’appareils contrôlés, accompagnés d’accessoires utiles, fiables et compatibles avec votre usage quotidien.
@@ -492,9 +613,11 @@
 
             <div class="cards-grid info-services">
 
-                <a href="#" class="service-card">
-                    <div class="card-icon">♻️</div>
-                    <div class="service-title">Reconditionnement</div>
+                <a href="#" class="service-card recondition">
+                    <div class="card-top">
+                        <div class="card-icon">♻️</div>
+                        <div class="service-title">Reconditionnement</div>
+                    </div>
 
                     <p class="service-text">
                         Découvrez comment les appareils sont testés, nettoyés, réparés et remis en état avant d’être proposés à la vente.
@@ -503,9 +626,11 @@
                     <p class="service-cta">Comprendre le processus →</p>
                 </a>
 
-                <a href="#" class="service-card">
-                    <div class="card-icon">✅</div>
-                    <div class="service-title">Qualité</div>
+                <a href="#" class="service-card quality">
+                    <div class="card-top">
+                        <div class="card-icon">🛡️</div>
+                        <div class="service-title">Qualité</div>
+                    </div>
 
                     <p class="service-text">
                         Pièces sélectionnées, contrôles fonctionnels et vérifications essentielles : chaque intervention suit une méthode sérieuse.
@@ -514,9 +639,11 @@
                     <p class="service-cta">Voir nos engagements →</p>
                 </a>
 
-                <a href="#" class="service-card">
-                    <div class="card-icon">✉️</div>
-                    <div class="service-title">Contact</div>
+                <a href="#" class="service-card contact">
+                    <div class="card-top">
+                        <div class="card-icon">✉️</div>
+                        <div class="service-title">Contact</div>
+                    </div>
 
                     <p class="service-text">
                         Une question, une demande particulière ou un doute sur une panne ? Contactez-nous facilement pour être orienté.
@@ -525,9 +652,11 @@
                     <p class="service-cta">Nous contacter →</p>
                 </a>
 
-                <a href="#" class="service-card">
-                    <div class="card-icon">📄</div>
-                    <div class="service-title">Conditions générales</div>
+                <a href="#" class="service-card terms">
+                    <div class="card-top">
+                        <div class="card-icon">📄</div>
+                        <div class="service-title">Conditions générales</div>
+                    </div>
 
                     <p class="service-text">
                         Consultez les informations importantes liées aux prestations, garanties, devis, ventes et modalités de prise en charge.
@@ -541,6 +670,8 @@
         </section>
 
     </main>
+
+</div>
 
 </body>
 </html>
