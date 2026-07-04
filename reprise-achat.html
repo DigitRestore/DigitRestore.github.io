@@ -59,7 +59,7 @@ body::before{
 }
 
 header{
-    height:72px;
+    height:70px;
     padding:10px 30px;
     display:flex;
     align-items:center;
@@ -134,10 +134,10 @@ main{
     max-width:1500px;
     width:100%;
     margin:0 auto;
-    padding:16px 28px;
+    padding:14px 28px;
     display:grid;
-    grid-template-rows:1fr 96px;
-    gap:14px;
+    grid-template-rows:1fr 74px;
+    gap:12px;
     min-height:0;
 }
 
@@ -148,7 +148,7 @@ main{
     min-height:0;
 }
 
-.card,.estimate-bar{
+.card,.estimate-card{
     border-radius:22px;
     background:
         radial-gradient(circle at 12% 15%, rgba(22,200,120,.14), transparent 35%),
@@ -161,7 +161,7 @@ main{
 .left-column{
     display:grid;
     grid-template-rows:auto 1fr;
-    gap:14px;
+    gap:12px;
     min-height:0;
 }
 
@@ -217,7 +217,6 @@ main{
     font-weight:800;
     outline:none;
     cursor:pointer;
-    transition:.22s ease;
 }
 
 .select-field:focus{
@@ -244,7 +243,7 @@ main{
 
 .device-image-box{
     flex:1;
-    min-height:145px;
+    min-height:150px;
     border-radius:18px;
     display:flex;
     align-items:center;
@@ -260,7 +259,7 @@ main{
 .device-image-box img{
     display:none;
     max-width:88%;
-    max-height:170px;
+    max-height:175px;
     object-fit:contain;
     filter:drop-shadow(0 18px 26px rgba(0,0,0,.55));
 }
@@ -271,18 +270,11 @@ main{
 }
 
 .device-name{
-    margin-top:12px;
-    font-size:17px;
+    margin-top:10px;
+    font-size:16px;
     font-weight:900;
     text-align:center;
-}
-
-.device-sub{
-    margin-top:6px;
-    color:rgba(255,255,255,.64);
-    font-size:12px;
-    text-align:center;
-    font-weight:700;
+    min-height:22px;
 }
 
 .question-card{
@@ -305,30 +297,12 @@ main{
     height:100%;
     min-height:360px;
     display:flex;
-    flex-direction:column;
     align-items:center;
     justify-content:center;
     text-align:center;
     padding:24px;
-}
-
-.question-placeholder-icon{
-    font-size:58px;
-    margin-bottom:18px;
-    opacity:.46;
-}
-
-.question-placeholder-title{
-    font-size:24px;
-    font-weight:900;
-    margin-bottom:10px;
-}
-
-.question-placeholder-text{
-    max-width:520px;
-    color:rgba(255,255,255,.62);
-    font-size:14px;
-    line-height:1.55;
+    color:rgba(255,255,255,.42);
+    font-weight:800;
 }
 
 .diagnostic-card{
@@ -339,9 +313,9 @@ main{
 }
 
 .summary-title{
-    font-size:19px;
+    font-size:18px;
     font-weight:900;
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
 .summary-list{
@@ -355,7 +329,7 @@ main{
     display:flex;
     justify-content:space-between;
     gap:12px;
-    padding:9px 0;
+    padding:8px 0;
     border-bottom:1px solid rgba(255,255,255,.09);
 }
 
@@ -365,38 +339,36 @@ main{
 }
 
 .diagnostic-separator{
-    margin:14px 0 10px;
+    margin:13px 0 9px;
     height:1px;
     background:linear-gradient(90deg, rgba(255,255,255,.16), transparent);
 }
 
 .status-pill{
     margin-top:auto;
-    padding:12px;
+    padding:10px;
     border-radius:14px;
     background:rgba(255,255,255,.045);
     border:1px solid rgba(255,255,255,.10);
     color:rgba(255,255,255,.58);
     font-size:12px;
-    line-height:1.45;
-}
-
-.estimate-bar{
-    padding:14px 18px;
-    display:grid;
-    grid-template-columns:1fr auto 1fr;
-    align-items:center;
-    gap:20px;
-}
-
-.estimate-left{
-    color:rgba(255,255,255,.68);
-    font-size:12px;
     line-height:1.4;
 }
 
-.estimate-center{
-    text-align:center;
+.estimate-zone{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.estimate-card{
+    width:min(620px,100%);
+    height:74px;
+    padding:10px 18px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    gap:18px;
 }
 
 .estimate-label{
@@ -405,24 +377,18 @@ main{
     font-weight:900;
     text-transform:uppercase;
     letter-spacing:.12em;
-    margin-bottom:2px;
 }
 
 .estimate-value{
-    font-size:34px;
+    font-size:30px;
     font-weight:900;
     color:var(--cyan);
     letter-spacing:.06em;
 }
 
-.estimate-right{
-    display:flex;
-    justify-content:flex-end;
-}
-
 .next-btn{
-    min-width:210px;
-    padding:13px 18px;
+    min-width:170px;
+    padding:12px 16px;
     border:none;
     border-radius:13px;
     color:#04101a;
@@ -435,78 +401,25 @@ main{
 }
 
 @media(max-width:1250px){
-    html,body{
-        height:auto;
-        overflow:auto;
-    }
-
-    .page{
-        height:auto;
-        min-height:100vh;
-    }
-
-    main{
-        display:block;
-    }
-
-    .reprise-layout{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .diagnostic-card{
-        grid-column:1 / -1;
-    }
-
-    .estimate-bar{
-        margin-top:14px;
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .estimate-right{
-        justify-content:center;
-    }
+    html,body{height:auto;overflow:auto}
+    .page{height:auto;min-height:100vh}
+    main{display:block}
+    .reprise-layout{grid-template-columns:1fr 1fr}
+    .diagnostic-card{grid-column:1 / -1}
+    .estimate-zone{margin-top:14px}
 }
 
 @media(max-width:820px){
-    header{
-        height:auto;
-        padding:14px 18px;
-    }
-
-    .brand img{
-        width:50px;
-        height:50px;
-    }
-
-    .digit,.restore{
-        font-size:18px;
-    }
-
-    .tag{
-        font-size:7px;
-        letter-spacing:.16em;
-    }
-
-    main{
-        padding:18px;
-    }
-
-    .reprise-layout{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .form-group.full{
-        grid-column:auto;
-    }
-
-    .question-placeholder{
-        min-height:300px;
-    }
+    header{height:auto;padding:14px 18px}
+    .brand img{width:50px;height:50px}
+    .digit,.restore{font-size:18px}
+    .tag{font-size:7px;letter-spacing:.16em}
+    main{padding:18px}
+    .reprise-layout{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+    .form-group.full{grid-column:auto}
+    .question-placeholder{min-height:300px}
+    .estimate-card{grid-template-columns:1fr;text-align:center;height:auto}
 }
 </style>
 </head>
@@ -589,8 +502,7 @@ main{
                 <img id="deviceImage" src="" alt="Aperçu du téléphone">
             </div>
 
-            <div class="device-name" id="deviceName">Aucun appareil sélectionné</div>
-            <div class="device-sub" id="deviceSub">La photo s’affichera après sélection de la couleur.</div>
+            <div class="device-name" id="deviceName"></div>
         </div>
 
     </aside>
@@ -599,20 +511,13 @@ main{
         <div class="card-title">Questionnaire de reprise</div>
 
         <div class="question-shell" id="questionnaireMount">
-            <div class="question-placeholder">
-                <div class="question-placeholder-icon">🧩</div>
-                <div class="question-placeholder-title">Panneau dynamique</div>
-                <div class="question-placeholder-text">
-                    Cette zone chargera prochainement le fichier <strong>questionnaire-reprise.html</strong>.
-                    Elle affichera une seule question à la fois, avec retour possible et mise à jour du diagnostic.
-                </div>
-            </div>
+            <div class="question-placeholder">Questionnaire en attente</div>
         </div>
     </section>
 
     <aside class="card diagnostic-card">
         <div class="card-title">Diagnostic</div>
-        <div class="summary-title" id="summaryTitle">Aucune sélection</div>
+        <div class="summary-title" id="summaryTitle">—</div>
 
         <div class="summary-list">
             <div class="summary-row"><span>Marque</span><strong id="summaryBrand">—</strong></div>
@@ -633,24 +538,18 @@ main{
             <div class="summary-row"><span>Marché UE</span><strong>—</strong></div>
         </div>
 
-        <div class="status-pill">
-            Le diagnostic sera complété automatiquement au fur et à mesure des réponses.
-        </div>
+        <div class="status-pill"></div>
     </aside>
 
 </section>
 
-<section class="estimate-bar">
-    <div class="estimate-left">
-        Estimation indicative sous réserve de contrôle atelier. Les appareils hors marché Union européenne ne sont pas éligibles.
-    </div>
+<section class="estimate-zone">
+    <div class="estimate-card">
+        <div>
+            <div class="estimate-label">Estimation</div>
+            <div class="estimate-value" id="estimateValue">--- €</div>
+        </div>
 
-    <div class="estimate-center">
-        <div class="estimate-label">Estimation</div>
-        <div class="estimate-value" id="estimateValue">--- €</div>
-    </div>
-
-    <div class="estimate-right">
         <button class="next-btn" type="button">Continuer →</button>
     </div>
 </section>
@@ -685,7 +584,6 @@ const summaryColor = document.getElementById("summaryColor");
 const summaryCapacity = document.getElementById("summaryCapacity");
 
 const deviceName = document.getElementById("deviceName");
-const deviceSub = document.getElementById("deviceSub");
 const deviceImage = document.getElementById("deviceImage");
 const devicePlaceholderIcon = document.getElementById("devicePlaceholderIcon");
 const questionnaireMount = document.getElementById("questionnaireMount");
@@ -699,23 +597,11 @@ brandSelect.addEventListener("change", async () => {
     state.selectedModelData = null;
     state.selectedVersionData = null;
 
-    resetSelect(modelSelect, "Sélectionner");
-    resetSelect(versionSelect, "Sélectionner");
-    resetSelect(colorSelect, "Sélectionner");
-    resetSelect(capacitySelect, "Sélectionner");
-
-    modelSelect.disabled = true;
-    versionSelect.disabled = true;
-    colorSelect.disabled = true;
-    capacitySelect.disabled = true;
-
+    resetAllAfterBrand();
     updateSummary();
 
     if (state.brand === "Apple") {
-        if (!state.data) {
-            await loadAppleData();
-        }
-
+        await loadAppleData();
         renderModelSelect();
         modelSelect.disabled = false;
     }
@@ -726,8 +612,8 @@ modelSelect.addEventListener("change", () => {
     state.version = "";
     state.color = "";
     state.capacity = "";
-    state.selectedVersionData = null;
     state.selectedModelData = findSelectedModel(state.model);
+    state.selectedVersionData = null;
 
     resetSelect(versionSelect, "Sélectionner");
     resetSelect(colorSelect, "Sélectionner");
@@ -782,72 +668,91 @@ async function loadAppleData() {
         const response = await fetch("donnees/reprise-apple.json", { cache: "no-cache" });
 
         if (!response.ok) {
-            throw new Error("Fichier JSON introuvable");
+            throw new Error("Fichier donnees/reprise-apple.json introuvable");
         }
 
-        state.data = await response.json();
+        const data = await response.json();
+
+        if (!data || !Array.isArray(data.modeles)) {
+            throw new Error("Structure JSON invalide : clé modeles absente");
+        }
+
+        state.data = data;
 
     } catch (error) {
-        resetSelect(modelSelect, "Erreur de chargement");
+        console.error(error);
+        state.data = null;
+        resetSelect(modelSelect, "Erreur JSON");
     }
 }
 
 function renderModelSelect() {
     resetSelect(modelSelect, "Sélectionner");
 
-    if (!state.data || !Array.isArray(state.data.modeles)) return;
+    if (!state.data || !Array.isArray(state.data.modeles)) {
+        modelSelect.disabled = true;
+        return;
+    }
 
-    const modeles = [...state.data.modeles].sort((a, b) => a.ordre - b.ordre);
+    const modeles = [...state.data.modeles].sort((a,b) => a.ordre - b.ordre);
 
     modeles.forEach(model => {
-        const option = document.createElement("option");
-        option.value = model.nom;
-        option.textContent = model.nom;
-        modelSelect.appendChild(option);
+        addOption(modelSelect, model.nom, model.nom);
     });
 }
 
 function renderVersionSelect(model) {
     resetSelect(versionSelect, "Sélectionner");
 
+    if (!model || !Array.isArray(model.versions)) return;
+
     model.versions.forEach(version => {
-        const option = document.createElement("option");
-        option.value = version.nom;
-        option.textContent = version.nom;
-        versionSelect.appendChild(option);
+        addOption(versionSelect, version.nom, version.nom);
     });
 }
 
 function renderColorSelect(version) {
     resetSelect(colorSelect, "Sélectionner");
 
+    if (!version || !Array.isArray(version.couleurs)) return;
+
     version.couleurs.forEach(color => {
-        const option = document.createElement("option");
-        option.value = color;
-        option.textContent = color;
-        colorSelect.appendChild(option);
+        addOption(colorSelect, color, color);
     });
 }
 
 function renderCapacitySelect(version) {
     resetSelect(capacitySelect, "Sélectionner");
 
+    if (!version || !Array.isArray(version.capacites)) return;
+
     version.capacites.forEach(capacity => {
-        const option = document.createElement("option");
-        option.value = capacity;
-        option.textContent = capacity;
-        capacitySelect.appendChild(option);
+        addOption(capacitySelect, capacity, capacity);
     });
+}
+
+function addOption(selectElement, value, text) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = text;
+    selectElement.appendChild(option);
 }
 
 function resetSelect(selectElement, placeholder) {
     selectElement.innerHTML = "";
+    addOption(selectElement, "", placeholder);
+}
 
-    const option = document.createElement("option");
-    option.value = "";
-    option.textContent = placeholder;
+function resetAllAfterBrand() {
+    resetSelect(modelSelect, "Sélectionner");
+    resetSelect(versionSelect, "Sélectionner");
+    resetSelect(colorSelect, "Sélectionner");
+    resetSelect(capacitySelect, "Sélectionner");
 
-    selectElement.appendChild(option);
+    modelSelect.disabled = true;
+    versionSelect.disabled = true;
+    colorSelect.disabled = true;
+    capacitySelect.disabled = true;
 }
 
 function findSelectedModel(modelName) {
@@ -873,16 +778,10 @@ function updateSummary() {
     } else if (state.model) {
         summaryTitle.textContent = state.model;
         deviceName.textContent = state.model;
-    } else if (state.brand) {
-        summaryTitle.textContent = state.brand;
-        deviceName.textContent = state.brand;
     } else {
-        summaryTitle.textContent = "Aucune sélection";
-        deviceName.textContent = "Aucun appareil sélectionné";
+        summaryTitle.textContent = "—";
+        deviceName.textContent = "";
     }
-
-    const details = [state.color, state.capacity].filter(Boolean).join(" • ");
-    deviceSub.textContent = details || "La photo s’affichera après sélection de la couleur.";
 
     updateDeviceImage();
 }
@@ -903,23 +802,12 @@ async function loadQuestionnaireShell() {
     try {
         const response = await fetch("questionnaire-reprise.html", { cache: "no-cache" });
 
-        if (!response.ok) {
-            throw new Error("Questionnaire non disponible");
-        }
+        if (!response.ok) throw new Error("Questionnaire absent");
 
         questionnaireMount.innerHTML = await response.text();
 
     } catch (error) {
-        questionnaireMount.innerHTML = `
-            <div class="question-placeholder">
-                <div class="question-placeholder-icon">🧩</div>
-                <div class="question-placeholder-title">Questionnaire bientôt disponible</div>
-                <div class="question-placeholder-text">
-                    Cette zone chargera automatiquement <strong>questionnaire-reprise.html</strong>.
-                    Pour l’instant, seule la structure visuelle de la page Reprise / Achat est préparée.
-                </div>
-            </div>
-        `;
+        questionnaireMount.innerHTML = `<div class="question-placeholder">Questionnaire en attente</div>`;
     }
 }
 
