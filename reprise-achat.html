@@ -569,6 +569,15 @@ h1 .highlight{
 
         <div class="options-grid" id="versionsContainer"></div>
     </div>
+    
+    <div class="step" id="stepColor">
+        <button class="back-step" onclick="showStep(4)">← Retour aux capacités</button>
+
+        <h2 class="step-title">Choisissez la couleur</h2>
+        <p class="step-text">Sélectionnez la couleur correspondant à votre appareil.</p>
+
+        <div class="options-grid" id="colorsContainer"></div>
+    </div>
 
     <div class="step" id="stepCapacity">
         <button class="back-step" onclick="showStep(3)">← Retour aux versions</button>
@@ -579,14 +588,7 @@ h1 .highlight{
         <div class="options-grid" id="capacitiesContainer"></div>
     </div>
 
-    <div class="step" id="stepColor">
-        <button class="back-step" onclick="showStep(4)">← Retour aux capacités</button>
-
-        <h2 class="step-title">Choisissez la couleur</h2>
-        <p class="step-text">Sélectionnez la couleur correspondant à votre appareil.</p>
-
-        <div class="options-grid" id="colorsContainer"></div>
-    </div>
+    
 
 </div>
 
@@ -640,8 +642,9 @@ const steps = {
     1: document.getElementById("stepBrand"),
     2: document.getElementById("stepModel"),
     3: document.getElementById("stepVersion"),
-    4: document.getElementById("stepCapacity"),
-    5: document.getElementById("stepColor")
+    4: document.getElementById("stepColor")
+    5: document.getElementById("stepCapacity"),
+    
 };
 
 const stepCount = document.getElementById("stepCount");
@@ -779,9 +782,9 @@ function renderVersions(model) {
             state.color = "";
             state.selectedVersionData = version;
 
-            renderCapacities(version);
-            updateSummary();
-            showStep(4);
+            renderColors(version);
+	    updateSummary();
+	    showStep(4);
         });
 
         versionsContainer.appendChild(button);
@@ -798,11 +801,11 @@ function renderCapacities(version) {
 
         button.addEventListener("click", () => {
             state.capacity = capacity;
-            state.color = "";
 
-            renderColors(version);
-            updateSummary();
-            showStep(5);
+document.querySelectorAll("#capacitiesContainer .choice-btn").forEach(btn => btn.classList.remove("active"));
+button.classList.add("active");
+
+updateSummary();
         });
 
         capacitiesContainer.appendChild(button);
@@ -819,10 +822,14 @@ function renderColors(version) {
 
         button.addEventListener("click", () => {
             state.color = color;
-            updateSummary();
+state.capacity = "";
 
-            document.querySelectorAll("#colorsContainer .choice-btn").forEach(btn => btn.classList.remove("active"));
-            button.classList.add("active");
+document.querySelectorAll("#colorsContainer .choice-btn").forEach(btn => btn.classList.remove("active"));
+button.classList.add("active");
+
+renderCapacities(version);
+updateSummary();
+showStep(5);
         });
 
         colorsContainer.appendChild(button);
