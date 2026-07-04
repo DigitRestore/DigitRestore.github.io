@@ -593,7 +593,18 @@ h1 .highlight{
 <aside class="summary-card">
     <div class="summary-label">Votre appareil</div>
 
-    <div class="device-image-placeholder" id="deviceImage">📱</div>
+    <div class="device-image-placeholder">
+    <img
+        id="deviceImage"
+        src=""
+        alt="Aperçu du téléphone"
+        style="
+            display:none;
+            max-width:100%;
+            max-height:100%;
+            object-fit:contain;
+        ">
+</div>
 
     <div class="summary-title" id="summaryTitle">Aucun appareil sélectionné</div>
 
@@ -647,6 +658,7 @@ const summaryModel = document.getElementById("summaryModel");
 const summaryVersion = document.getElementById("summaryVersion");
 const summaryCapacity = document.getElementById("summaryCapacity");
 const summaryColor = document.getElementById("summaryColor");
+const deviceImage = document.getElementById("deviceImage");
 
 document.querySelectorAll("[data-brand]").forEach(button => {
     button.addEventListener("click", async () => {
@@ -665,6 +677,15 @@ document.querySelectorAll("[data-brand]").forEach(button => {
 
         if (!state.data) {
             await loadAppleData();
+if (
+    state.version === "iPhone 17 Pro Max" &&
+    state.color === "Blanc"
+) {
+    deviceImage.src = "images/reprise/apple/iphone-17-pro-max-blanc.png";
+    deviceImage.style.display = "block";
+} else {
+    deviceImage.style.display = "none";
+}
         }
 
         renderModels();
