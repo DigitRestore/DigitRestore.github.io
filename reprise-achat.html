@@ -247,6 +247,219 @@ main{
     align-items:center;
     justify-content:center;
     background:
+        radial-gradient(circle at center, rgba(53,216,}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.024) 1px, transparent 1px);
+    background-size:54px 54px;
+    mask-image:radial-gradient(circle at center, black 0%, transparent 78%);
+    opacity:.22;
+    z-index:0;
+}
+
+.page{
+    position:relative;
+    z-index:1;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+header{
+    height:70px;
+    padding:10px 30px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    background:rgba(5,8,20,.74);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.back-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:#fff;
+    font-size:22px;
+    background:rgba(255,54,85,.18);
+    border:1px solid rgba(255,54,85,.75);
+    box-shadow:0 0 20px rgba(255,54,85,.35);
+    transition:.25s ease;
+}
+
+.back-btn:hover{
+    transform:translateX(-3px) scale(1.05);
+    border-color:rgba(53,216,255,.85);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.brand img{
+    width:50px;
+    height:50px;
+    object-fit:contain;
+    filter:drop-shadow(0 0 10px rgba(53,216,255,.22));
+}
+
+.brand-line{
+    display:flex;
+    gap:7px;
+    line-height:1;
+}
+
+.digit,.restore{
+    font-family:"Montserrat",sans-serif;
+    font-size:21px;
+    font-weight:900;
+}
+
+.restore{
+    color:var(--red);
+    text-shadow:0 0 14px rgba(255,54,85,.28);
+}
+
+.tag{
+    display:block;
+    margin-top:4px;
+    font-size:8px;
+    letter-spacing:.20em;
+    color:var(--cyan);
+    font-weight:700;
+}
+
+main{
+    flex:1;
+    max-width:1500px;
+    width:100%;
+    margin:0 auto;
+    padding:14px 28px;
+    display:grid;
+    min-height:0;
+}
+
+.reprise-layout{
+    display:grid;
+    grid-template-columns:350px minmax(420px,1fr) 330px;
+    gap:14px;
+    min-height:0;
+}
+
+.card{
+    border-radius:22px;
+    background:
+        radial-gradient(circle at 12% 15%, rgba(22,200,120,.14), transparent 35%),
+        linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.022)),
+        rgba(8,14,31,.84);
+    border:1px solid rgba(22,200,120,.32);
+    box-shadow:0 20px 44px rgba(0,0,0,.42);
+}
+
+.left-column{
+    display:grid;
+    grid-template-rows:auto 1fr;
+    gap:12px;
+    min-height:0;
+}
+
+.config-card{
+    padding:16px;
+}
+
+.card-title{
+    color:var(--cyan);
+    font-size:13px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    margin-bottom:14px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.form-group.full{
+    grid-column:1 / -1;
+}
+
+.form-label{
+    font-size:11px;
+    font-weight:900;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.82);
+    letter-spacing:.06em;
+}
+
+.select-field{
+    width:100%;
+    height:46px;
+    padding:0 12px;
+    border-radius:13px;
+    border:1px solid rgba(255,255,255,.14);
+    background:
+        linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025)),
+        rgba(255,255,255,.035);
+    color:#fff;
+    font-family:"Poppins",sans-serif;
+    font-size:13px;
+    font-weight:800;
+    outline:none;
+    cursor:pointer;
+}
+
+.select-field:focus{
+    border-color:rgba(22,200,120,.85);
+    box-shadow:0 0 18px rgba(22,200,120,.22);
+}
+
+.select-field:disabled{
+    opacity:.42;
+    cursor:not-allowed;
+}
+
+.select-field option{
+    color:#061324;
+    background:#ffffff;
+}
+
+.device-card{
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+}
+
+.device-image-box{
+    flex:1;
+    min-height:150px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
         radial-gradient(circle at center, rgba(53,216,255,.16), transparent 56%),
         radial-gradient(circle at 50% 100%, rgba(22,200,120,.16), transparent 42%),
         rgba(255,255,255,.025);
