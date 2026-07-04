@@ -389,6 +389,18 @@ h1 .highlight{
         radial-gradient(circle at center, rgba(53,216,255,.13), transparent 55%),
         rgba(255,255,255,.04);
     border:1px dashed rgba(255,255,255,.16);
+    overflow:hidden;
+}
+
+.device-image-placeholder img{
+    display:none;
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+}
+
+.device-placeholder-icon{
+    display:block;
 }
 
 .summary-title{
@@ -528,7 +540,7 @@ h1 .highlight{
     </div>
 
     <p class="intro-text">
-        Sélectionnez votre iPhone étape par étape. Le module prépare ensuite l’estimation selon le modèle, la capacité, la couleur et l’état général.
+        Sélectionnez votre iPhone étape par étape. Le module prépare ensuite l’estimation selon le modèle, la couleur, la capacité et l’état général.
     </p>
 </section>
 
@@ -569,18 +581,18 @@ h1 .highlight{
 
         <div class="options-grid" id="versionsContainer"></div>
     </div>
-    
+
     <div class="step" id="stepColor">
-        <button class="back-step" onclick="showStep(4)">← Retour aux capacités</button>
+        <button class="back-step" onclick="showStep(3)">← Retour aux versions</button>
 
         <h2 class="step-title">Choisissez la couleur</h2>
-        <p class="step-text">Sélectionnez la couleur correspondant à votre appareil.</p>
+        <p class="step-text">Sélectionnez la couleur correspondant à votre appareil. L’aperçu s’affiche dès que la couleur est choisie.</p>
 
         <div class="options-grid" id="colorsContainer"></div>
     </div>
 
     <div class="step" id="stepCapacity">
-        <button class="back-step" onclick="showStep(3)">← Retour aux versions</button>
+        <button class="back-step" onclick="showStep(4)">← Retour aux couleurs</button>
 
         <h2 class="step-title">Choisissez la capacité</h2>
         <p class="step-text">La capacité influence directement l’estimation finale de reprise.</p>
@@ -588,25 +600,15 @@ h1 .highlight{
         <div class="options-grid" id="capacitiesContainer"></div>
     </div>
 
-    
-
 </div>
 
 <aside class="summary-card">
     <div class="summary-label">Votre appareil</div>
 
     <div class="device-image-placeholder">
-    <img
-        id="deviceImage"
-        src=""
-        alt="Aperçu du téléphone"
-        style="
-            display:none;
-            max-width:100%;
-            max-height:100%;
-            object-fit:contain;
-        ">
-</div>
+        <span class="device-placeholder-icon" id="devicePlaceholderIcon">📱</span>
+        <img id="deviceImage" src="" alt="Aperçu du téléphone">
+    </div>
 
     <div class="summary-title" id="summaryTitle">Aucun appareil sélectionné</div>
 
@@ -614,8 +616,8 @@ h1 .highlight{
         <div>Marque : <strong id="summaryBrand">—</strong></div>
         <div>Modèle : <strong id="summaryModel">—</strong></div>
         <div>Version : <strong id="summaryVersion">—</strong></div>
-        <div>Capacité : <strong id="summaryCapacity">—</strong></div>
         <div>Couleur : <strong id="summaryColor">—</strong></div>
+        <div>Capacité : <strong id="summaryCapacity">—</strong></div>
         <div class="summary-empty">Les questions sur l’état, la batterie et l’origine européenne seront ajoutées ensuite.</div>
     </div>
 </aside>
@@ -631,8 +633,8 @@ const state = {
     brand: "",
     model: "",
     version: "",
-    capacity: "",
     color: "",
+    capacity: "",
     selectedModelData: null,
     selectedVersionData: null,
     data: null
@@ -642,9 +644,8 @@ const steps = {
     1: document.getElementById("stepBrand"),
     2: document.getElementById("stepModel"),
     3: document.getElementById("stepVersion"),
-    4: document.getElementById("stepColor")
-    5: document.getElementById("stepCapacity"),
-    
+    4: document.getElementById("stepColor"),
+    5: document.getElementById("stepCapacity")
 };
 
 const stepCount = document.getElementById("stepCount");
@@ -652,24 +653,26 @@ const progressBar = document.getElementById("progressBar");
 
 const modelsContainer = document.getElementById("modelsContainer");
 const versionsContainer = document.getElementById("versionsContainer");
-const capacitiesContainer = document.getElementById("capacitiesContainer");
 const colorsContainer = document.getElementById("colorsContainer");
+const capacitiesContainer = document.getElementById("capacitiesContainer");
 
 const summaryTitle = document.getElementById("summaryTitle");
 const summaryBrand = document.getElementById("summaryBrand");
 const summaryModel = document.getElementById("summaryModel");
 const summaryVersion = document.getElementById("summaryVersion");
-const summaryCapacity = document.getElementById("summaryCapacity");
 const summaryColor = document.getElementById("summaryColor");
+const summaryCapacity = document.getElementById("summaryCapacity");
+
 const deviceImage = document.getElementById("deviceImage");
+const devicePlaceholderIcon = document.getElementById("devicePlaceholderIcon");
 
 document.querySelectorAll("[data-brand]").forEach(button => {
     button.addEventListener("click", async () => {
         state.brand = button.dataset.brand;
         state.model = "";
         state.version = "";
-        state.capacity = "";
         state.color = "";
+        state.capacity = "";
         state.selectedModelData = null;
         state.selectedVersionData = null;
 
@@ -680,15 +683,6 @@ document.querySelectorAll("[data-brand]").forEach(button => {
 
         if (!state.data) {
             await loadAppleData();
-if (
-    state.version === "iPhone 17 Pro Max" &&
-    state.color === "Blanc"
-) {
-    deviceImage.src = "images/reprise/apple/iphone-17-pro-max-blanc.png";
-    deviceImage.style.display = "block";
-} else {
-    deviceImage.style.display = "none";
-}
         }
 
         renderModels();
@@ -754,8 +748,8 @@ function renderModels() {
         card.addEventListener("click", () => {
             state.model = model.nom;
             state.version = "";
-            state.capacity = "";
             state.color = "";
+            state.capacity = "";
             state.selectedModelData = model;
             state.selectedVersionData = null;
 
@@ -778,16 +772,40 @@ function renderVersions(model) {
 
         button.addEventListener("click", () => {
             state.version = version.nom;
-            state.capacity = "";
             state.color = "";
+            state.capacity = "";
             state.selectedVersionData = version;
 
             renderColors(version);
-	    updateSummary();
-	    showStep(4);
+            updateSummary();
+            showStep(4);
         });
 
         versionsContainer.appendChild(button);
+    });
+}
+
+function renderColors(version) {
+    colorsContainer.innerHTML = "";
+
+    version.couleurs.forEach(color => {
+        const button = document.createElement("button");
+        button.className = "choice-btn";
+        button.textContent = color;
+
+        button.addEventListener("click", () => {
+            state.color = color;
+            state.capacity = "";
+
+            document.querySelectorAll("#colorsContainer .choice-btn").forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            renderCapacities(version);
+            updateSummary();
+            showStep(5);
+        });
+
+        colorsContainer.appendChild(button);
     });
 }
 
@@ -802,37 +820,13 @@ function renderCapacities(version) {
         button.addEventListener("click", () => {
             state.capacity = capacity;
 
-document.querySelectorAll("#capacitiesContainer .choice-btn").forEach(btn => btn.classList.remove("active"));
-button.classList.add("active");
+            document.querySelectorAll("#capacitiesContainer .choice-btn").forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
 
-updateSummary();
+            updateSummary();
         });
 
         capacitiesContainer.appendChild(button);
-    });
-}
-
-function renderColors(version) {
-    colorsContainer.innerHTML = "";
-
-    version.couleurs.forEach(color => {
-        const button = document.createElement("button");
-        button.className = "choice-btn";
-        button.textContent = color;
-
-        button.addEventListener("click", () => {
-            state.color = color;
-state.capacity = "";
-
-document.querySelectorAll("#colorsContainer .choice-btn").forEach(btn => btn.classList.remove("active"));
-button.classList.add("active");
-
-renderCapacities(version);
-updateSummary();
-showStep(5);
-        });
-
-        colorsContainer.appendChild(button);
     });
 }
 
@@ -851,8 +845,8 @@ function updateSummary() {
     summaryBrand.textContent = state.brand || "—";
     summaryModel.textContent = state.model || "—";
     summaryVersion.textContent = state.version || "—";
-    summaryCapacity.textContent = state.capacity || "—";
     summaryColor.textContent = state.color || "—";
+    summaryCapacity.textContent = state.capacity || "—";
 
     if (state.version) {
         summaryTitle.textContent = state.version;
@@ -862,6 +856,20 @@ function updateSummary() {
         summaryTitle.textContent = state.brand;
     } else {
         summaryTitle.textContent = "Aucun appareil sélectionné";
+    }
+
+    updateDeviceImage();
+}
+
+function updateDeviceImage() {
+    if (state.version === "iPhone 17 Pro Max" && state.color === "Blanc") {
+        deviceImage.src = "images/reprise/apple/iphone-17-pro-max-blanc.png";
+        deviceImage.style.display = "block";
+        devicePlaceholderIcon.style.display = "none";
+    } else {
+        deviceImage.src = "";
+        deviceImage.style.display = "none";
+        devicePlaceholderIcon.style.display = "block";
     }
 }
 
