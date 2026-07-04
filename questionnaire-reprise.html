@@ -1,0 +1,235 @@
+<div class="qr-component">
+
+    <div class="qr-progress">
+        <div class="qr-step active">1</div>
+        <div class="qr-line"></div>
+        <div class="qr-step">2</div>
+        <div class="qr-line"></div>
+        <div class="qr-step">3</div>
+        <div class="qr-line"></div>
+        <div class="qr-step">4</div>
+        <div class="qr-line"></div>
+        <div class="qr-step">5</div>
+        <div class="qr-line"></div>
+        <div class="qr-step">6</div>
+    </div>
+
+    <div class="qr-header">
+        <div class="qr-kicker">Étape 1 sur 6</div>
+        <h2>Fonctionnement général</h2>
+        <p>Votre iPhone est-il pleinement fonctionnel ?</p>
+    </div>
+
+    <div class="qr-options">
+
+        <label class="qr-option">
+            <input type="radio" name="fonctionnement" value="oui">
+            <span class="qr-radio"></span>
+            <span class="qr-content">
+                <strong>Oui, tout fonctionne correctement</strong>
+                <small>L’appareil s’allume, se charge et toutes les fonctions principales sont opérationnelles.</small>
+            </span>
+        </label>
+
+        <label class="qr-option">
+            <input type="radio" name="fonctionnement" value="non">
+            <span class="qr-radio"></span>
+            <span class="qr-content">
+                <strong>Non, il présente un ou plusieurs défauts</strong>
+                <small>Vous pourrez préciser les défauts constatés à l’étape suivante.</small>
+            </span>
+        </label>
+
+    </div>
+
+    <div class="qr-actions">
+        <button class="qr-btn qr-btn-secondary" type="button" disabled>← Retour</button>
+        <button class="qr-btn qr-btn-primary" type="button">Valider →</button>
+    </div>
+
+</div>
+
+<style>
+.qr-component{
+    height:100%;
+    min-height:360px;
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    background:
+        radial-gradient(circle at 12% 10%, rgba(53,216,255,.10), transparent 34%),
+        radial-gradient(circle at 90% 90%, rgba(22,200,120,.10), transparent 36%);
+}
+
+.qr-progress{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.qr-step{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:900;
+    color:rgba(255,255,255,.55);
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.13);
+}
+
+.qr-step.active{
+    color:#04101a;
+    background:linear-gradient(135deg,var(--green),var(--cyan));
+    box-shadow:0 0 18px rgba(53,216,255,.28);
+}
+
+.qr-line{
+    flex:1;
+    height:2px;
+    border-radius:99px;
+    background:rgba(255,255,255,.10);
+}
+
+.qr-header{
+    padding-top:4px;
+}
+
+.qr-kicker{
+    margin-bottom:6px;
+    color:var(--cyan);
+    font-size:11px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+}
+
+.qr-header h2{
+    font-size:26px;
+    line-height:1.15;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.qr-header p{
+    max-width:560px;
+    color:rgba(255,255,255,.68);
+    font-size:14px;
+    line-height:1.5;
+}
+
+.qr-options{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.qr-option{
+    position:relative;
+    min-height:76px;
+    padding:14px 15px;
+    border-radius:17px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:14px;
+    align-items:center;
+    background:
+        linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.025));
+    border:1px solid rgba(255,255,255,.11);
+    cursor:pointer;
+    transition:.22s ease;
+}
+
+.qr-option:hover{
+    transform:translateY(-1px);
+    border-color:rgba(53,216,255,.38);
+    box-shadow:0 14px 28px rgba(0,0,0,.22);
+}
+
+.qr-option input{
+    display:none;
+}
+
+.qr-radio{
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.28);
+    background:rgba(255,255,255,.035);
+    box-shadow:inset 0 0 0 5px rgba(8,14,31,.92);
+    transition:.22s ease;
+}
+
+.qr-option input:checked + .qr-radio{
+    border-color:var(--cyan);
+    background:linear-gradient(135deg,var(--green),var(--cyan));
+    box-shadow:
+        inset 0 0 0 5px rgba(8,14,31,.92),
+        0 0 18px rgba(53,216,255,.38);
+}
+
+.qr-option:has(input:checked){
+    border-color:rgba(53,216,255,.70);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(53,216,255,.14), transparent 38%),
+        linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.030));
+}
+
+.qr-content strong{
+    display:block;
+    font-size:14px;
+    font-weight:900;
+    margin-bottom:4px;
+}
+
+.qr-content small{
+    display:block;
+    color:rgba(255,255,255,.58);
+    font-size:12px;
+    line-height:1.45;
+}
+
+.qr-actions{
+    margin-top:auto;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.qr-btn{
+    min-width:145px;
+    padding:12px 16px;
+    border-radius:13px;
+    font-family:"Poppins",sans-serif;
+    font-size:13px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.22s ease;
+}
+
+.qr-btn-primary{
+    border:none;
+    color:#04101a;
+    background:linear-gradient(90deg,var(--green),var(--cyan));
+    box-shadow:0 0 20px rgba(53,216,255,.22);
+}
+
+.qr-btn-secondary{
+    color:#fff;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.13);
+}
+
+.qr-btn:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+}
+
+.qr-btn:not(:disabled):hover{
+    transform:translateY(-1px);
+}
+</style>
