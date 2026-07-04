@@ -283,7 +283,7 @@ html,body{
 
 <body>
 
-<div class="qr-component" id="qrComponent">
+<div class="qr-component">
     <div id="qrRender"></div>
 </div>
 
@@ -467,16 +467,28 @@ function renderQuestion(stepId) {
             <button class="qr-btn qr-btn-secondary" type="button" id="qrBackBtn" ${questionnaireState.history.length === 0 ? "disabled" : ""}>
                 ← Retour
             </button>
-            <button class="qr-btn qr-btn-primary" type="button" id="qrNextBtn">
-                ${stepId === "recap" ? "Questionnaire terminé" : "Valider →"}
-            </button>
+            ${renderActionButton(question)}
         </div>
     `;
 
-    document.getElementById("qrBackBtn").addEventListener("click", goBack);
-    document.getElementById("qrNextBtn").addEventListener("click", () => validateQuestion(question));
-
+    bindEvents(question);
     sendQuestionnaireUpdate(stepId === "recap");
+}
+
+function renderActionButton(question) {
+    if (question.type === "radio") {
+        return `<button class="qr-btn qr-btn-primary" type="button" disabled>Choisissez une réponse</button>`;
+    }
+
+    if (question.type === "checkbox") {
+        return `<button class="qr-btn qr-btn-primary" type="button" id="qrContinueBtn">Continuer →</button>`;
+    }
+
+    if (question.type === "recap") {
+        return `<button class="qr-btn qr-btn-primary" type="button" id="qrFinishBtn">Questionnaire terminé</button>`;
+    }
+
+    return "";
 }
 
 function renderProgress(currentStep) {
@@ -508,7 +520,7 @@ function renderBody(question) {
         const inputType = question.type === "checkbox" ? "checkbox" : "radio";
 
         html += `
-            <label class="qr-option">
+            <label class="qr-option" data-option-value="${value}">
                 <input type="${inputType}" name="${question.key}" value="${value}" ${checked ? "checked" : ""}>
                 <span class="qr-dot"></span>
                 <span class="qr-content">
@@ -553,43 +565,62 @@ function renderRecap() {
     `;
 }
 
-function validateQuestion(question) {
+function bindEvents(question) {
+    const backBtn = document.getElementById("qrBackBtn");
+    if (backBtn) backBtn.addEventListener("click", goBack);
+
+    if (question.type === "radio") {
+        const options = document.querySelectorAll(`input[name="${question.key}"]`);
+
+        options.forEach(input => {
+            input.addEventListener("change", () => {
+                saveAnswer(question.key, input.value);
+                goNext(question.key, input.value);
+            });
+        });
+    }
+
+    if (question.type === "checkbox") {
+        const continueBtn = document.getElementById("qrContinueBtn");
+
+        if (continueBtn) {
+            continueBtn.addEventListener("click", () => {
+                const values = getSelectedCheckboxValues(question.key);
+
+                if (values.length === 0) {
+                    alert("Merci de sélectionner au moins une réponse.");
+                    return;
+                }
+
+                saveAnswer(question.key, values);
+                goNext(question.key, values);
+            });
+        }
+    }
+
     if (question.type === "recap") {
-        sendQuestionnaireUpdate(true);
-        return;
-    }
-
-    const value = getSelectedValue(question);
-
-    if (question.type === "radio" && !value) {
-        alert("Merci de sélectionner une réponse.");
-        return;
-    }
-
-    if (question.type === "checkbox" && value.length === 0) {
-        alert("Merci de sélectionner au moins une réponse.");
-        return;
-    }
-
-    saveAnswer(question.key, value);
-
-    const nextStep = getNextStep(question.key, value);
-
-    if (nextStep) {
-        questionnaireState.history.push(questionnaireState.currentStep);
-        renderQuestion(nextStep);
+        const finishBtn = document.getElementById("qrFinishBtn");
+        if (finishBtn) {
+            finishBtn.addEventListener("click", () => {
+                sendQuestionnaireUpdate(true);
+            });
+        }
     }
 }
 
-function getSelectedValue(question) {
-    const inputs = [...document.querySelectorAll(`input[name="${question.key}"]`)];
+function goNext(key, value) {
+    const nextStep = getNextStep(key, value);
 
-    if (question.type === "radio") {
-        const selected = inputs.find(input => input.checked);
-        return selected ? selected.value : null;
-    }
+    if (!nextStep) return;
 
-    return inputs.filter(input => input.checked).map(input => input.value);
+    questionnaireState.history.push(questionnaireState.currentStep);
+    renderQuestion(nextStep);
+}
+
+function getSelectedCheckboxValues(key) {
+    return [...document.querySelectorAll(`input[name="${key}"]`)]
+        .filter(input => input.checked)
+        .map(input => input.value);
 }
 
 function saveAnswer(key, value) {
