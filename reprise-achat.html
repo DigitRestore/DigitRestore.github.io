@@ -57,26 +57,26 @@ body::before{
 }
 
 header{
-    height:78px;
-    padding:12px 34px;
+    height:72px;
+    padding:10px 30px;
     display:flex;
     align-items:center;
-    gap:22px;
+    gap:20px;
     background:rgba(5,8,20,.74);
     backdrop-filter:blur(18px);
     border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .back-btn{
-    width:44px;
-    height:44px;
+    width:42px;
+    height:42px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
     text-decoration:none;
     color:#fff;
-    font-size:23px;
+    font-size:22px;
     background:rgba(255,54,85,.18);
     border:1px solid rgba(255,54,85,.75);
     box-shadow:0 0 20px rgba(255,54,85,.35);
@@ -91,12 +91,12 @@ header{
 .brand{
     display:flex;
     align-items:center;
-    gap:13px;
+    gap:12px;
 }
 
 .brand img{
-    width:54px;
-    height:54px;
+    width:50px;
+    height:50px;
     object-fit:contain;
     filter:drop-shadow(0 0 10px rgba(53,216,255,.22));
 }
@@ -109,7 +109,7 @@ header{
 
 .digit,.restore{
     font-family:"Montserrat",sans-serif;
-    font-size:22px;
+    font-size:21px;
     font-weight:900;
 }
 
@@ -122,7 +122,7 @@ header{
     display:block;
     margin-top:4px;
     font-size:8px;
-    letter-spacing:.22em;
+    letter-spacing:.20em;
     color:var(--cyan);
     font-weight:700;
 }
@@ -130,65 +130,12 @@ header{
 main{
     max-width:1500px;
     margin:0 auto;
-    padding:22px 34px 24px;
-}
-
-.hero{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:26px;
-    margin-bottom:16px;
-}
-
-.eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-    margin-bottom:8px;
-    padding:7px 13px;
-    border-radius:999px;
-    color:var(--cyan);
-    font-size:11px;
-    font-weight:800;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    background:rgba(53,216,255,.08);
-    border:1px solid rgba(53,216,255,.18);
-}
-
-.eyebrow::before{
-    content:"";
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:var(--green);
-    box-shadow:0 0 14px rgba(22,200,120,.85);
-}
-
-h1{
-    font-size:clamp(32px,3.5vw,48px);
-    line-height:1.02;
-    font-weight:800;
-    letter-spacing:-.05em;
-}
-
-h1 .highlight{
-    background:linear-gradient(90deg,var(--green),var(--cyan),var(--red));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-.intro-text{
-    max-width:560px;
-    font-size:13px;
-    line-height:1.5;
-    color:rgba(255,255,255,.72);
+    padding:18px 30px 18px;
 }
 
 .reprise-layout{
     display:grid;
-    grid-template-columns:440px minmax(360px,1fr) 340px;
+    grid-template-columns:360px minmax(360px,1fr) 330px;
     gap:14px;
     align-items:stretch;
 }
@@ -204,124 +151,89 @@ h1 .highlight{
 }
 
 .panel{
-    padding:16px;
+    padding:18px;
+    min-height:510px;
     display:flex;
     flex-direction:column;
-    gap:12px;
-}
-
-.config-block{
-    border-radius:17px;
-    padding:13px;
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.11);
-}
-
-.config-block.disabled{
-    opacity:.42;
-    pointer-events:none;
-}
-
-.block-title{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    margin-bottom:11px;
-    font-size:13px;
-    font-weight:900;
-    text-transform:uppercase;
-    letter-spacing:.02em;
-}
-
-.block-number{
-    color:var(--cyan);
-    font-weight:900;
-}
-
-.options-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:8px;
-}
-
-.choice-btn{
-    min-height:48px;
-    padding:10px 11px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,.12);
-    background:
-        linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025)),
-        rgba(255,255,255,.03);
-    color:#fff;
-    font-family:"Poppins",sans-serif;
-    font-size:13px;
-    font-weight:800;
-    cursor:pointer;
-    text-align:center;
-    transition:.22s ease;
-}
-
-.choice-btn:hover,.choice-btn.active{
-    transform:translateY(-2px);
-    border-color:rgba(22,200,120,.85);
-    box-shadow:0 0 18px rgba(22,200,120,.22);
-}
-
-.model-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:8px;
-    max-height:230px;
-    overflow:auto;
-    padding-right:4px;
-}
-
-.model-card{
-    min-height:74px;
-    padding:10px;
-    border-radius:13px;
-    border:1px solid rgba(255,255,255,.12);
-    background:
-        radial-gradient(circle at 20% 15%, rgba(53,216,255,.09), transparent 40%),
-        linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025)),
-        rgba(255,255,255,.03);
-    color:#fff;
-    cursor:pointer;
-    transition:.22s ease;
-    text-align:center;
-}
-
-.model-card:hover,.model-card.active{
-    transform:translateY(-2px);
-    border-color:rgba(22,200,120,.85);
-    box-shadow:0 0 18px rgba(22,200,120,.22);
-}
-
-.model-name{
-    font-size:15px;
-    font-weight:900;
-    margin-bottom:7px;
-}
-
-.model-pills{
-    display:flex;
-    flex-wrap:wrap;
-    gap:4px;
     justify-content:center;
 }
 
-.model-pill{
-    padding:4px 6px;
-    border-radius:7px;
-    font-size:10px;
-    font-weight:700;
+.config-title{
+    color:var(--cyan);
+    font-size:13px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.09em;
+    margin-bottom:18px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.form-group.full{
+    grid-column:1 / -1;
+}
+
+.form-label{
+    font-size:12px;
+    font-weight:900;
+    text-transform:uppercase;
     color:rgba(255,255,255,.82);
-    background:rgba(255,255,255,.07);
+    letter-spacing:.06em;
+}
+
+.select-field{
+    width:100%;
+    height:52px;
+    padding:0 14px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.14);
+    background:
+        linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025)),
+        rgba(255,255,255,.035);
+    color:#fff;
+    font-family:"Poppins",sans-serif;
+    font-size:14px;
+    font-weight:800;
+    outline:none;
+    cursor:pointer;
+    transition:.22s ease;
+}
+
+.select-field:focus{
+    border-color:rgba(22,200,120,.85);
+    box-shadow:0 0 18px rgba(22,200,120,.22);
+}
+
+.select-field:disabled{
+    opacity:.42;
+    cursor:not-allowed;
+}
+
+.select-field option{
+    color:#061324;
+    background:#ffffff;
+}
+
+.helper-text{
+    margin-top:16px;
+    color:rgba(255,255,255,.48);
+    font-size:12px;
+    line-height:1.45;
 }
 
 .preview-card{
-    padding:18px;
-    min-height:520px;
+    padding:16px;
+    min-height:510px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -340,11 +252,11 @@ h1 .highlight{
 .preview-image-box{
     width:100%;
     flex:1;
-    min-height:310px;
+    min-height:270px;
     display:flex;
     align-items:center;
     justify-content:center;
-    margin:10px 0 12px;
+    margin:8px 0 10px;
     border-radius:22px;
     background:
         radial-gradient(circle at center, rgba(53,216,255,.16), transparent 56%),
@@ -356,34 +268,34 @@ h1 .highlight{
 
 .preview-image-box img{
     display:none;
-    max-width:92%;
-    max-height:300px;
+    max-width:90%;
+    max-height:270px;
     object-fit:contain;
     filter:drop-shadow(0 20px 30px rgba(0,0,0,.55));
 }
 
 .preview-placeholder{
-    font-size:76px;
+    font-size:70px;
     opacity:.42;
 }
 
 .preview-title{
-    font-size:24px;
+    font-size:22px;
     font-weight:900;
     text-align:center;
-    margin-bottom:10px;
+    margin-bottom:9px;
 }
 
 .preview-tags{
     display:flex;
     flex-wrap:wrap;
-    gap:8px;
+    gap:7px;
     justify-content:center;
 }
 
 .preview-tag{
-    padding:8px 13px;
-    border-radius:11px;
+    padding:7px 11px;
+    border-radius:10px;
     background:rgba(255,255,255,.05);
     border:1px solid rgba(255,255,255,.12);
     color:rgba(255,255,255,.86);
@@ -395,7 +307,7 @@ h1 .highlight{
     padding:18px;
     display:flex;
     flex-direction:column;
-    min-height:520px;
+    min-height:510px;
 }
 
 .summary-label{
@@ -404,13 +316,13 @@ h1 .highlight{
     font-weight:900;
     text-transform:uppercase;
     letter-spacing:.08em;
-    margin-bottom:16px;
+    margin-bottom:14px;
 }
 
 .summary-title{
-    font-size:21px;
+    font-size:20px;
     font-weight:900;
-    margin-bottom:14px;
+    margin-bottom:12px;
 }
 
 .summary-list{
@@ -424,7 +336,7 @@ h1 .highlight{
     display:flex;
     justify-content:space-between;
     gap:12px;
-    padding:12px 0;
+    padding:10px 0;
     border-bottom:1px solid rgba(255,255,255,.09);
 }
 
@@ -434,21 +346,21 @@ h1 .highlight{
 }
 
 .estimate-box{
-    margin-top:22px;
-    padding-top:18px;
+    margin-top:18px;
+    padding-top:15px;
     border-top:1px solid rgba(255,255,255,.12);
 }
 
 .estimate-title{
     color:rgba(255,255,255,.72);
-    font-size:13px;
+    font-size:12px;
     font-weight:900;
     text-transform:uppercase;
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
 .estimate-value{
-    font-size:36px;
+    font-size:32px;
     font-weight:900;
     color:var(--cyan);
     text-align:center;
@@ -458,7 +370,7 @@ h1 .highlight{
 .next-btn{
     width:100%;
     margin-top:auto;
-    padding:14px 18px;
+    padding:13px 16px;
     border:none;
     border-radius:13px;
     color:#04101a;
@@ -471,10 +383,10 @@ h1 .highlight{
 }
 
 .summary-empty{
-    margin-top:14px;
+    margin-top:12px;
     color:rgba(255,255,255,.42);
     font-style:italic;
-    line-height:1.45;
+    line-height:1.4;
     font-size:12px;
 }
 
@@ -483,25 +395,25 @@ h1 .highlight{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:10px;
-    padding:14px 18px;
+    padding:12px 16px;
 }
 
 .trust-item{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:10px;
     color:rgba(255,255,255,.76);
     font-size:12px;
 }
 
 .trust-icon{
     color:var(--green);
-    font-size:24px;
+    font-size:22px;
 }
 
 .notice{
-    padding:14px;
-    border-radius:15px;
+    padding:12px;
+    border-radius:14px;
     background:rgba(255,255,255,.05);
     border:1px solid rgba(255,255,255,.1);
     color:rgba(255,255,255,.72);
@@ -545,35 +457,27 @@ h1 .highlight{
     }
 
     main{
-        padding:24px 18px;
-    }
-
-    .hero{
-        display:block;
-    }
-
-    .intro-text{
-        margin-top:10px;
+        padding:18px;
     }
 
     .reprise-layout{
         grid-template-columns:1fr;
     }
 
-    .options-grid,.model-grid{
+    .form-grid{
         grid-template-columns:1fr;
     }
 
-    .model-grid{
-        max-height:none;
+    .form-group.full{
+        grid-column:auto;
     }
 
-    .preview-card,.summary-card{
+    .panel,.preview-card,.summary-card{
         min-height:auto;
     }
 
     .preview-image-box{
-        min-height:240px;
+        min-height:230px;
     }
 }
 </style>
@@ -601,48 +505,54 @@ h1 .highlight{
 
 <main>
 
-<section class="hero">
-    <div class="hero-text">
-        <div class="eyebrow">Assistant de reprise</div>
-        <h1>Estimez votre appareil avec <span class="highlight">DigitRestore</span></h1>
-    </div>
-
-    <p class="intro-text">
-        Configurez votre iPhone en quelques clics. L’aperçu se met à jour automatiquement selon le modèle, la couleur et la capacité.
-    </p>
-</section>
-
 <section class="reprise-layout">
 
 <div class="panel">
+    <div class="config-title">Configuration de votre appareil</div>
 
-    <div class="config-block" id="blockBrand">
-        <div class="block-title"><span class="block-number">1.</span> Marque</div>
-        <div class="options-grid">
-            <button class="choice-btn" data-brand="Apple">Apple</button>
+    <div class="form-grid">
+
+        <div class="form-group full">
+            <label class="form-label" for="brandSelect">Marque</label>
+            <select class="select-field" id="brandSelect">
+                <option value="">Sélectionner une marque</option>
+                <option value="Apple">Apple</option>
+            </select>
         </div>
-    </div>
 
-    <div class="config-block disabled" id="blockModel">
-        <div class="block-title"><span class="block-number">2.</span> Modèle</div>
-        <div class="model-grid" id="modelsContainer"></div>
-    </div>
-
-    <div class="config-block disabled" id="blockVersion">
-        <div class="block-title"><span class="block-number">3.</span> Version</div>
-        <div class="options-grid" id="versionsContainer"></div>
-    </div>
-
-    <div class="config-block disabled" id="blockColorCapacity">
-        <div class="block-title"><span class="block-number">4.</span> Couleur</div>
-        <div class="options-grid" id="colorsContainer"></div>
-
-        <div class="block-title" style="margin-top:14px;">
-            <span class="block-number">5.</span> Capacité
+        <div class="form-group">
+            <label class="form-label" for="modelSelect">Modèle</label>
+            <select class="select-field" id="modelSelect" disabled>
+                <option value="">Sélectionner</option>
+            </select>
         </div>
-        <div class="options-grid" id="capacitiesContainer"></div>
+
+        <div class="form-group">
+            <label class="form-label" for="versionSelect">Version</label>
+            <select class="select-field" id="versionSelect" disabled>
+                <option value="">Sélectionner</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="colorSelect">Couleur</label>
+            <select class="select-field" id="colorSelect" disabled>
+                <option value="">Sélectionner</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="capacitySelect">Capacité</label>
+            <select class="select-field" id="capacitySelect" disabled>
+                <option value="">Sélectionner</option>
+            </select>
+        </div>
+
     </div>
 
+    <p class="helper-text">
+        La sélection se débloque progressivement. L’aperçu se met à jour dès que la couleur est choisie.
+    </p>
 </div>
 
 <div class="preview-card">
@@ -712,16 +622,11 @@ const state = {
     data: null
 };
 
-const blocks = {
-    model: document.getElementById("blockModel"),
-    version: document.getElementById("blockVersion"),
-    colorCapacity: document.getElementById("blockColorCapacity")
-};
-
-const modelsContainer = document.getElementById("modelsContainer");
-const versionsContainer = document.getElementById("versionsContainer");
-const colorsContainer = document.getElementById("colorsContainer");
-const capacitiesContainer = document.getElementById("capacitiesContainer");
+const brandSelect = document.getElementById("brandSelect");
+const modelSelect = document.getElementById("modelSelect");
+const versionSelect = document.getElementById("versionSelect");
+const colorSelect = document.getElementById("colorSelect");
+const capacitySelect = document.getElementById("capacitySelect");
 
 const summaryTitle = document.getElementById("summaryTitle");
 const summaryBrand = document.getElementById("summaryBrand");
@@ -739,29 +644,93 @@ const previewCapacity = document.getElementById("previewCapacity");
 const deviceImage = document.getElementById("deviceImage");
 const devicePlaceholderIcon = document.getElementById("devicePlaceholderIcon");
 
-document.querySelectorAll("[data-brand]").forEach(button => {
-    button.addEventListener("click", async () => {
-        state.brand = button.dataset.brand;
-        state.model = "";
-        state.version = "";
-        state.color = "";
-        state.capacity = "";
-        state.selectedModelData = null;
-        state.selectedVersionData = null;
+brandSelect.addEventListener("change", async () => {
+    state.brand = brandSelect.value;
+    state.model = "";
+    state.version = "";
+    state.color = "";
+    state.capacity = "";
+    state.selectedModelData = null;
+    state.selectedVersionData = null;
 
-        document.querySelectorAll("[data-brand]").forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
+    resetSelect(modelSelect, "Sélectionner");
+    resetSelect(versionSelect, "Sélectionner");
+    resetSelect(colorSelect, "Sélectionner");
+    resetSelect(capacitySelect, "Sélectionner");
 
-        resetContainersAfterBrand();
-        updateSummary();
+    modelSelect.disabled = true;
+    versionSelect.disabled = true;
+    colorSelect.disabled = true;
+    capacitySelect.disabled = true;
 
+    updateSummary();
+
+    if (state.brand === "Apple") {
         if (!state.data) {
             await loadAppleData();
         }
 
-        renderModels();
-        blocks.model.classList.remove("disabled");
-    });
+        renderModelSelect();
+        modelSelect.disabled = false;
+    }
+});
+
+modelSelect.addEventListener("change", () => {
+    state.model = modelSelect.value;
+    state.version = "";
+    state.color = "";
+    state.capacity = "";
+    state.selectedVersionData = null;
+
+    state.selectedModelData = findSelectedModel(state.model);
+
+    resetSelect(versionSelect, "Sélectionner");
+    resetSelect(colorSelect, "Sélectionner");
+    resetSelect(capacitySelect, "Sélectionner");
+
+    versionSelect.disabled = true;
+    colorSelect.disabled = true;
+    capacitySelect.disabled = true;
+
+    if (state.selectedModelData) {
+        renderVersionSelect(state.selectedModelData);
+        versionSelect.disabled = false;
+    }
+
+    updateSummary();
+});
+
+versionSelect.addEventListener("change", () => {
+    state.version = versionSelect.value;
+    state.color = "";
+    state.capacity = "";
+
+    state.selectedVersionData = findSelectedVersion(state.version);
+
+    resetSelect(colorSelect, "Sélectionner");
+    resetSelect(capacitySelect, "Sélectionner");
+
+    colorSelect.disabled = true;
+    capacitySelect.disabled = true;
+
+    if (state.selectedVersionData) {
+        renderColorSelect(state.selectedVersionData);
+        renderCapacitySelect(state.selectedVersionData);
+        colorSelect.disabled = false;
+        capacitySelect.disabled = false;
+    }
+
+    updateSummary();
+});
+
+colorSelect.addEventListener("change", () => {
+    state.color = colorSelect.value;
+    updateSummary();
+});
+
+capacitySelect.addEventListener("change", () => {
+    state.capacity = capacitySelect.value;
+    updateSummary();
 });
 
 async function loadAppleData() {
@@ -775,147 +744,82 @@ async function loadAppleData() {
         state.data = await response.json();
 
     } catch (error) {
-        modelsContainer.innerHTML = `
-            <div class="notice">
-                Impossible de charger <strong>donnees/reprise-apple.json</strong>.<br>
-                Vérifiez que le fichier existe bien dans le dossier <strong>donnees</strong>.
-            </div>
-        `;
+        resetSelect(modelSelect, "Erreur de chargement");
     }
 }
 
-function renderModels() {
-    modelsContainer.innerHTML = "";
+function renderModelSelect() {
+    resetSelect(modelSelect, "Sélectionner");
 
     if (!state.data || !Array.isArray(state.data.modeles)) {
-        modelsContainer.innerHTML = `<div class="notice">Aucun modèle disponible pour le moment.</div>`;
         return;
     }
 
     const modeles = [...state.data.modeles].sort((a, b) => a.ordre - b.ordre);
 
     modeles.forEach(model => {
-        const card = document.createElement("button");
-        card.className = "model-card";
-
-        const title = document.createElement("div");
-        title.className = "model-name";
-        title.textContent = model.nom;
-
-        const pills = document.createElement("div");
-        pills.className = "model-pills";
-
-        model.versions.forEach(version => {
-            const pill = document.createElement("span");
-            pill.className = "model-pill";
-            pill.textContent = getShortVersionName(model.nom, version.nom);
-            pills.appendChild(pill);
-        });
-
-        card.appendChild(title);
-        card.appendChild(pills);
-
-        card.addEventListener("click", () => {
-            state.model = model.nom;
-            state.version = "";
-            state.color = "";
-            state.capacity = "";
-            state.selectedModelData = model;
-            state.selectedVersionData = null;
-
-            document.querySelectorAll("#modelsContainer .model-card").forEach(btn => btn.classList.remove("active"));
-            card.classList.add("active");
-
-            renderVersions(model);
-            blocks.version.classList.remove("disabled");
-            blocks.colorCapacity.classList.add("disabled");
-
-            colorsContainer.innerHTML = "";
-            capacitiesContainer.innerHTML = "";
-
-            updateSummary();
-        });
-
-        modelsContainer.appendChild(card);
+        const option = document.createElement("option");
+        option.value = model.nom;
+        option.textContent = model.nom;
+        modelSelect.appendChild(option);
     });
 }
 
-function renderVersions(model) {
-    versionsContainer.innerHTML = "";
+function renderVersionSelect(model) {
+    resetSelect(versionSelect, "Sélectionner");
 
     model.versions.forEach(version => {
-        const button = document.createElement("button");
-        button.className = "choice-btn";
-        button.textContent = version.nom;
-
-        button.addEventListener("click", () => {
-            state.version = version.nom;
-            state.color = "";
-            state.capacity = "";
-            state.selectedVersionData = version;
-
-            document.querySelectorAll("#versionsContainer .choice-btn").forEach(btn => btn.classList.remove("active"));
-            button.classList.add("active");
-
-            renderColors(version);
-            renderCapacities(version);
-
-            blocks.colorCapacity.classList.remove("disabled");
-            updateSummary();
-        });
-
-        versionsContainer.appendChild(button);
+        const option = document.createElement("option");
+        option.value = version.nom;
+        option.textContent = version.nom;
+        versionSelect.appendChild(option);
     });
 }
 
-function renderColors(version) {
-    colorsContainer.innerHTML = "";
+function renderColorSelect(version) {
+    resetSelect(colorSelect, "Sélectionner");
 
     version.couleurs.forEach(color => {
-        const button = document.createElement("button");
-        button.className = "choice-btn";
-        button.textContent = color;
-
-        button.addEventListener("click", () => {
-            state.color = color;
-
-            document.querySelectorAll("#colorsContainer .choice-btn").forEach(btn => btn.classList.remove("active"));
-            button.classList.add("active");
-
-            updateSummary();
-        });
-
-        colorsContainer.appendChild(button);
+        const option = document.createElement("option");
+        option.value = color;
+        option.textContent = color;
+        colorSelect.appendChild(option);
     });
 }
 
-function renderCapacities(version) {
-    capacitiesContainer.innerHTML = "";
+function renderCapacitySelect(version) {
+    resetSelect(capacitySelect, "Sélectionner");
 
     version.capacites.forEach(capacity => {
-        const button = document.createElement("button");
-        button.className = "choice-btn";
-        button.textContent = capacity;
-
-        button.addEventListener("click", () => {
-            state.capacity = capacity;
-
-            document.querySelectorAll("#capacitiesContainer .choice-btn").forEach(btn => btn.classList.remove("active"));
-            button.classList.add("active");
-
-            updateSummary();
-        });
-
-        capacitiesContainer.appendChild(button);
+        const option = document.createElement("option");
+        option.value = capacity;
+        option.textContent = capacity;
+        capacitySelect.appendChild(option);
     });
 }
 
-function resetContainersAfterBrand() {
-    versionsContainer.innerHTML = "";
-    colorsContainer.innerHTML = "";
-    capacitiesContainer.innerHTML = "";
-    blocks.version.classList.add("disabled");
-    blocks.colorCapacity.classList.add("disabled");
+function resetSelect(selectElement, placeholder) {
+    selectElement.innerHTML = "";
+    const option = document.createElement("option");
+    option.value = "";
+    option.textContent = placeholder;
+    selectElement.appendChild(option);
+}
+
+function findSelectedModel(modelName) {
+    if (!state.data || !Array.isArray(state.data.modeles)) {
+        return null;
+    }
+
+    return state.data.modeles.find(model => model.nom === modelName) || null;
+}
+
+function findSelectedVersion(versionName) {
+    if (!state.selectedModelData || !Array.isArray(state.selectedModelData.versions)) {
+        return null;
+    }
+
+    return state.selectedModelData.versions.find(version => version.nom === versionName) || null;
 }
 
 function updateSummary() {
@@ -957,13 +861,6 @@ function updateDeviceImage() {
         deviceImage.style.display = "none";
         devicePlaceholderIcon.style.display = "block";
     }
-}
-
-function getShortVersionName(modelName, versionName) {
-    return versionName
-        .replace(modelName, "")
-        .replace("iPhone", "")
-        .trim() || modelName.replace("iPhone", "").trim();
 }
 </script>
 
