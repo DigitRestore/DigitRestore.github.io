@@ -691,40 +691,1356 @@ window.addEventListener("message", event => {
         questionnaireState.appareil = data.appareil || questionnaireState.appareil;
     }
 });
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-function formatValue(value) {
+<style>
+:root{
+    --red:#ff3655;
+    --cyan:#35d8ff;
+    --green:#16c878;
+    --text-main:#ffffff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:"Poppins",Arial,sans-serif;
+    color:var(--text-main);
+    background:transparent;
+}
+
+.qr-component{
+    width:100%;
+    height:100%;
+    min-height:0;
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    background:
+        radial-gradient(circle at 12% 10%, rgba(53,216,255,.10), transparent 34%),
+        radial-gradient(circle at 90% 90%, rgba(22,200,120,.10), transparent 36%);
+}
+
+#qrRender{
+    flex:1;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.qr-progress{
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.qr-step{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:900;
+    color:rgba(255,255,255,.55);
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.13);
+}
+
+.qr-step.active,
+.qr-step.done{
+    color:#04101a;
+    background:linear-gradient(135deg,var(--green),var(--cyan));
+    box-shadow:0 0 18px rgba(53,216,255,.28);
+}
+
+.qr-step.done{
+    opacity:.70;
+}
+
+.qr-line{
+    flex:1;
+    height:2px;
+    border-radius:99px;
+    background:rgba(255,255,255,.10);
+}
+
+.qr-body{
+    flex:1;
+    min-height:0;
+    overflow-y:auto;
+    padding-right:4px;
+    padding-bottom:12px;
+}
+
+.qr-body::-webkit-scrollbar{
+    width:6px;
+}
+
+.qr-body::-webkit-scrollbar-thumb{
+    border-radius:99px;
+    background:rgba(255,255,255,.18);
+}
+
+.qr-kicker{
+    margin-bottom:6px;
+    color:var(--cyan);
+    font-size:11px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+}
+
+.qr-title{
+    font-size:26px;
+    line-height:1.15;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.qr-text{
+    max-width:620px;
+    color:rgba(255,255,255,.68);
+    font-size:14px;
+    line-height:1.5;
+    margin-bottom:18px;
+}
+
+.qr-options{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.qr-options.compact{
+    gap:9px;
+}
+
+.qr-option{
+    min-height:72px;
+    padding:14px 15px;
+    border-radius:17px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:14px;
+    align-items:center;
+    background:linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.025));
+    border:1px solid rgba(255,255,255,.11);
+    cursor:pointer;
+    transition:.22s ease;
+}
+
+.qr-option:hover{
+    transform:translateY(-1px);
+    border-color:rgba(53,216,255,.38);
+    box-shadow:0 14px 28px rgba(0,0,0,.22);
+}
+
+.qr-option input{
+    display:none;
+}
+
+.qr-dot{
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.28);
+    background:rgba(255,255,255,.035);
+    box-shadow:inset 0 0 0 5px rgba(8,14,31,.92);
+    transition:.22s ease;
+}
+
+.qr-option input:checked + .qr-dot{
+    border-color:var(--cyan);
+    background:linear-gradient(135deg,var(--green),var(--cyan));
+    box-shadow:
+        inset 0 0 0 5px rgba(8,14,31,.92),
+        0 0 18px rgba(53,216,255,.38);
+}
+
+.qr-option:has(input:checked){
+    border-color:rgba(53,216,255,.70);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(53,216,255,.14), transparent 38%),
+        linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.030));
+}
+
+.qr-content strong{
+    display:block;
+    font-size:14px;
+    font-weight:900;
+    margin-bottom:4px;
+}
+
+.qr-content small{
+    display:block;
+    color:rgba(255,255,255,.58);
+    font-size:12px;
+    line-height:1.45;
+}
+
+.qr-actions{
+    flex-shrink:0;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.qr-btn{
+    min-width:145px;
+    padding:12px 16px;
+    border-radius:13px;
+    font-family:"Poppins",Arial,sans-serif;
+    font-size:13px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.22s ease;
+}
+
+.qr-btn-primary{
+    border:none;
+    color:#04101a;
+    background:linear-gradient(90deg,var(--green),var(--cyan));
+    box-shadow:0 0 20px rgba(53,216,255,.22);
+}
+
+.qr-btn-secondary{
+    color:#fff;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.13);
+}
+
+.qr-btn:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+}
+
+.qr-btn:not(:disabled):hover{
+    transform:translateY(-1px);
+}
+
+.qr-note,
+.qr-alert{
+    margin-top:14px;
+    padding:11px 13px;
+    border-radius:14px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.10);
+    color:rgba(255,255,255,.62);
+    font-size:12px;
+    line-height:1.45;
+}
+
+.qr-alert{
+    background:rgba(255,54,85,.08);
+    border-color:rgba(255,54,85,.35);
+    color:rgba(255,255,255,.78);
+}
+
+.qr-recap{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.qr-recap-row{
+    padding:10px 12px;
+    border-radius:13px;
+    display:grid;
+    grid-template-columns:155px 1fr;
+    gap:12px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.10);
+    font-size:12px;
+}
+
+.qr-recap-row span{
+    color:rgba(255,255,255,.56);
+    font-weight:800;
+}
+
+.qr-recap-row strong{
+    color:#fff;
+    font-weight:900;
+}
+
+@media(max-width:820px){
+    .qr-component{
+        padding:18px;
+    }
+
+    .qr-actions{
+        flex-direction:column;
+    }
+
+    .qr-btn{
+        width:100%;
+    }
+
+    .qr-recap-row{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="qr-component">
+    <div id="qrRender"></div>
+</div>
+
+<script>
+const questionnaireState = {
+    currentStep: "fonctionnement",
+    history: [],
+    appareil: {
+        marque: "",
+        modele: "",
+        version: "",
+        couleur: "",
+        capacite: ""
+    },
+    answers: {
+        fonctionnement: null,
+        defauts: [],
+        batterie: null,
+        ecran: null,
+        chassis: null,
+        repare: null,
+        reparations: [],
+        marcheUE: null
+    }
+};
+
+const qrRender = document.getElementById("qrRender");
+    const questions = {
+
+    fonctionnement:{
+        stepNumber:1,
+        help:"fonctionnement",
+        type:"radio",
+        key:"fonctionnement",
+        title:"Fonctionnement général",
+        text:"Votre iPhone est-il pleinement fonctionnel ?",
+
+        options:[
+            [
+                "oui",
+                "Oui, tout fonctionne correctement",
+                "L'appareil s'allume, se charge et toutes les fonctions principales sont opérationnelles."
+            ],
+
+            [
+                "non",
+                "Non, il présente un ou plusieurs défauts",
+                "Vous pourrez préciser les défauts rencontrés."
+            ]
+        ]
+    },
+
+    defauts:{
+        stepNumber:1,
+        help:"fonctionnement",
+        type:"checkbox",
+        key:"defauts",
+        title:"Défauts constatés",
+        text:"Sélectionnez tous les défauts présents sur votre appareil.",
+
+        options:[
+
+            [
+                "ecran_affichage",
+                "Écran défectueux",
+                "Écran cassé ou défaut d'affichage."
+            ],
+
+            [
+                "tactile",
+                "Écran tactile défectueux",
+                "Le tactile répond mal ou ne fonctionne plus."
+            ],
+
+            [
+                "batterie",
+                "Batterie usée",
+                "Autonomie faible ou batterie à remplacer."
+            ],
+
+            [
+                "son",
+                "Bruit parasite",
+                "Défaut du haut-parleur ou du microphone."
+            ],
+
+            [
+                "camera",
+                "Caméra principale défectueuse",
+                "Photos floues ou caméra inactive."
+            ],
+
+            [
+                "charge",
+                "Impossible d'allumer ou de charger",
+                "L'appareil ne démarre pas ou ne prend plus la charge."
+            ],
+
+            [
+                "autre",
+                "Autre problème",
+                "Tout autre défaut non listé."
+            ]
+
+        ]
+    },
+
+    batterie:{
+        stepNumber:2,
+        help:"batterie",
+        type:"radio",
+        key:"batterie",
+        title:"État de la batterie",
+        text:"Quelle est la capacité maximale indiquée dans les réglages ?",
+
+        options:[
+
+            [
+                "90_100",
+                "90 % à 100 %",
+                "Très bon état."
+            ],
+
+            [
+                "80_89",
+                "80 % à 89 %",
+                "Usure normale."
+            ],
+
+            [
+                "moins_80",
+                "Inférieure à 80 %",
+                "Batterie usée."
+            ],
+
+            [
+                "gonflee",
+                "Batterie gonflée",
+                "Défaut important nécessitant un contrôle."
+            ],
+
+            [
+                "inconnu",
+                "Je ne sais pas",
+                "La vérification sera réalisée à réception."
+            ]
+
+        ]
+    },
+
+    ecran:{
+        stepNumber:3,
+        help:"ecran",
+        type:"radio",
+        compact:true,
+        key:"ecran",
+
+        title:"État de l'écran",
+
+        text:"Veuillez comparer votre écran avec les photos de référence.",
+
+        options:[
+
+            [
+                "comme_neuf",
+                "Comme neuf",
+                "Aucune rayure."
+            ],
+
+            [
+                "tres_bon",
+                "Très bon état",
+                "Micro-rayures peu visibles."
+            ],
+
+            [
+                "bon",
+                "Bon état",
+                "Quelques rayures visibles."
+            ],
+
+            [
+                "correct",
+                "Correct",
+                "Rayures marquées."
+            ],
+
+            [
+                "endommage",
+                "Endommagé",
+                "Fissure ou impact."
+            ]
+
+        ]
+    },
+
+    chassis:{
+        stepNumber:4,
+        help:"chassis",
+        type:"radio",
+        compact:true,
+        key:"chassis",
+
+        title:"Face arrière et châssis",
+
+        text:"Veuillez comparer l'état du châssis avec les photos de référence.",
+
+        options:[
+
+            [
+                "comme_neuf",
+                "Comme neuf",
+                "Aucune trace."
+            ],
+
+            [
+                "tres_bon",
+                "Très bon état",
+                "Très légères traces."
+            ],
+
+            [
+                "bon",
+                "Bon état",
+                "Quelques rayures."
+            ],
+
+            [
+                "correct",
+                "Correct",
+                "Marques visibles."
+            ],
+
+            [
+                "endommage",
+                "Endommagé",
+                "Cassé ou fortement abîmé."
+            ]
+
+        ]
+    },
+
+    repare:{
+        stepNumber:5,
+        help:"reparations",
+        type:"radio",
+        key:"repare",
+
+        title:"Historique des réparations",
+
+        text:"Votre appareil a-t-il déjà été réparé ?",
+
+        options:[
+
+            [
+                "non",
+                "Non",
+                "Aucune réparation connue."
+            ],
+
+            [
+                "oui",
+                "Oui",
+                "Vous pourrez préciser lesquelles."
+            ],
+
+            [
+                "inconnu",
+                "Je ne sais pas",
+                "Contrôle en atelier."
+            ]
+
+        ],
+
+        note:"Toutes les réparations seront contrôlées à réception."
+    },
+
+    reparations:{
+        stepNumber:5,
+        help:"reparations",
+        type:"checkbox",
+        key:"reparations",
+
+        title:"Réparations effectuées",
+
+        text:"Quels éléments ont été remplacés ?",
+
+        options:[
+
+            ["ecran","Écran remplacé",""],
+            ["batterie","Batterie remplacée",""],
+            ["face_arriere","Face arrière remplacée",""],
+            ["connecteur","Connecteur remplacé",""],
+            ["camera","Caméra remplacée",""],
+            ["autre","Autre réparation",""]
+
+        ],
+
+        note:"DigitRestore vérifiera la conformité et la qualité des pièces remplacées."
+    },
+
+    marcheUE:{
+        stepNumber:6,
+        help:"ue",
+        type:"radio",
+        key:"marcheUE",
+
+        title:"Marché européen",
+
+        text:"L'appareil a-t-il été acheté dans un pays de l'Union européenne ?",
+
+        options:[
+
+            [
+                "oui",
+                "Oui",
+                "Appareil potentiellement éligible."
+            ],
+
+            [
+                "non",
+                "Non",
+                "Les appareils hors UE ne sont pas repris."
+            ],
+
+            [
+                "inconnu",
+                "Je ne sais pas",
+                "Contrôle effectué à réception."
+            ]
+
+        ],
+
+        alert:"Les appareils destinés à un marché hors Union européenne sont exclus du programme de reprise."
+    },
+
+    recap:{
+        stepNumber:6,
+        help:"recap",
+        type:"recap",
+
+        title:"Récapitulatif",
+
+        text:"Vérifiez les informations avant d'obtenir votre estimation."
+    }
+
+};
+const questions = {
+
+    fonctionnement:{
+        stepNumber:1,
+        help:"fonctionnement",
+        type:"radio",
+        key:"fonctionnement",
+        title:"Fonctionnement général",
+        text:"Votre iPhone est-il pleinement fonctionnel ?",
+
+        options:[
+            [
+                "oui",
+                "Oui, tout fonctionne correctement",
+                "L'appareil s'allume, se charge et toutes les fonctions principales sont opérationnelles."
+            ],
+
+            [
+                "non",
+                "Non, il présente un ou plusieurs défauts",
+                "Vous pourrez préciser les défauts rencontrés."
+            ]
+        ]
+    },
+
+    defauts:{
+        stepNumber:1,
+        help:"fonctionnement",
+        type:"checkbox",
+        key:"defauts",
+        title:"Défauts constatés",
+        text:"Sélectionnez tous les défauts présents sur votre appareil.",
+
+        options:[
+
+            [
+                "ecran_affichage",
+                "Écran défectueux",
+                "Écran cassé ou défaut d'affichage."
+            ],
+
+            [
+                "tactile",
+                "Écran tactile défectueux",
+                "Le tactile répond mal ou ne fonctionne plus."
+            ],
+
+            [
+                "batterie",
+                "Batterie usée",
+                "Autonomie faible ou batterie à remplacer."
+            ],
+
+            [
+                "son",
+                "Bruit parasite",
+                "Défaut du haut-parleur ou du microphone."
+            ],
+
+            [
+                "camera",
+                "Caméra principale défectueuse",
+                "Photos floues ou caméra inactive."
+            ],
+
+            [
+                "charge",
+                "Impossible d'allumer ou de charger",
+                "L'appareil ne démarre pas ou ne prend plus la charge."
+            ],
+
+            [
+                "autre",
+                "Autre problème",
+                "Tout autre défaut non listé."
+            ]
+
+        ]
+    },
+
+    batterie:{
+        stepNumber:2,
+        help:"batterie",
+        type:"radio",
+        key:"batterie",
+        title:"État de la batterie",
+        text:"Quelle est la capacité maximale indiquée dans les réglages ?",
+
+        options:[
+
+            [
+                "90_100",
+                "90 % à 100 %",
+                "Très bon état."
+            ],
+
+            [
+                "80_89",
+                "80 % à 89 %",
+                "Usure normale."
+            ],
+
+            [
+                "moins_80",
+                "Inférieure à 80 %",
+                "Batterie usée."
+            ],
+
+            [
+                "gonflee",
+                "Batterie gonflée",
+                "Défaut important nécessitant un contrôle."
+            ],
+
+            [
+                "inconnu",
+                "Je ne sais pas",
+                "La vérification sera réalisée à réception."
+            ]
+
+        ]
+    },
+
+    ecran:{
+        stepNumber:3,
+        help:"ecran",
+        type:"radio",
+        compact:true,
+        key:"ecran",
+
+        title:"État de l'écran",
+
+        text:"Veuillez comparer votre écran avec les photos de référence.",
+
+        options:[
+
+            [
+                "comme_neuf",
+                "Comme neuf",
+                "Aucune rayure."
+            ],
+
+            [
+                "tres_bon",
+                "Très bon état",
+                "Micro-rayures peu visibles."
+            ],
+
+            [
+                "bon",
+                "Bon état",
+                "Quelques rayures visibles."
+            ],
+
+            [
+                "correct",
+                "Correct",
+                "Rayures marquées."
+            ],
+
+            [
+                "endommage",
+                "Endommagé",
+                "Fissure ou impact."
+            ]
+
+        ]
+    },
+
+    chassis:{
+        stepNumber:4,
+        help:"chassis",
+        type:"radio",
+        compact:true,
+        key:"chassis",
+
+        title:"Face arrière et châssis",
+
+        text:"Veuillez comparer l'état du châssis avec les photos de référence.",
+
+        options:[
+
+            [
+                "comme_neuf",
+                "Comme neuf",
+                "Aucune trace."
+            ],
+
+            [
+                "tres_bon",
+                "Très bon état",
+                "Très légères traces."
+            ],
+
+            [
+                "bon",
+                "Bon état",
+                "Quelques rayures."
+            ],
+
+            [
+                "correct",
+                "Correct",
+                "Marques visibles."
+            ],
+
+            [
+                "endommage",
+                "Endommagé",
+                "Cassé ou fortement abîmé."
+            ]
+
+        ]
+    },
+
+    repare:{
+        stepNumber:5,
+        help:"reparations",
+        type:"radio",
+        key:"repare",
+
+        title:"Historique des réparations",
+
+        text:"Votre appareil a-t-il déjà été réparé ?",
+
+        options:[
+
+            [
+                "non",
+                "Non",
+                "Aucune réparation connue."
+            ],
+
+            [
+                "oui",
+                "Oui",
+                "Vous pourrez préciser lesquelles."
+            ],
+
+            [
+                "inconnu",
+                "Je ne sais pas",
+                "Contrôle en atelier."
+            ]
+
+        ],
+
+        note:"Toutes les réparations seront contrôlées à réception."
+    },
+
+    reparations:{
+        stepNumber:5,
+        help:"reparations",
+        type:"checkbox",
+        key:"reparations",
+
+        title:"Réparations effectuées",
+
+        text:"Quels éléments ont été remplacés ?",
+
+        options:[
+
+            ["ecran","Écran remplacé",""],
+            ["batterie","Batterie remplacée",""],
+            ["face_arriere","Face arrière remplacée",""],
+            ["connecteur","Connecteur remplacé",""],
+            ["camera","Caméra remplacée",""],
+            ["autre","Autre réparation",""]
+
+        ],
+
+        note:"DigitRestore vérifiera la conformité et la qualité des pièces remplacées."
+    },
+
+    marcheUE:{
+        stepNumber:6,
+        help:"ue",
+        type:"radio",
+        key:"marcheUE",
+
+        title:"Marché européen",
+
+        text:"L'appareil a-t-il été acheté dans un pays de l'Union européenne ?",
+
+        options:[
+
+            [
+                "oui",
+                "Oui",
+                "Appareil potentiellement éligible."
+            ],
+
+            [
+                "non",
+                "Non",
+                "Les appareils hors UE ne sont pas repris."
+            ],
+
+            [
+                "inconnu",
+                "Je ne sais pas",
+                "Contrôle effectué à réception."
+            ]
+
+        ],
+
+        alert:"Les appareils destinés à un marché hors Union européenne sont exclus du programme de reprise."
+    },
+
+    recap:{
+        stepNumber:6,
+        help:"recap",
+        type:"recap",
+
+        title:"Récapitulatif",
+
+        text:"Vérifiez les informations avant d'obtenir votre estimation."
+    }
+
+};
+    function renderQuestion(stepId){
+    const question = questions[stepId];
+    if(!question) return;
+
+    questionnaireState.currentStep = stepId;
+    sendVisualHelp(question.help);
+
+    qrRender.innerHTML = `
+        ${renderProgress(question.stepNumber)}
+
+        <div class="qr-body">
+            ${renderBody(question)}
+        </div>
+
+        <div class="qr-actions">
+            <button class="qr-btn qr-btn-secondary" type="button" id="qrBackBtn" ${questionnaireState.history.length === 0 ? "disabled" : ""}>
+                ← Retour
+            </button>
+
+            ${renderActionButton(question)}
+        </div>
+    `;
+
+    bindEvents(question);
+    sendQuestionnaireUpdate(stepId === "recap");
+}
+
+function renderProgress(currentStep){
+    let html = `<div class="qr-progress">`;
+
+    for(let i = 1; i <= 6; i++){
+        const cls = i < currentStep ? "qr-step done" : i === currentStep ? "qr-step active" : "qr-step";
+
+        html += `<div class="${cls}">${i}</div>`;
+
+        if(i < 6){
+            html += `<div class="qr-line"></div>`;
+        }
+    }
+
+    html += `</div>`;
+    return html;
+}
+
+function renderBody(question){
+    if(question.type === "recap"){
+        return renderRecap();
+    }
+
+    let html = `
+        <div class="qr-kicker">Étape ${question.stepNumber} sur 6</div>
+        <h2 class="qr-title">${question.title}</h2>
+        <p class="qr-text">${question.text}</p>
+        <div class="qr-options ${question.compact ? "compact" : ""}">
+    `;
+
+    question.options.forEach(option => {
+        const value = option[0];
+        const label = option[1];
+        const detail = option[2] || "";
+        const checked = isChecked(question.key, value);
+        const inputType = question.type === "checkbox" ? "checkbox" : "radio";
+
+        html += `
+            <label class="qr-option">
+                <input type="${inputType}" name="${question.key}" value="${value}" ${checked ? "checked" : ""}>
+                <span class="qr-dot"></span>
+                <span class="qr-content">
+                    <strong>${label}</strong>
+                    ${detail ? `<small>${detail}</small>` : ""}
+                </span>
+            </label>
+        `;
+    });
+
+    html += `</div>`;
+
+    if(question.note){
+        html += `<div class="qr-note">${question.note}</div>`;
+    }
+
+    if(question.alert){
+        html += `<div class="qr-alert">${question.alert}</div>`;
+    }
+
+    return html;
+}
+
+function renderActionButton(question){
+    if(question.type === "radio"){
+        return `<button class="qr-btn qr-btn-primary" type="button" disabled>Choisissez une réponse</button>`;
+    }
+
+    if(question.type === "checkbox"){
+        return `<button class="qr-btn qr-btn-primary" type="button" id="qrContinueBtn">Continuer →</button>`;
+    }
+
+    if(question.type === "recap"){
+        return `<button class="qr-btn qr-btn-primary" type="button" id="qrFinishBtn">Questionnaire terminé</button>`;
+    }
+
+    return "";
+}
+
+function bindEvents(question){
+    const backBtn = document.getElementById("qrBackBtn");
+
+    if(backBtn){
+        backBtn.addEventListener("click", goBack);
+    }
+
+    if(question.type === "radio"){
+        const inputs = document.querySelectorAll(`input[name="${question.key}"]`);
+
+        inputs.forEach(input => {
+            input.addEventListener("change", () => {
+                const oldValue = questionnaireState.answers[question.key];
+                const newValue = input.value;
+
+                if(oldValue !== newValue){
+                    resetAfter(question.key);
+                }
+
+                saveAnswer(question.key, newValue);
+                goNext(question.key, newValue);
+            });
+        });
+    }
+
+    if(question.type === "checkbox"){
+        const continueBtn = document.getElementById("qrContinueBtn");
+
+        if(continueBtn){
+            continueBtn.addEventListener("click", () => {
+                const values = getSelectedCheckboxValues(question.key);
+
+                if(values.length === 0){
+                    alert("Merci de sélectionner au moins une réponse.");
+                    return;
+                }
+
+                const oldValue = JSON.stringify(questionnaireState.answers[question.key] || []);
+                const newValue = JSON.stringify(values);
+
+                if(oldValue !== newValue){
+                    resetAfter(question.key);
+                }
+
+                saveAnswer(question.key, values);
+                goNext(question.key, values);
+            });
+        }
+    }
+
+    if(question.type === "recap"){
+        const finishBtn = document.getElementById("qrFinishBtn");
+
+        if(finishBtn){
+            finishBtn.addEventListener("click", () => {
+                sendQuestionnaireUpdate(true);
+            });
+        }
+    }
+}
+
+function goNext(key,value){
+    const nextStep = getNextStep(key,value);
+
+    if(!nextStep) return;
+
+    questionnaireState.history.push(questionnaireState.currentStep);
+    renderQuestion(nextStep);
+}
+
+function goBack(){
+    const previous = questionnaireState.history.pop();
+
+    if(!previous) return;
+
+    renderQuestion(previous);
+}
+
+function getNextStep(key,value){
+    if(key === "fonctionnement"){
+        return value === "non" ? "defauts" : "batterie";
+    }
+
+    if(key === "defauts") return "batterie";
+    if(key === "batterie") return "ecran";
+    if(key === "ecran") return "chassis";
+    if(key === "chassis") return "repare";
+
+    if(key === "repare"){
+        return value === "oui" ? "reparations" : "marcheUE";
+    }
+
+    if(key === "reparations") return "marcheUE";
+    if(key === "marcheUE") return "recap";
+
+    return null;
+}
+
+function getSelectedCheckboxValues(key){
+    return [...document.querySelectorAll(`input[name="${key}"]`)]
+        .filter(input => input.checked)
+        .map(input => input.value);
+}
+
+function saveAnswer(key,value){
+    questionnaireState.answers[key] = value;
+
+    if(key === "fonctionnement"){
+        if(value === "oui"){
+            questionnaireState.answers.defauts = [];
+        }
+    }
+
+    if(key === "repare"){
+        if(value !== "oui"){
+            questionnaireState.answers.reparations = [];
+        }
+    }
+
+    sendQuestionnaireUpdate(false);
+}
+
+function resetAfter(key){
+    const resetMap = {
+        fonctionnement:["defauts","batterie","ecran","chassis","repare","reparations","marcheUE"],
+        defauts:["batterie","ecran","chassis","repare","reparations","marcheUE"],
+        batterie:["ecran","chassis","repare","reparations","marcheUE"],
+        ecran:["chassis","repare","reparations","marcheUE"],
+        chassis:["repare","reparations","marcheUE"],
+        repare:["reparations","marcheUE"],
+        reparations:["marcheUE"],
+        marcheUE:[]
+    };
+
+    const toReset = resetMap[key] || [];
+
+    toReset.forEach(item => {
+        if(Array.isArray(questionnaireState.answers[item])){
+            questionnaireState.answers[item] = [];
+        }else{
+            questionnaireState.answers[item] = null;
+        }
+    });
+
+    cleanHistoryAfter(key);
+}
+
+function cleanHistoryAfter(key){
+    const order = [
+        "fonctionnement",
+        "defauts",
+        "batterie",
+        "ecran",
+        "chassis",
+        "repare",
+        "reparations",
+        "marcheUE",
+        "recap"
+    ];
+
+    const index = order.indexOf(key);
+
+    if(index === -1) return;
+
+    questionnaireState.history = questionnaireState.history.filter(step => {
+        return order.indexOf(step) <= index;
+    });
+}
+
+function isChecked(key,value){
+    const current = questionnaireState.answers[key];
+
+    if(Array.isArray(current)){
+        return current.includes(value);
+    }
+
+    return current === value;
+             }
+    function renderRecap(){
+    const a = questionnaireState.answers;
+
+    return `
+        <div class="qr-kicker">Validation finale</div>
+        <h2 class="qr-title">Récapitulatif</h2>
+        <p class="qr-text">Contrôlez les informations déclarées avant de passer à l’estimation.</p>
+
+        <div class="qr-recap">
+            <div class="qr-recap-row"><span>Fonctionnement</span><strong>${formatValue(a.fonctionnement)}</strong></div>
+            <div class="qr-recap-row"><span>Défauts</span><strong>${formatArray(a.defauts)}</strong></div>
+            <div class="qr-recap-row"><span>Batterie</span><strong>${formatValue(a.batterie)}</strong></div>
+            <div class="qr-recap-row"><span>Écran</span><strong>${formatValue(a.ecran)}</strong></div>
+            <div class="qr-recap-row"><span>Châssis</span><strong>${formatValue(a.chassis)}</strong></div>
+            <div class="qr-recap-row"><span>Déjà réparé</span><strong>${formatValue(a.repare)}</strong></div>
+            <div class="qr-recap-row"><span>Réparations</span><strong>${formatArray(a.reparations)}</strong></div>
+            <div class="qr-recap-row"><span>Marché UE</span><strong>${formatValue(a.marcheUE)}</strong></div>
+        </div>
+
+        <div class="qr-note">
+            L’estimation affichée sera indicative. Chaque appareil sera contrôlé en atelier.
+            Toute anomalie ou information non déclarée peut entraîner une nouvelle proposition.
+        </div>
+    `;
+}
+
+function sendQuestionnaireUpdate(complete){
+    window.parent.postMessage({
+        source:"digitrestore-questionnaire",
+        type:"questionnaire-update",
+        complete:complete,
+        answers:questionnaireState.answers
+    },"*");
+}
+
+function sendVisualHelp(help){
+    window.parent.postMessage({
+        source:"digitrestore-questionnaire",
+        type:"visual-help",
+        help:help
+    },"*");
+}
+
+window.addEventListener("message", event => {
+    const data = event.data;
+
+    if(!data || data.source !== "digitrestore-reprise") return;
+
+    if(data.type === "device-update"){
+        questionnaireState.appareil = data.appareil || questionnaireState.appareil;
+    }
+});
+
+function formatValue(value){
     const labels = {
-        oui: "Oui",
-        non: "Non",
-        inconnu: "Je ne sais pas",
-        "90_100": "90 % à 100 %",
-        "80_89": "80 % à 89 %",
-        moins_80: "Inférieure à 80 %",
-        gonflee: "Batterie gonflée",
-        comme_neuf: "Comme neuf",
-        tres_bon: "Très bon état",
-        bon: "Bon état",
-        correct: "Correct",
-        endommage: "Endommagé"
+        oui:"Oui",
+        non:"Non",
+        inconnu:"Je ne sais pas",
+
+        "90_100":"90 % à 100 %",
+        "80_89":"80 % à 89 %",
+        moins_80:"Inférieure à 80 %",
+        gonflee:"Batterie gonflée",
+
+        comme_neuf:"Comme neuf",
+        tres_bon:"Très bon état",
+        bon:"Bon état",
+        correct:"Correct",
+        endommage:"Endommagé"
     };
 
     return labels[value] || value || "—";
 }
 
-function formatArray(values) {
-    if (!values || values.length === 0) return "—";
+function formatArray(values){
+    if(!values || values.length === 0) return "—";
 
     const labels = {
-        ecran_affichage: "Écran cassé ou défaut d’affichage",
-        tactile: "Écran tactile défectueux",
-        batterie: "Batterie usée",
-        son: "Bruit parasite haut-parleur ou micro",
-        camera: "Caméra principale défectueuse",
-        charge: "Impossible d’allumer ou de charger",
-        autre: "Autre problème",
-        ecran: "Écran remplacé",
-        face_arriere: "Face arrière remplacée",
-        connecteur: "Connecteur remplacé"
+        ecran_affichage:"Écran cassé ou défaut d’affichage",
+        tactile:"Écran tactile défectueux",
+        batterie:"Batterie usée",
+        son:"Bruit parasite haut-parleur ou micro",
+        camera:"Caméra principale défectueuse",
+        charge:"Impossible d’allumer ou de charger",
+        autre:"Autre problème",
+
+        ecran:"Écran remplacé",
+        face_arriere:"Face arrière remplacée",
+        connecteur:"Connecteur remplacé"
     };
 
     return values.map(value => labels[value] || value).join(", ");
