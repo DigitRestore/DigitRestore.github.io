@@ -22,10 +22,10 @@
 
 html,body{
     width:100%;
-    min-height:100%;
+    height:100%;
     font-family:"Poppins",sans-serif;
     color:var(--text-main);
-    overflow-x:hidden;
+    overflow:hidden;
 }
 
 body{
@@ -53,7 +53,9 @@ body::before{
 .page{
     position:relative;
     z-index:1;
-    min-height:100vh;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
 }
 
 header{
@@ -128,19 +130,25 @@ header{
 }
 
 main{
+    flex:1;
     max-width:1500px;
+    width:100%;
     margin:0 auto;
-    padding:18px 30px 18px;
+    padding:16px 28px;
+    display:grid;
+    grid-template-rows:1fr 96px;
+    gap:14px;
+    min-height:0;
 }
 
 .reprise-layout{
     display:grid;
-    grid-template-columns:360px minmax(360px,1fr) 330px;
+    grid-template-columns:350px minmax(420px,1fr) 330px;
     gap:14px;
-    align-items:stretch;
+    min-height:0;
 }
 
-.panel,.preview-card,.summary-card,.trust-bar{
+.card,.estimate-bar{
     border-radius:22px;
     background:
         radial-gradient(circle at 12% 15%, rgba(22,200,120,.14), transparent 35%),
@@ -150,33 +158,36 @@ main{
     box-shadow:0 20px 44px rgba(0,0,0,.42);
 }
 
-.panel{
-    padding:18px;
-    min-height:510px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+.left-column{
+    display:grid;
+    grid-template-rows:auto 1fr;
+    gap:14px;
+    min-height:0;
 }
 
-.config-title{
+.config-card{
+    padding:16px;
+}
+
+.card-title{
     color:var(--cyan);
     font-size:13px;
     font-weight:900;
     text-transform:uppercase;
-    letter-spacing:.09em;
-    margin-bottom:18px;
+    letter-spacing:.08em;
+    margin-bottom:14px;
 }
 
 .form-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:14px;
+    gap:12px;
 }
 
 .form-group{
     display:flex;
     flex-direction:column;
-    gap:7px;
+    gap:6px;
 }
 
 .form-group.full{
@@ -184,7 +195,7 @@ main{
 }
 
 .form-label{
-    font-size:12px;
+    font-size:11px;
     font-weight:900;
     text-transform:uppercase;
     color:rgba(255,255,255,.82);
@@ -193,16 +204,16 @@ main{
 
 .select-field{
     width:100%;
-    height:52px;
-    padding:0 14px;
-    border-radius:14px;
+    height:46px;
+    padding:0 12px;
+    border-radius:13px;
     border:1px solid rgba(255,255,255,.14);
     background:
         linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025)),
         rgba(255,255,255,.035);
     color:#fff;
     font-family:"Poppins",sans-serif;
-    font-size:14px;
+    font-size:13px;
     font-weight:800;
     outline:none;
     cursor:pointer;
@@ -224,40 +235,20 @@ main{
     background:#ffffff;
 }
 
-.helper-text{
-    margin-top:16px;
-    color:rgba(255,255,255,.48);
-    font-size:12px;
-    line-height:1.45;
-}
-
-.preview-card{
+.device-card{
     padding:16px;
-    min-height:510px;
     display:flex;
     flex-direction:column;
-    align-items:center;
-    justify-content:space-between;
+    min-height:0;
 }
 
-.preview-label{
-    width:100%;
-    color:var(--cyan);
-    font-size:13px;
-    font-weight:900;
-    text-transform:uppercase;
-    letter-spacing:.05em;
-}
-
-.preview-image-box{
-    width:100%;
+.device-image-box{
     flex:1;
-    min-height:270px;
+    min-height:145px;
+    border-radius:18px;
     display:flex;
     align-items:center;
     justify-content:center;
-    margin:8px 0 10px;
-    border-radius:22px;
     background:
         radial-gradient(circle at center, rgba(53,216,255,.16), transparent 56%),
         radial-gradient(circle at 50% 100%, rgba(22,200,120,.16), transparent 42%),
@@ -266,61 +257,89 @@ main{
     overflow:hidden;
 }
 
-.preview-image-box img{
+.device-image-box img{
     display:none;
-    max-width:90%;
-    max-height:270px;
+    max-width:88%;
+    max-height:170px;
     object-fit:contain;
-    filter:drop-shadow(0 20px 30px rgba(0,0,0,.55));
+    filter:drop-shadow(0 18px 26px rgba(0,0,0,.55));
 }
 
-.preview-placeholder{
-    font-size:70px;
+.device-placeholder{
+    font-size:54px;
     opacity:.42;
 }
 
-.preview-title{
-    font-size:22px;
+.device-name{
+    margin-top:12px;
+    font-size:17px;
     font-weight:900;
     text-align:center;
-    margin-bottom:9px;
 }
 
-.preview-tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-    justify-content:center;
-}
-
-.preview-tag{
-    padding:7px 11px;
-    border-radius:10px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.12);
-    color:rgba(255,255,255,.86);
+.device-sub{
+    margin-top:6px;
+    color:rgba(255,255,255,.64);
     font-size:12px;
-    font-weight:800;
+    text-align:center;
+    font-weight:700;
 }
 
-.summary-card{
+.question-card{
     padding:18px;
+    min-height:0;
     display:flex;
     flex-direction:column;
-    min-height:510px;
 }
 
-.summary-label{
-    color:var(--cyan);
-    font-size:13px;
+.question-shell{
+    flex:1;
+    min-height:0;
+    border-radius:18px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.10);
+    overflow:hidden;
+}
+
+.question-placeholder{
+    height:100%;
+    min-height:360px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:24px;
+}
+
+.question-placeholder-icon{
+    font-size:58px;
+    margin-bottom:18px;
+    opacity:.46;
+}
+
+.question-placeholder-title{
+    font-size:24px;
     font-weight:900;
-    text-transform:uppercase;
-    letter-spacing:.08em;
-    margin-bottom:14px;
+    margin-bottom:10px;
+}
+
+.question-placeholder-text{
+    max-width:520px;
+    color:rgba(255,255,255,.62);
+    font-size:14px;
+    line-height:1.55;
+}
+
+.diagnostic-card{
+    padding:16px;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
 }
 
 .summary-title{
-    font-size:20px;
+    font-size:19px;
     font-weight:900;
     margin-bottom:12px;
 }
@@ -329,14 +348,14 @@ main{
     display:flex;
     flex-direction:column;
     color:rgba(255,255,255,.72);
-    font-size:13px;
+    font-size:12px;
 }
 
 .summary-row{
     display:flex;
     justify-content:space-between;
     gap:12px;
-    padding:10px 0;
+    padding:9px 0;
     border-bottom:1px solid rgba(255,255,255,.09);
 }
 
@@ -345,32 +364,65 @@ main{
     text-align:right;
 }
 
-.estimate-box{
-    margin-top:18px;
-    padding-top:15px;
-    border-top:1px solid rgba(255,255,255,.12);
+.diagnostic-separator{
+    margin:14px 0 10px;
+    height:1px;
+    background:linear-gradient(90deg, rgba(255,255,255,.16), transparent);
 }
 
-.estimate-title{
-    color:rgba(255,255,255,.72);
+.status-pill{
+    margin-top:auto;
+    padding:12px;
+    border-radius:14px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.10);
+    color:rgba(255,255,255,.58);
+    font-size:12px;
+    line-height:1.45;
+}
+
+.estimate-bar{
+    padding:14px 18px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:20px;
+}
+
+.estimate-left{
+    color:rgba(255,255,255,.68);
+    font-size:12px;
+    line-height:1.4;
+}
+
+.estimate-center{
+    text-align:center;
+}
+
+.estimate-label{
+    color:var(--cyan);
     font-size:12px;
     font-weight:900;
     text-transform:uppercase;
-    margin-bottom:8px;
+    letter-spacing:.12em;
+    margin-bottom:2px;
 }
 
 .estimate-value{
-    font-size:32px;
+    font-size:34px;
     font-weight:900;
     color:var(--cyan);
-    text-align:center;
-    letter-spacing:.08em;
+    letter-spacing:.06em;
+}
+
+.estimate-right{
+    display:flex;
+    justify-content:flex-end;
 }
 
 .next-btn{
-    width:100%;
-    margin-top:auto;
-    padding:13px 16px;
+    min-width:210px;
+    padding:13px 18px;
     border:none;
     border-radius:13px;
     color:#04101a;
@@ -382,57 +434,37 @@ main{
     box-shadow:0 0 20px rgba(53,216,255,.22);
 }
 
-.summary-empty{
-    margin-top:12px;
-    color:rgba(255,255,255,.42);
-    font-style:italic;
-    line-height:1.4;
-    font-size:12px;
-}
-
-.trust-bar{
-    grid-column:1 / -1;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    padding:12px 16px;
-}
-
-.trust-item{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:rgba(255,255,255,.76);
-    font-size:12px;
-}
-
-.trust-icon{
-    color:var(--green);
-    font-size:22px;
-}
-
-.notice{
-    padding:12px;
-    border-radius:14px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-    color:rgba(255,255,255,.72);
-    font-size:13px;
-    line-height:1.5;
-}
-
 @media(max-width:1250px){
+    html,body{
+        height:auto;
+        overflow:auto;
+    }
+
+    .page{
+        height:auto;
+        min-height:100vh;
+    }
+
+    main{
+        display:block;
+    }
+
     .reprise-layout{
         grid-template-columns:1fr 1fr;
     }
 
-    .summary-card{
+    .diagnostic-card{
         grid-column:1 / -1;
-        min-height:auto;
     }
 
-    .trust-bar{
+    .estimate-bar{
+        margin-top:14px;
         grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .estimate-right{
+        justify-content:center;
     }
 }
 
@@ -472,12 +504,8 @@ main{
         grid-column:auto;
     }
 
-    .panel,.preview-card,.summary-card{
-        min-height:auto;
-    }
-
-    .preview-image-box{
-        min-height:230px;
+    .question-placeholder{
+        min-height:300px;
     }
 }
 </style>
@@ -507,103 +535,124 @@ main{
 
 <section class="reprise-layout">
 
-<div class="panel">
-    <div class="config-title">Configuration de votre appareil</div>
+    <aside class="left-column">
 
-    <div class="form-grid">
+        <div class="card config-card">
+            <div class="card-title">Configuration appareil</div>
 
-        <div class="form-group full">
-            <label class="form-label" for="brandSelect">Marque</label>
-            <select class="select-field" id="brandSelect">
-                <option value="">Sélectionner une marque</option>
-                <option value="Apple">Apple</option>
-            </select>
+            <div class="form-grid">
+
+                <div class="form-group full">
+                    <label class="form-label" for="brandSelect">Marque</label>
+                    <select class="select-field" id="brandSelect">
+                        <option value="">Sélectionner</option>
+                        <option value="Apple">Apple</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="modelSelect">Modèle</label>
+                    <select class="select-field" id="modelSelect" disabled>
+                        <option value="">Sélectionner</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="versionSelect">Version</label>
+                    <select class="select-field" id="versionSelect" disabled>
+                        <option value="">Sélectionner</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="colorSelect">Couleur</label>
+                    <select class="select-field" id="colorSelect" disabled>
+                        <option value="">Sélectionner</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="capacitySelect">Capacité</label>
+                    <select class="select-field" id="capacitySelect" disabled>
+                        <option value="">Sélectionner</option>
+                    </select>
+                </div>
+
+            </div>
         </div>
 
-        <div class="form-group">
-            <label class="form-label" for="modelSelect">Modèle</label>
-            <select class="select-field" id="modelSelect" disabled>
-                <option value="">Sélectionner</option>
-            </select>
+        <div class="card device-card">
+            <div class="card-title">Aperçu appareil</div>
+
+            <div class="device-image-box">
+                <span class="device-placeholder" id="devicePlaceholderIcon">📱</span>
+                <img id="deviceImage" src="" alt="Aperçu du téléphone">
+            </div>
+
+            <div class="device-name" id="deviceName">Aucun appareil sélectionné</div>
+            <div class="device-sub" id="deviceSub">La photo s’affichera après sélection de la couleur.</div>
         </div>
 
-        <div class="form-group">
-            <label class="form-label" for="versionSelect">Version</label>
-            <select class="select-field" id="versionSelect" disabled>
-                <option value="">Sélectionner</option>
-            </select>
+    </aside>
+
+    <section class="card question-card">
+        <div class="card-title">Questionnaire de reprise</div>
+
+        <div class="question-shell" id="questionnaireMount">
+            <div class="question-placeholder">
+                <div class="question-placeholder-icon">🧩</div>
+                <div class="question-placeholder-title">Panneau dynamique</div>
+                <div class="question-placeholder-text">
+                    Cette zone chargera prochainement le fichier <strong>questionnaire-reprise.html</strong>.
+                    Elle affichera une seule question à la fois, avec retour possible et mise à jour du diagnostic.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="card diagnostic-card">
+        <div class="card-title">Diagnostic</div>
+        <div class="summary-title" id="summaryTitle">Aucune sélection</div>
+
+        <div class="summary-list">
+            <div class="summary-row"><span>Marque</span><strong id="summaryBrand">—</strong></div>
+            <div class="summary-row"><span>Modèle</span><strong id="summaryModel">—</strong></div>
+            <div class="summary-row"><span>Version</span><strong id="summaryVersion">—</strong></div>
+            <div class="summary-row"><span>Couleur</span><strong id="summaryColor">—</strong></div>
+            <div class="summary-row"><span>Capacité</span><strong id="summaryCapacity">—</strong></div>
         </div>
 
-        <div class="form-group">
-            <label class="form-label" for="colorSelect">Couleur</label>
-            <select class="select-field" id="colorSelect" disabled>
-                <option value="">Sélectionner</option>
-            </select>
+        <div class="diagnostic-separator"></div>
+
+        <div class="summary-list">
+            <div class="summary-row"><span>Fonctionnement</span><strong>—</strong></div>
+            <div class="summary-row"><span>Batterie</span><strong>—</strong></div>
+            <div class="summary-row"><span>Écran</span><strong>—</strong></div>
+            <div class="summary-row"><span>Châssis</span><strong>—</strong></div>
+            <div class="summary-row"><span>Réparations</span><strong>—</strong></div>
+            <div class="summary-row"><span>Marché UE</span><strong>—</strong></div>
         </div>
 
-        <div class="form-group">
-            <label class="form-label" for="capacitySelect">Capacité</label>
-            <select class="select-field" id="capacitySelect" disabled>
-                <option value="">Sélectionner</option>
-            </select>
+        <div class="status-pill">
+            Le diagnostic sera complété automatiquement au fur et à mesure des réponses.
         </div>
+    </aside>
 
+</section>
+
+<section class="estimate-bar">
+    <div class="estimate-left">
+        Estimation indicative sous réserve de contrôle atelier. Les appareils hors marché Union européenne ne sont pas éligibles.
     </div>
 
-    <p class="helper-text">
-        La sélection se débloque progressivement. L’aperçu se met à jour dès que la couleur est choisie.
-    </p>
-</div>
-
-<div class="preview-card">
-    <div class="preview-label">Votre appareil sélectionné</div>
-
-    <div class="preview-image-box">
-        <span class="preview-placeholder" id="devicePlaceholderIcon">📱</span>
-        <img id="deviceImage" src="" alt="Aperçu du téléphone">
+    <div class="estimate-center">
+        <div class="estimate-label">Estimation</div>
+        <div class="estimate-value" id="estimateValue">--- €</div>
     </div>
 
-    <div>
-        <div class="preview-title" id="previewTitle">Aucun appareil sélectionné</div>
-        <div class="preview-tags">
-            <span class="preview-tag" id="previewBrand">Marque</span>
-            <span class="preview-tag" id="previewVersion">Modèle</span>
-            <span class="preview-tag" id="previewColor">Couleur</span>
-            <span class="preview-tag" id="previewCapacity">Capacité</span>
-        </div>
+    <div class="estimate-right">
+        <button class="next-btn" type="button">Continuer →</button>
     </div>
-</div>
-
-<aside class="summary-card">
-    <div class="summary-label">Récapitulatif</div>
-
-    <div class="summary-title" id="summaryTitle">Aucune sélection</div>
-
-    <div class="summary-list">
-        <div class="summary-row"><span>Marque</span><strong id="summaryBrand">—</strong></div>
-        <div class="summary-row"><span>Modèle</span><strong id="summaryModel">—</strong></div>
-        <div class="summary-row"><span>Version</span><strong id="summaryVersion">—</strong></div>
-        <div class="summary-row"><span>Couleur</span><strong id="summaryColor">—</strong></div>
-        <div class="summary-row"><span>Capacité</span><strong id="summaryCapacity">—</strong></div>
-        <div class="summary-row"><span>État</span><strong>Non sélectionné</strong></div>
-    </div>
-
-    <div class="estimate-box">
-        <div class="estimate-title">Estimation</div>
-        <div class="estimate-value">--- €</div>
-    </div>
-
-    <p class="summary-empty">Les questions sur l’état, la batterie et l’origine européenne seront ajoutées ensuite.</p>
-
-    <button class="next-btn" type="button">Étape suivante →</button>
-</aside>
-
-<div class="trust-bar">
-    <div class="trust-item"><span class="trust-icon">⚡</span><span><strong>Paiement rapide</strong><br>Virement après validation</span></div>
-    <div class="trust-item"><span class="trust-icon">🛡️</span><span><strong>Données sécurisées</strong><br>Confidentialité garantie</span></div>
-    <div class="trust-item"><span class="trust-icon">🏅</span><span><strong>Estimation claire</strong><br>Reprise juste et transparente</span></div>
-</div>
-
 </section>
 
 </main>
@@ -635,14 +684,11 @@ const summaryVersion = document.getElementById("summaryVersion");
 const summaryColor = document.getElementById("summaryColor");
 const summaryCapacity = document.getElementById("summaryCapacity");
 
-const previewTitle = document.getElementById("previewTitle");
-const previewBrand = document.getElementById("previewBrand");
-const previewVersion = document.getElementById("previewVersion");
-const previewColor = document.getElementById("previewColor");
-const previewCapacity = document.getElementById("previewCapacity");
-
+const deviceName = document.getElementById("deviceName");
+const deviceSub = document.getElementById("deviceSub");
 const deviceImage = document.getElementById("deviceImage");
 const devicePlaceholderIcon = document.getElementById("devicePlaceholderIcon");
+const questionnaireMount = document.getElementById("questionnaireMount");
 
 brandSelect.addEventListener("change", async () => {
     state.brand = brandSelect.value;
@@ -681,7 +727,6 @@ modelSelect.addEventListener("change", () => {
     state.color = "";
     state.capacity = "";
     state.selectedVersionData = null;
-
     state.selectedModelData = findSelectedModel(state.model);
 
     resetSelect(versionSelect, "Sélectionner");
@@ -704,7 +749,6 @@ versionSelect.addEventListener("change", () => {
     state.version = versionSelect.value;
     state.color = "";
     state.capacity = "";
-
     state.selectedVersionData = findSelectedVersion(state.version);
 
     resetSelect(colorSelect, "Sélectionner");
@@ -751,9 +795,7 @@ async function loadAppleData() {
 function renderModelSelect() {
     resetSelect(modelSelect, "Sélectionner");
 
-    if (!state.data || !Array.isArray(state.data.modeles)) {
-        return;
-    }
+    if (!state.data || !Array.isArray(state.data.modeles)) return;
 
     const modeles = [...state.data.modeles].sort((a, b) => a.ordre - b.ordre);
 
@@ -800,25 +842,21 @@ function renderCapacitySelect(version) {
 
 function resetSelect(selectElement, placeholder) {
     selectElement.innerHTML = "";
+
     const option = document.createElement("option");
     option.value = "";
     option.textContent = placeholder;
+
     selectElement.appendChild(option);
 }
 
 function findSelectedModel(modelName) {
-    if (!state.data || !Array.isArray(state.data.modeles)) {
-        return null;
-    }
-
+    if (!state.data || !Array.isArray(state.data.modeles)) return null;
     return state.data.modeles.find(model => model.nom === modelName) || null;
 }
 
 function findSelectedVersion(versionName) {
-    if (!state.selectedModelData || !Array.isArray(state.selectedModelData.versions)) {
-        return null;
-    }
-
+    if (!state.selectedModelData || !Array.isArray(state.selectedModelData.versions)) return null;
     return state.selectedModelData.versions.find(version => version.nom === versionName) || null;
 }
 
@@ -829,24 +867,22 @@ function updateSummary() {
     summaryColor.textContent = state.color || "—";
     summaryCapacity.textContent = state.capacity || "—";
 
-    previewBrand.textContent = state.brand || "Marque";
-    previewVersion.textContent = state.version || state.model || "Modèle";
-    previewColor.textContent = state.color || "Couleur";
-    previewCapacity.textContent = state.capacity || "Capacité";
-
     if (state.version) {
         summaryTitle.textContent = state.version;
-        previewTitle.textContent = state.version;
+        deviceName.textContent = state.version;
     } else if (state.model) {
         summaryTitle.textContent = state.model;
-        previewTitle.textContent = state.model;
+        deviceName.textContent = state.model;
     } else if (state.brand) {
         summaryTitle.textContent = state.brand;
-        previewTitle.textContent = state.brand;
+        deviceName.textContent = state.brand;
     } else {
         summaryTitle.textContent = "Aucune sélection";
-        previewTitle.textContent = "Aucun appareil sélectionné";
+        deviceName.textContent = "Aucun appareil sélectionné";
     }
+
+    const details = [state.color, state.capacity].filter(Boolean).join(" • ");
+    deviceSub.textContent = details || "La photo s’affichera après sélection de la couleur.";
 
     updateDeviceImage();
 }
@@ -862,6 +898,32 @@ function updateDeviceImage() {
         devicePlaceholderIcon.style.display = "block";
     }
 }
+
+async function loadQuestionnaireShell() {
+    try {
+        const response = await fetch("questionnaire-reprise.html", { cache: "no-cache" });
+
+        if (!response.ok) {
+            throw new Error("Questionnaire non disponible");
+        }
+
+        questionnaireMount.innerHTML = await response.text();
+
+    } catch (error) {
+        questionnaireMount.innerHTML = `
+            <div class="question-placeholder">
+                <div class="question-placeholder-icon">🧩</div>
+                <div class="question-placeholder-title">Questionnaire bientôt disponible</div>
+                <div class="question-placeholder-text">
+                    Cette zone chargera automatiquement <strong>questionnaire-reprise.html</strong>.
+                    Pour l’instant, seule la structure visuelle de la page Reprise / Achat est préparée.
+                </div>
+            </div>
+        `;
+    }
+}
+
+loadQuestionnaireShell();
 </script>
 
 </body>
