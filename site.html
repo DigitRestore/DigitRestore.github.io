@@ -22,8 +22,8 @@
     --teal: #23d6c8;
 
     --text-main: #f5f5f7;
-    --text-soft: #c3c8df;
-    --text-muted: #8f96b3;
+    --text-soft: #d2d6e8;
+    --text-muted: #a0a7c2;
 
     --bg-main: #050814;
     --bg-alt: #070c1c;
@@ -50,14 +50,14 @@ body {
 
     background:
         radial-gradient(
-            circle at 7% 16%,
-            rgba(79, 210, 255, 0.16),
+            circle at 7% 15%,
+            rgba(79, 210, 255, 0.18),
             transparent 32%
         ),
         radial-gradient(
-            circle at 92% 18%,
-            rgba(255, 75, 92, 0.15),
-            transparent 34%
+            circle at 92% 19%,
+            rgba(255, 75, 92, 0.16),
+            transparent 35%
         ),
         linear-gradient(
             135deg,
@@ -66,7 +66,7 @@ body {
         );
 }
 
-/* Grille subtile */
+/* Grille de fond */
 body::before {
     content: "";
 
@@ -78,12 +78,12 @@ body::before {
 
     background:
         linear-gradient(
-            rgba(255, 255, 255, 0.024) 1px,
+            rgba(255, 255, 255, 0.025) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255, 255, 255, 0.024) 1px,
+            rgba(255, 255, 255, 0.025) 1px,
             transparent 1px
         );
 
@@ -92,14 +92,14 @@ body::before {
     mask-image:
         radial-gradient(
             circle at center,
-            #000,
+            black,
             transparent 80%
         );
 
     opacity: 0.18;
 }
 
-/* Halos mouvants */
+/* Halos mobiles */
 body::after {
     content: "";
 
@@ -126,15 +126,15 @@ body::after {
         ease-in-out infinite alternate;
 }
 
-/* Grand cercle en arrière-plan */
+/* Grand cercle décoratif */
 .background-orbit {
     position: fixed;
 
     z-index: 0;
-    top: 65px;
+    top: 60px;
     right: -70px;
 
-    width: min(680px, 52vw);
+    width: min(650px, 50vw);
     aspect-ratio: 1;
 
     border-radius: 50%;
@@ -144,31 +144,31 @@ body::after {
     background:
         conic-gradient(
             from 0deg,
-            transparent 0deg 18deg,
-            var(--cyan) 45deg,
-            transparent 76deg 188deg,
-            var(--red) 222deg,
-            transparent 260deg 360deg
+            transparent 0deg 20deg,
+            var(--cyan) 47deg,
+            transparent 78deg 188deg,
+            var(--red) 224deg,
+            transparent 262deg 360deg
         );
 
     mask-image:
         radial-gradient(
             circle,
             transparent 0 68%,
-            #000 68.3% 69%,
+            black 68.3% 69%,
             transparent 69.5%
         );
 
-    opacity: 0.62;
+    opacity: 0.58;
 
     filter:
         drop-shadow(
             0 0 14px
-            rgba(79, 210, 255, 0.48)
+            rgba(79, 210, 255, 0.45)
         )
         drop-shadow(
             0 0 14px
-            rgba(255, 75, 92, 0.4)
+            rgba(255, 75, 92, 0.38)
         );
 
     animation:
@@ -176,40 +176,24 @@ body::after {
         linear infinite;
 }
 
-.background-orbit::before,
-.background-orbit::after {
+.background-orbit::before {
     content: "";
 
     position: absolute;
+    inset: 9%;
 
     border-radius: 50%;
-}
-
-.background-orbit::before {
-    inset: 8%;
 
     border:
         1px dashed
         rgba(79, 210, 255, 0.25);
 
     animation:
-        orbitReverse 28s
+        orbitReverse 29s
         linear infinite;
 }
 
-.background-orbit::after {
-    inset: 17%;
-
-    border:
-        1px dotted
-        rgba(255, 75, 92, 0.24);
-
-    animation:
-        backgroundOrbit 18s
-        linear infinite;
-}
-
-/* Page principale */
+/* Page */
 .page {
     position: relative;
     z-index: 1;
@@ -218,20 +202,19 @@ body::after {
     height: calc(100dvh - 16px);
 
     margin: 8px auto;
-    padding: 10px 22px 14px;
+    padding: 10px 22px 15px;
 
     display: grid;
 
     grid-template-rows:
         auto
-        auto
-        minmax(220px, 310px)
-        minmax(92px, 118px)
-        minmax(48px, 62px);
+        minmax(90px, 122px)
+        minmax(180px, 235px)
+        minmax(135px, 165px);
 
     align-content: space-between;
 
-    gap: 10px;
+    gap: 11px;
 
     overflow: hidden;
 
@@ -266,7 +249,7 @@ body::after {
 
 /* En-tête */
 .site-header {
-    min-height: 72px;
+    min-height: 70px;
 
     display: flex;
     align-items: center;
@@ -280,10 +263,10 @@ body::after {
 
 /* Bouton retour */
 .back-btn {
-    width: 45px;
-    height: 45px;
+    width: 44px;
+    height: 44px;
 
-    flex: 0 0 45px;
+    flex: 0 0 44px;
 
     display: grid;
     place-items: center;
@@ -291,13 +274,13 @@ body::after {
     color: var(--text-main);
     text-decoration: none;
 
-    font-size: 23px;
+    font-size: 22px;
 
     border-radius: 50%;
 
     border:
         1px solid
-        rgba(79, 210, 255, 0.34);
+        rgba(79, 210, 255, 0.35);
 
     background:
         radial-gradient(
@@ -309,7 +292,7 @@ body::after {
 
     box-shadow:
         0 0 16px
-        rgba(79, 210, 255, 0.13);
+        rgba(79, 210, 255, 0.14);
 
     transition:
         transform 0.25s ease,
@@ -326,14 +309,14 @@ body::after {
         rgba(255, 75, 92, 0.85);
 
     box-shadow:
-        0 0 21px
-        rgba(79, 210, 255, 0.28),
+        0 0 20px
+        rgba(79, 210, 255, 0.27),
 
         0 0 18px
-        rgba(255, 75, 92, 0.28);
+        rgba(255, 75, 92, 0.27);
 }
 
-/* Marque */
+/* Identité DigitRestore */
 .brand {
     display: flex;
     align-items: center;
@@ -349,8 +332,8 @@ body::after {
 }
 
 .brand-logo {
-    width: 58px;
-    height: 58px;
+    width: 56px;
+    height: 56px;
 
     object-fit: contain;
 
@@ -378,7 +361,7 @@ body::after {
         "Montserrat",
         sans-serif;
 
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 900;
 
     letter-spacing: 0.08em;
@@ -405,7 +388,19 @@ body::after {
 
 /* Introduction */
 .intro {
-    padding: 4px 13px 5px;
+    min-height: 0;
+
+    padding: 6px 14px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        230px;
+
+    align-items: center;
+
+    gap: 30px;
 
     opacity: 0;
     transform: translateY(14px);
@@ -415,9 +410,8 @@ body::after {
         0.2s forwards;
 }
 
-/* Petite ligne cyan/rouge */
 .intro-line {
-    width: 55px;
+    width: 56px;
     height: 3px;
 
     margin-bottom: 8px;
@@ -461,15 +455,211 @@ body::after {
 }
 
 .intro p {
-    margin-top: 5px;
+    margin-top: 6px;
 
     color: var(--text-soft);
 
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.45;
 }
 
-/* Grille principale */
+/* Petit visuel animé */
+.intro-visual {
+    position: relative;
+
+    width: 220px;
+    height: 110px;
+
+    display: grid;
+    place-items: center;
+
+    justify-self: end;
+
+    border-radius: 22px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(79, 210, 255, 0.09),
+            transparent 58%
+        ),
+        rgba(5, 10, 25, 0.62);
+
+    overflow: hidden;
+}
+
+.intro-orbit {
+    position: absolute;
+
+    width: 155px;
+    height: 155px;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            transparent 0 15%,
+            var(--cyan) 28%,
+            transparent 42% 62%,
+            var(--red) 76%,
+            transparent 90%
+        );
+
+    mask-image:
+        radial-gradient(
+            circle,
+            transparent 0 67%,
+            black 68% 69%,
+            transparent 70%
+        );
+
+    animation:
+        backgroundOrbit 10s
+        linear infinite;
+}
+
+.intro-phone {
+    position: relative;
+    z-index: 2;
+
+    width: 54px;
+    height: 94px;
+
+    padding: 3px;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            140deg,
+            var(--cyan),
+            var(--red)
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(0, 0, 0, 0.5),
+
+        0 0 16px
+        rgba(79, 210, 255, 0.18);
+
+    animation:
+        miniPhoneFloat 4.5s
+        ease-in-out infinite;
+}
+
+.intro-phone-screen {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(79, 210, 255, 0.15),
+            transparent 44%
+        ),
+        #060a14;
+}
+
+.intro-phone-screen::before {
+    content: "";
+
+    position: absolute;
+
+    width: 44px;
+    height: 44px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    border:
+        2px solid transparent;
+
+    border-top-color:
+        var(--cyan);
+
+    border-right-color:
+        var(--red);
+
+    animation:
+        screenRotate 5s
+        linear infinite;
+}
+
+.intro-island {
+    position: absolute;
+
+    z-index: 2;
+
+    top: 6px;
+    left: 50%;
+
+    width: 26px;
+    height: 6px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 99px;
+
+    background: #000;
+}
+
+.visual-dot {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background:
+        var(--cyan);
+
+    box-shadow:
+        0 0 10px
+        var(--cyan);
+
+    animation:
+        dotPulse 2.4s
+        ease-in-out infinite;
+}
+
+.visual-dot.one {
+    left: 24px;
+    top: 24px;
+}
+
+.visual-dot.two {
+    right: 27px;
+    bottom: 21px;
+
+    background:
+        var(--red);
+
+    box-shadow:
+        0 0 10px
+        var(--red);
+
+    animation-delay: 1.1s;
+}
+
+/* Grille principale plus compacte */
 .primary-grid {
     min-height: 0;
 
@@ -490,7 +680,7 @@ body::after {
     min-width: 0;
     min-height: 0;
 
-    padding: 15px 18px;
+    padding: 12px 17px;
 
     display: flex;
     flex-direction: column;
@@ -502,7 +692,7 @@ body::after {
     text-align: center;
     text-decoration: none;
 
-    border-radius: 21px;
+    border-radius: 20px;
 
     border:
         1px solid
@@ -573,7 +763,6 @@ body::after {
     animation-delay: 0.53s;
 }
 
-/* Lumière inférieure */
 .primary-card::after {
     content: "";
 
@@ -595,8 +784,6 @@ body::after {
             transparent
         );
 
-    opacity: 0.78;
-
     box-shadow:
         0 0 16px
         var(--accent);
@@ -604,19 +791,20 @@ body::after {
 
 .primary-card:hover {
     transform:
-        translateY(-7px)
+        translateY(-6px)
         scale(1.012);
 
-    border-color: var(--accent);
+    border-color:
+        var(--accent);
 
     box-shadow:
-        0 25px 48px
+        0 24px 46px
         rgba(0, 0, 0, 0.52),
 
-        0 0 31px
+        0 0 30px
         color-mix(
             in srgb,
-            var(--accent) 31%,
+            var(--accent) 30%,
             transparent
         );
 }
@@ -636,7 +824,8 @@ body::after {
             transparent 85%
         );
 
-    transform: translateX(-130%);
+    transform:
+        translateX(-130%);
 }
 
 .primary-card:hover .card-shine,
@@ -645,26 +834,25 @@ body::after {
         shineSweep 0.7s ease-out;
 }
 
-/* Cercle principal de l’icône */
+/* Cercle de l’icône */
 .icon-circle {
     position: relative;
 
-    width: 76px;
-    height: 76px;
+    width: 59px;
+    height: 59px;
 
-    flex: 0 0 76px;
+    flex: 0 0 59px;
 
     display: grid;
     place-items: center;
 
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 
     border-radius: 50%;
 
     isolation: isolate;
 }
 
-/* Cercle rotatif */
 .icon-circle::before {
     content: "";
 
@@ -677,12 +865,11 @@ body::after {
 
     background:
         conic-gradient(
-            from 0deg,
             transparent 0 13%,
             var(--accent) 28%,
             transparent 43% 61%,
             var(--accent) 76%,
-            transparent 90% 100%
+            transparent 90%
         );
 
     filter:
@@ -692,10 +879,10 @@ body::after {
         );
 
     animation:
-        iconOrbit 5s linear infinite;
+        iconOrbit 5s
+        linear infinite;
 }
 
-/* Fond du cercle */
 .icon-circle::after {
     content: "";
 
@@ -731,10 +918,9 @@ body::after {
     animation-duration: 1.7s;
 }
 
-/* Icônes SVG */
 .icon-circle svg {
-    width: 37px;
-    height: 37px;
+    width: 29px;
+    height: 29px;
 
     color: var(--accent);
 
@@ -761,47 +947,49 @@ body::after {
 }
 
 .card-title {
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 700;
 
     line-height: 1.2;
 }
 
 .card-description {
-    max-width: 390px;
+    max-width: 420px;
 
-    margin-top: 7px;
+    margin-top: 6px;
 
     color: var(--text-soft);
 
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.45;
 }
 
-.card-action {
-    min-width: 185px;
+.primary-action {
+    min-width: 245px;
 
     margin-top: auto;
-    padding: 8px 17px;
+    padding: 8px 15px;
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    gap: 14px;
+    gap: 13px;
 
-    border-radius: 12px;
+    text-align: center;
+
+    border-radius: 11px;
 
     color: var(--text-main);
 
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 650;
 
     border:
         1px solid
         color-mix(
             in srgb,
-            var(--accent) 65%,
+            var(--accent) 68%,
             transparent
         );
 
@@ -816,24 +1004,25 @@ body::after {
         0 0 13px
         color-mix(
             in srgb,
-            var(--accent) 16%,
+            var(--accent) 17%,
             transparent
         );
 
     transition:
         color 0.25s ease,
-        border-color 0.25s ease,
         transform 0.25s ease,
+        border-color 0.25s ease,
         box-shadow 0.25s ease;
 }
 
-.primary-card:hover .card-action {
+.primary-card:hover .primary-action {
     color: var(--accent);
 
     transform:
         translateY(-2px);
 
-    border-color: var(--accent);
+    border-color:
+        var(--accent);
 
     box-shadow:
         0 0 20px
@@ -851,12 +1040,13 @@ body::after {
         transform 0.25s ease;
 }
 
-.primary-card:hover .action-arrow {
+.primary-card:hover .action-arrow,
+.secondary-card:hover .action-arrow {
     transform:
         translateX(4px);
 }
 
-/* Services secondaires */
+/* Quatre cartes inférieures agrandies */
 .secondary-grid {
     min-height: 0;
 
@@ -876,12 +1066,18 @@ body::after {
     min-width: 0;
     min-height: 0;
 
-    padding: 12px 15px;
+    padding: 13px 15px;
 
-    display: flex;
-    align-items: center;
+    display: grid;
 
-    gap: 13px;
+    grid-template-columns:
+        56px minmax(0, 1fr);
+
+    grid-template-rows:
+        1fr auto;
+
+    column-gap: 13px;
+    row-gap: 8px;
 
     overflow: hidden;
 
@@ -894,7 +1090,7 @@ body::after {
         1px solid
         color-mix(
             in srgb,
-            var(--accent) 54%,
+            var(--accent) 55%,
             transparent
         );
 
@@ -964,7 +1160,8 @@ body::after {
         translateY(-5px)
         scale(1.015);
 
-    border-color: var(--accent);
+    border-color:
+        var(--accent);
 
     box-shadow:
         0 19px 37px
@@ -978,17 +1175,19 @@ body::after {
         );
 }
 
-/* Petit cercle pour les cartes secondaires */
+/* Cercle des icônes secondaires */
 .small-icon-circle {
     position: relative;
 
-    width: 54px;
-    height: 54px;
+    width: 56px;
+    height: 56px;
 
-    flex: 0 0 54px;
+    grid-row: 1;
 
     display: grid;
     place-items: center;
+
+    align-self: center;
 
     border-radius: 50%;
 
@@ -1007,7 +1206,6 @@ body::after {
 
     background:
         conic-gradient(
-            from 0deg,
             transparent 0 16%,
             var(--accent) 31%,
             transparent 47% 68%,
@@ -1081,135 +1279,99 @@ body::after {
 
 .secondary-content {
     min-width: 0;
-    flex: 1;
+
+    grid-column: 2;
+    grid-row: 1;
+
+    align-self: center;
 }
 
 .secondary-title {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
 
     line-height: 1.2;
 }
 
 .secondary-description {
-    margin-top: 4px;
+    margin-top: 5px;
 
-    color: var(--text-muted);
+    color: var(--text-soft);
 
-    font-size: 10px;
-    line-height: 1.35;
+    font-size: 12px;
+    line-height: 1.4;
 }
 
-.secondary-arrow {
-    flex: 0 0 auto;
+/* Bouton En savoir plus des cartes inférieures */
+.secondary-action {
+    grid-column: 1 / -1;
+    grid-row: 2;
 
-    color: var(--accent);
+    width: 100%;
 
-    font-size: 20px;
+    min-height: 32px;
 
-    transition:
-        transform 0.25s ease;
-}
-
-.secondary-card:hover .secondary-arrow {
-    transform:
-        translateX(4px);
-}
-
-/* Bandeau inférieur */
-.trust-strip {
-    min-height: 54px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    overflow: hidden;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.09);
-
-    border-radius: 17px;
-
-    background:
-        rgba(4, 8, 20, 0.75);
-
-    opacity: 0;
-    transform: translateY(10px);
-
-    animation:
-        fadeUp 0.65s ease
-        0.93s forwards;
-}
-
-.trust-item {
-    position: relative;
+    padding: 6px 13px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    gap: 10px;
+    gap: 13px;
 
-    color: var(--text-soft);
+    border-radius: 10px;
+
+    color: var(--text-main);
 
     font-size: 11px;
-    font-weight: 600;
-}
-
-.trust-item + .trust-item::before {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 20%;
-    bottom: 20%;
-
-    width: 1px;
-
-    background:
-        linear-gradient(
-            transparent,
-            rgba(255, 255, 255, 0.18),
-            transparent
-        );
-}
-
-.trust-icon {
-    width: 34px;
-    height: 34px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 50%;
-
-    color: var(--cyan);
+    font-weight: 650;
 
     border:
         1px solid
-        rgba(79, 210, 255, 0.3);
+        color-mix(
+            in srgb,
+            var(--accent) 65%,
+            transparent
+        );
 
     background:
-        rgba(79, 210, 255, 0.07);
+        color-mix(
+            in srgb,
+            var(--accent) 8%,
+            rgba(5, 10, 25, 0.95)
+        );
 
     box-shadow:
         0 0 12px
-        rgba(79, 210, 255, 0.13);
+        color-mix(
+            in srgb,
+            var(--accent) 14%,
+            transparent
+        );
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-.trust-icon svg {
-    width: 19px;
-    height: 19px;
+.secondary-card:hover .secondary-action {
+    color: var(--accent);
 
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    transform:
+        translateY(-2px);
+
+    border-color:
+        var(--accent);
+
+    box-shadow:
+        0 0 19px
+        color-mix(
+            in srgb,
+            var(--accent) 29%,
+            transparent
+        );
 }
 
 /* Animations */
@@ -1293,86 +1455,143 @@ body::after {
     }
 }
 
-/* Écrans moins hauts */
+@keyframes miniPhoneFloat {
+    0%,
+    100% {
+        transform:
+            translateY(3px)
+            rotate(-2deg);
+    }
+
+    50% {
+        transform:
+            translateY(-5px)
+            rotate(2deg);
+    }
+}
+
+@keyframes screenRotate {
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+    }
+}
+
+@keyframes dotPulse {
+    0%,
+    100% {
+        opacity: 0.35;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* Fenêtres moins hautes */
 @media (max-height: 800px) {
     .page {
         grid-template-rows:
             auto
-            auto
-            minmax(190px, 250px)
-            minmax(82px, 102px)
-            minmax(42px, 50px);
+            minmax(74px, 94px)
+            minmax(165px, 205px)
+            minmax(120px, 145px);
 
         gap: 7px;
     }
 
     .site-header {
-        min-height: 58px;
+        min-height: 57px;
     }
 
     .brand-logo {
-        width: 46px;
-        height: 46px;
+        width: 45px;
+        height: 45px;
     }
 
     .brand-name {
         font-size: 18px;
     }
 
-    .intro-line {
-        margin-bottom: 5px;
+    .intro {
+        grid-template-columns:
+            minmax(0, 1fr)
+            185px;
     }
 
     .intro h1 {
         font-size:
-            clamp(22px, 2.5vw, 31px);
+            clamp(21px, 2.5vw, 30px);
     }
 
     .intro p {
-        font-size: 11px;
+        font-size: 12px;
+    }
+
+    .intro-visual {
+        width: 180px;
+        height: 82px;
+    }
+
+    .intro-phone {
+        width: 40px;
+        height: 70px;
+    }
+
+    .intro-orbit {
+        width: 115px;
+        height: 115px;
     }
 
     .primary-card {
-        padding: 10px 14px;
+        padding: 8px 12px;
     }
 
     .icon-circle {
-        width: 58px;
-        height: 58px;
+        width: 49px;
+        height: 49px;
 
-        flex-basis: 58px;
+        flex-basis: 49px;
 
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
 
     .icon-circle svg {
-        width: 29px;
-        height: 29px;
+        width: 24px;
+        height: 24px;
     }
 
     .card-title {
-        font-size: 17px;
+        font-size: 16px;
     }
 
     .card-description {
-        font-size: 10px;
+        font-size: 11px;
     }
 
-    .card-action {
-        padding: 6px 14px;
+    .primary-action {
+        min-width: 210px;
+
+        padding: 6px 11px;
 
         font-size: 9px;
     }
 
     .secondary-card {
-        padding: 8px 11px;
+        padding: 8px 10px;
+
+        grid-template-columns:
+            44px minmax(0, 1fr);
+
+        row-gap: 5px;
     }
 
     .small-icon-circle {
         width: 43px;
         height: 43px;
-
-        flex-basis: 43px;
     }
 
     .small-icon-circle svg {
@@ -1381,10 +1600,18 @@ body::after {
     }
 
     .secondary-title {
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .secondary-description {
+        font-size: 10px;
+    }
+
+    .secondary-action {
+        min-height: 27px;
+
+        padding: 4px 9px;
+
         font-size: 9px;
     }
 }
@@ -1403,15 +1630,19 @@ body::after {
     }
 
     .primary-card {
-        padding-left: 9px;
-        padding-right: 9px;
-    }
-
-    .card-title {
-        font-size: 16px;
+        padding-left: 8px;
+        padding-right: 8px;
     }
 
     .card-description {
+        font-size: 11px;
+    }
+
+    .primary-action {
+        min-width: 0;
+
+        width: 94%;
+
         font-size: 9px;
     }
 
@@ -1425,7 +1656,7 @@ body::after {
     }
 
     .secondary-description {
-        display: none;
+        font-size: 9px;
     }
 }
 
@@ -1436,35 +1667,33 @@ body::after {
 
         margin: 3px auto;
 
-        padding:
-            7px 8px 9px;
+        padding: 7px 8px 9px;
 
         border-radius: 18px;
 
         grid-template-rows:
             auto
-            auto
-            minmax(180px, 1fr)
-            minmax(100px, 0.65fr)
-            42px;
+            minmax(65px, 83px)
+            minmax(155px, 1fr)
+            minmax(160px, 0.92fr);
     }
 
     .site-header {
-        min-height: 49px;
+        min-height: 48px;
     }
 
     .back-btn {
-        width: 36px;
-        height: 36px;
+        width: 35px;
+        height: 35px;
 
-        flex-basis: 36px;
+        flex-basis: 35px;
 
         font-size: 18px;
     }
 
     .brand-logo {
-        width: 38px;
-        height: 38px;
+        width: 37px;
+        height: 37px;
     }
 
     .brand-name {
@@ -1476,6 +1705,8 @@ body::after {
     }
 
     .intro {
+        display: block;
+
         text-align: center;
     }
 
@@ -1485,35 +1716,39 @@ body::after {
     }
 
     .intro h1 {
-        font-size: 21px;
+        font-size: 20px;
     }
 
     .intro p {
         font-size: 9px;
     }
 
+    .intro-visual {
+        display: none;
+    }
+
     .primary-grid {
-        gap: 5px;
+        gap: 4px;
     }
 
     .primary-card {
-        padding: 7px 4px;
+        padding: 6px 4px;
 
-        border-radius: 13px;
+        border-radius: 12px;
     }
 
     .icon-circle {
-        width: 41px;
-        height: 41px;
+        width: 38px;
+        height: 38px;
 
-        flex-basis: 41px;
+        flex-basis: 38px;
 
-        margin-bottom: 4px;
+        margin-bottom: 3px;
     }
 
     .icon-circle svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
     }
 
     .card-title {
@@ -1524,10 +1759,11 @@ body::after {
         display: none;
     }
 
-    .card-action {
-        min-width: 0;
+    .primary-action {
+        width: 96%;
+        min-height: 25px;
 
-        padding: 4px 5px;
+        padding: 3px;
 
         font-size: 6px;
     }
@@ -1546,39 +1782,38 @@ body::after {
     .secondary-card {
         padding: 5px 6px;
 
-        gap: 6px;
+        grid-template-columns:
+            30px minmax(0, 1fr);
+
+        gap: 4px;
 
         border-radius: 11px;
     }
 
     .small-icon-circle {
-        width: 30px;
-        height: 30px;
-
-        flex-basis: 30px;
+        width: 29px;
+        height: 29px;
     }
 
     .small-icon-circle svg {
-        width: 15px;
-        height: 15px;
+        width: 14px;
+        height: 14px;
     }
 
     .secondary-title {
         font-size: 8px;
     }
 
-    .secondary-arrow {
-        font-size: 12px;
+    .secondary-description {
+        display: none;
     }
 
-    .trust-item {
-        gap: 3px;
+    .secondary-action {
+        min-height: 21px;
+
+        padding: 2px 4px;
 
         font-size: 6px;
-    }
-
-    .trust-icon {
-        display: none;
     }
 
     .background-orbit {
@@ -1587,7 +1822,7 @@ body::after {
     }
 }
 
-/* Réduction des animations */
+/* Accessibilité */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -1634,6 +1869,7 @@ body::after {
 
                 <div class="brand-name">
                     <span>DIGIT</span>
+
                     <span class="restore">
                         RESTORE
                     </span>
@@ -1651,19 +1887,44 @@ body::after {
 
     <section class="intro">
 
-        <div
-            class="intro-line"
-            aria-hidden="true">
+        <div class="intro-copy">
+
+            <div
+                class="intro-line"
+                aria-hidden="true">
+            </div>
+
+            <h1>
+                Bienvenue dans l’Atelier
+                <span>DigitRestore</span>
+            </h1>
+
+            <p>
+                Choisissez le service qui correspond à votre besoin.
+            </p>
+
         </div>
 
-        <h1>
-            Bienvenue dans l’Atelier
-            <span>DigitRestore</span>
-        </h1>
+        <div
+            class="intro-visual"
+            aria-hidden="true">
 
-        <p>
-            Choisissez le service qui correspond à votre besoin.
-        </p>
+            <div class="intro-orbit"></div>
+
+            <span class="visual-dot one"></span>
+            <span class="visual-dot two"></span>
+
+            <div class="intro-phone">
+
+                <div class="intro-phone-screen">
+
+                    <div class="intro-island"></div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </section>
 
@@ -1688,8 +1949,8 @@ body::after {
                         a4 4 0 0 0 5 5
                         L5 16a2.1 2.1 0 0 0 3 3
                         l6.9-6.9a4 4 0 0 0 5-5
-                        l-2.1 2.1-2.8-2.8 2.1-2.1
-                        a4 4 0 0 0-2.4 2z">
+                        l-2.1 2.1-2.8-2.8
+                        2.1-2.1a4 4 0 0 0-2.4 2z">
                     </path>
 
                 </svg>
@@ -1701,12 +1962,15 @@ body::after {
             </h2>
 
             <p class="card-description">
-                Diagnostic précis et réparations rapides
+                Diagnostic précis et réparations rapides<br>
                 pour tous vos appareils.
             </p>
 
-            <span class="card-action">
-                <span>En savoir plus</span>
+            <span class="primary-action">
+                <span>
+                    Faire une demande de devis en ligne
+                </span>
+
                 <span class="action-arrow">→</span>
             </span>
 
@@ -1730,8 +1994,7 @@ body::after {
                         11 23.2
                         1.8 14
                         11.4 4.4
-                        H20.6
-                        Z">
+                        H20.6Z">
                     </path>
 
                     <circle
@@ -1760,12 +2023,15 @@ body::after {
             </h2>
 
             <p class="card-description">
-                Nous rachetons vos appareils au meilleur
-                prix, en toute simplicité.
+                Nous rachetons vos appareils au meilleur prix,<br>
+                simplement et en toute transparence.
             </p>
 
-            <span class="card-action">
-                <span>En savoir plus</span>
+            <span class="primary-action">
+                <span>
+                    Faire estimer votre téléphone
+                </span>
+
                 <span class="action-arrow">→</span>
             </span>
 
@@ -1814,12 +2080,15 @@ body::after {
             </h2>
 
             <p class="card-description">
-                Un large choix de téléphones et d’accessoires
-                sélectionnés pour leur qualité.
+                Téléphones sélectionnés et accessoires utiles,<br>
+                contrôlés avec soin par DigitRestore.
             </p>
 
-            <span class="card-action">
-                <span>En savoir plus</span>
+            <span class="primary-action">
+                <span>
+                    Visiter notre boutique
+                </span>
+
                 <span class="action-arrow">→</span>
             </span>
 
@@ -1870,13 +2139,15 @@ body::after {
                 </h2>
 
                 <p class="secondary-description">
-                    Appareils remis à neuf,
-                    testés et garantis.
+                    Appareils remis à neuf, testés et garantis.
                 </p>
 
             </div>
 
-            <span class="secondary-arrow">→</span>
+            <span class="secondary-action">
+                <span>En savoir plus</span>
+                <span class="action-arrow">→</span>
+            </span>
 
         </a>
 
@@ -1896,14 +2167,17 @@ body::after {
 
                     <path
                         d="M12 2
-                        20 5.5
-                        V11
+                        20 5.5V11
                         c0 5-3.4 9-8 11
                         -4.6-2-8-6-8-11
                         V5.5z">
                     </path>
 
-                    <path d="m8.5 12 2.2 2.2 4.8-5"></path>
+                    <path
+                        d="m8.5 12
+                        2.2 2.2
+                        4.8-5">
+                    </path>
 
                 </svg>
 
@@ -1916,13 +2190,15 @@ body::after {
                 </h2>
 
                 <p class="secondary-description">
-                    Contrôles rigoureux
-                    et pièces fiables.
+                    Contrôles rigoureux et pièces fiables.
                 </p>
 
             </div>
 
-            <span class="secondary-arrow">→</span>
+            <span class="secondary-action">
+                <span>En savoir plus</span>
+                <span class="action-arrow">→</span>
+            </span>
 
         </a>
 
@@ -1947,20 +2223,21 @@ body::after {
                     </path>
 
                     <path
-                        d="M4 13
-                        H2v5
+                        d="M4 13H2v5
                         a2 2 0 0 0 2 2
                         h2v-7z">
                     </path>
 
                     <path
-                        d="M20 13
-                        h2v5
+                        d="M20 13h2v5
                         a2 2 0 0 1-2 2
                         h-2v-7z">
                     </path>
 
-                    <path d="M18 20c-1 2-3 2-5 2"></path>
+                    <path
+                        d="M18 20
+                        c-1 2-3 2-5 2">
+                    </path>
 
                 </svg>
 
@@ -1973,13 +2250,15 @@ body::after {
                 </h2>
 
                 <p class="secondary-description">
-                    Une équipe à votre écoute
-                    pour vous accompagner.
+                    Une équipe disponible pour vous accompagner.
                 </p>
 
             </div>
 
-            <span class="secondary-arrow">→</span>
+            <span class="secondary-action">
+                <span>En savoir plus</span>
+                <span class="action-arrow">→</span>
+            </span>
 
         </a>
 
@@ -1998,7 +2277,8 @@ body::after {
                     aria-hidden="true">
 
                     <path
-                        d="M6 2h8l4 4v16H6z">
+                        d="M6 2h8
+                        l4 4v16H6z">
                     </path>
 
                     <path d="M14 2v5h5"></path>
@@ -2016,97 +2296,17 @@ body::after {
                 </h2>
 
                 <p class="secondary-description">
-                    Consultez les informations
-                    liées à nos prestations.
+                    Informations sur les prestations et garanties.
                 </p>
 
             </div>
 
-            <span class="secondary-arrow">→</span>
+            <span class="secondary-action">
+                <span>En savoir plus</span>
+                <span class="action-arrow">→</span>
+            </span>
 
         </a>
-
-    </section>
-
-    <section
-        class="trust-strip"
-        aria-label="Engagements DigitRestore">
-
-        <div class="trust-item">
-
-            <span class="trust-icon">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
-
-                    <circle cx="12" cy="12" r="7"></circle>
-                    <circle cx="12" cy="12" r="2"></circle>
-                    <path d="M12 2v3"></path>
-                    <path d="M12 19v3"></path>
-                    <path d="M2 12h3"></path>
-                    <path d="M19 12h3"></path>
-
-                </svg>
-
-            </span>
-
-            <span>Diagnostic précis</span>
-
-        </div>
-
-        <div class="trust-item">
-
-            <span class="trust-icon">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
-
-                    <rect
-                        x="5"
-                        y="10"
-                        width="14"
-                        height="11"
-                        rx="2">
-                    </rect>
-
-                    <path
-                        d="M8 10V7
-                        a4 4 0 0 1 8 0
-                        v3">
-                    </path>
-
-                    <path d="M12 14v3"></path>
-
-                </svg>
-
-            </span>
-
-            <span>Données protégées</span>
-
-        </div>
-
-        <div class="trust-item">
-
-            <span class="trust-icon">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
-
-                    <path d="M5 20V10"></path>
-                    <path d="M10 20V4"></path>
-                    <path d="M15 20v-7"></path>
-                    <path d="M20 20V7"></path>
-
-                </svg>
-
-            </span>
-
-            <span>Suivi transparent</span>
-
-        </div>
 
     </section>
 
@@ -2119,7 +2319,8 @@ const interactiveCards = document.querySelectorAll(
 
 interactiveCards.forEach(card => {
     card.addEventListener("pointermove", event => {
-        const bounds = card.getBoundingClientRect();
+        const bounds =
+            card.getBoundingClientRect();
 
         const mouseX =
             event.clientX - bounds.left;
