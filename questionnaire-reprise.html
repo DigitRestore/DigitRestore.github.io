@@ -10,6 +10,8 @@
     --cyan:#35d8ff;
     --green:#16c878;
     --text-main:#ffffff;
+    --text-soft:#c8cbe0;
+    --text-muted:#8f96b3;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -24,15 +26,22 @@ html,body{
 }
 
 .qr-component{
-    height:100%;
+    height:100vh;
     min-height:360px;
     padding:22px;
     display:flex;
     flex-direction:column;
-    gap:18px;
     background:
         radial-gradient(circle at 12% 10%, rgba(53,216,255,.10), transparent 34%),
         radial-gradient(circle at 90% 90%, rgba(22,200,120,.10), transparent 36%);
+}
+
+#qrRender{
+    height:100%;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
 }
 
 .qr-progress{
@@ -77,121 +86,10 @@ html,body{
     min-height:0;
     overflow-y:auto;
     padding-right:4px;
-    padding-bottom:12px;
+    padding-bottom:8px;
 }
 
 .qr-body::-webkit-scrollbar{width:6px}
-.qr-body::-webkit-scrollbar-thumb{
-    border-radius:99px;
-    background:rgba(255,255,255,.18);
-}
-
-.qr-kicker{
-    margin-bottom:6px;
-    color:var(--cyan);
-    font-size:11px;
-    font-weight:900;
-    text-transform:uppercase;
-    letter-spacing:.12em;
-}
-
-.qr-title{
-    font-size:26px;
-    line-height:1.15;
-    font-weight:900;
-    margin-bottom:8px;
-}
-
-.qr-text{
-    max-width:620px;
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-:root{
-    --red:#ff3655;
-    --cyan:#35d8ff;
-    --green:#16c878;
-    --text-main:#ffffff;
-    --text-soft:#c8cbe0;
-    --text-muted:#8f96b3;
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    font-family:"Poppins",Arial,sans-serif;
-    color:var(--text-main);
-    background:transparent;
-}
-
-.qr-component{
-    height:100vh;
-    min-height:360px;
-    padding:22px;
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-    background:
-        radial-gradient(circle at 12% 10%, rgba(53,216,255,.10), transparent 34%),
-        radial-gradient(circle at 90% 90%, rgba(22,200,120,.10), transparent 36%);
-}
-
-.qr-progress{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.qr-step{
-    width:28px;
-    height:28px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
-    font-weight:900;
-    color:rgba(255,255,255,.55);
-    background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.13);
-}
-
-.qr-step.active,
-.qr-step.done{
-    color:#04101a;
-    background:linear-gradient(135deg,var(--green),var(--cyan));
-    box-shadow:0 0 18px rgba(53,216,255,.28);
-}
-
-.qr-step.done{
-    opacity:.70;
-}
-
-.qr-line{
-    flex:1;
-    height:2px;
-    border-radius:99px;
-    background:rgba(255,255,255,.10);
-}
-
-.qr-body{
-    flex:1;
-    min-height:0;
-    overflow:auto;
-    padding-right:4px;
-}
-
-.qr-body::-webkit-scrollbar{
-    width:6px;
-}
-
 .qr-body::-webkit-scrollbar-thumb{
     border-radius:99px;
     background:rgba(255,255,255,.18);
@@ -227,11 +125,10 @@ html,body{
     gap:12px;
 }
 
-.qr-options.compact{
-    gap:9px;
-}
+.qr-options.compact{gap:9px}
 
 .qr-option{
+    width:100%;
     min-height:72px;
     padding:14px 15px;
     border-radius:17px;
@@ -239,6 +136,9 @@ html,body{
     grid-template-columns:auto 1fr;
     gap:14px;
     align-items:center;
+    text-align:left;
+    font-family:"Poppins",Arial,sans-serif;
+    color:#fff;
     background:linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.025));
     border:1px solid rgba(255,255,255,.11);
     cursor:pointer;
@@ -247,12 +147,15 @@ html,body{
 
 .qr-option:hover{
     transform:translateY(-1px);
-    border-color:rgba(53,216,255,.38);
+    border-color:rgba(53,216,255,.45);
     box-shadow:0 14px 28px rgba(0,0,0,.22);
 }
 
-.qr-option input{
-    display:none;
+.qr-option.selected{
+    border-color:rgba(53,216,255,.75);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(53,216,255,.16), transparent 38%),
+        linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
 }
 
 .qr-dot{
@@ -265,19 +168,12 @@ html,body{
     transition:.22s ease;
 }
 
-.qr-option input:checked + .qr-dot{
+.qr-option.selected .qr-dot{
     border-color:var(--cyan);
     background:linear-gradient(135deg,var(--green),var(--cyan));
     box-shadow:
         inset 0 0 0 5px rgba(8,14,31,.92),
         0 0 18px rgba(53,216,255,.38);
-}
-
-.qr-option:has(input:checked){
-    border-color:rgba(53,216,255,.70);
-    background:
-        radial-gradient(circle at 0% 0%, rgba(53,216,255,.14), transparent 38%),
-        linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.030));
 }
 
 .qr-content strong{
@@ -295,6 +191,7 @@ html,body{
 }
 
 .qr-actions{
+    flex-shrink:0;
     display:flex;
     justify-content:space-between;
     gap:12px;
@@ -389,7 +286,7 @@ html,body{
 
 <body>
 
-<div class="qr-component" id="qrComponent">
+<div class="qr-component">
     <div id="qrRender"></div>
 </div>
 
@@ -420,20 +317,20 @@ const qrRender = document.getElementById("qrRender");
 
 const questions = {
     fonctionnement: {
-        stepNumber: 1,
+        stepNumber: 2,
         help: "fonctionnement",
         type: "radio",
         key: "fonctionnement",
         title: "Fonctionnement général",
         text: "Votre iPhone est-il pleinement fonctionnel ?",
         options: [
-            ["oui", "Oui, tout fonctionne correctement", "L’appareil s’allume, se charge et les fonctions principales sont opérationnelles."],
-            ["non", "Non, il présente un ou plusieurs défauts", "Vous pourrez préciser les défauts constatés à l’étape suivante."]
+            ["oui", "Oui", "L’appareil s’allume, se charge et les fonctions principales sont opérationnelles."],
+            ["non", "Non", "L’appareil présente un ou plusieurs défauts."]
         ]
     },
 
     defauts: {
-        stepNumber: 1,
+        stepNumber: 2,
         help: "fonctionnement",
         type: "checkbox",
         key: "defauts",
@@ -447,11 +344,12 @@ const questions = {
             ["camera", "Caméra principale défectueuse", "Photo floue, caméra inactive ou défaut visible."],
             ["charge", "Impossible d’allumer ou de charger", "L’appareil ne démarre pas ou ne prend pas la charge."],
             ["autre", "Autre problème", "Tout autre défaut non listé."]
-        ]
+        ],
+        note: "Vous pouvez sélectionner plusieurs défauts."
     },
 
     batterie: {
-        stepNumber: 2,
+        stepNumber: 3,
         help: "batterie",
         type: "radio",
         key: "batterie",
@@ -459,7 +357,7 @@ const questions = {
         text: "Quelle est la capacité maximale de la batterie ?",
         options: [
             ["90_100", "90 % à 100 %", "Batterie en très bon état."],
-            ["80_89", "80 % à 89 %", "Usure normale, appareil encore exploitable."],
+            ["80_89", "80 % à 89 %", "Usure normale."],
             ["moins_80", "Inférieure à 80 %", "Batterie considérée comme usée."],
             ["gonflee", "Batterie gonflée", "Défaut important, contrôle obligatoire."],
             ["inconnu", "Je ne sais pas", "Une vérification sera faite en atelier."]
@@ -467,13 +365,13 @@ const questions = {
     },
 
     ecran: {
-        stepNumber: 3,
+        stepNumber: 4,
         help: "ecran",
         type: "radio",
         key: "ecran",
         compact: true,
         title: "État de l’écran",
-        text: "Veuillez évaluer l’état de la face avant de l’appareil.",
+        text: "Veuillez évaluer l’état de l’écran.",
         options: [
             ["comme_neuf", "Comme neuf", "Aucune rayure visible."],
             ["tres_bon", "Très bon état", "Micro-rayures très légères."],
@@ -484,13 +382,13 @@ const questions = {
     },
 
     chassis: {
-        stepNumber: 4,
+        stepNumber: 5,
         help: "chassis",
         type: "radio",
         key: "chassis",
         compact: true,
         title: "Face arrière & châssis",
-        text: "Veuillez évaluer l’état de la face arrière, du cadre et des contours.",
+        text: "Veuillez évaluer l’état de la face arrière et du cadre.",
         options: [
             ["comme_neuf", "Comme neuf", "Aucune trace visible."],
             ["tres_bon", "Très bon état", "Micro-traces très légères."],
@@ -501,7 +399,7 @@ const questions = {
     },
 
     repare: {
-        stepNumber: 5,
+        stepNumber: 6,
         help: "reparations",
         type: "radio",
         key: "repare",
@@ -516,7 +414,7 @@ const questions = {
     },
 
     reparations: {
-        stepNumber: 5,
+        stepNumber: 6,
         help: "reparations",
         type: "checkbox",
         key: "reparations",
@@ -530,11 +428,11 @@ const questions = {
             ["camera", "Caméra remplacée", "Caméra avant ou arrière déjà remplacée."],
             ["autre", "Autre réparation", "Autre élément déjà remplacé."]
         ],
-        note: "Les appareils déjà réparés feront l’objet d’un contrôle approfondi afin de vérifier la qualité et la conformité des réparations."
+        note: "Les appareils déjà réparés feront l’objet d’un contrôle approfondi."
     },
 
     marcheUE: {
-        stepNumber: 6,
+        stepNumber: 7,
         help: "ue",
         type: "radio",
         key: "marcheUE",
@@ -545,11 +443,11 @@ const questions = {
             ["non", "Non", "Les appareils hors marché UE ne sont pas éligibles."],
             ["inconnu", "Je ne sais pas", "La conformité sera contrôlée à réception."]
         ],
-        alert: "Les appareils destinés à un marché hors Union européenne ne sont pas éligibles à notre programme de reprise."
+        alert: "Les appareils destinés à un marché hors Union européenne ne sont pas éligibles au programme de reprise DigitRestore."
     },
 
     recap: {
-        stepNumber: 6,
+        stepNumber: 7,
         help: "recap",
         type: "recap",
         title: "Récapitulatif",
@@ -573,14 +471,16 @@ function renderQuestion(stepId) {
             <button class="qr-btn qr-btn-secondary" type="button" id="qrBackBtn" ${questionnaireState.history.length === 0 ? "disabled" : ""}>
                 ← Retour
             </button>
-            <button class="qr-btn qr-btn-primary" type="button" id="qrNextBtn">
-                ${stepId === "recap" ? "Questionnaire terminé" : "Valider →"}
-            </button>
+            ${renderActionButton(question)}
         </div>
     `;
 
     document.getElementById("qrBackBtn").addEventListener("click", goBack);
-    document.getElementById("qrNextBtn").addEventListener("click", () => validateQuestion(question));
+
+    const nextBtn = document.getElementById("qrNextBtn");
+    if (nextBtn) {
+        nextBtn.addEventListener("click", () => validateCurrentQuestion(question));
+    }
 
     sendQuestionnaireUpdate(stepId === "recap");
 }
@@ -588,40 +488,64 @@ function renderQuestion(stepId) {
 function renderProgress(currentStep) {
     let html = `<div class="qr-progress">`;
 
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 2; i <= 7; i++) {
         const cls = i < currentStep ? "qr-step done" : i === currentStep ? "qr-step active" : "qr-step";
         html += `<div class="${cls}">${i}</div>`;
-        if (i < 6) html += `<div class="qr-line"></div>`;
+        if (i < 7) html += `<div class="qr-line"></div>`;
     }
 
     html += `</div>`;
     return html;
 }
 
+function renderActionButton(question) {
+    if (question.type === "checkbox") {
+        return `
+            <button class="qr-btn qr-btn-primary" type="button" id="qrNextBtn">
+                Continuer →
+            </button>
+        `;
+    }
+
+    if (question.type === "recap") {
+        return `
+            <button class="qr-btn qr-btn-primary" type="button" id="qrNextBtn">
+                Questionnaire terminé
+            </button>
+        `;
+    }
+
+    return `
+        <button class="qr-btn qr-btn-primary" type="button" disabled>
+            Choisissez une réponse
+        </button>
+    `;
+}
+
 function renderBody(question) {
     if (question.type === "recap") return renderRecap();
 
     let html = `
-        <div class="qr-kicker">Étape ${question.stepNumber} sur 6</div>
+        <div class="qr-kicker">Étape ${question.stepNumber} sur 7</div>
         <h2 class="qr-title">${question.title}</h2>
         <p class="qr-text">${question.text}</p>
         <div class="qr-options ${question.compact ? "compact" : ""}">
     `;
 
     question.options.forEach(option => {
-        const [value, label, detail] = option;
-        const checked = isChecked(question.key, value);
-        const inputType = question.type === "checkbox" ? "checkbox" : "radio";
+        const value = option[0];
+        const label = option[1];
+        const detail = option[2];
+        const selected = isChecked(question.key, value) ? "selected" : "";
 
         html += `
-            <label class="qr-option">
-                <input type="${inputType}" name="${question.key}" value="${value}" ${checked ? "checked" : ""}>
+            <button class="qr-option ${selected}" type="button" data-key="${question.key}" data-value="${value}">
                 <span class="qr-dot"></span>
                 <span class="qr-content">
                     <strong>${label}</strong>
                     <small>${detail}</small>
                 </span>
-            </label>
+            </button>
         `;
     });
 
@@ -633,79 +557,78 @@ function renderBody(question) {
     return html;
 }
 
-function renderRecap() {
-    const a = questionnaireState.answers;
+function attachOptionEvents() {
+    const buttons = document.querySelectorAll(".qr-option");
 
-    return `
-        <div class="qr-kicker">Validation finale</div>
-        <h2 class="qr-title">Récapitulatif</h2>
-        <p class="qr-text">Contrôlez les informations déclarées avant de passer à l’estimation.</p>
-
-        <div class="qr-recap">
-            <div class="qr-recap-row"><span>Fonctionnement</span><strong>${formatValue(a.fonctionnement)}</strong></div>
-            <div class="qr-recap-row"><span>Défauts</span><strong>${formatArray(a.defauts)}</strong></div>
-            <div class="qr-recap-row"><span>Batterie</span><strong>${formatValue(a.batterie)}</strong></div>
-            <div class="qr-recap-row"><span>Écran</span><strong>${formatValue(a.ecran)}</strong></div>
-            <div class="qr-recap-row"><span>Châssis</span><strong>${formatValue(a.chassis)}</strong></div>
-            <div class="qr-recap-row"><span>Déjà réparé</span><strong>${formatValue(a.repare)}</strong></div>
-            <div class="qr-recap-row"><span>Réparations</span><strong>${formatArray(a.reparations)}</strong></div>
-            <div class="qr-recap-row"><span>Marché UE</span><strong>${formatValue(a.marcheUE)}</strong></div>
-        </div>
-
-        <div class="qr-note">
-            L’estimation affichée sera indicative. Chaque appareil sera contrôlé en atelier.
-            Toute anomalie ou information non déclarée peut entraîner une nouvelle proposition.
-        </div>
-    `;
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            const key = button.dataset.key;
+            const value = button.dataset.value;
+            selectOption(key, value);
+        });
+    });
 }
 
-function validateQuestion(question) {
+function selectOption(key, value) {
+    const question = questions[questionnaireState.currentStep];
+
+    if (!question) return;
+
+    if (question.type === "checkbox") {
+        const current = questionnaireState.answers[key] || [];
+
+        if (current.includes(value)) {
+            questionnaireState.answers[key] = current.filter(item => item !== value);
+        } else {
+            questionnaireState.answers[key] = [...current, value];
+        }
+
+        renderQuestion(questionnaireState.currentStep);
+        attachOptionEvents();
+        return;
+    }
+
+    saveAnswer(key, value);
+
+    const nextStep = getNextStep(key, value);
+
+    if (nextStep) {
+        questionnaireState.history.push(questionnaireState.currentStep);
+        renderQuestion(nextStep);
+        attachOptionEvents();
+    }
+}
+
+function validateCurrentQuestion(question) {
     if (question.type === "recap") {
         sendQuestionnaireUpdate(true);
         return;
     }
 
-    const value = getSelectedValue(question);
+    const value = questionnaireState.answers[question.key];
 
-    if (question.type === "radio" && !value) {
-        alert("Merci de sélectionner une réponse.");
-        return;
-    }
-
-    if (question.type === "checkbox" && value.length === 0) {
+    if (question.type === "checkbox" && (!value || value.length === 0)) {
         alert("Merci de sélectionner au moins une réponse.");
         return;
     }
-
-    saveAnswer(question.key, value);
 
     const nextStep = getNextStep(question.key, value);
 
     if (nextStep) {
         questionnaireState.history.push(questionnaireState.currentStep);
         renderQuestion(nextStep);
+        attachOptionEvents();
     }
-}
-
-function getSelectedValue(question) {
-    const inputs = [...document.querySelectorAll(`input[name="${question.key}"]`)];
-
-    if (question.type === "radio") {
-        const selected = inputs.find(input => input.checked);
-        return selected ? selected.value : null;
-    }
-
-    return inputs.filter(input => input.checked).map(input => input.value);
 }
 
 function saveAnswer(key, value) {
     questionnaireState.answers[key] = value;
 
-    if (key === "fonctionnement") {
+    if (key === "fonctionnement" && value === "oui") {
         questionnaireState.answers.defauts = [];
     }
 
-    if (key === "repare") {
+    if (key === "repare" && value !== "oui") {
         questionnaireState.answers.reparations = [];
     }
 
@@ -737,6 +660,8 @@ function goBack() {
     if (!previous) return;
 
     renderQuestion(previous);
+    attachOptionEvents();
+    sendQuestionnaireUpdate(false);
 }
 
 function isChecked(key, value) {
@@ -747,6 +672,32 @@ function isChecked(key, value) {
     }
 
     return current === value;
+}
+
+function renderRecap() {
+    const a = questionnaireState.answers;
+
+    return `
+        <div class="qr-kicker">Validation finale</div>
+        <h2 class="qr-title">Récapitulatif</h2>
+        <p class="qr-text">Contrôlez les informations déclarées avant de passer à l’estimation.</p>
+
+        <div class="qr-recap">
+            <div class="qr-recap-row"><span>Fonctionnement</span><strong>${formatValue(a.fonctionnement)}</strong></div>
+            <div class="qr-recap-row"><span>Défauts</span><strong>${formatArray(a.defauts)}</strong></div>
+            <div class="qr-recap-row"><span>Batterie</span><strong>${formatValue(a.batterie)}</strong></div>
+            <div class="qr-recap-row"><span>Écran</span><strong>${formatValue(a.ecran)}</strong></div>
+            <div class="qr-recap-row"><span>Châssis</span><strong>${formatValue(a.chassis)}</strong></div>
+            <div class="qr-recap-row"><span>Déjà réparé</span><strong>${formatValue(a.repare)}</strong></div>
+            <div class="qr-recap-row"><span>Réparations</span><strong>${formatArray(a.reparations)}</strong></div>
+            <div class="qr-recap-row"><span>Marché UE</span><strong>${formatValue(a.marcheUE)}</strong></div>
+        </div>
+
+        <div class="qr-note">
+            L’estimation affichée sera indicative. Chaque appareil sera contrôlé en atelier.
+            Toute anomalie ou information non déclarée peut entraîner une nouvelle proposition.
+        </div>
+    `;
 }
 
 function sendQuestionnaireUpdate(complete) {
@@ -808,13 +759,15 @@ function formatArray(values) {
         autre: "Autre problème",
         ecran: "Écran remplacé",
         face_arriere: "Face arrière remplacée",
-        connecteur: "Connecteur remplacé"
+        connecteur: "Connecteur remplacé",
+        camera: "Caméra remplacée"
     };
 
     return values.map(value => labels[value] || value).join(", ");
 }
 
 renderQuestion("fonctionnement");
+attachOptionEvents();
 </script>
 
 </body>
