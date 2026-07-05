@@ -857,8 +857,10 @@ function updateDeviceDisplay() {
 }
 
 function updateDeviceImage() {
-    if (state.version === "iPhone 17 Pro Max" && state.color === "Blanc") {
-        deviceImage.src = "images/reprise/apple/iphone-17-pro-max-blanc.png";
+    const imagePath = state.selectedVersionData?.image || state.selectedModelData?.image || "";
+
+    if (imagePath) {
+        deviceImage.src = imagePath;
         deviceImage.style.display = "block";
         devicePlaceholderIcon.style.display = "none";
     } else {
@@ -867,7 +869,6 @@ function updateDeviceImage() {
         devicePlaceholderIcon.style.display = "block";
     }
 }
-
 function sendDeviceStateToQuestionnaire() {
     if (!questionnaireFrame || !questionnaireFrame.contentWindow) return;
 
