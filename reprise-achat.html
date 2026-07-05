@@ -254,13 +254,10 @@ main{
     overflow:hidden;
 }
 
-.device-image-box img,
-.device-image-box canvas{
+.device-image-box img{
     display:none;
     max-width:88%;
     max-height:175px;
-    width:auto;
-    height:auto;
     object-fit:contain;
     filter:drop-shadow(0 18px 26px rgba(0,0,0,.55));
 }
@@ -471,13 +468,11 @@ main{
 
     <div class="brand">
         <img src="logo.png" alt="Logo DigitRestore">
-
         <div>
             <div class="brand-line">
                 <span class="digit">DIGIT</span>
                 <span class="restore">RESTORE</span>
             </div>
-
             <span class="tag">REPRISE & ACHAT</span>
             <span class="tag">SMARTPHONES & TABLETTES</span>
         </div>
@@ -496,10 +491,7 @@ main{
             <div class="form-grid">
 
                 <div class="form-group full">
-                    <label class="form-label" for="brandSelect">
-                        Marque
-                    </label>
-
+                    <label class="form-label" for="brandSelect">Marque</label>
                     <select class="select-field" id="brandSelect">
                         <option value="">Sélectionner</option>
                         <option value="Apple">Apple</option>
@@ -507,40 +499,28 @@ main{
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="modelSelect">
-                        Modèle
-                    </label>
-
+                    <label class="form-label" for="modelSelect">Modèle</label>
                     <select class="select-field" id="modelSelect" disabled>
                         <option value="">Sélectionner</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="versionSelect">
-                        Version
-                    </label>
-
+                    <label class="form-label" for="versionSelect">Version</label>
                     <select class="select-field" id="versionSelect" disabled>
                         <option value="">Sélectionner</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="colorSelect">
-                        Couleur
-                    </label>
-
+                    <label class="form-label" for="colorSelect">Couleur</label>
                     <select class="select-field" id="colorSelect" disabled>
                         <option value="">Sélectionner</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="capacitySelect">
-                        Capacité
-                    </label>
-
+                    <label class="form-label" for="capacitySelect">Capacité</label>
                     <select class="select-field" id="capacitySelect" disabled>
                         <option value="">Sélectionner</option>
                     </select>
@@ -553,22 +533,8 @@ main{
             <div class="card-title">Aperçu appareil</div>
 
             <div class="device-image-box">
-                <span
-                    class="device-placeholder"
-                    id="devicePlaceholderIcon">
-                    📱
-                </span>
-
-                <img
-                    id="deviceImage"
-                    src=""
-                    alt="Aperçu du téléphone">
-
-                <canvas
-                    id="deviceCanvas"
-                    role="img"
-                    aria-label="Aperçu recoloré du téléphone">
-                </canvas>
+                <span class="device-placeholder" id="devicePlaceholderIcon">📱</span>
+                <img id="deviceImage" src="" alt="Aperçu du téléphone">
             </div>
 
             <div class="device-name" id="deviceName"></div>
@@ -589,11 +555,7 @@ main{
         </div>
 
         <div class="question-footer">
-            <button
-                class="next-btn"
-                type="button"
-                id="estimateButton"
-                disabled>
+            <button class="next-btn" type="button" id="estimateButton" disabled>
                 Obtenir l’estimation →
             </button>
         </div>
@@ -602,38 +564,26 @@ main{
     <aside class="card help-card">
         <div class="card-title">Aide visuelle</div>
 
-        <div class="help-title" id="helpTitle">
-            État d’usure
-        </div>
+        <div class="help-title" id="helpTitle">État d’usure</div>
 
         <p class="help-intro" id="helpIntro">
-            Cette zone aide le client à comparer l’état réel de son
-            appareil avec des exemples visuels.
+            Cette zone aide le client à comparer l’état réel de son appareil avec des exemples visuels.
         </p>
 
         <div class="wear-levels" id="wearLevels">
             <div class="wear-item">
                 <strong>Très bon état</strong>
-                <span>
-                    Micro-rayures légères, peu visibles,
-                    non détectables à l’ongle.
-                </span>
+                <span>Micro-rayures légères, peu visibles, non détectables à l’ongle.</span>
             </div>
 
             <div class="wear-item">
                 <strong>Bon état</strong>
-                <span>
-                    Rayures visibles à la lumière,
-                    sans fissure ni impact profond.
-                </span>
+                <span>Rayures visibles à la lumière, sans fissure ni impact profond.</span>
             </div>
 
             <div class="wear-item">
                 <strong>État usé</strong>
-                <span>
-                    Rayures marquées, impacts visibles
-                    ou traces d’utilisation importantes.
-                </span>
+                <span>Rayures marquées, impacts visibles ou traces d’utilisation importantes.</span>
             </div>
         </div>
 
@@ -645,22 +595,13 @@ main{
             </div>
 
             <div class="visual-image">
-                <span
-                    class="visual-placeholder"
-                    id="visualPlaceholder">
-                    🖼️
-                </span>
-
-                <img
-                    id="wearImage"
-                    src=""
-                    alt="Exemple d’état d’usure">
+                <span class="visual-placeholder" id="visualPlaceholder">🖼️</span>
+                <img id="wearImage" src="" alt="Exemple d’état d’usure">
             </div>
         </div>
 
         <div class="help-note" id="helpNote">
-            Les photos seront adaptées selon la question active :
-            écran, châssis, fissure, rayure ou état général.
+            Les photos seront adaptées selon la question active : écran, châssis, fissure, rayure ou état général.
         </div>
     </aside>
 
@@ -669,8 +610,6 @@ main{
 </main>
 
 </div>
-
-<script src="js/coloration.js"></script>
 
 <script>
 const state = {
@@ -686,66 +625,26 @@ const state = {
     questionnaireComplete: false
 };
 
-const brandSelect =
-    document.getElementById("brandSelect");
+const brandSelect = document.getElementById("brandSelect");
+const modelSelect = document.getElementById("modelSelect");
+const versionSelect = document.getElementById("versionSelect");
+const colorSelect = document.getElementById("colorSelect");
+const capacitySelect = document.getElementById("capacitySelect");
 
-const modelSelect =
-    document.getElementById("modelSelect");
+const deviceName = document.getElementById("deviceName");
+const deviceImage = document.getElementById("deviceImage");
+const devicePlaceholderIcon = document.getElementById("devicePlaceholderIcon");
 
-const versionSelect =
-    document.getElementById("versionSelect");
+const questionnaireFrame = document.getElementById("questionnaireFrame");
+const estimateButton = document.getElementById("estimateButton");
 
-const colorSelect =
-    document.getElementById("colorSelect");
-
-const capacitySelect =
-    document.getElementById("capacitySelect");
-
-const deviceName =
-    document.getElementById("deviceName");
-
-const deviceImage =
-    document.getElementById("deviceImage");
-
-const deviceCanvas =
-    document.getElementById("deviceCanvas");
-
-const devicePlaceholderIcon =
-    document.getElementById("devicePlaceholderIcon");
-
-const deviceColorizer = new DeviceColorizer({
-    canvas: deviceCanvas,
-    fallbackImage: deviceImage,
-    placeholder: devicePlaceholderIcon
-});
-
-const questionnaireFrame =
-    document.getElementById("questionnaireFrame");
-
-const estimateButton =
-    document.getElementById("estimateButton");
-
-const helpTitle =
-    document.getElementById("helpTitle");
-
-const helpIntro =
-    document.getElementById("helpIntro");
-
-const visualCaption =
-    document.getElementById("visualCaption");
-
-const wearImage =
-    document.getElementById("wearImage");
-
-const visualPlaceholder =
-    document.getElementById("visualPlaceholder");
-
-const wearLevels =
-    document.getElementById("wearLevels");
-
-const helpNote =
-    document.getElementById("helpNote");
-
+const helpTitle = document.getElementById("helpTitle");
+const helpIntro = document.getElementById("helpIntro");
+const visualCaption = document.getElementById("visualCaption");
+const wearImage = document.getElementById("wearImage");
+const visualPlaceholder = document.getElementById("visualPlaceholder");
+const wearLevels = document.getElementById("wearLevels");
+const helpNote = document.getElementById("helpNote");
 
 brandSelect.addEventListener("change", async () => {
     state.brand = brandSelect.value;
@@ -767,16 +666,12 @@ brandSelect.addEventListener("change", async () => {
     }
 });
 
-
 modelSelect.addEventListener("change", () => {
     state.model = modelSelect.value;
     state.version = "";
     state.color = "";
     state.capacity = "";
-
-    state.selectedModelData =
-        findSelectedModel(state.model);
-
+    state.selectedModelData = findSelectedModel(state.model);
     state.selectedVersionData = null;
 
     resetSelect(versionSelect, "Sélectionner");
@@ -796,14 +691,11 @@ modelSelect.addEventListener("change", () => {
     sendDeviceStateToQuestionnaire();
 });
 
-
 versionSelect.addEventListener("change", () => {
     state.version = versionSelect.value;
     state.color = "";
     state.capacity = "";
-
-    state.selectedVersionData =
-        findSelectedVersion(state.version);
+    state.selectedVersionData = findSelectedVersion(state.version);
 
     resetSelect(colorSelect, "Sélectionner");
     resetSelect(capacitySelect, "Sélectionner");
@@ -814,7 +706,6 @@ versionSelect.addEventListener("change", () => {
     if (state.selectedVersionData) {
         renderColorSelect(state.selectedVersionData);
         renderCapacitySelect(state.selectedVersionData);
-
         colorSelect.disabled = false;
         capacitySelect.disabled = false;
     }
@@ -823,22 +714,17 @@ versionSelect.addEventListener("change", () => {
     sendDeviceStateToQuestionnaire();
 });
 
-
 colorSelect.addEventListener("change", () => {
     state.color = colorSelect.value;
-
     updateDeviceDisplay();
     sendDeviceStateToQuestionnaire();
 });
-
 
 capacitySelect.addEventListener("change", () => {
     state.capacity = capacitySelect.value;
-
     updateDeviceDisplay();
     sendDeviceStateToQuestionnaire();
 });
-
 
 estimateButton.addEventListener("click", () => {
     const payload = {
@@ -849,180 +735,98 @@ estimateButton.addEventListener("click", () => {
             couleur: state.color,
             capacite: state.capacity
         },
-
         questionnaire: state.questionnaireAnswers || {}
     };
 
-    sessionStorage.setItem(
-        "digitrestore_reprise_payload",
-        JSON.stringify(payload)
-    );
-
+    sessionStorage.setItem("digitrestore_reprise_payload", JSON.stringify(payload));
     window.location.href = "estimation-reprise.html";
 });
 
-
 async function loadAppleData() {
     try {
-        const response = await fetch(
-            "donnees/reprise-apple.json",
-            { cache: "no-cache" }
-        );
+        const response = await fetch("donnees/reprise-apple.json", { cache: "no-cache" });
 
         if (!response.ok) {
-            throw new Error(
-                "Fichier donnees/reprise-apple.json introuvable"
-            );
+            throw new Error("Fichier donnees/reprise-apple.json introuvable");
         }
 
         const data = await response.json();
 
         if (!data || !Array.isArray(data.modeles)) {
-            throw new Error(
-                "Structure JSON invalide : clé modeles absente"
-            );
+            throw new Error("Structure JSON invalide : clé modeles absente");
         }
 
         state.data = data;
 
     } catch (error) {
         console.error(error);
-
         state.data = null;
-
-        resetSelect(
-            modelSelect,
-            "Erreur JSON"
-        );
+        resetSelect(modelSelect, "Erreur JSON");
     }
 }
 
-
 function renderModelSelect() {
-    resetSelect(
-        modelSelect,
-        "Sélectionner"
-    );
+    resetSelect(modelSelect, "Sélectionner");
 
     if (!state.data || !Array.isArray(state.data.modeles)) {
         modelSelect.disabled = true;
         return;
     }
 
-    const modeles = [...state.data.modeles]
-        .sort((a, b) => a.ordre - b.ordre);
+    const modeles = [...state.data.modeles].sort((a,b) => a.ordre - b.ordre);
 
     modeles.forEach(model => {
-        addOption(
-            modelSelect,
-            model.nom,
-            model.nom
-        );
+        addOption(modelSelect, model.nom, model.nom);
     });
 }
-
 
 function renderVersionSelect(model) {
-    resetSelect(
-        versionSelect,
-        "Sélectionner"
-    );
+    resetSelect(versionSelect, "Sélectionner");
 
-    if (!model || !Array.isArray(model.versions)) {
-        return;
-    }
+    if (!model || !Array.isArray(model.versions)) return;
 
     model.versions.forEach(version => {
-        addOption(
-            versionSelect,
-            version.nom,
-            version.nom
-        );
+        addOption(versionSelect, version.nom, version.nom);
     });
 }
-
 
 function renderColorSelect(version) {
-    resetSelect(
-        colorSelect,
-        "Sélectionner"
-    );
+    resetSelect(colorSelect, "Sélectionner");
 
-    if (!version || !Array.isArray(version.couleurs)) {
-        return;
-    }
+    if (!version || !Array.isArray(version.couleurs)) return;
 
     version.couleurs.forEach(color => {
-        addOption(
-            colorSelect,
-            color,
-            color
-        );
+        addOption(colorSelect, color, color);
     });
 }
-
 
 function renderCapacitySelect(version) {
-    resetSelect(
-        capacitySelect,
-        "Sélectionner"
-    );
+    resetSelect(capacitySelect, "Sélectionner");
 
-    if (!version || !Array.isArray(version.capacites)) {
-        return;
-    }
+    if (!version || !Array.isArray(version.capacites)) return;
 
     version.capacites.forEach(capacity => {
-        addOption(
-            capacitySelect,
-            capacity,
-            capacity
-        );
+        addOption(capacitySelect, capacity, capacity);
     });
 }
-
 
 function addOption(selectElement, value, text) {
     const option = document.createElement("option");
-
     option.value = value;
     option.textContent = text;
-
     selectElement.appendChild(option);
 }
 
-
 function resetSelect(selectElement, placeholder) {
     selectElement.innerHTML = "";
-
-    addOption(
-        selectElement,
-        "",
-        placeholder
-    );
+    addOption(selectElement, "", placeholder);
 }
 
-
 function resetAllAfterBrand() {
-    resetSelect(
-        modelSelect,
-        "Sélectionner"
-    );
-
-    resetSelect(
-        versionSelect,
-        "Sélectionner"
-    );
-
-    resetSelect(
-        colorSelect,
-        "Sélectionner"
-    );
-
-    resetSelect(
-        capacitySelect,
-        "Sélectionner"
-    );
+    resetSelect(modelSelect, "Sélectionner");
+    resetSelect(versionSelect, "Sélectionner");
+    resetSelect(colorSelect, "Sélectionner");
+    resetSelect(capacitySelect, "Sélectionner");
 
     modelSelect.disabled = true;
     versionSelect.disabled = true;
@@ -1030,31 +834,15 @@ function resetAllAfterBrand() {
     capacitySelect.disabled = true;
 }
 
-
 function findSelectedModel(modelName) {
-    if (!state.data || !Array.isArray(state.data.modeles)) {
-        return null;
-    }
-
-    return state.data.modeles.find(
-        model => model.nom === modelName
-    ) || null;
+    if (!state.data || !Array.isArray(state.data.modeles)) return null;
+    return state.data.modeles.find(model => model.nom === modelName) || null;
 }
-
 
 function findSelectedVersion(versionName) {
-    if (
-        !state.selectedModelData ||
-        !Array.isArray(state.selectedModelData.versions)
-    ) {
-        return null;
-    }
-
-    return state.selectedModelData.versions.find(
-        version => version.nom === versionName
-    ) || null;
+    if (!state.selectedModelData || !Array.isArray(state.selectedModelData.versions)) return null;
+    return state.selectedModelData.versions.find(version => version.nom === versionName) || null;
 }
-
 
 function updateDeviceDisplay() {
     if (state.version) {
@@ -1068,28 +856,25 @@ function updateDeviceDisplay() {
     updateDeviceImage();
 }
 
-
 function updateDeviceImage() {
-    deviceColorizer.render({
-        model: state.selectedModelData || {},
-        version: state.selectedVersionData || {},
-        color: state.color
-    });
-}
+    const imagePath = state.selectedVersionData?.image || state.selectedModelData?.image || "";
 
-
-function sendDeviceStateToQuestionnaire() {
-    if (
-        !questionnaireFrame ||
-        !questionnaireFrame.contentWindow
-    ) {
-        return;
+    if (imagePath) {
+        deviceImage.src = imagePath;
+        deviceImage.style.display = "block";
+        devicePlaceholderIcon.style.display = "none";
+    } else {
+        deviceImage.src = "";
+        deviceImage.style.display = "none";
+        devicePlaceholderIcon.style.display = "block";
     }
+}
+function sendDeviceStateToQuestionnaire() {
+    if (!questionnaireFrame || !questionnaireFrame.contentWindow) return;
 
     questionnaireFrame.contentWindow.postMessage({
         source: "digitrestore-reprise",
         type: "device-update",
-
         appareil: {
             marque: state.brand,
             modele: state.model,
@@ -1100,300 +885,132 @@ function sendDeviceStateToQuestionnaire() {
     }, "*");
 }
 
-
 window.addEventListener("message", event => {
     const data = event.data;
 
-    if (
-        !data ||
-        data.source !== "digitrestore-questionnaire"
-    ) {
-        return;
-    }
+    if (!data || data.source !== "digitrestore-questionnaire") return;
 
     if (data.type === "questionnaire-update") {
-        state.questionnaireAnswers =
-            data.answers || {};
-
-        state.questionnaireComplete =
-            !!data.complete;
-
-        estimateButton.disabled =
-            !state.questionnaireComplete;
+        state.questionnaireAnswers = data.answers || {};
+        state.questionnaireComplete = !!data.complete;
+        estimateButton.disabled = !state.questionnaireComplete;
     }
 
     if (data.type === "visual-help") {
-        updateVisualHelp(
-            data.help || "default"
-        );
+        updateVisualHelp(data.help || "default");
     }
 });
-
 
 questionnaireFrame.addEventListener("load", () => {
     sendDeviceStateToQuestionnaire();
 });
 
-
 function updateVisualHelp(type) {
     const helpData = {
         fonctionnement: {
             title: "Fonctionnement général",
-
-            intro:
-                "Déclarez les défauts réellement présents. Chaque point sera vérifié à réception.",
-
-            caption:
-                "Contrôle général de l’appareil",
-
+            intro: "Déclarez les défauts réellement présents. Chaque point sera vérifié à réception.",
+            caption: "Contrôle général de l’appareil",
             image: "",
-
-            note:
-                "Un appareil non fonctionnel peut rester éligible, mais son estimation sera adaptée.",
-
+            note: "Un appareil non fonctionnel peut rester éligible, mais son estimation sera adaptée.",
             levels: [
-                [
-                    "Fonctionnel",
-                    "L’appareil s’allume, se charge et répond normalement."
-                ],
-                [
-                    "Défaut partiel",
-                    "Une fonction est touchée : tactile, caméra, son, batterie ou charge."
-                ],
-                [
-                    "Défaut important",
-                    "L’appareil ne démarre pas ou présente une panne majeure."
-                ]
+                ["Fonctionnel", "L’appareil s’allume, se charge et répond normalement."],
+                ["Défaut partiel", "Une fonction est touchée : tactile, caméra, son, batterie ou charge."],
+                ["Défaut important", "L’appareil ne démarre pas ou présente une panne majeure."]
             ]
         },
-
         batterie: {
             title: "État de la batterie",
-
-            intro:
-                "La capacité maximale se trouve dans les réglages iOS, rubrique Batterie.",
-
-            caption:
-                "Exemple : santé batterie",
-
+            intro: "La capacité maximale se trouve dans les réglages iOS, rubrique Batterie.",
+            caption: "Exemple : santé batterie",
             image: "",
-
-            note:
-                "Une batterie gonflée doit être signalée impérativement.",
-
+            note: "Une batterie gonflée doit être signalée impérativement.",
             levels: [
-                [
-                    "90 % à 100 %",
-                    "Très bon niveau d’autonomie."
-                ],
-                [
-                    "80 % à 89 %",
-                    "Usure normale."
-                ],
-                [
-                    "Moins de 80 %",
-                    "Batterie considérée comme usée."
-                ]
+                ["90 % à 100 %", "Très bon niveau d’autonomie."],
+                ["80 % à 89 %", "Usure normale."],
+                ["Moins de 80 %", "Batterie considérée comme usée."]
             ]
         },
-
         ecran: {
             title: "État de l’écran",
-
-            intro:
-                "Comparez les rayures, fissures et impacts visibles sur la face avant du téléphone.",
-
-            caption:
-                "Exemple : écran rayé ou fissuré",
-
-            image:
-                "images/reprise/usure/ecran-exemple.png",
-
-            note:
-                "Les micro-rayures légères ne doivent pas accrocher à l’ongle.",
-
+            intro: "Comparez les rayures, fissures et impacts visibles sur la face avant du téléphone.",
+            caption: "Exemple : écran rayé ou fissuré",
+            image: "images/reprise/usure/ecran-exemple.png",
+            note: "Les micro-rayures légères ne doivent pas accrocher à l’ongle.",
             levels: [
-                [
-                    "Comme neuf",
-                    "Aucune rayure visible."
-                ],
-                [
-                    "Très bon état",
-                    "Micro-rayures légères, difficiles à voir."
-                ],
-                [
-                    "Endommagé",
-                    "Fissure, impact ou défaut d’affichage."
-                ]
+                ["Comme neuf", "Aucune rayure visible."],
+                ["Très bon état", "Micro-rayures légères, difficiles à voir."],
+                ["Endommagé", "Fissure, impact ou défaut d’affichage."]
             ]
         },
-
         chassis: {
             title: "Face arrière & châssis",
-
-            intro:
-                "Vérifiez le dos, les coins, les tranches et les traces de chute.",
-
-            caption:
-                "Exemple : châssis marqué",
-
-            image:
-                "images/reprise/usure/chassis-exemple.png",
-
-            note:
-                "Un cadre tordu ou une face arrière cassée aura un impact important.",
-
+            intro: "Vérifiez le dos, les coins, les tranches et les traces de chute.",
+            caption: "Exemple : châssis marqué",
+            image: "images/reprise/usure/chassis-exemple.png",
+            note: "Un cadre tordu ou une face arrière cassée aura un impact important.",
             levels: [
-                [
-                    "Très bon état",
-                    "Traces très légères."
-                ],
-                [
-                    "Bon état",
-                    "Quelques rayures visibles."
-                ],
-                [
-                    "Endommagé",
-                    "Dos cassé, coins marqués ou cadre déformé."
-                ]
+                ["Très bon état", "Traces très légères."],
+                ["Bon état", "Quelques rayures visibles."],
+                ["Endommagé", "Dos cassé, coins marqués ou cadre déformé."]
             ]
         },
-
         reparations: {
             title: "Historique des réparations",
-
-            intro:
-                "Les réparations déjà effectuées ne sont pas forcément bloquantes, mais elles seront contrôlées.",
-
-            caption:
-                "Contrôle qualité des pièces",
-
+            intro: "Les réparations déjà effectuées ne sont pas forcément bloquantes, mais elles seront contrôlées.",
+            caption: "Contrôle qualité des pièces",
             image: "",
-
-            note:
-                "DigitRestore vérifie la qualité, la conformité et le bon montage des pièces remplacées.",
-
+            note: "DigitRestore vérifie la qualité, la conformité et le bon montage des pièces remplacées.",
             levels: [
-                [
-                    "Aucune réparation",
-                    "Situation la plus simple à contrôler."
-                ],
-                [
-                    "Réparation connue",
-                    "Élément remplacé à déclarer."
-                ],
-                [
-                    "Inconnu",
-                    "Contrôle approfondi en atelier."
-                ]
+                ["Aucune réparation", "Situation la plus simple à contrôler."],
+                ["Réparation connue", "Élément remplacé à déclarer."],
+                ["Inconnu", "Contrôle approfondi en atelier."]
             ]
         },
-
         ue: {
             title: "Marché Union européenne",
-
-            intro:
-                "DigitRestore reprend uniquement les appareils destinés au marché européen.",
-
-            caption:
-                "Contrôle des références constructeur",
-
+            intro: "DigitRestore reprend uniquement les appareils destinés au marché européen.",
+            caption: "Contrôle des références constructeur",
             image: "",
-
-            note:
-                "Les appareils hors marché UE sont refusés.",
-
+            note: "Les appareils hors marché UE sont refusés.",
             levels: [
-                [
-                    "Marché UE",
-                    "Appareil normalement éligible."
-                ],
-                [
-                    "Hors UE",
-                    "Appareil non éligible."
-                ],
-                [
-                    "Inconnu",
-                    "Vérification effectuée à réception."
-                ]
+                ["Marché UE", "Appareil normalement éligible."],
+                ["Hors UE", "Appareil non éligible."],
+                ["Inconnu", "Vérification effectuée à réception."]
             ]
         },
-
         recap: {
             title: "Avant estimation",
-
-            intro:
-                "Vérifiez les réponses avant de demander l’estimation indicative.",
-
-            caption:
-                "Récapitulatif de reprise",
-
+            intro: "Vérifiez les réponses avant de demander l’estimation indicative.",
+            caption: "Récapitulatif de reprise",
             image: "",
-
-            note:
-                "Toute anomalie non déclarée peut entraîner une nouvelle proposition.",
-
+            note: "Toute anomalie non déclarée peut entraîner une nouvelle proposition.",
             levels: [
-                [
-                    "Estimation indicative",
-                    "Le montant final dépend du contrôle atelier."
-                ],
-                [
-                    "Contrôle systématique",
-                    "Chaque appareil est vérifié avant validation."
-                ],
-                [
-                    "Transparence",
-                    "Les défauts non déclarés peuvent modifier l’offre."
-                ]
+                ["Estimation indicative", "Le montant final dépend du contrôle atelier."],
+                ["Contrôle systématique", "Chaque appareil est vérifié avant validation."],
+                ["Transparence", "Les défauts non déclarés peuvent modifier l’offre."]
             ]
         },
-
         default: {
             title: "État d’usure",
-
-            intro:
-                "Cette zone aide le client à comparer l’état réel de son appareil avec des exemples visuels.",
-
-            caption:
-                "Exemple visuel",
-
+            intro: "Cette zone aide le client à comparer l’état réel de son appareil avec des exemples visuels.",
+            caption: "Exemple visuel",
             image: "",
-
-            note:
-                "Les photos seront adaptées selon la question active : écran, châssis, fissure, rayure ou état général.",
-
+            note: "Les photos seront adaptées selon la question active : écran, châssis, fissure, rayure ou état général.",
             levels: [
-                [
-                    "Très bon état",
-                    "Micro-rayures légères, peu visibles, non détectables à l’ongle."
-                ],
-                [
-                    "Bon état",
-                    "Rayures visibles à la lumière, sans fissure ni impact profond."
-                ],
-                [
-                    "État usé",
-                    "Rayures marquées, impacts visibles ou traces d’utilisation importantes."
-                ]
+                ["Très bon état", "Micro-rayures légères, peu visibles, non détectables à l’ongle."],
+                ["Bon état", "Rayures visibles à la lumière, sans fissure ni impact profond."],
+                ["État usé", "Rayures marquées, impacts visibles ou traces d’utilisation importantes."]
             ]
         }
     };
 
-    const selected =
-        helpData[type] || helpData.default;
+    const selected = helpData[type] || helpData.default;
 
-    helpTitle.textContent =
-        selected.title;
-
-    helpIntro.textContent =
-        selected.intro;
-
-    visualCaption.textContent =
-        selected.caption;
-
-    helpNote.textContent =
-        selected.note;
+    helpTitle.textContent = selected.title;
+    helpIntro.textContent = selected.intro;
+    visualCaption.textContent = selected.caption;
+    helpNote.textContent = selected.note;
 
     wearLevels.innerHTML = selected.levels.map(level => `
         <div class="wear-item">
