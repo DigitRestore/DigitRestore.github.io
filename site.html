@@ -15,9 +15,9 @@
 :root {
     --red: #ff4b5c;
     --cyan: #4fd2ff;
+    --green: #20d5a0;
     --blue: #1e9bff;
-    --green: #16c878;
-    --purple: #9b3cff;
+    --purple: #a45cff;
     --orange: #f3a51b;
     --teal: #23d6c8;
 
@@ -27,13 +27,12 @@
 
     --bg-main: #050814;
     --bg-alt: #070c1c;
-    --bg-card: rgba(8, 14, 31, 0.86);
 }
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html,
@@ -45,24 +44,20 @@ body {
 
 body {
     position: relative;
+
     font-family: "Poppins", sans-serif;
     color: var(--text-main);
 
     background:
         radial-gradient(
-            circle at 8% 14%,
-            rgba(79, 210, 255, 0.18),
-            transparent 34%
+            circle at 7% 16%,
+            rgba(79, 210, 255, 0.16),
+            transparent 32%
         ),
         radial-gradient(
             circle at 92% 18%,
-            rgba(255, 75, 92, 0.16),
-            transparent 36%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(30, 155, 255, 0.12),
-            transparent 44%
+            rgba(255, 75, 92, 0.15),
+            transparent 34%
         ),
         linear-gradient(
             135deg,
@@ -71,22 +66,24 @@ body {
         );
 }
 
-/* Grille discrète de fond */
+/* Grille subtile */
 body::before {
     content: "";
+
     position: fixed;
     inset: 0;
     z-index: 0;
+
     pointer-events: none;
 
     background:
         linear-gradient(
-            rgba(255, 255, 255, 0.025) 1px,
+            rgba(255, 255, 255, 0.024) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255, 255, 255, 0.025) 1px,
+            rgba(255, 255, 255, 0.024) 1px,
             transparent 1px
         );
 
@@ -95,86 +92,96 @@ body::before {
     mask-image:
         radial-gradient(
             circle at center,
-            black,
+            #000,
             transparent 80%
         );
 
-    opacity: 0.2;
+    opacity: 0.18;
 }
 
-/* Halo mobile */
+/* Halos mouvants */
 body::after {
     content: "";
+
     position: fixed;
+    inset: -20%;
     z-index: 0;
+
     pointer-events: none;
-
-    width: 620px;
-    height: 620px;
-    right: -140px;
-    top: 70px;
-
-    border-radius: 50%;
 
     background:
         radial-gradient(
-            circle,
-            rgba(79, 210, 255, 0.1),
-            transparent 55%
+            circle at 25% 42%,
+            rgba(79, 210, 255, 0.08),
+            transparent 26%
+        ),
+        radial-gradient(
+            circle at 78% 47%,
+            rgba(255, 75, 92, 0.08),
+            transparent 28%
         );
 
-    filter: blur(8px);
-
     animation:
-        ambientFloat 15s ease-in-out infinite alternate;
+        ambientMove 18s
+        ease-in-out infinite alternate;
 }
 
-/* Cercle cyan et rouge de fond */
+/* Grand cercle en arrière-plan */
 .background-orbit {
     position: fixed;
+
     z-index: 0;
-    pointer-events: none;
-
-    width: min(650px, 48vw);
-    aspect-ratio: 1;
-
-    top: 78px;
+    top: 65px;
     right: -70px;
 
+    width: min(680px, 52vw);
+    aspect-ratio: 1;
+
     border-radius: 50%;
+
+    pointer-events: none;
 
     background:
         conic-gradient(
             from 0deg,
-            transparent 0deg 22deg,
-            var(--cyan) 48deg,
-            transparent 80deg 185deg,
-            var(--red) 220deg,
+            transparent 0deg 18deg,
+            var(--cyan) 45deg,
+            transparent 76deg 188deg,
+            var(--red) 222deg,
             transparent 260deg 360deg
         );
-
-    opacity: 0.55;
 
     mask-image:
         radial-gradient(
             circle,
-            transparent 0 67%,
-            black 67.5% 68.3%,
-            transparent 69%
+            transparent 0 68%,
+            #000 68.3% 69%,
+            transparent 69.5%
         );
 
+    opacity: 0.62;
+
     filter:
-        drop-shadow(0 0 12px rgba(79, 210, 255, 0.45))
-        drop-shadow(0 0 12px rgba(255, 75, 92, 0.35));
+        drop-shadow(
+            0 0 14px
+            rgba(79, 210, 255, 0.48)
+        )
+        drop-shadow(
+            0 0 14px
+            rgba(255, 75, 92, 0.4)
+        );
 
     animation:
-        orbitRotate 22s linear infinite;
+        backgroundOrbit 24s
+        linear infinite;
 }
 
 .background-orbit::before,
 .background-orbit::after {
     content: "";
+
     position: absolute;
+
     border-radius: 50%;
 }
 
@@ -182,50 +189,57 @@ body::after {
     inset: 8%;
 
     border:
-        1px dashed rgba(79, 210, 255, 0.28);
+        1px dashed
+        rgba(79, 210, 255, 0.25);
 
     animation:
-        orbitRotateReverse 29s linear infinite;
+        orbitReverse 28s
+        linear infinite;
 }
 
 .background-orbit::after {
-    inset: 18%;
+    inset: 17%;
 
     border:
-        1px dotted rgba(255, 75, 92, 0.24);
+        1px dotted
+        rgba(255, 75, 92, 0.24);
 
     animation:
-        orbitRotate 18s linear infinite;
+        backgroundOrbit 18s
+        linear infinite;
 }
 
-/* Page générale */
+/* Page principale */
 .page {
     position: relative;
     z-index: 1;
 
-    width: min(1500px, calc(100% - 24px));
-    height: calc(100dvh - 20px);
+    width: min(1550px, calc(100% - 20px));
+    height: calc(100dvh - 16px);
 
-    margin: 10px auto;
-    padding: 12px 24px 16px;
+    margin: 8px auto;
+    padding: 10px 22px 14px;
 
     display: grid;
 
     grid-template-rows:
         auto
         auto
-        minmax(0, 1.55fr)
-        minmax(0, 0.72fr)
-        auto;
+        minmax(220px, 310px)
+        minmax(92px, 118px)
+        minmax(48px, 62px);
 
-    gap: 11px;
+    align-content: space-between;
+
+    gap: 10px;
 
     overflow: hidden;
 
     border:
-        1px solid rgba(255, 255, 255, 0.07);
+        1px solid
+        rgba(255, 255, 255, 0.07);
 
-    border-radius: 28px;
+    border-radius: 27px;
 
     background:
         linear-gradient(
@@ -233,10 +247,11 @@ body::after {
             rgba(255, 255, 255, 0.04),
             rgba(7, 12, 28, 0.92)
         ),
-        rgba(5, 8, 20, 0.76);
+        rgba(5, 8, 20, 0.78);
 
     box-shadow:
-        0 28px 90px rgba(0, 0, 0, 0.5);
+        0 28px 90px
+        rgba(0, 0, 0, 0.48);
 
     backdrop-filter: blur(18px);
 
@@ -251,7 +266,7 @@ body::after {
 
 /* En-tête */
 .site-header {
-    min-height: 67px;
+    min-height: 72px;
 
     display: flex;
     align-items: center;
@@ -259,39 +274,42 @@ body::after {
     gap: 18px;
 
     border-bottom:
-        1px solid rgba(255, 255, 255, 0.07);
+        1px solid
+        rgba(255, 255, 255, 0.07);
 }
 
-/* Retour */
+/* Bouton retour */
 .back-btn {
-    width: 43px;
-    height: 43px;
+    width: 45px;
+    height: 45px;
 
-    flex: 0 0 43px;
+    flex: 0 0 45px;
 
     display: grid;
     place-items: center;
 
-    border-radius: 50%;
-
     color: var(--text-main);
     text-decoration: none;
 
-    font-size: 22px;
+    font-size: 23px;
+
+    border-radius: 50%;
 
     border:
-        1px solid rgba(79, 210, 255, 0.35);
+        1px solid
+        rgba(79, 210, 255, 0.34);
 
     background:
         radial-gradient(
-            circle at 30% 25%,
-            rgba(255, 255, 255, 0.12),
+            circle at 30% 24%,
+            rgba(255, 255, 255, 0.13),
             transparent 38%
         ),
         rgba(7, 13, 29, 0.9);
 
     box-shadow:
-        0 0 16px rgba(79, 210, 255, 0.14);
+        0 0 16px
+        rgba(79, 210, 255, 0.13);
 
     transition:
         transform 0.25s ease,
@@ -305,30 +323,34 @@ body::after {
         scale(1.05);
 
     border-color:
-        rgba(255, 75, 92, 0.8);
+        rgba(255, 75, 92, 0.85);
 
     box-shadow:
-        0 0 20px rgba(79, 210, 255, 0.25),
-        0 0 18px rgba(255, 75, 92, 0.25);
+        0 0 21px
+        rgba(79, 210, 255, 0.28),
+
+        0 0 18px
+        rgba(255, 75, 92, 0.28);
 }
 
 /* Marque */
 .brand {
     display: flex;
     align-items: center;
+
     gap: 11px;
 
     opacity: 0;
     transform: translateY(-12px);
 
     animation:
-        fadeDown 0.75s ease
+        fadeDown 0.7s ease
         0.1s forwards;
 }
 
 .brand-logo {
-    width: 54px;
-    height: 54px;
+    width: 58px;
+    height: 58px;
 
     object-fit: contain;
 
@@ -339,22 +361,24 @@ body::after {
         );
 }
 
-.brand-text {
+.brand-copy {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+
+    gap: 4px;
 }
 
 .brand-name {
     display: flex;
     align-items: baseline;
+
     gap: 5px;
 
     font-family:
         "Montserrat",
         sans-serif;
 
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 900;
 
     letter-spacing: 0.08em;
@@ -362,43 +386,64 @@ body::after {
 }
 
 .brand-name .restore {
-    color: var(--red);
+    color: var(--cyan);
 
     text-shadow:
-        0 0 14px
-        rgba(255, 75, 92, 0.32);
+        0 0 13px
+        rgba(79, 210, 255, 0.3);
 }
 
 .brand-tag {
+    color: var(--text-soft);
+
     font-size: 8px;
     font-weight: 600;
 
-    letter-spacing: 0.19em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-
-    color: var(--cyan);
 }
 
-/* Introduction compacte */
+/* Introduction */
 .intro {
-    padding: 5px 14px 3px;
+    padding: 4px 13px 5px;
 
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(14px);
 
     animation:
-        fadeUp 0.8s ease
+        fadeUp 0.75s ease
         0.2s forwards;
+}
+
+/* Petite ligne cyan/rouge */
+.intro-line {
+    width: 55px;
+    height: 3px;
+
+    margin-bottom: 8px;
+
+    border-radius: 99px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--red)
+        );
+
+    box-shadow:
+        0 0 13px
+        rgba(79, 210, 255, 0.45);
 }
 
 .intro h1 {
     font-size:
-        clamp(25px, 3vw, 38px);
+        clamp(25px, 2.8vw, 38px);
+
+    font-weight: 700;
 
     line-height: 1.12;
     letter-spacing: -0.035em;
-
-    font-weight: 700;
 }
 
 .intro h1 span {
@@ -416,15 +461,15 @@ body::after {
 }
 
 .intro p {
-    margin-top: 6px;
+    margin-top: 5px;
 
     color: var(--text-soft);
 
     font-size: 13px;
-    line-height: 1.5;
+    line-height: 1.45;
 }
 
-/* Cartes principales */
+/* Grille principale */
 .primary-grid {
     min-height: 0;
 
@@ -436,26 +481,26 @@ body::after {
     gap: 14px;
 }
 
-.service-card {
-    --card-color: var(--cyan);
+/* Carte principale */
+.primary-card {
+    --accent: var(--cyan);
 
     position: relative;
 
     min-width: 0;
     min-height: 0;
 
-    overflow: hidden;
-
-    padding: 17px 18px;
+    padding: 15px 18px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    text-align: center;
-    text-decoration: none;
+    overflow: hidden;
 
     color: var(--text-main);
+    text-align: center;
+    text-decoration: none;
 
     border-radius: 21px;
 
@@ -463,40 +508,43 @@ body::after {
         1px solid
         color-mix(
             in srgb,
-            var(--card-color) 58%,
+            var(--accent) 58%,
             transparent
         );
 
     background:
         radial-gradient(
-            circle at 50% 0%,
+            circle at var(--mouse-x, 50%)
+            var(--mouse-y, 0%),
             color-mix(
                 in srgb,
-                var(--card-color) 15%,
+                var(--accent) 18%,
                 transparent
             ),
-            transparent 50%
+            transparent 43%
         ),
         linear-gradient(
             145deg,
             rgba(255, 255, 255, 0.055),
-            rgba(255, 255, 255, 0.016)
+            rgba(255, 255, 255, 0.015)
         ),
-        rgba(6, 11, 27, 0.88);
+        rgba(5, 10, 25, 0.9);
 
     box-shadow:
-        0 18px 38px rgba(0, 0, 0, 0.36),
+        0 18px 38px
+        rgba(0, 0, 0, 0.36),
+
         0 0 18px
         color-mix(
             in srgb,
-            var(--card-color) 10%,
+            var(--accent) 10%,
             transparent
         );
 
     opacity: 0;
 
     transform:
-        translateY(18px)
+        translateY(17px)
         scale(0.985);
 
     animation:
@@ -510,34 +558,71 @@ body::after {
         box-shadow 0.28s ease;
 }
 
-.service-card:nth-child(1) {
-    animation-delay: 0.34s;
+.primary-card:nth-child(1) {
+    --accent: var(--red);
+    animation-delay: 0.33s;
 }
 
-.service-card:nth-child(2) {
-    animation-delay: 0.44s;
+.primary-card:nth-child(2) {
+    --accent: var(--green);
+    animation-delay: 0.43s;
 }
 
-.service-card:nth-child(3) {
-    animation-delay: 0.54s;
+.primary-card:nth-child(3) {
+    --accent: var(--blue);
+    animation-delay: 0.53s;
 }
 
-.service-card.repair {
-    --card-color: var(--red);
+/* Lumière inférieure */
+.primary-card::after {
+    content: "";
+
+    position: absolute;
+
+    left: 12%;
+    right: 12%;
+    bottom: -1px;
+
+    height: 2px;
+
+    border-radius: 99px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--accent),
+            transparent
+        );
+
+    opacity: 0.78;
+
+    box-shadow:
+        0 0 16px
+        var(--accent);
 }
 
-.service-card.buyback {
-    --card-color: var(--green);
-}
+.primary-card:hover {
+    transform:
+        translateY(-7px)
+        scale(1.012);
 
-.service-card.phones {
-    --card-color: var(--cyan);
+    border-color: var(--accent);
+
+    box-shadow:
+        0 25px 48px
+        rgba(0, 0, 0, 0.52),
+
+        0 0 31px
+        color-mix(
+            in srgb,
+            var(--accent) 31%,
+            transparent
+        );
 }
 
 /* Reflet traversant */
-.service-card::before {
-    content: "";
-
+.card-shine {
     position: absolute;
     inset: 0;
 
@@ -554,81 +639,33 @@ body::after {
     transform: translateX(-130%);
 }
 
-/* Ligne lumineuse inférieure */
-.service-card::after {
-    content: "";
-
-    position: absolute;
-
-    left: 14%;
-    right: 14%;
-    bottom: -1px;
-
-    height: 2px;
-
-    border-radius: 99px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--card-color),
-            transparent
-        );
-
-    opacity: 0.7;
-
-    box-shadow:
-        0 0 15px
-        var(--card-color);
-}
-
-.service-card:hover {
-    transform:
-        translateY(-7px)
-        scale(1.012);
-
-    border-color:
-        var(--card-color);
-
-    box-shadow:
-        0 25px 48px
-        rgba(0, 0, 0, 0.52),
-
-        0 0 30px
-        color-mix(
-            in srgb,
-            var(--card-color) 30%,
-            transparent
-        );
-}
-
-.service-card:hover::before {
+.primary-card:hover .card-shine,
+.secondary-card:hover .card-shine {
     animation:
-        lightSweep 0.72s ease-out;
+        shineSweep 0.7s ease-out;
 }
 
-/* Cercle tournant autour des icônes */
-.icon-orbit {
+/* Cercle principal de l’icône */
+.icon-circle {
     position: relative;
 
-    width: 69px;
-    height: 69px;
+    width: 76px;
+    height: 76px;
 
-    flex: 0 0 69px;
+    flex: 0 0 76px;
 
     display: grid;
     place-items: center;
 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 
     border-radius: 50%;
 
     isolation: isolate;
 }
 
-/* Anneau lumineux rotatif */
-.icon-orbit::before {
+/* Cercle rotatif */
+.icon-circle::before {
     content: "";
 
     position: absolute;
@@ -641,25 +678,25 @@ body::after {
     background:
         conic-gradient(
             from 0deg,
-            transparent 0 15%,
-            var(--card-color) 28%,
-            transparent 43% 62%,
-            var(--card-color) 75%,
+            transparent 0 13%,
+            var(--accent) 28%,
+            transparent 43% 61%,
+            var(--accent) 76%,
             transparent 90% 100%
         );
 
     filter:
         drop-shadow(
             0 0 8px
-            var(--card-color)
+            var(--accent)
         );
 
     animation:
         iconOrbit 5s linear infinite;
 }
 
-/* Fond intérieur de l’anneau */
-.icon-orbit::after {
+/* Fond du cercle */
+.icon-circle::after {
     content: "";
 
     position: absolute;
@@ -674,57 +711,63 @@ body::after {
             circle at 35% 25%,
             color-mix(
                 in srgb,
-                var(--card-color) 20%,
+                var(--accent) 18%,
                 transparent
             ),
-            transparent 43%
+            transparent 44%
         ),
-        #08101f;
+        #07101f;
 
     border:
         1px solid
         color-mix(
             in srgb,
-            var(--card-color) 42%,
+            var(--accent) 43%,
             transparent
         );
 }
 
-.service-card:hover
-.icon-orbit::before {
-    animation-duration: 1.8s;
+.primary-card:hover .icon-circle::before {
+    animation-duration: 1.7s;
 }
 
-.card-icon {
-    color: var(--card-color);
+/* Icônes SVG */
+.icon-circle svg {
+    width: 37px;
+    height: 37px;
 
-    font-size: 30px;
+    color: var(--accent);
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 
     filter:
         drop-shadow(
-            0 0 8px
-            var(--card-color)
+            0 0 7px
+            var(--accent)
         );
 
     transition:
         transform 0.28s ease;
 }
 
-.service-card:hover
-.card-icon {
+.primary-card:hover .icon-circle svg {
     transform:
-        scale(1.12)
-        rotate(-5deg);
+        scale(1.1)
+        rotate(-4deg);
 }
 
-.service-title {
-    font-size: 21px;
+.card-title {
+    font-size: 20px;
     font-weight: 700;
 
     line-height: 1.2;
 }
 
-.service-text {
+.card-description {
     max-width: 390px;
 
     margin-top: 7px;
@@ -732,34 +775,85 @@ body::after {
     color: var(--text-soft);
 
     font-size: 12px;
-    line-height: 1.5;
+    line-height: 1.45;
 }
 
-.service-cta {
-    position: relative;
+.card-action {
+    min-width: 185px;
 
     margin-top: auto;
-    padding-top: 12px;
+    padding: 8px 17px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    border-radius: 12px;
 
     color: var(--text-main);
 
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
 
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--accent) 65%,
+            transparent
+        );
+
+    background:
+        color-mix(
+            in srgb,
+            var(--accent) 8%,
+            rgba(5, 10, 25, 0.94)
+        );
+
+    box-shadow:
+        0 0 13px
+        color-mix(
+            in srgb,
+            var(--accent) 16%,
+            transparent
+        );
 
     transition:
         color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.primary-card:hover .card-action {
+    color: var(--accent);
+
+    transform:
+        translateY(-2px);
+
+    border-color: var(--accent);
+
+    box-shadow:
+        0 0 20px
+        color-mix(
+            in srgb,
+            var(--accent) 30%,
+            transparent
+        );
+}
+
+.action-arrow {
+    font-size: 18px;
+
+    transition:
         transform 0.25s ease;
 }
 
-.service-card:hover
-.service-cta {
-    color: var(--card-color);
-
+.primary-card:hover .action-arrow {
     transform:
-        translateX(3px);
+        translateX(4px);
 }
 
 /* Services secondaires */
@@ -775,24 +869,24 @@ body::after {
 }
 
 .secondary-card {
-    --card-color: var(--purple);
+    --accent: var(--purple);
 
     position: relative;
 
     min-width: 0;
     min-height: 0;
 
-    padding: 13px 15px;
+    padding: 12px 15px;
 
     display: flex;
     align-items: center;
 
-    gap: 12px;
+    gap: 13px;
 
     overflow: hidden;
 
-    text-decoration: none;
     color: var(--text-main);
+    text-decoration: none;
 
     border-radius: 17px;
 
@@ -800,31 +894,39 @@ body::after {
         1px solid
         color-mix(
             in srgb,
-            var(--card-color) 52%,
+            var(--accent) 54%,
             transparent
         );
 
     background:
         radial-gradient(
-            circle at 0% 50%,
+            circle at var(--mouse-x, 0%)
+            var(--mouse-y, 50%),
             color-mix(
                 in srgb,
-                var(--card-color) 12%,
+                var(--accent) 14%,
                 transparent
             ),
             transparent 48%
         ),
-        rgba(5, 10, 25, 0.87);
+        rgba(5, 10, 25, 0.9);
 
     box-shadow:
         0 14px 30px
-        rgba(0, 0, 0, 0.3);
+        rgba(0, 0, 0, 0.3),
+
+        0 0 14px
+        color-mix(
+            in srgb,
+            var(--accent) 9%,
+            transparent
+        );
 
     opacity: 0;
 
     transform:
-        translateY(14px)
-        scale(0.98);
+        translateY(13px)
+        scale(0.985);
 
     animation:
         cardEnter 0.5s
@@ -838,40 +940,23 @@ body::after {
 }
 
 .secondary-card:nth-child(1) {
-    --card-color: var(--purple);
-    animation-delay: 0.62s;
+    --accent: var(--purple);
+    animation-delay: 0.61s;
 }
 
 .secondary-card:nth-child(2) {
-    --card-color: var(--teal);
-    animation-delay: 0.7s;
+    --accent: var(--teal);
+    animation-delay: 0.69s;
 }
 
 .secondary-card:nth-child(3) {
-    --card-color: var(--orange);
-    animation-delay: 0.78s;
+    --accent: var(--orange);
+    animation-delay: 0.77s;
 }
 
 .secondary-card:nth-child(4) {
-    --card-color: var(--red);
-    animation-delay: 0.86s;
-}
-
-.secondary-card::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            110deg,
-            transparent 20%,
-            rgba(255, 255, 255, 0.16),
-            transparent 80%
-        );
-
-    transform: translateX(-130%);
+    --accent: var(--red);
+    animation-delay: 0.85s;
 }
 
 .secondary-card:hover {
@@ -879,34 +964,28 @@ body::after {
         translateY(-5px)
         scale(1.015);
 
-    border-color:
-        var(--card-color);
+    border-color: var(--accent);
 
     box-shadow:
-        0 18px 36px
-        rgba(0, 0, 0, 0.44),
+        0 19px 37px
+        rgba(0, 0, 0, 0.43),
 
-        0 0 24px
+        0 0 25px
         color-mix(
             in srgb,
-            var(--card-color) 28%,
+            var(--accent) 28%,
             transparent
         );
 }
 
-.secondary-card:hover::before {
-    animation:
-        lightSweep 0.65s ease-out;
-}
-
-/* Petit anneau rotatif secondaire */
-.small-orbit {
+/* Petit cercle pour les cartes secondaires */
+.small-icon-circle {
     position: relative;
 
-    width: 49px;
-    height: 49px;
+    width: 54px;
+    height: 54px;
 
-    flex: 0 0 49px;
+    flex: 0 0 54px;
 
     display: grid;
     place-items: center;
@@ -916,7 +995,7 @@ body::after {
     isolation: isolate;
 }
 
-.small-orbit::before {
+.small-icon-circle::before {
     content: "";
 
     position: absolute;
@@ -928,17 +1007,18 @@ body::after {
 
     background:
         conic-gradient(
-            transparent 0 20%,
-            var(--card-color) 34%,
-            transparent 48% 70%,
-            var(--card-color) 84%,
+            from 0deg,
+            transparent 0 16%,
+            var(--accent) 31%,
+            transparent 47% 68%,
+            var(--accent) 83%,
             transparent 100%
         );
 
     filter:
         drop-shadow(
             0 0 7px
-            var(--card-color)
+            var(--accent)
         );
 
     animation:
@@ -946,7 +1026,7 @@ body::after {
         linear infinite;
 }
 
-.small-orbit::after {
+.small-icon-circle::after {
     content: "";
 
     position: absolute;
@@ -956,47 +1036,51 @@ body::after {
 
     border-radius: 50%;
 
-    background: #08101f;
+    background: #07101f;
 
     border:
         1px solid
         color-mix(
             in srgb,
-            var(--card-color) 38%,
+            var(--accent) 42%,
             transparent
         );
 }
 
-.secondary-card:hover
-.small-orbit::before {
+.secondary-card:hover .small-icon-circle::before {
     animation-duration: 1.6s;
 }
 
-.small-icon {
-    color: var(--card-color);
+.small-icon-circle svg {
+    width: 28px;
+    height: 28px;
 
-    font-size: 22px;
+    color: var(--accent);
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 
     filter:
         drop-shadow(
-            0 0 7px
-            var(--card-color)
+            0 0 6px
+            var(--accent)
         );
 
     transition:
         transform 0.25s ease;
 }
 
-.secondary-card:hover
-.small-icon {
+.secondary-card:hover .small-icon-circle svg {
     transform:
-        scale(1.12)
-        rotate(6deg);
+        scale(1.1)
+        rotate(5deg);
 }
 
 .secondary-content {
     min-width: 0;
-
     flex: 1;
 }
 
@@ -1007,8 +1091,8 @@ body::after {
     line-height: 1.2;
 }
 
-.secondary-text {
-    margin-top: 3px;
+.secondary-description {
+    margin-top: 4px;
 
     color: var(--text-muted);
 
@@ -1017,7 +1101,9 @@ body::after {
 }
 
 .secondary-arrow {
-    color: var(--card-color);
+    flex: 0 0 auto;
+
+    color: var(--accent);
 
     font-size: 20px;
 
@@ -1025,37 +1111,37 @@ body::after {
         transform 0.25s ease;
 }
 
-.secondary-card:hover
-.secondary-arrow {
+.secondary-card:hover .secondary-arrow {
     transform:
         translateX(4px);
 }
 
 /* Bandeau inférieur */
 .trust-strip {
-    min-height: 59px;
+    min-height: 54px;
 
     display: grid;
 
     grid-template-columns:
         repeat(3, minmax(0, 1fr));
 
+    overflow: hidden;
+
     border:
-        1px solid rgba(255, 255, 255, 0.09);
+        1px solid
+        rgba(255, 255, 255, 0.09);
 
     border-radius: 17px;
 
     background:
-        rgba(4, 8, 20, 0.72);
-
-    overflow: hidden;
+        rgba(4, 8, 20, 0.75);
 
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(10px);
 
     animation:
-        fadeUp 0.7s ease
-        0.92s forwards;
+        fadeUp 0.65s ease
+        0.93s forwards;
 }
 
 .trust-item {
@@ -1065,7 +1151,7 @@ body::after {
     align-items: center;
     justify-content: center;
 
-    gap: 11px;
+    gap: 10px;
 
     color: var(--text-soft);
 
@@ -1077,6 +1163,7 @@ body::after {
     content: "";
 
     position: absolute;
+
     left: 0;
     top: 20%;
     bottom: 20%;
@@ -1091,9 +1178,9 @@ body::after {
         );
 }
 
-.trust-dot {
-    width: 31px;
-    height: 31px;
+.trust-icon {
+    width: 34px;
+    height: 34px;
 
     display: grid;
     place-items: center;
@@ -1103,14 +1190,26 @@ body::after {
     color: var(--cyan);
 
     border:
-        1px solid rgba(79, 210, 255, 0.3);
+        1px solid
+        rgba(79, 210, 255, 0.3);
 
     background:
         rgba(79, 210, 255, 0.07);
 
     box-shadow:
         0 0 12px
-        rgba(79, 210, 255, 0.12);
+        rgba(79, 210, 255, 0.13);
+}
+
+.trust-icon svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 /* Animations */
@@ -1145,7 +1244,7 @@ body::after {
     }
 }
 
-@keyframes ambientFloat {
+@keyframes ambientMove {
     from {
         transform:
             translate3d(-2%, -1%, 0)
@@ -1159,14 +1258,14 @@ body::after {
     }
 }
 
-@keyframes orbitRotate {
+@keyframes backgroundOrbit {
     to {
         transform:
             rotate(360deg);
     }
 }
 
-@keyframes orbitRotateReverse {
+@keyframes orbitReverse {
     to {
         transform:
             rotate(-360deg);
@@ -1187,7 +1286,7 @@ body::after {
     }
 }
 
-@keyframes lightSweep {
+@keyframes shineSweep {
     to {
         transform:
             translateX(130%);
@@ -1197,21 +1296,18 @@ body::after {
 /* Écrans moins hauts */
 @media (max-height: 800px) {
     .page {
-        padding-top: 9px;
-        padding-bottom: 11px;
-
-        gap: 8px;
-
         grid-template-rows:
             auto
             auto
-            minmax(0, 1.48fr)
-            minmax(0, 0.68fr)
-            auto;
+            minmax(190px, 250px)
+            minmax(82px, 102px)
+            minmax(42px, 50px);
+
+        gap: 7px;
     }
 
     .site-header {
-        min-height: 57px;
+        min-height: 58px;
     }
 
     .brand-logo {
@@ -1223,142 +1319,152 @@ body::after {
         font-size: 18px;
     }
 
+    .intro-line {
+        margin-bottom: 5px;
+    }
+
     .intro h1 {
         font-size:
-            clamp(22px, 2.8vw, 31px);
+            clamp(22px, 2.5vw, 31px);
     }
 
     .intro p {
         font-size: 11px;
     }
 
-    .service-card {
-        padding: 12px 14px;
+    .primary-card {
+        padding: 10px 14px;
     }
 
-    .icon-orbit {
-        width: 56px;
-        height: 56px;
+    .icon-circle {
+        width: 58px;
+        height: 58px;
 
-        flex-basis: 56px;
+        flex-basis: 58px;
 
-        margin-bottom: 7px;
+        margin-bottom: 6px;
     }
 
-    .card-icon {
-        font-size: 25px;
+    .icon-circle svg {
+        width: 29px;
+        height: 29px;
     }
 
-    .service-title {
+    .card-title {
         font-size: 17px;
     }
 
-    .service-text {
+    .card-description {
         font-size: 10px;
-        line-height: 1.35;
     }
 
-    .service-cta {
-        padding-top: 7px;
+    .card-action {
+        padding: 6px 14px;
+
         font-size: 9px;
     }
 
     .secondary-card {
-        padding: 9px 11px;
+        padding: 8px 11px;
     }
 
-    .small-orbit {
-        width: 42px;
-        height: 42px;
+    .small-icon-circle {
+        width: 43px;
+        height: 43px;
 
-        flex-basis: 42px;
+        flex-basis: 43px;
+    }
+
+    .small-icon-circle svg {
+        width: 22px;
+        height: 22px;
     }
 
     .secondary-title {
         font-size: 12px;
     }
 
-    .secondary-text {
-        font-size: 8px;
-    }
-
-    .trust-strip {
-        min-height: 50px;
+    .secondary-description {
+        font-size: 9px;
     }
 }
 
 /* Tablettes */
 @media (max-width: 1000px) {
     .page {
-        width: calc(100% - 16px);
+        width: calc(100% - 12px);
 
-        padding-left: 14px;
-        padding-right: 14px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
-    .service-card {
-        padding: 13px 11px;
+    .primary-grid {
+        gap: 7px;
     }
 
-    .service-title {
-        font-size: 17px;
+    .primary-card {
+        padding-left: 9px;
+        padding-right: 9px;
     }
 
-    .service-text {
-        font-size: 10px;
+    .card-title {
+        font-size: 16px;
+    }
+
+    .card-description {
+        font-size: 9px;
+    }
+
+    .secondary-grid {
+        gap: 6px;
     }
 
     .secondary-card {
-        gap: 7px;
-        padding: 9px;
+        padding-left: 8px;
+        padding-right: 8px;
     }
 
-    .secondary-title {
-        font-size: 11px;
-    }
-
-    .secondary-text {
+    .secondary-description {
         display: none;
-    }
-
-    .secondary-arrow {
-        font-size: 16px;
     }
 }
 
 /* Téléphones */
 @media (max-width: 680px) {
     .page {
-        height: calc(100dvh - 8px);
+        height: calc(100dvh - 6px);
 
-        margin: 4px auto;
+        margin: 3px auto;
 
-        border-radius: 19px;
+        padding:
+            7px 8px 9px;
+
+        border-radius: 18px;
 
         grid-template-rows:
             auto
             auto
-            minmax(0, 1.12fr)
-            minmax(0, 0.9fr)
-            auto;
+            minmax(180px, 1fr)
+            minmax(100px, 0.65fr)
+            42px;
     }
 
     .site-header {
-        min-height: 50px;
+        min-height: 49px;
     }
 
     .back-btn {
-        width: 37px;
-        height: 37px;
+        width: 36px;
+        height: 36px;
 
-        flex-basis: 37px;
+        flex-basis: 36px;
 
-        font-size: 19px;
+        font-size: 18px;
     }
 
     .brand-logo {
-        width: 39px;
-        height: 39px;
+        width: 38px;
+        height: 38px;
     }
 
     .brand-name {
@@ -1373,103 +1479,115 @@ body::after {
         text-align: center;
     }
 
+    .intro-line {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .intro h1 {
-        font-size: 22px;
+        font-size: 21px;
     }
 
     .intro p {
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .primary-grid {
-        gap: 6px;
+        gap: 5px;
     }
 
-    .service-card {
-        padding: 8px 5px;
+    .primary-card {
+        padding: 7px 4px;
 
-        border-radius: 14px;
+        border-radius: 13px;
     }
 
-    .icon-orbit {
-        width: 43px;
-        height: 43px;
+    .icon-circle {
+        width: 41px;
+        height: 41px;
 
-        flex-basis: 43px;
+        flex-basis: 41px;
 
-        margin-bottom: 5px;
+        margin-bottom: 4px;
     }
 
-    .card-icon {
-        font-size: 20px;
+    .icon-circle svg {
+        width: 20px;
+        height: 20px;
     }
 
-    .service-title {
-        font-size: 11px;
+    .card-title {
+        font-size: 10px;
     }
 
-    .service-text {
+    .card-description {
         display: none;
     }
 
-    .service-cta {
-        font-size: 7px;
-        padding-top: 5px;
+    .card-action {
+        min-width: 0;
+
+        padding: 4px 5px;
+
+        font-size: 6px;
+    }
+
+    .action-arrow {
+        display: none;
     }
 
     .secondary-grid {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
 
-        gap: 5px;
+        gap: 4px;
     }
 
     .secondary-card {
-        padding: 6px 8px;
+        padding: 5px 6px;
 
-        border-radius: 12px;
+        gap: 6px;
+
+        border-radius: 11px;
     }
 
-    .small-orbit {
-        width: 33px;
-        height: 33px;
+    .small-icon-circle {
+        width: 30px;
+        height: 30px;
 
-        flex-basis: 33px;
+        flex-basis: 30px;
     }
 
-    .small-icon {
-        font-size: 16px;
+    .small-icon-circle svg {
+        width: 15px;
+        height: 15px;
     }
 
     .secondary-title {
-        font-size: 9px;
+        font-size: 8px;
     }
 
     .secondary-arrow {
-        font-size: 13px;
-    }
-
-    .trust-strip {
-        min-height: 43px;
+        font-size: 12px;
     }
 
     .trust-item {
-        gap: 4px;
+        gap: 3px;
 
-        font-size: 7px;
+        font-size: 6px;
     }
 
-    .trust-dot {
+    .trust-icon {
         display: none;
     }
 
     .background-orbit {
         width: 420px;
-        right: -220px;
+        right: -230px;
     }
 }
 
-/* Accessibilité */
+/* Réduction des animations */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -1489,7 +1607,10 @@ body::after {
 
 <body>
 
-<div class="background-orbit" aria-hidden="true"></div>
+<div
+    class="background-orbit"
+    aria-hidden="true">
+</div>
 
 <div class="page">
 
@@ -1509,27 +1630,31 @@ body::after {
                 class="brand-logo"
                 alt="Logo DigitRestore">
 
-            <div class="brand-text">
+            <div class="brand-copy">
 
                 <div class="brand-name">
                     <span>DIGIT</span>
-                    <span class="restore">RESTORE</span>
+                    <span class="restore">
+                        RESTORE
+                    </span>
                 </div>
 
                 <span class="brand-tag">
                     Réparation & reconditionnement
                 </span>
 
-                <span class="brand-tag">
-                    Smartphones & tablettes
-                </span>
-
             </div>
+
         </div>
 
     </header>
 
     <section class="intro">
+
+        <div
+            class="intro-line"
+            aria-hidden="true">
+        </div>
 
         <h1>
             Bienvenue dans l’Atelier
@@ -1544,72 +1669,158 @@ body::after {
 
     <main class="primary-grid">
 
+        <!-- RÉPARATION -->
         <a
             href="reparation.html"
-            class="service-card repair">
+            class="primary-card">
 
-            <div class="icon-orbit">
-                <span class="card-icon">🔧</span>
+            <span class="card-shine"></span>
+
+            <div class="icon-circle">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <path
+                        d="M14.7 6.3a4 4 0 0 0-5-5
+                        l2.1 2.1-2.8 2.8-2.1-2.1
+                        a4 4 0 0 0 5 5
+                        L5 16a2.1 2.1 0 0 0 3 3
+                        l6.9-6.9a4 4 0 0 0 5-5
+                        l-2.1 2.1-2.8-2.8 2.1-2.1
+                        a4 4 0 0 0-2.4 2z">
+                    </path>
+
+                </svg>
+
             </div>
 
-            <h2 class="service-title">
+            <h2 class="card-title">
                 Réparation
             </h2>
 
-            <p class="service-text">
+            <p class="card-description">
                 Diagnostic précis et réparations rapides
-                pour vos smartphones et tablettes.
+                pour tous vos appareils.
             </p>
 
-            <span class="service-cta">
-                Faire une demande →
+            <span class="card-action">
+                <span>En savoir plus</span>
+                <span class="action-arrow">→</span>
             </span>
 
         </a>
 
+        <!-- REPRISE / ACHAT -->
         <a
             href="reprise-achat.html"
-            class="service-card buyback">
+            class="primary-card">
 
-            <div class="icon-orbit">
-                <span class="card-icon">€</span>
+            <span class="card-shine"></span>
+
+            <div class="icon-circle">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <path
+                        d="M20.6 13.6
+                        11 23.2
+                        1.8 14
+                        11.4 4.4
+                        H20.6
+                        Z">
+                    </path>
+
+                    <circle
+                        cx="16.7"
+                        cy="8.3"
+                        r="1">
+                    </circle>
+
+                    <path
+                        d="M13.8 11.4
+                        c-.4-.5-1-.8-1.7-.8
+                        -1.2 0-2.1.9-2.1 2.1
+                        s.9 2.1 2.1 2.1
+                        c.7 0 1.3-.3 1.7-.8">
+                    </path>
+
+                    <path d="M8.8 12h3.4"></path>
+                    <path d="M8.8 13.3h3"></path>
+
+                </svg>
+
             </div>
 
-            <h2 class="service-title">
+            <h2 class="card-title">
                 Reprise / Achat
             </h2>
 
-            <p class="service-text">
-                Faites estimer et reprendre votre appareil
-                simplement et en toute transparence.
+            <p class="card-description">
+                Nous rachetons vos appareils au meilleur
+                prix, en toute simplicité.
             </p>
 
-            <span class="service-cta">
-                Demander une reprise →
+            <span class="card-action">
+                <span>En savoir plus</span>
+                <span class="action-arrow">→</span>
             </span>
 
         </a>
 
+        <!-- TÉLÉPHONES ET ACCESSOIRES -->
         <a
             href="#telephonie"
             id="telephonie"
-            class="service-card phones">
+            class="primary-card">
 
-            <div class="icon-orbit">
-                <span class="card-icon">▣</span>
+            <span class="card-shine"></span>
+
+            <div class="icon-circle">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <rect
+                        x="2.5"
+                        y="3"
+                        width="10"
+                        height="18"
+                        rx="2">
+                    </rect>
+
+                    <path d="M6.2 17.8h2.6"></path>
+
+                    <path
+                        d="M14 10h7
+                        l1 10h-9z">
+                    </path>
+
+                    <path
+                        d="M16 10
+                        a2.5 2.5 0 0 1 5 0">
+                    </path>
+
+                </svg>
+
             </div>
 
-            <h2 class="service-title">
+            <h2 class="card-title">
                 Téléphones & Accessoires
             </h2>
 
-            <p class="service-text">
-                Découvrez une sélection de téléphones
-                et d’accessoires contrôlés avec soin.
+            <p class="card-description">
+                Un large choix de téléphones et d’accessoires
+                sélectionnés pour leur qualité.
             </p>
 
-            <span class="service-cta">
-                Voir les produits →
+            <span class="card-action">
+                <span>En savoir plus</span>
+                <span class="action-arrow">→</span>
             </span>
 
         </a>
@@ -1618,92 +1829,197 @@ body::after {
 
     <section class="secondary-grid">
 
+        <!-- RECONDITIONNEMENT -->
         <a
             href="#reconditionnement"
             id="reconditionnement"
             class="secondary-card">
 
-            <div class="small-orbit">
-                <span class="small-icon">↻</span>
+            <span class="card-shine"></span>
+
+            <div class="small-icon-circle">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <path
+                        d="M20 7
+                        a8 8 0 0 0-13-2
+                        L4 8">
+                    </path>
+
+                    <path d="M4 3v5h5"></path>
+
+                    <path
+                        d="M4 17
+                        a8 8 0 0 0 13 2
+                        l3-3">
+                    </path>
+
+                    <path d="M20 21v-5h-5"></path>
+
+                </svg>
+
             </div>
 
             <div class="secondary-content">
+
                 <h2 class="secondary-title">
                     Reconditionnement
                 </h2>
 
-                <p class="secondary-text">
-                    Appareils testés, nettoyés et remis en état.
+                <p class="secondary-description">
+                    Appareils remis à neuf,
+                    testés et garantis.
                 </p>
+
             </div>
 
             <span class="secondary-arrow">→</span>
 
         </a>
 
+        <!-- QUALITÉ -->
         <a
             href="#qualite"
             id="qualite"
             class="secondary-card">
 
-            <div class="small-orbit">
-                <span class="small-icon">◇</span>
+            <span class="card-shine"></span>
+
+            <div class="small-icon-circle">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <path
+                        d="M12 2
+                        20 5.5
+                        V11
+                        c0 5-3.4 9-8 11
+                        -4.6-2-8-6-8-11
+                        V5.5z">
+                    </path>
+
+                    <path d="m8.5 12 2.2 2.2 4.8-5"></path>
+
+                </svg>
+
             </div>
 
             <div class="secondary-content">
+
                 <h2 class="secondary-title">
                     Qualité
                 </h2>
 
-                <p class="secondary-text">
-                    Contrôles rigoureux et pièces sélectionnées.
+                <p class="secondary-description">
+                    Contrôles rigoureux
+                    et pièces fiables.
                 </p>
+
             </div>
 
             <span class="secondary-arrow">→</span>
 
         </a>
 
+        <!-- CONTACT -->
         <a
             href="#contact"
             id="contact"
             class="secondary-card">
 
-            <div class="small-orbit">
-                <span class="small-icon">✉</span>
+            <span class="card-shine"></span>
+
+            <div class="small-icon-circle">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <path
+                        d="M4 14v-2
+                        a8 8 0 0 1 16 0
+                        v2">
+                    </path>
+
+                    <path
+                        d="M4 13
+                        H2v5
+                        a2 2 0 0 0 2 2
+                        h2v-7z">
+                    </path>
+
+                    <path
+                        d="M20 13
+                        h2v5
+                        a2 2 0 0 1-2 2
+                        h-2v-7z">
+                    </path>
+
+                    <path d="M18 20c-1 2-3 2-5 2"></path>
+
+                </svg>
+
             </div>
 
             <div class="secondary-content">
+
                 <h2 class="secondary-title">
                     Contact
                 </h2>
 
-                <p class="secondary-text">
-                    Une équipe disponible pour vous accompagner.
+                <p class="secondary-description">
+                    Une équipe à votre écoute
+                    pour vous accompagner.
                 </p>
+
             </div>
 
             <span class="secondary-arrow">→</span>
 
         </a>
 
+        <!-- CONDITIONS GÉNÉRALES -->
         <a
             href="#conditions"
             id="conditions"
             class="secondary-card">
 
-            <div class="small-orbit">
-                <span class="small-icon">▤</span>
+            <span class="card-shine"></span>
+
+            <div class="small-icon-circle">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <path
+                        d="M6 2h8l4 4v16H6z">
+                    </path>
+
+                    <path d="M14 2v5h5"></path>
+                    <path d="M9 12h6"></path>
+                    <path d="M9 16h6"></path>
+
+                </svg>
+
             </div>
 
             <div class="secondary-content">
+
                 <h2 class="secondary-title">
                     Conditions générales
                 </h2>
 
-                <p class="secondary-text">
-                    Informations sur les prestations et garanties.
+                <p class="secondary-description">
+                    Consultez les informations
+                    liées à nos prestations.
                 </p>
+
             </div>
 
             <span class="secondary-arrow">→</span>
@@ -1717,23 +2033,124 @@ body::after {
         aria-label="Engagements DigitRestore">
 
         <div class="trust-item">
-            <span class="trust-dot">◎</span>
+
+            <span class="trust-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <circle cx="12" cy="12" r="7"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                    <path d="M12 2v3"></path>
+                    <path d="M12 19v3"></path>
+                    <path d="M2 12h3"></path>
+                    <path d="M19 12h3"></path>
+
+                </svg>
+
+            </span>
+
             <span>Diagnostic précis</span>
+
         </div>
 
         <div class="trust-item">
-            <span class="trust-dot">▣</span>
+
+            <span class="trust-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <rect
+                        x="5"
+                        y="10"
+                        width="14"
+                        height="11"
+                        rx="2">
+                    </rect>
+
+                    <path
+                        d="M8 10V7
+                        a4 4 0 0 1 8 0
+                        v3">
+                    </path>
+
+                    <path d="M12 14v3"></path>
+
+                </svg>
+
+            </span>
+
             <span>Données protégées</span>
+
         </div>
 
         <div class="trust-item">
-            <span class="trust-dot">▥</span>
+
+            <span class="trust-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <path d="M5 20V10"></path>
+                    <path d="M10 20V4"></path>
+                    <path d="M15 20v-7"></path>
+                    <path d="M20 20V7"></path>
+
+                </svg>
+
+            </span>
+
             <span>Suivi transparent</span>
+
         </div>
 
     </section>
 
 </div>
+
+<script>
+const interactiveCards = document.querySelectorAll(
+    ".primary-card, .secondary-card"
+);
+
+interactiveCards.forEach(card => {
+    card.addEventListener("pointermove", event => {
+        const bounds = card.getBoundingClientRect();
+
+        const mouseX =
+            event.clientX - bounds.left;
+
+        const mouseY =
+            event.clientY - bounds.top;
+
+        card.style.setProperty(
+            "--mouse-x",
+            `${mouseX}px`
+        );
+
+        card.style.setProperty(
+            "--mouse-y",
+            `${mouseY}px`
+        );
+    });
+
+    card.addEventListener("pointerleave", () => {
+        card.style.setProperty(
+            "--mouse-x",
+            "50%"
+        );
+
+        card.style.setProperty(
+            "--mouse-y",
+            "0%"
+        );
+    });
+});
+</script>
 
 </body>
 </html>
