@@ -317,7 +317,7 @@ const qrRender = document.getElementById("qrRender");
 
 const questions = {
     fonctionnement: {
-        stepNumber: 2,
+        stepNumber: 1,
         help: "fonctionnement",
         type: "radio",
         key: "fonctionnement",
@@ -330,7 +330,7 @@ const questions = {
     },
 
     defauts: {
-        stepNumber: 2,
+        stepNumber: 1,
         help: "fonctionnement",
         type: "checkbox",
         key: "defauts",
@@ -349,7 +349,7 @@ const questions = {
     },
 
     batterie: {
-        stepNumber: 3,
+        stepNumber: 2,
         help: "batterie",
         type: "radio",
         key: "batterie",
@@ -365,7 +365,7 @@ const questions = {
     },
 
     ecran: {
-        stepNumber: 4,
+        stepNumber: 3,
         help: "ecran",
         type: "radio",
         key: "ecran",
@@ -382,7 +382,7 @@ const questions = {
     },
 
     chassis: {
-        stepNumber: 5,
+        stepNumber: 4,
         help: "chassis",
         type: "radio",
         key: "chassis",
@@ -399,7 +399,7 @@ const questions = {
     },
 
     repare: {
-        stepNumber: 6,
+        stepNumber: 5,
         help: "reparations",
         type: "radio",
         key: "repare",
@@ -414,7 +414,7 @@ const questions = {
     },
 
     reparations: {
-        stepNumber: 6,
+        stepNumber: 5,
         help: "reparations",
         type: "checkbox",
         key: "reparations",
@@ -432,28 +432,21 @@ const questions = {
     },
 
     marcheUE: {
-        stepNumber: 7,
-        help: "ue",
-        type: "radio",
-        key: "marcheUE",
-        title: "Conformité marché européen",
-        text: "L’appareil a-t-il été acheté dans un pays de l’Union européenne ?",
-        options: [
-            ["oui", "Oui", "L’appareil semble éligible au programme de reprise."],
-            ["non", "Non", "Les appareils hors marché UE ne sont pas éligibles."],
-            ["inconnu", "Je ne sais pas", "La conformité sera contrôlée à réception."]
-        ],
-        alert: "Les appareils destinés à un marché hors Union européenne ne sont pas éligibles au programme de reprise DigitRestore."
-    },
+    stepNumber: 6,
+    help: "ue",
+    type: "radio",
+    key: "marcheUE",
+    title: "Conformité européenne",
+    text: "Le marquage CE est-il présent sur l’appareil ou dans les informations réglementaires ?",
+    options: [
+        ["oui", "Oui", "Le marquage CE semble présent."],
+        ["non", "Non", "L’appareil pourrait ne pas être éligible à la reprise."],
+        ["inconnu", "Je ne sais pas", "La conformité sera contrôlée à réception."]
+    ],
+    alert: "DigitRestore vérifiera à réception le marquage CE, les références constructeur et la conformité européenne de l’appareil."
+},
 
-    recap: {
-        stepNumber: 7,
-        help: "recap",
-        type: "recap",
-        title: "Récapitulatif",
-        text: "Vérifiez les informations avant de demander l’estimation."
-    }
-};
+    };
 
 function renderQuestion(stepId) {
     const question = questions[stepId];
@@ -488,10 +481,10 @@ function renderQuestion(stepId) {
 function renderProgress(currentStep) {
     let html = `<div class="qr-progress">`;
 
-    for (let i = 2; i <= 7; i++) {
+    for (let i = 1; i <= 6; i++) {
         const cls = i < currentStep ? "qr-step done" : i === currentStep ? "qr-step active" : "qr-step";
         html += `<div class="${cls}">${i}</div>`;
-        if (i < 7) html += `<div class="qr-line"></div>`;
+        if (i < 6) html += `<div class="qr-line"></div>`;
     }
 
     html += `</div>`;
@@ -526,7 +519,7 @@ function renderBody(question) {
     if (question.type === "recap") return renderRecap();
 
     let html = `
-        <div class="qr-kicker">Étape ${question.stepNumber} sur 7</div>
+        <div class="qr-kicker">Étape ${question.stepNumber} sur 6</div>
         <h2 class="qr-title">${question.title}</h2>
         <p class="qr-text">${question.text}</p>
         <div class="qr-options ${question.compact ? "compact" : ""}">
@@ -592,11 +585,17 @@ function selectOption(key, value) {
 
     const nextStep = getNextStep(key, value);
 
-    if (nextStep) {
-        questionnaireState.history.push(questionnaireState.currentStep);
-        renderQuestion(nextStep);
-        attachOptionEvents();
-    }
+    if (nextStep === "complete") {
+    sendQuestionnaireUpdate(true);
+    sendVisualHelp("recap");
+    return;
+}
+
+if (nextStep) {
+    questionnaireState.history.push(questionnaireState.currentStep);
+    renderQuestion(nextStep);
+    attachOptionEvents();
+}
 }
 
 function validateCurrentQuestion(question) {
@@ -614,11 +613,17 @@ function validateCurrentQuestion(question) {
 
     const nextStep = getNextStep(question.key, value);
 
-    if (nextStep) {
-        questionnaireState.history.push(questionnaireState.currentStep);
-        renderQuestion(nextStep);
-        attachOptionEvents();
-    }
+    if (nextStep === "complete") {
+    sendQuestionnaireUpdate(true);
+    sendVisualHelp("recap");
+    return;
+}
+
+if (nextStep) {
+    questionnaireState.history.push(questionnaireState.currentStep);
+    renderQuestion(nextStep);
+    attachOptionEvents();
+}
 }
 
 function saveAnswer(key, value) {
@@ -650,7 +655,7 @@ function getNextStep(key, value) {
     }
 
     if (key === "reparations") return "marcheUE";
-    if (key === "marcheUE") return "recap";
+    if (key === "marcheUE") return "complete";
 
     return null;
 }
