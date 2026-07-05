@@ -1,8 +1,6 @@
 {
   "marque": "Apple",
-
   "modeles": [
-
     {
       "nom": "iPhone 17",
       "ordre": 1,
@@ -11,27 +9,23 @@
         {
           "nom": "iPhone 17",
           "capacites": ["128 Go", "256 Go", "512 Go"],
-          "couleurs": ["Noir", "Blanc", "Bleu", "Rose"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Noir", "Lavande", "Sauge", "Blanc", "Bleu"],
+          "image": ""
         },
         {
           "nom": "iPhone 17 Pro",
           "capacites": ["256 Go", "512 Go", "1 To"],
-          "couleurs": ["Noir", "Blanc", "Titane Naturel", "Bleu"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Noir Sidéral", "Argent", "Bleu Profond", "Orange Cosmique"],
+          "image": ""
         },
         {
           "nom": "iPhone 17 Pro Max",
           "capacites": ["256 Go", "512 Go", "1 To"],
-          "couleurs": ["Noir", "Blanc", "Titane Naturel", "Bleu"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Noir Sidéral", "Argent", "Bleu Profond", "Orange Cosmique"],
+          "image": ""
         }
       ]
     },
-
     {
       "nom": "iPhone Air",
       "ordre": 2,
@@ -40,13 +34,11 @@
         {
           "nom": "iPhone Air",
           "capacites": ["128 Go", "256 Go", "512 Go"],
-          "couleurs": ["Bleu Clair", "Blanc", "Noir"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Noir", "Blanc", "Lumière Dorée", "Bleu Ciel"],
+          "image": ""
         }
       ]
     },
-
     {
       "nom": "iPhone 16",
       "ordre": 3,
@@ -56,40 +48,34 @@
           "nom": "iPhone 16e",
           "capacites": ["128 Go", "256 Go", "512 Go"],
           "couleurs": ["Noir", "Blanc"],
-          "image": "",
-          "prixBase": 0
+          "image": ""
         },
         {
           "nom": "iPhone 16",
           "capacites": ["128 Go", "256 Go", "512 Go"],
-          "couleurs": ["Noir", "Blanc", "Bleu", "Rose", "Vert"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Noir", "Blanc", "Rose", "Menthe", "Bleu Outremer"],
+          "image": ""
         },
         {
           "nom": "iPhone 16 Plus",
           "capacites": ["128 Go", "256 Go", "512 Go"],
-          "couleurs": ["Noir", "Blanc", "Bleu", "Rose", "Vert"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Noir", "Blanc", "Rose", "Menthe", "Bleu Outremer"],
+          "image": ""
         },
         {
           "nom": "iPhone 16 Pro",
           "capacites": ["128 Go", "256 Go", "512 Go", "1 To"],
           "couleurs": ["Titane Noir", "Titane Blanc", "Titane Naturel", "Titane Désert"],
-          "image": "",
-          "prixBase": 0
+          "image": ""
         },
         {
           "nom": "iPhone 16 Pro Max",
           "capacites": ["256 Go", "512 Go", "1 To"],
           "couleurs": ["Titane Noir", "Titane Blanc", "Titane Naturel", "Titane Désert"],
-          "image": "",
-          "prixBase": 0
+          "image": ""
         }
       ]
     },
-
     {
       "nom": "iPhone 15",
       "ordre": 4,
@@ -98,34 +84,29 @@
         {
           "nom": "iPhone 15",
           "capacites": ["128 Go", "256 Go", "512 Go"],
-          "couleurs": ["Noir", "Bleu", "Vert", "Jaune", "Rose"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Noir", "Blanc", "Rose", "Jaune", "Bleu"],
+          "image": ""
         },
         {
           "nom": "iPhone 15 Plus",
           "capacites": ["128 Go", "256 Go", "512 Go"],
-          "couleurs": ["Noir", "Bleu", "Vert", "Jaune", "Rose"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Noir", "Blanc", "Rose", "Jaune", "Bleu"],
+          "image": ""
         },
         {
           "nom": "iPhone 15 Pro",
           "capacites": ["128 Go", "256 Go", "512 Go", "1 To"],
           "couleurs": ["Titane Noir", "Titane Blanc", "Titane Bleu", "Titane Naturel"],
-          "image": "",
-          "prixBase": 0
+          "image": ""
         },
         {
           "nom": "iPhone 15 Pro Max",
           "capacites": ["256 Go", "512 Go", "1 To"],
           "couleurs": ["Titane Noir", "Titane Blanc", "Titane Bleu", "Titane Naturel"],
-          "image": "",
-          "prixBase": 0
+          "image": ""
         }
       ]
     },
-
     {
       "nom": "iPhone 14",
       "ordre": 5,
@@ -134,34 +115,29 @@
         {
           "nom": "iPhone 14",
           "capacites": ["128 Go", "256 Go", "512 Go"],
-          "couleurs": ["Minuit", "Lumière Stellaire", "Bleu", "Violet", "Rouge", "Jaune"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Minuit", "Lumière Stellaire", "Bleu", "Violet", "Rouge"],
+          "image": ""
         },
         {
           "nom": "iPhone 14 Plus",
           "capacites": ["128 Go", "256 Go", "512 Go"],
-          "couleurs": ["Minuit", "Lumière Stellaire", "Bleu", "Violet", "Rouge", "Jaune"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Minuit", "Lumière Stellaire", "Bleu", "Violet", "Rouge"],
+          "image": ""
         },
         {
           "nom": "iPhone 14 Pro",
           "capacites": ["128 Go", "256 Go", "512 Go", "1 To"],
-          "couleurs": ["Noir Sidéral", "Argent", "Or", "Violet Intense"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Violet Profond", "Or", "Argent", "Noir Sidéral"],
+          "image": ""
         },
         {
           "nom": "iPhone 14 Pro Max",
           "capacites": ["128 Go", "256 Go", "512 Go", "1 To"],
-          "couleurs": ["Noir Sidéral", "Argent", "Or", "Violet Intense"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Violet Profond", "Or", "Argent", "Noir Sidéral"],
+          "image": ""
         }
       ]
     },
-
     {
       "nom": "iPhone 13",
       "ordre": 6,
@@ -170,33 +146,109 @@
         {
           "nom": "iPhone 13 mini",
           "capacites": ["128 Go", "256 Go", "512 Go"],
-          "couleurs": ["Rose", "Bleu", "Minuit", "Lumière Stellaire", "Vert", "Rouge"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Minuit", "Lumière Stellaire", "Bleu", "Rose", "Rouge"],
+          "image": ""
         },
         {
           "nom": "iPhone 13",
           "capacites": ["128 Go", "256 Go", "512 Go"],
-          "couleurs": ["Rose", "Bleu", "Minuit", "Lumière Stellaire", "Vert", "Rouge"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Minuit", "Lumière Stellaire", "Bleu", "Rose", "Rouge"],
+          "image": ""
         },
         {
           "nom": "iPhone 13 Pro",
           "capacites": ["128 Go", "256 Go", "512 Go", "1 To"],
-          "couleurs": ["Graphite", "Argent", "Or", "Bleu Alpin", "Vert Alpin"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Alpin", "Sierra Blue", "Or", "Graphite", "Vert Alpin"],
+          "image": ""
         },
         {
           "nom": "iPhone 13 Pro Max",
           "capacites": ["128 Go", "256 Go", "512 Go", "1 To"],
-          "couleurs": ["Graphite", "Argent", "Or", "Bleu Alpin", "Vert Alpin"],
-          "image": "",
-          "prixBase": 0
+          "couleurs": ["Alpin", "Sierra Blue", "Or", "Graphite", "Vert Alpin"],
+          "image": ""
+        }
+      ]
+    },
+    {
+      "nom": "iPhone 12",
+      "ordre": 7,
+      "image": "",
+      "versions": [
+        {
+          "nom": "iPhone 12 mini",
+          "capacites": ["64 Go", "128 Go", "256 Go"],
+          "couleurs": ["Noir", "Blanc", "Rouge", "Vert", "Bleu"],
+          "image": ""
+        },
+        {
+          "nom": "iPhone 12",
+          "capacites": ["64 Go", "128 Go", "256 Go"],
+          "couleurs": ["Noir", "Blanc", "Rouge", "Vert", "Bleu", "Mauve"],
+          "image": ""
+        },
+        {
+          "nom": "iPhone 12 Pro",
+          "capacites": ["128 Go", "256 Go", "512 Go"],
+          "couleurs": ["Graphite", "Argent", "Or", "Bleu Pacifique"],
+          "image": ""
+        },
+        {
+          "nom": "iPhone 12 Pro Max",
+          "capacites": ["128 Go", "256 Go", "512 Go"],
+          "couleurs": ["Graphite", "Argent", "Or", "Bleu Pacifique"],
+          "image": ""
+        }
+      ]
+    },
+    {
+      "nom": "iPhone 11",
+      "ordre": 8,
+      "image": "",
+      "versions": [
+        {
+          "nom": "iPhone 11",
+          "capacites": ["64 Go", "128 Go", "256 Go"],
+          "couleurs": ["Noir", "Blanc", "Rouge", "Jaune", "Vert", "Violet"],
+          "image": ""
+        },
+        {
+          "nom": "iPhone 11 Pro",
+          "capacites": ["64 Go", "256 Go", "512 Go"],
+          "couleurs": ["Noir Sidéral", "Argent", "Or", "Vert Nuit"],
+          "image": ""
+        },
+        {
+          "nom": "iPhone 11 Pro Max",
+          "capacites": ["64 Go", "256 Go", "512 Go"],
+          "couleurs": ["Noir Sidéral", "Argent", "Or", "Vert Nuit"],
+          "image": ""
+        }
+      ]
+    },
+    {
+      "nom": "iPhone XR / XS",
+      "ordre": 9,
+      "image": "",
+      "versions": [
+        {
+          "nom": "iPhone XR",
+          "capacites": ["64 Go", "128 Go", "256 Go"],
+          "couleurs": ["Noir", "Blanc", "Bleu", "Jaune", "Corail", "Rouge"],
+          "image": ""
+        },
+        {
+          "nom": "iPhone XS",
+          "capacites": ["64 Go", "256 Go", "512 Go"],
+          "couleurs": ["Or", "Argent", "Gris Sidéral"],
+          "image": ""
+        },
+        {
+          "nom": "iPhone XS Max",
+          "capacites": ["64 Go", "256 Go", "512 Go"],
+          "couleurs": ["Or", "Argent", "Gris Sidéral"],
+          "image": ""
         }
       ]
     }
-
   ]
 }
