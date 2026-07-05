@@ -19,11 +19,21 @@
           "image": ""
         },
         {
-          "nom": "iPhone 17 Pro Max",
-          "capacites": ["256 Go", "512 Go", "1 To"],
-          "couleurs": ["Noir Sidéral", "Argent", "Bleu Profond", "Orange Cosmique"],
-          "image": "images/reprise/apple/iphone-17-pro-max-blanc.png"
-        }
+  "nom": "iPhone 17 Pro Max",
+  "capacites": ["256 Go", "512 Go", "1 To"],
+  "couleurs": ["Noir Sidéral", "Argent", "Bleu Profond", "Orange Cosmique"],
+
+  "image": "images/reprise/apple/iphone-17-pro-max/apple-iphone-17-pro-max-base.png",
+  "imageBase": "images/reprise/apple/iphone-17-pro-max/apple-iphone-17-pro-max-base.png",
+  "maskBody": "images/reprise/apple/iphone-17-pro-max/apple-iphone-17-pro-max-mask-body.png",
+  "maskScreen": "images/reprise/apple/iphone-17-pro-max/apple-iphone-17-pro-max-mask-screen.png",
+
+  "palette": {
+    "Noir Sidéral": "#292B30",
+    "Argent": "#D8D8D5",
+    "Bleu Profond": "#304A70",
+    "Orange Cosmique": "#E66F32"
+  }
       ]
     },
     {
