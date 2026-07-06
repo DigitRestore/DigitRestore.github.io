@@ -4,289 +4,606 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Questionnaire de reprise DigitRestore</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
 <style>
-:root{
-    --red:#ff3655;
-    --cyan:#35d8ff;
-    --green:#16c878;
-    --text-main:#ffffff;
-    --text-soft:#c8cbe0;
-    --text-muted:#8f96b3;
+:root {
+    --navy: #050814;
+    --navy-light: #070c1c;
+
+    --cyan: #4fd2ff;
+    --cyan-soft: rgba(79, 210, 255, 0.14);
+
+    --red: #ff4b5c;
+    --red-soft: rgba(255, 75, 92, 0.14);
+
+    --white: #f7f8fc;
+    --text-soft: #aeb7ce;
+    --text-muted: #7f8aa4;
+
+    --border: rgba(138, 171, 204, 0.3);
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
-
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    font-family:"Poppins",Arial,sans-serif;
-    color:var(--text-main);
-    background:transparent;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.qr-component{
-    height:100vh;
-    min-height:360px;
-    padding:22px;
-    display:flex;
-    flex-direction:column;
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    color: var(--white);
+    font-family: "Poppins", sans-serif;
+    background: transparent;
+}
+
+button {
+    font: inherit;
+}
+
+/* =========================
+   CONTENEUR
+========================= */
+
+.questionnaire {
+    width: 100%;
+    height: 100%;
+    padding: 13px 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     background:
-        radial-gradient(circle at 12% 10%, rgba(53,216,255,.10), transparent 34%),
-        radial-gradient(circle at 90% 90%, rgba(22,200,120,.10), transparent 36%);
+        radial-gradient(
+            circle at 8% 10%,
+            rgba(79, 210, 255, 0.045),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 92% 90%,
+            rgba(255, 75, 92, 0.04),
+            transparent 35%
+        );
 }
 
-#qrRender{
-    height:100%;
-    min-height:0;
-    display:flex;
-    flex-direction:column;
-    gap:18px;
+#qrRender {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
 }
 
-.qr-progress{
-    flex-shrink:0;
-    display:flex;
-    align-items:center;
-    gap:8px;
+#qrRender.leaving {
+    opacity: 0;
+    transform: translateX(-12px);
 }
 
-.qr-step{
-    width:28px;
-    height:28px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
-    font-weight:900;
-    color:rgba(255,255,255,.55);
-    background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.13);
+#qrRender.entering {
+    opacity: 0;
+    transform: translateX(12px);
 }
 
-.qr-step.active,
-.qr-step.done{
-    color:#04101a;
-    background:linear-gradient(135deg,var(--green),var(--cyan));
-    box-shadow:0 0 18px rgba(53,216,255,.28);
+/* =========================
+   PROGRESSION
+========================= */
+
+.progress-area {
+    flex: 0 0 auto;
+    margin-bottom: 12px;
 }
 
-.qr-step.done{opacity:.70}
-
-.qr-line{
-    flex:1;
-    height:2px;
-    border-radius:99px;
-    background:rgba(255,255,255,.10);
+.progress-steps {
+    display: flex;
+    align-items: center;
+    gap: 7px;
 }
 
-.qr-body{
-    flex:1;
-    min-height:0;
-    overflow-y:auto;
-    padding-right:4px;
-    padding-bottom:8px;
+.progress-step {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid rgba(148, 175, 205, 0.35);
+    background: rgba(5, 10, 23, 0.88);
+    transition:
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
 }
 
-.qr-body::-webkit-scrollbar{width:6px}
-.qr-body::-webkit-scrollbar-thumb{
-    border-radius:99px;
-    background:rgba(255,255,255,.18);
+.progress-step.done {
+    color: var(--cyan);
+    border-color: rgba(79, 210, 255, 0.55);
+    background: rgba(79, 210, 255, 0.07);
 }
 
-.qr-kicker{
-    margin-bottom:6px;
-    color:var(--cyan);
-    font-size:11px;
-    font-weight:900;
-    text-transform:uppercase;
-    letter-spacing:.12em;
-}
-
-.qr-title{
-    font-size:26px;
-    line-height:1.15;
-    font-weight:900;
-    margin-bottom:8px;
-}
-
-.qr-text{
-    max-width:620px;
-    color:rgba(255,255,255,.68);
-    font-size:14px;
-    line-height:1.5;
-    margin-bottom:18px;
-}
-
-.qr-options{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-
-.qr-options.compact{gap:9px}
-
-.qr-option{
-    width:100%;
-    min-height:72px;
-    padding:14px 15px;
-    border-radius:17px;
-    display:grid;
-    grid-template-columns:auto 1fr;
-    gap:14px;
-    align-items:center;
-    text-align:left;
-    font-family:"Poppins",Arial,sans-serif;
-    color:#fff;
-    background:linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.025));
-    border:1px solid rgba(255,255,255,.11);
-    cursor:pointer;
-    transition:.22s ease;
-}
-
-.qr-option:hover{
-    transform:translateY(-1px);
-    border-color:rgba(53,216,255,.45);
-    box-shadow:0 14px 28px rgba(0,0,0,.22);
-}
-
-.qr-option.selected{
-    border-color:rgba(53,216,255,.75);
-    background:
-        radial-gradient(circle at 0% 0%, rgba(53,216,255,.16), transparent 38%),
-        linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
-}
-
-.qr-dot{
-    width:25px;
-    height:25px;
-    border-radius:50%;
-    border:2px solid rgba(255,255,255,.28);
-    background:rgba(255,255,255,.035);
-    box-shadow:inset 0 0 0 5px rgba(8,14,31,.92);
-    transition:.22s ease;
-}
-
-.qr-option.selected .qr-dot{
-    border-color:var(--cyan);
-    background:linear-gradient(135deg,var(--green),var(--cyan));
+.progress-step.active {
+    color: white;
+    border-color: var(--cyan);
+    background: rgba(79, 210, 255, 0.14);
     box-shadow:
-        inset 0 0 0 5px rgba(8,14,31,.92),
-        0 0 18px rgba(53,216,255,.38);
+        0 0 12px rgba(79, 210, 255, 0.65),
+        inset 0 0 12px rgba(79, 210, 255, 0.12);
+    transform: scale(1.08);
+    animation: activeStepPulse 2.1s ease-in-out infinite;
 }
 
-.qr-content strong{
-    display:block;
-    font-size:14px;
-    font-weight:900;
-    margin-bottom:4px;
+@keyframes activeStepPulse {
+    0%,
+    100% {
+        box-shadow:
+            0 0 10px rgba(79, 210, 255, 0.45),
+            inset 0 0 10px rgba(79, 210, 255, 0.08);
+    }
+
+    50% {
+        box-shadow:
+            0 0 19px rgba(79, 210, 255, 0.78),
+            inset 0 0 14px rgba(79, 210, 255, 0.16);
+    }
 }
 
-.qr-content small{
-    display:block;
-    color:rgba(255,255,255,.58);
-    font-size:12px;
-    line-height:1.45;
+.progress-line {
+    position: relative;
+    height: 2px;
+    flex: 1;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(141, 168, 198, 0.18);
 }
 
-.qr-actions{
-    flex-shrink:0;
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
+.progress-line.done {
+    background: rgba(79, 210, 255, 0.47);
 }
 
-.qr-btn{
-    min-width:145px;
-    padding:12px 16px;
-    border-radius:13px;
-    font-family:"Poppins",Arial,sans-serif;
-    font-size:13px;
-    font-weight:900;
-    cursor:pointer;
-    transition:.22s ease;
+.progress-line.done::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 50%;
+    height: 100%;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            white,
+            var(--cyan),
+            transparent
+        );
+    box-shadow: 0 0 8px var(--cyan);
+    animation: progressLight 2.5s linear infinite;
 }
 
-.qr-btn-primary{
-    border:none;
-    color:#04101a;
-    background:linear-gradient(90deg,var(--green),var(--cyan));
-    box-shadow:0 0 20px rgba(53,216,255,.22);
+@keyframes progressLight {
+    to {
+        left: 120%;
+    }
 }
 
-.qr-btn-secondary{
-    color:#fff;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.13);
+/* =========================
+   QUESTION
+========================= */
+
+.question-body {
+    min-height: 0;
+    flex: 1;
+    padding-right: 5px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color:
+        rgba(79, 210, 255, 0.35)
+        transparent;
 }
 
-.qr-btn:disabled{
-    opacity:.35;
-    cursor:not-allowed;
+.question-body::-webkit-scrollbar {
+    width: 5px;
 }
 
-.qr-btn:not(:disabled):hover{
-    transform:translateY(-1px);
+.question-body::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(79, 210, 255, 0.35);
 }
 
-.qr-note,
-.qr-alert{
-    margin-top:14px;
-    padding:11px 13px;
-    border-radius:14px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.10);
-    color:rgba(255,255,255,.62);
-    font-size:12px;
-    line-height:1.45;
+.question-kicker {
+    margin-bottom: 4px;
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
 }
 
-.qr-alert{
-    background:rgba(255,54,85,.08);
-    border-color:rgba(255,54,85,.35);
-    color:rgba(255,255,255,.78);
+.question-title {
+    margin-bottom: 4px;
+    font-size: clamp(20px, 2.1vw, 27px);
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.02em;
 }
 
-.qr-recap{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
+.question-description {
+    margin-bottom: 12px;
+    color: var(--text-soft);
+    font-size: 12px;
+    line-height: 1.5;
 }
 
-.qr-recap-row{
-    padding:10px 12px;
-    border-radius:13px;
-    display:grid;
-    grid-template-columns:155px 1fr;
-    gap:12px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.10);
-    font-size:12px;
+/* =========================
+   RÉPONSES
+========================= */
+
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
-.qr-recap-row span{
-    color:rgba(255,255,255,.56);
-    font-weight:800;
+.option-button {
+    position: relative;
+    width: 100%;
+    min-height: 57px;
+    padding: 10px 13px;
+    overflow: hidden;
+    border-radius: 10px;
+    text-align: left;
+    color: var(--white);
+    border: 1px solid rgba(139, 169, 202, 0.34);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.035),
+            rgba(255, 255, 255, 0.012)
+        ),
+        rgba(5, 10, 23, 0.76);
+    cursor: pointer;
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease;
 }
 
-.qr-recap-row strong{
-    color:#fff;
-    font-weight:900;
+.option-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -55%;
+    width: 42%;
+    height: 1px;
+    pointer-events: none;
+    opacity: 0;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            white,
+            var(--cyan),
+            transparent
+        );
 }
 
-@media(max-width:820px){
-    .qr-component{padding:18px}
-    .qr-actions{flex-direction:column}
-    .qr-btn{width:100%}
-    .qr-recap-row{grid-template-columns:1fr}
+.option-button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(79, 210, 255, 0.64);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(79, 210, 255, 0.065),
+            rgba(255, 255, 255, 0.015)
+        ),
+        rgba(5, 10, 23, 0.84);
+}
+
+.option-button:hover::after,
+.option-button.selected::after {
+    opacity: 1;
+    animation: optionLight 1.8s linear infinite;
+}
+
+@keyframes optionLight {
+    to {
+        left: 120%;
+    }
+}
+
+.option-button.selected {
+    border-color: var(--cyan);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(79, 210, 255, 0.12),
+            rgba(79, 210, 255, 0.025)
+        ),
+        rgba(5, 12, 27, 0.96);
+    box-shadow:
+        0 0 14px rgba(79, 210, 255, 0.31),
+        inset 0 0 14px rgba(79, 210, 255, 0.045);
+}
+
+.option-label {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.option-detail {
+    display: block;
+    color: var(--text-soft);
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.question-note,
+.question-alert {
+    margin-top: 9px;
+    padding: 9px 11px;
+    border-radius: 9px;
+    color: var(--text-soft);
+    font-size: 10px;
+    line-height: 1.45;
+    border: 1px solid rgba(139, 169, 202, 0.25);
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.question-alert {
+    color: #f2d5d9;
+    border-color: rgba(255, 75, 92, 0.42);
+    background: rgba(255, 75, 92, 0.07);
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.question-actions {
+    flex: 0 0 auto;
+    margin-top: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.question-button {
+    min-width: 125px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        opacity 0.22s ease;
+}
+
+.back-button {
+    color: var(--white);
+    border: 1px solid rgba(139, 169, 202, 0.4);
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.back-button:not(:disabled):hover {
+    transform: translateX(-3px);
+    border-color: var(--cyan);
+    box-shadow: 0 0 13px rgba(79, 210, 255, 0.2);
+}
+
+.continue-button {
+    position: relative;
+    overflow: hidden;
+    color: white;
+    border: 1px solid var(--cyan);
+    background:
+        linear-gradient(
+            105deg,
+            rgba(79, 210, 255, 0.14),
+            rgba(7, 13, 28, 0.96),
+            rgba(255, 75, 92, 0.11)
+        );
+    box-shadow:
+        0 0 13px rgba(79, 210, 255, 0.25),
+        0 0 12px rgba(255, 75, 92, 0.12);
+}
+
+.continue-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    left: -110%;
+    width: 55%;
+    pointer-events: none;
+    transform: skewX(-20deg);
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.14),
+            transparent
+        );
+    animation: buttonSweep 3.8s ease-in-out infinite;
+}
+
+@keyframes buttonSweep {
+    0%,
+    35% {
+        left: -110%;
+    }
+
+    75%,
+    100% {
+        left: 155%;
+    }
+}
+
+.continue-button:not(:disabled):hover {
+    transform: translateY(-2px);
+    border-color: var(--red);
+    box-shadow:
+        0 0 17px rgba(79, 210, 255, 0.32),
+        0 0 15px rgba(255, 75, 92, 0.26);
+}
+
+.question-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.28;
+    box-shadow: none;
+}
+
+/* =========================
+   QUESTIONNAIRE TERMINÉ
+========================= */
+
+.completion-screen {
+    min-height: 0;
+    flex: 1;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.completion-line {
+    width: min(290px, 75%);
+    height: 2px;
+    margin-bottom: 22px;
+    border-radius: 999px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--cyan),
+            white,
+            var(--red),
+            transparent
+        );
+    box-shadow:
+        0 0 13px rgba(79, 210, 255, 0.35),
+        0 0 13px rgba(255, 75, 92, 0.25);
+    animation: completionPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes completionPulse {
+    50% {
+        opacity: 0.55;
+        transform: scaleX(0.92);
+    }
+}
+
+.completion-screen h2 {
+    margin-bottom: 8px;
+    font-size: clamp(22px, 2.3vw, 30px);
+    font-weight: 600;
+}
+
+.completion-screen p {
+    max-width: 480px;
+    color: var(--text-soft);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.completion-device {
+    margin-top: 17px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    color: var(--cyan);
+    font-size: 12px;
+    border: 1px solid rgba(79, 210, 255, 0.32);
+    background: rgba(79, 210, 255, 0.045);
+}
+
+.modify-answers-button {
+    margin-top: 18px;
+    padding: 10px 17px;
+    border-radius: 10px;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(139, 169, 202, 0.42);
+    background: rgba(255, 255, 255, 0.025);
+    transition: 0.22s ease;
+}
+
+.modify-answers-button:hover {
+    transform: translateY(-2px);
+    border-color: var(--cyan);
+    box-shadow: 0 0 15px rgba(79, 210, 255, 0.22);
+}
+
+/* =========================
+   PETITS ÉCRANS
+========================= */
+
+@media (max-width: 720px) {
+    .questionnaire {
+        padding: 12px;
+    }
+
+    .progress-step {
+        width: 28px;
+        height: 28px;
+        flex-basis: 28px;
+    }
+
+    .question-title {
+        font-size: 21px;
+    }
+
+    .question-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .question-button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="qr-component">
+<div class="questionnaire">
     <div id="qrRender"></div>
 </div>
 
@@ -294,6 +611,8 @@ html,body{
 const questionnaireState = {
     currentStep: "fonctionnement",
     history: [],
+    transitioning: false,
+
     appareil: {
         marque: "",
         modele: "",
@@ -301,6 +620,7 @@ const questionnaireState = {
         couleur: "",
         capacite: ""
     },
+
     answers: {
         fonctionnement: null,
         defauts: [],
@@ -315,17 +635,38 @@ const questionnaireState = {
 
 const qrRender = document.getElementById("qrRender");
 
+const MESSAGE_ORIGIN =
+    window.location.protocol === "file:"
+        ? "*"
+        : window.location.origin;
+
+/* =========================
+   QUESTIONS
+========================= */
+
 const questions = {
     fonctionnement: {
         stepNumber: 1,
         help: "fonctionnement",
         type: "radio",
         key: "fonctionnement",
+
         title: "Fonctionnement général",
-        text: "Votre iPhone est-il pleinement fonctionnel ?",
+
+        text:
+            "Votre appareil est-il pleinement fonctionnel ?",
+
         options: [
-            ["oui", "Oui", "L’appareil s’allume, se charge et les fonctions principales sont opérationnelles."],
-            ["non", "Non", "L’appareil présente un ou plusieurs défauts."]
+            [
+                "oui",
+                "Oui",
+                "L’appareil s’allume, se charge et les fonctions principales sont opérationnelles."
+            ],
+            [
+                "non",
+                "Non",
+                "L’appareil présente un ou plusieurs défauts."
+            ]
         ]
     },
 
@@ -334,18 +675,52 @@ const questions = {
         help: "fonctionnement",
         type: "checkbox",
         key: "defauts",
+
         title: "Défauts constatés",
-        text: "Sélectionnez les défauts présents sur l’appareil.",
+
+        text:
+            "Sélectionnez tous les défauts présents sur l’appareil.",
+
         options: [
-            ["ecran_affichage", "Écran défectueux", "Écran cassé ou défaut d’affichage."],
-            ["tactile", "Écran tactile défectueux", "Le tactile répond mal ou ne fonctionne plus."],
-            ["batterie", "Batterie usée", "Autonomie faible ou batterie à remplacer."],
-            ["son", "Bruit parasite", "Défaut haut-parleur ou micro."],
-            ["camera", "Caméra principale défectueuse", "Photo floue, caméra inactive ou défaut visible."],
-            ["charge", "Impossible d’allumer ou de charger", "L’appareil ne démarre pas ou ne prend pas la charge."],
-            ["autre", "Autre problème", "Tout autre défaut non listé."]
+            [
+                "ecran_affichage",
+                "Écran défectueux",
+                "Écran cassé ou défaut d’affichage."
+            ],
+            [
+                "tactile",
+                "Écran tactile défectueux",
+                "Le tactile répond mal ou ne fonctionne plus."
+            ],
+            [
+                "batterie_defaut",
+                "Batterie usée",
+                "Autonomie faible ou batterie à remplacer."
+            ],
+            [
+                "son",
+                "Haut-parleur ou microphone",
+                "Son défectueux, faible ou bruit parasite."
+            ],
+            [
+                "camera_defaut",
+                "Caméra défectueuse",
+                "Image floue, caméra inactive ou défaut visible."
+            ],
+            [
+                "charge",
+                "Impossible d’allumer ou de charger",
+                "L’appareil ne démarre pas ou ne prend pas la charge."
+            ],
+            [
+                "autre_defaut",
+                "Autre problème",
+                "Un défaut non présent dans cette liste."
+            ]
         ],
-        note: "Vous pouvez sélectionner plusieurs défauts."
+
+        note:
+            "Vous pouvez sélectionner plusieurs défauts."
     },
 
     batterie: {
@@ -353,14 +728,38 @@ const questions = {
         help: "batterie",
         type: "radio",
         key: "batterie",
+
         title: "Batterie",
-        text: "Quelle est la capacité maximale de la batterie ?",
+
+        text:
+            "Quelle est la capacité maximale de la batterie ?",
+
         options: [
-            ["90_100", "90 % à 100 %", "Batterie en très bon état."],
-            ["80_89", "80 % à 89 %", "Usure normale."],
-            ["moins_80", "Inférieure à 80 %", "Batterie considérée comme usée."],
-            ["gonflee", "Batterie gonflée", "Défaut important, contrôle obligatoire."],
-            ["inconnu", "Je ne sais pas", "Une vérification sera faite en atelier."]
+            [
+                "90_100",
+                "90 % à 100 %",
+                "La batterie est en très bon état."
+            ],
+            [
+                "80_89",
+                "80 % à 89 %",
+                "La batterie présente une usure normale."
+            ],
+            [
+                "moins_80",
+                "Inférieure à 80 %",
+                "La batterie est considérée comme usée."
+            ],
+            [
+                "gonflee",
+                "Batterie gonflée",
+                "Un contrôle de sécurité sera obligatoire."
+            ],
+            [
+                "inconnu",
+                "Je ne sais pas",
+                "Une vérification sera effectuée en atelier."
+            ]
         ]
     },
 
@@ -369,15 +768,38 @@ const questions = {
         help: "ecran",
         type: "radio",
         key: "ecran",
-        compact: true,
+
         title: "État de l’écran",
-        text: "Veuillez évaluer l’état de l’écran.",
+
+        text:
+            "Veuillez évaluer l’état de l’écran.",
+
         options: [
-            ["comme_neuf", "Comme neuf", "Aucune rayure visible."],
-            ["tres_bon", "Très bon état", "Micro-rayures très légères."],
-            ["bon", "Bon état", "Rayures visibles mais légères."],
-            ["correct", "Correct", "Rayures marquées ou traces visibles."],
-            ["endommage", "Endommagé", "Fissure, impact ou défaut important."]
+            [
+                "comme_neuf",
+                "Comme neuf",
+                "Aucune rayure visible."
+            ],
+            [
+                "tres_bon",
+                "Très bon état",
+                "Micro-rayures très légères."
+            ],
+            [
+                "bon",
+                "Bon état",
+                "Rayures visibles mais légères."
+            ],
+            [
+                "correct",
+                "Correct",
+                "Rayures marquées ou traces visibles."
+            ],
+            [
+                "endommage",
+                "Endommagé",
+                "Fissure, impact ou défaut important."
+            ]
         ]
     },
 
@@ -386,15 +808,38 @@ const questions = {
         help: "chassis",
         type: "radio",
         key: "chassis",
-        compact: true,
-        title: "Face arrière & châssis",
-        text: "Veuillez évaluer l’état de la face arrière et du cadre.",
+
+        title: "Face arrière et châssis",
+
+        text:
+            "Évaluez l’état de la face arrière et du cadre.",
+
         options: [
-            ["comme_neuf", "Comme neuf", "Aucune trace visible."],
-            ["tres_bon", "Très bon état", "Micro-traces très légères."],
-            ["bon", "Bon état", "Rayures ou marques légères."],
-            ["correct", "Correct", "Impacts ou rayures visibles."],
-            ["endommage", "Endommagé", "Dos cassé, cadre tordu ou choc important."]
+            [
+                "comme_neuf",
+                "Comme neuf",
+                "Aucune trace visible."
+            ],
+            [
+                "tres_bon",
+                "Très bon état",
+                "Micro-traces très légères."
+            ],
+            [
+                "bon",
+                "Bon état",
+                "Rayures ou marques légères."
+            ],
+            [
+                "correct",
+                "Correct",
+                "Impacts ou rayures visibles."
+            ],
+            [
+                "endommage",
+                "Endommagé",
+                "Dos cassé, cadre tordu ou choc important."
+            ]
         ]
     },
 
@@ -403,14 +848,32 @@ const questions = {
         help: "reparations",
         type: "radio",
         key: "repare",
+
         title: "Historique des réparations",
-        text: "Votre iPhone a-t-il déjà été réparé ?",
+
+        text:
+            "Votre appareil a-t-il déjà été réparé ?",
+
         options: [
-            ["non", "Non", "Aucune réparation connue."],
-            ["oui", "Oui", "Vous pourrez préciser les éléments remplacés."],
-            ["inconnu", "Je ne sais pas", "Un contrôle sera effectué à réception."]
+            [
+                "non",
+                "Non",
+                "Aucune réparation connue."
+            ],
+            [
+                "oui",
+                "Oui",
+                "Vous pourrez préciser les éléments remplacés."
+            ],
+            [
+                "inconnu",
+                "Je ne sais pas",
+                "Un contrôle sera effectué à réception."
+            ]
         ],
-        note: "Une vérification sera systématiquement réalisée à réception de l’appareil."
+
+        note:
+            "Une vérification sera systématiquement réalisée à réception."
     },
 
     reparations: {
@@ -418,361 +881,718 @@ const questions = {
         help: "reparations",
         type: "checkbox",
         key: "reparations",
+
         title: "Réparations effectuées",
-        text: "Sélectionnez les éléments qui ont déjà été remplacés.",
+
+        text:
+            "Sélectionnez les éléments qui ont déjà été remplacés.",
+
         options: [
-            ["ecran", "Écran remplacé", "Écran déjà changé."],
-            ["batterie", "Batterie remplacée", "Batterie déjà changée."],
-            ["face_arriere", "Face arrière remplacée", "Dos ou châssis déjà remplacé."],
-            ["connecteur", "Connecteur remplacé", "Connecteur de charge déjà remplacé."],
-            ["camera", "Caméra remplacée", "Caméra avant ou arrière déjà remplacée."],
-            ["autre", "Autre réparation", "Autre élément déjà remplacé."]
+            [
+                "ecran_remplace",
+                "Écran remplacé",
+                "L’écran a déjà été changé."
+            ],
+            [
+                "batterie_remplacee",
+                "Batterie remplacée",
+                "La batterie a déjà été changée."
+            ],
+            [
+                "face_arriere_remplacee",
+                "Face arrière remplacée",
+                "La face arrière ou le châssis a été remplacé."
+            ],
+            [
+                "connecteur_remplace",
+                "Connecteur remplacé",
+                "Le connecteur de charge a déjà été changé."
+            ],
+            [
+                "camera_remplacee",
+                "Caméra remplacée",
+                "Une caméra avant ou arrière a été remplacée."
+            ],
+            [
+                "autre_reparation",
+                "Autre réparation",
+                "Un autre composant a déjà été remplacé."
+            ]
         ],
-        note: "Les appareils déjà réparés feront l’objet d’un contrôle approfondi."
+
+        note:
+            "Les appareils réparés feront l’objet d’un contrôle approfondi."
     },
 
     marcheUE: {
-    stepNumber: 6,
-    help: "ue",
-    type: "radio",
-    key: "marcheUE",
-    title: "Conformité européenne",
-    text: "Le marquage CE est-il présent sur l’appareil ou dans les informations réglementaires ?",
-    options: [
-        ["oui", "Oui", "Le marquage CE semble présent."],
-        ["non", "Non", "L’appareil pourrait ne pas être éligible à la reprise."],
-        ["inconnu", "Je ne sais pas", "La conformité sera contrôlée à réception."]
-    ],
-    alert: "DigitRestore vérifiera à réception le marquage CE, les références constructeur et la conformité européenne de l’appareil."
-},
+        stepNumber: 6,
+        help: "ue",
+        type: "radio",
+        key: "marcheUE",
 
-    };
+        title: "Conformité européenne",
+
+        text:
+            "Le marquage CE est-il présent sur l’appareil ou dans les informations réglementaires ?",
+
+        options: [
+            [
+                "oui",
+                "Oui",
+                "Le marquage CE semble présent."
+            ],
+            [
+                "non",
+                "Non",
+                "L’appareil pourrait ne pas être éligible à la reprise."
+            ],
+            [
+                "inconnu",
+                "Je ne sais pas",
+                "La conformité sera contrôlée à réception."
+            ]
+        ],
+
+        alert:
+            "DigitRestore vérifiera le marquage CE, les références constructeur et la conformité européenne de l’appareil."
+    }
+};
+
+/* =========================
+   AFFICHAGE
+========================= */
 
 function renderQuestion(stepId) {
     const question = questions[stepId];
-    if (!question) return;
+
+    if (!question) {
+        return;
+    }
 
     questionnaireState.currentStep = stepId;
+
     sendVisualHelp(question.help);
 
     qrRender.innerHTML = `
         ${renderProgress(question.stepNumber)}
-        <div class="qr-body">
-            ${renderBody(question)}
+
+        <div class="question-body">
+            <div class="question-kicker">
+                Étape ${question.stepNumber} sur 6
+            </div>
+
+            <h2 class="question-title">
+                ${escapeHtml(question.title)}
+            </h2>
+
+            <p class="question-description">
+                ${escapeHtml(question.text)}
+            </p>
+
+            <div class="options-list">
+                ${renderOptions(question)}
+            </div>
+
+            ${
+                question.note
+                    ? `
+                        <div class="question-note">
+                            ${escapeHtml(question.note)}
+                        </div>
+                    `
+                    : ""
+            }
+
+            ${
+                question.alert
+                    ? `
+                        <div class="question-alert">
+                            ${escapeHtml(question.alert)}
+                        </div>
+                    `
+                    : ""
+            }
         </div>
-        <div class="qr-actions">
-            <button class="qr-btn qr-btn-secondary" type="button" id="qrBackBtn" ${questionnaireState.history.length === 0 ? "disabled" : ""}>
+
+        <div class="question-actions">
+            <button
+                class="question-button back-button"
+                type="button"
+                id="qrBackButton"
+                ${
+                    questionnaireState.history.length === 0
+                        ? "disabled"
+                        : ""
+                }
+            >
                 ← Retour
             </button>
-            ${renderActionButton(question)}
+
+            ${renderContinueButton(question)}
         </div>
     `;
 
-    document.getElementById("qrBackBtn").addEventListener("click", goBack);
-
-    const nextBtn = document.getElementById("qrNextBtn");
-    if (nextBtn) {
-        nextBtn.addEventListener("click", () => validateCurrentQuestion(question));
-    }
-
-    sendQuestionnaireUpdate(stepId === "recap");
+    attachQuestionEvents();
+    sendQuestionnaireUpdate(false);
 }
 
 function renderProgress(currentStep) {
-    let html = `<div class="qr-progress">`;
+    let html = `
+        <div class="progress-area">
+            <div class="progress-steps">
+    `;
 
-    for (let i = 1; i <= 6; i++) {
-        const cls = i < currentStep ? "qr-step done" : i === currentStep ? "qr-step active" : "qr-step";
-        html += `<div class="${cls}">${i}</div>`;
-        if (i < 6) html += `<div class="qr-line"></div>`;
+    for (let step = 1; step <= 6; step += 1) {
+        let stepClass = "";
+
+        if (step < currentStep) {
+            stepClass = "done";
+        } else if (step === currentStep) {
+            stepClass = "active";
+        }
+
+        html += `
+            <div class="progress-step ${stepClass}">
+                ${step}
+            </div>
+        `;
+
+        if (step < 6) {
+            html += `
+                <div
+                    class="progress-line ${
+                        step < currentStep ? "done" : ""
+                    }"
+                ></div>
+            `;
+        }
     }
 
-    html += `</div>`;
+    html += `
+            </div>
+        </div>
+    `;
+
     return html;
 }
 
-function renderActionButton(question) {
-    if (question.type === "checkbox") {
-        return `
-            <button class="qr-btn qr-btn-primary" type="button" id="qrNextBtn">
-                Continuer →
-            </button>
-        `;
+function renderOptions(question) {
+    return question.options
+        .map(option => {
+            const [value, label, detail] = option;
+            const selected =
+                isAnswerSelected(question.key, value);
+
+            return `
+                <button
+                    class="option-button ${
+                        selected ? "selected" : ""
+                    }"
+                    type="button"
+                    data-key="${escapeHtml(question.key)}"
+                    data-value="${escapeHtml(value)}"
+                    aria-pressed="${selected}"
+                >
+                    <span class="option-label">
+                        ${escapeHtml(label)}
+                    </span>
+
+                    <span class="option-detail">
+                        ${escapeHtml(detail)}
+                    </span>
+                </button>
+            `;
+        })
+        .join("");
+}
+
+function renderContinueButton(question) {
+    if (question.type !== "checkbox") {
+        return "";
     }
 
-    if (question.type === "recap") {
-        return `
-            <button class="qr-btn qr-btn-primary" type="button" id="qrNextBtn">
-                Questionnaire terminé
-            </button>
-        `;
-    }
+    const values =
+        questionnaireState.answers[question.key] || [];
 
     return `
-        <button class="qr-btn qr-btn-primary" type="button" disabled>
-            Choisissez une réponse
+        <button
+            class="question-button continue-button"
+            type="button"
+            id="qrContinueButton"
+            ${values.length === 0 ? "disabled" : ""}
+        >
+            Continuer →
         </button>
     `;
 }
 
-function renderBody(question) {
-    if (question.type === "recap") return renderRecap();
+function renderCompletion() {
+    const deviceText = [
+        questionnaireState.appareil.marque,
+        questionnaireState.appareil.version ||
+            questionnaireState.appareil.modele,
+        questionnaireState.appareil.couleur,
+        questionnaireState.appareil.capacite
+    ]
+        .filter(Boolean)
+        .join(" — ");
 
-    let html = `
-        <div class="qr-kicker">Étape ${question.stepNumber} sur 6</div>
-        <h2 class="qr-title">${question.title}</h2>
-        <p class="qr-text">${question.text}</p>
-        <div class="qr-options ${question.compact ? "compact" : ""}">
+    qrRender.innerHTML = `
+        <div class="completion-screen">
+            <div class="completion-line"></div>
+
+            <h2>Questionnaire terminé</h2>
+
+            <p>
+                Toutes vos réponses ont été enregistrées.
+                Vous pouvez maintenant utiliser le bouton
+                « Obtenir mon estimation » situé sous le questionnaire.
+            </p>
+
+            ${
+                deviceText
+                    ? `
+                        <div class="completion-device">
+                            ${escapeHtml(deviceText)}
+                        </div>
+                    `
+                    : ""
+            }
+
+            <button
+                class="modify-answers-button"
+                type="button"
+                id="modifyAnswersButton"
+            >
+                Modifier ma dernière réponse
+            </button>
+        </div>
     `;
 
-    question.options.forEach(option => {
-        const value = option[0];
-        const label = option[1];
-        const detail = option[2];
-        const selected = isChecked(question.key, value) ? "selected" : "";
+    document
+        .getElementById("modifyAnswersButton")
+        .addEventListener("click", returnFromCompletion);
 
-        html += `
-            <button class="qr-option ${selected}" type="button" data-key="${question.key}" data-value="${value}">
-                <span class="qr-dot"></span>
-                <span class="qr-content">
-                    <strong>${label}</strong>
-                    <small>${detail}</small>
-                </span>
-            </button>
-        `;
-    });
-
-    html += `</div>`;
-
-    if (question.note) html += `<div class="qr-note">${question.note}</div>`;
-    if (question.alert) html += `<div class="qr-alert">${question.alert}</div>`;
-
-    return html;
+    sendQuestionnaireUpdate(true);
 }
 
-function attachOptionEvents() {
-    const buttons = document.querySelectorAll(".qr-option");
+/* =========================
+   ANIMATIONS ENTRE QUESTIONS
+========================= */
 
-    buttons.forEach(button => {
-        button.addEventListener("click", () => {
-            const key = button.dataset.key;
-            const value = button.dataset.value;
-            selectOption(key, value);
+function transitionToQuestion(
+    nextStep,
+    {
+        addToHistory = true,
+        direction = "forward"
+    } = {}
+) {
+    if (questionnaireState.transitioning) {
+        return;
+    }
+
+    questionnaireState.transitioning = true;
+
+    qrRender.classList.remove("entering");
+    qrRender.classList.add("leaving");
+
+    window.setTimeout(() => {
+        if (addToHistory) {
+            questionnaireState.history.push(
+                questionnaireState.currentStep
+            );
+        }
+
+        renderQuestion(nextStep);
+
+        qrRender.classList.remove("leaving");
+        qrRender.classList.add("entering");
+
+        if (direction === "back") {
+            qrRender.style.transform =
+                "translateX(-12px)";
+        }
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                qrRender.classList.remove("entering");
+                qrRender.style.removeProperty("transform");
+                questionnaireState.transitioning = false;
+            });
         });
-    });
+    }, 190);
+}
+
+function transitionToCompletion() {
+    if (questionnaireState.transitioning) {
+        return;
+    }
+
+    questionnaireState.transitioning = true;
+
+    qrRender.classList.add("leaving");
+
+    window.setTimeout(() => {
+        renderCompletion();
+
+        qrRender.classList.remove("leaving");
+        qrRender.classList.add("entering");
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                qrRender.classList.remove("entering");
+                questionnaireState.transitioning = false;
+            });
+        });
+    }, 190);
+}
+
+/* =========================
+   INTERACTIONS
+========================= */
+
+function attachQuestionEvents() {
+    document
+        .querySelectorAll(".option-button")
+        .forEach(button => {
+            button.addEventListener("click", () => {
+                selectOption(
+                    button.dataset.key,
+                    button.dataset.value
+                );
+            });
+        });
+
+    const backButton =
+        document.getElementById("qrBackButton");
+
+    if (backButton) {
+        backButton.addEventListener(
+            "click",
+            goBack
+        );
+    }
+
+    const continueButton =
+        document.getElementById("qrContinueButton");
+
+    if (continueButton) {
+        continueButton.addEventListener(
+            "click",
+            validateCheckboxQuestion
+        );
+    }
 }
 
 function selectOption(key, value) {
-    const question = questions[questionnaireState.currentStep];
+    if (questionnaireState.transitioning) {
+        return;
+    }
 
-    if (!question) return;
+    const question =
+        questions[questionnaireState.currentStep];
+
+    if (!question) {
+        return;
+    }
 
     if (question.type === "checkbox") {
-        const current = questionnaireState.answers[key] || [];
+        toggleCheckboxAnswer(key, value);
 
-        if (current.includes(value)) {
-            questionnaireState.answers[key] = current.filter(item => item !== value);
-        } else {
-            questionnaireState.answers[key] = [...current, value];
-        }
+        renderQuestion(
+            questionnaireState.currentStep
+        );
 
-        renderQuestion(questionnaireState.currentStep);
-        attachOptionEvents();
         return;
     }
 
-    saveAnswer(key, value);
-
-    const nextStep = getNextStep(key, value);
-
-    if (nextStep === "complete") {
-    sendQuestionnaireUpdate(true);
-    sendVisualHelp("recap");
-    return;
-}
-
-if (nextStep) {
-    questionnaireState.history.push(questionnaireState.currentStep);
-    renderQuestion(nextStep);
-    attachOptionEvents();
-}
-}
-
-function validateCurrentQuestion(question) {
-    if (question.type === "recap") {
-        sendQuestionnaireUpdate(true);
-        return;
-    }
-
-    const value = questionnaireState.answers[question.key];
-
-    if (question.type === "checkbox" && (!value || value.length === 0)) {
-        alert("Merci de sélectionner au moins une réponse.");
-        return;
-    }
-
-    const nextStep = getNextStep(question.key, value);
-
-    if (nextStep === "complete") {
-    sendQuestionnaireUpdate(true);
-    sendVisualHelp("recap");
-    return;
-}
-
-if (nextStep) {
-    questionnaireState.history.push(questionnaireState.currentStep);
-    renderQuestion(nextStep);
-    attachOptionEvents();
-}
-}
-
-function saveAnswer(key, value) {
     questionnaireState.answers[key] = value;
 
-    if (key === "fonctionnement" && value === "oui") {
-        questionnaireState.answers.defauts = [];
+    clearConditionalAnswers(key, value);
+    sendQuestionnaireUpdate(false);
+
+    const selectedButton =
+        document.querySelector(
+            `.option-button[data-value="${CSS.escape(value)}"]`
+        );
+
+    if (selectedButton) {
+        document
+            .querySelectorAll(".option-button")
+            .forEach(button => {
+                button.classList.remove("selected");
+                button.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+            });
+
+        selectedButton.classList.add("selected");
+        selectedButton.setAttribute(
+            "aria-pressed",
+            "true"
+        );
     }
 
-    if (key === "repare" && value !== "oui") {
-        questionnaireState.answers.reparations = [];
+    const nextStep =
+        getNextStep(key, value);
+
+    window.setTimeout(() => {
+        if (nextStep === "complete") {
+            transitionToCompletion();
+            return;
+        }
+
+        if (nextStep) {
+            transitionToQuestion(nextStep);
+        }
+    }, 230);
+}
+
+function toggleCheckboxAnswer(key, value) {
+    const currentValues = Array.isArray(
+        questionnaireState.answers[key]
+    )
+        ? questionnaireState.answers[key]
+        : [];
+
+    if (currentValues.includes(value)) {
+        questionnaireState.answers[key] =
+            currentValues.filter(
+                item => item !== value
+            );
+    } else {
+        questionnaireState.answers[key] = [
+            ...currentValues,
+            value
+        ];
     }
 
     sendQuestionnaireUpdate(false);
 }
 
+function validateCheckboxQuestion() {
+    const question =
+        questions[questionnaireState.currentStep];
+
+    if (!question || question.type !== "checkbox") {
+        return;
+    }
+
+    const selectedValues =
+        questionnaireState.answers[question.key];
+
+    if (
+        !Array.isArray(selectedValues) ||
+        selectedValues.length === 0
+    ) {
+        return;
+    }
+
+    const nextStep = getNextStep(
+        question.key,
+        selectedValues
+    );
+
+    if (nextStep === "complete") {
+        transitionToCompletion();
+        return;
+    }
+
+    if (nextStep) {
+        transitionToQuestion(nextStep);
+    }
+}
+
+function goBack() {
+    if (
+        questionnaireState.transitioning ||
+        questionnaireState.history.length === 0
+    ) {
+        return;
+    }
+
+    const previousStep =
+        questionnaireState.history.pop();
+
+    transitionToQuestion(
+        previousStep,
+        {
+            addToHistory: false,
+            direction: "back"
+        }
+    );
+}
+
+function returnFromCompletion() {
+    const lastStep =
+        questionnaireState.currentStep ||
+        "marcheUE";
+
+    sendQuestionnaireUpdate(false);
+
+    transitionToQuestion(
+        lastStep,
+        {
+            addToHistory: false,
+            direction: "back"
+        }
+    );
+}
+
+/* =========================
+   EMBRANCHEMENTS
+========================= */
+
 function getNextStep(key, value) {
     if (key === "fonctionnement") {
-        return value === "non" ? "defauts" : "batterie";
+        return value === "non"
+            ? "defauts"
+            : "batterie";
     }
 
-    if (key === "defauts") return "batterie";
-    if (key === "batterie") return "ecran";
-    if (key === "ecran") return "chassis";
-    if (key === "chassis") return "repare";
+    if (key === "defauts") {
+        return "batterie";
+    }
+
+    if (key === "batterie") {
+        return "ecran";
+    }
+
+    if (key === "ecran") {
+        return "chassis";
+    }
+
+    if (key === "chassis") {
+        return "repare";
+    }
 
     if (key === "repare") {
-        return value === "oui" ? "reparations" : "marcheUE";
+        return value === "oui"
+            ? "reparations"
+            : "marcheUE";
     }
 
-    if (key === "reparations") return "marcheUE";
-    if (key === "marcheUE") return "complete";
+    if (key === "reparations") {
+        return "marcheUE";
+    }
+
+    if (key === "marcheUE") {
+        return "complete";
+    }
 
     return null;
 }
 
-function goBack() {
-    const previous = questionnaireState.history.pop();
-    if (!previous) return;
-
-    renderQuestion(previous);
-    attachOptionEvents();
-    sendQuestionnaireUpdate(false);
-}
-
-function isChecked(key, value) {
-    const current = questionnaireState.answers[key];
-
-    if (Array.isArray(current)) {
-        return current.includes(value);
+function clearConditionalAnswers(key, value) {
+    if (
+        key === "fonctionnement" &&
+        value === "oui"
+    ) {
+        questionnaireState.answers.defauts = [];
     }
 
-    return current === value;
+    if (
+        key === "repare" &&
+        value !== "oui"
+    ) {
+        questionnaireState.answers.reparations = [];
+    }
 }
 
-function renderRecap() {
-    const a = questionnaireState.answers;
+function isAnswerSelected(key, value) {
+    const answer =
+        questionnaireState.answers[key];
 
-    return `
-        <div class="qr-kicker">Validation finale</div>
-        <h2 class="qr-title">Récapitulatif</h2>
-        <p class="qr-text">Contrôlez les informations déclarées avant de passer à l’estimation.</p>
+    if (Array.isArray(answer)) {
+        return answer.includes(value);
+    }
 
-        <div class="qr-recap">
-            <div class="qr-recap-row"><span>Fonctionnement</span><strong>${formatValue(a.fonctionnement)}</strong></div>
-            <div class="qr-recap-row"><span>Défauts</span><strong>${formatArray(a.defauts)}</strong></div>
-            <div class="qr-recap-row"><span>Batterie</span><strong>${formatValue(a.batterie)}</strong></div>
-            <div class="qr-recap-row"><span>Écran</span><strong>${formatValue(a.ecran)}</strong></div>
-            <div class="qr-recap-row"><span>Châssis</span><strong>${formatValue(a.chassis)}</strong></div>
-            <div class="qr-recap-row"><span>Déjà réparé</span><strong>${formatValue(a.repare)}</strong></div>
-            <div class="qr-recap-row"><span>Réparations</span><strong>${formatArray(a.reparations)}</strong></div>
-            <div class="qr-recap-row"><span>Marché UE</span><strong>${formatValue(a.marcheUE)}</strong></div>
-        </div>
-
-        <div class="qr-note">
-            L’estimation affichée sera indicative. Chaque appareil sera contrôlé en atelier.
-            Toute anomalie ou information non déclarée peut entraîner une nouvelle proposition.
-        </div>
-    `;
+    return answer === value;
 }
+
+/* =========================
+   COMMUNICATION AVEC LA PAGE
+========================= */
 
 function sendQuestionnaireUpdate(complete) {
-    window.parent.postMessage({
-        source: "digitrestore-questionnaire",
-        type: "questionnaire-update",
-        complete: complete,
-        answers: questionnaireState.answers
-    }, "*");
+    window.parent.postMessage(
+        {
+            source:
+                "digitrestore-questionnaire",
+
+            type:
+                "questionnaire-update",
+
+            complete:
+                Boolean(complete),
+
+            answers:
+                questionnaireState.answers
+        },
+        MESSAGE_ORIGIN
+    );
 }
 
-function sendVisualHelp(help) {
-    window.parent.postMessage({
-        source: "digitrestore-questionnaire",
-        type: "visual-help",
-        help: help
-    }, "*");
+function sendVisualHelp(helpType) {
+    window.parent.postMessage(
+        {
+            source:
+                "digitrestore-questionnaire",
+
+            type:
+                "visual-help",
+
+            help:
+                helpType
+        },
+        MESSAGE_ORIGIN
+    );
 }
 
 window.addEventListener("message", event => {
+    if (
+        MESSAGE_ORIGIN !== "*" &&
+        event.origin !== window.location.origin
+    ) {
+        return;
+    }
+
     const data = event.data;
 
-    if (!data || data.source !== "digitrestore-reprise") return;
+    if (
+        !data ||
+        data.source !== "digitrestore-reprise"
+    ) {
+        return;
+    }
 
     if (data.type === "device-update") {
-        questionnaireState.appareil = data.appareil || questionnaireState.appareil;
+        questionnaireState.appareil = {
+            ...questionnaireState.appareil,
+            ...(data.appareil || {})
+        };
     }
 });
 
-function formatValue(value) {
-    const labels = {
-        oui: "Oui",
-        non: "Non",
-        inconnu: "Je ne sais pas",
-        "90_100": "90 % à 100 %",
-        "80_89": "80 % à 89 %",
-        moins_80: "Inférieure à 80 %",
-        gonflee: "Batterie gonflée",
-        comme_neuf: "Comme neuf",
-        tres_bon: "Très bon état",
-        bon: "Bon état",
-        correct: "Correct",
-        endommage: "Endommagé"
-    };
+/* =========================
+   SÉCURITÉ DU HTML
+========================= */
 
-    return labels[value] || value || "—";
+function escapeHtml(value) {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
-function formatArray(values) {
-    if (!values || values.length === 0) return "—";
-
-    const labels = {
-        ecran_affichage: "Écran cassé ou défaut d’affichage",
-        tactile: "Écran tactile défectueux",
-        batterie: "Batterie usée",
-        son: "Bruit parasite haut-parleur ou micro",
-        camera: "Caméra principale défectueuse",
-        charge: "Impossible d’allumer ou de charger",
-        autre: "Autre problème",
-        ecran: "Écran remplacé",
-        face_arriere: "Face arrière remplacée",
-        connecteur: "Connecteur remplacé",
-        camera: "Caméra remplacée"
-    };
-
-    return values.map(value => labels[value] || value).join(", ");
-}
+/* =========================
+   DÉMARRAGE
+========================= */
 
 renderQuestion("fonctionnement");
-attachOptionEvents();
 </script>
 
 </body>
