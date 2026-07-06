@@ -861,7 +861,32 @@ main {
     font-size: 11px;
     text-align: center;
 }
+.help-card {
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease;
+}
 
+.help-card .section-heading,
+.help-card .help-content {
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+}
+
+.help-card.empty {
+    background: rgba(3, 6, 15, 0.78);
+    border-color: rgba(139, 169, 202, 0.12);
+}
+
+.help-card.empty .section-heading,
+.help-card.empty .help-content {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(7px);
+    pointer-events: none;
+}
 /* =========================
    ADAPTATION
 ========================= */
@@ -1197,7 +1222,7 @@ main {
 
         <!-- AIDE VISUELLE -->
 
-        <aside class="card help-card">
+        <aside class="card help-card" id="helpCard">
             <h2 class="section-heading red">
                 Aide visuelle
             </h2>
@@ -1214,7 +1239,7 @@ main {
 
                 <div class="wear-levels" id="wearLevels"></div>
 
-                <div class="visual-box">
+                <div class="visual-box" id="visualBox">
                     <div class="visual-caption" id="visualCaption">
                         Exemple visuel
                     </div>
@@ -1273,6 +1298,8 @@ const questionnaireFrame =
 const estimateButton =
     document.getElementById("estimateButton");
 
+const helpCard = document.getElementById("helpCard");
+const visualBox = document.getElementById("visualBox");
 const helpContent = document.getElementById("helpContent");
 const helpTitle = document.getElementById("helpTitle");
 const helpIntro = document.getElementById("helpIntro");
@@ -1775,34 +1802,41 @@ estimateButton.addEventListener("click", () => {
 
 const visualHelpData = {
     fonctionnement: {
-        title: "Fonctionnement général",
+    title: "Fonctionnement général",
 
-        intro:
-            "Déclarez les défauts réellement présents. " +
-            "Chaque point sera vérifié à réception.",
+    intro:
+        "Un appareil pleinement fonctionnel doit pouvoir être utilisé normalement, sans panne ni anomalie.",
 
-        caption:
-            "Contrôle général de l’appareil",
+    caption: "",
 
-        image: "",
+    image: "",
 
-        levels: [
-            [
-                "Fonctionnel",
-                "L’appareil s’allume, se charge et répond normalement."
-            ],
-            [
-                "Défaut partiel",
-                "Une fonction est touchée : tactile, caméra, son, batterie ou charge."
-            ],
-            [
-                "Défaut important",
-                "L’appareil ne démarre pas ou présente une panne majeure."
-            ]
+    showVisual: false,
+
+    levels: [
+        [
+            "Mise en marche et charge",
+            "L’appareil s’allume, s’éteint, redémarre et se charge correctement."
+        ],
+        [
+            "Écran, tactile et boutons",
+            "Le tactile répond normalement et tous les boutons physiques fonctionnent correctement."
+        ],
+        [
+            "Son et communications",
+            "Les microphones et les haut-parleurs fonctionnent sans coupure ni grésillement. Le réseau mobile, le Wi-Fi et le Bluetooth fonctionnent normalement."
+        ],
+        [
+            "Caméras",
+            "Les caméras avant et arrière fonctionnent correctement. Les photos ne présentent aucune tache, zone floue permanente ou anomalie visible."
+        ],
+        [
+            "Fonctionnalités générales",
+            "Toutes les fonctionnalités de l’appareil doivent être opérationnelles et utilisables normalement."
         ]
-    },
-
-    batterie: {
+    ]
+},
+	batterie: {
         title: "État de la batterie",
 
         intro:
@@ -1973,6 +2007,29 @@ const visualHelpData = {
 };
 
 function updateVisualHelp(type) {
+    /*
+     * Certaines questions ne nécessitent aucune aide.
+     * La colonne reste présente afin d’éviter un déplacement
+     * de toute la mise en page.
+     */
+    if (type === "aucune") {
+        helpCard.classList.add("empty");
+
+        window.setTimeout(() => {
+            helpTitle.textContent = "";
+            helpIntro.textContent = "";
+            visualCaption.textContent = "";
+            wearLevels.innerHTML = "";
+
+            wearImage.removeAttribute("src");
+            wearImage.style.display = "none";
+
+            visualPlaceholder.style.display = "none";
+        }, 220);
+
+        return;
+    }
+
     const selected =
         visualHelpData[type] ||
         visualHelpData.default;
@@ -1981,16 +2038,16 @@ function updateVisualHelp(type) {
 
     window.setTimeout(() => {
         helpTitle.textContent =
-            selected.title;
+            selected.title || "";
 
         helpIntro.textContent =
-            selected.intro;
+            selected.intro || "";
 
         visualCaption.textContent =
-            selected.caption;
+            selected.caption || "";
 
         wearLevels.innerHTML =
-            selected.levels
+            (selected.levels || [])
                 .map(level => `
                     <div class="wear-item">
                         <strong>${escapeHtml(level[0])}</strong>
@@ -1999,35 +2056,48 @@ function updateVisualHelp(type) {
                 `)
                 .join("");
 
-        if (selected.image) {
-            wearImage.onload = () => {
-                wearImage.style.display = "block";
-                visualPlaceholder.style.display = "none";
-            };
+        /*
+         * Certaines aides sont uniquement constituées de texte.
+         */
+        if (selected.showVisual === false) {
+            visualBox.style.display = "none";
 
-            wearImage.onerror = () => {
-                wearImage.style.display = "none";
-                visualPlaceholder.style.display = "block";
-
-                visualPlaceholder.textContent =
-                    "L’image d’aide sera ajoutée prochainement.";
-            };
-
-            wearImage.src = selected.image;
-            wearImage.alt = selected.caption;
-        } else {
             wearImage.removeAttribute("src");
             wearImage.style.display = "none";
+            visualPlaceholder.style.display = "none";
+        } else {
+            visualBox.style.display = "flex";
 
-            visualPlaceholder.style.display = "block";
-            visualPlaceholder.textContent =
-                "Une image d’aide pourra être ajoutée ici.";
+            if (selected.image) {
+                wearImage.onload = () => {
+                    wearImage.style.display = "block";
+                    visualPlaceholder.style.display = "none";
+                };
+
+                wearImage.onerror = () => {
+                    wearImage.style.display = "none";
+                    visualPlaceholder.style.display = "block";
+
+                    visualPlaceholder.textContent =
+                        "L’image d’aide sera ajoutée prochainement.";
+                };
+
+                wearImage.src = selected.image;
+                wearImage.alt = selected.caption || "Exemple visuel";
+            } else {
+                wearImage.removeAttribute("src");
+                wearImage.style.display = "none";
+
+                visualPlaceholder.style.display = "block";
+                visualPlaceholder.textContent =
+                    "Une image d’aide pourra être ajoutée ici.";
+            }
         }
 
+        helpCard.classList.remove("empty");
         helpContent.classList.remove("changing");
     }, 180);
 }
-
 function escapeHtml(value) {
     return String(value)
         .replace(/&/g, "&amp;")
