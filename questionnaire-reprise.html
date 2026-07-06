@@ -378,6 +378,26 @@ button {
     background: rgba(255, 75, 92, 0.07);
 }
 
+.options-list.multiple-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 12px;
+}
+
+.options-list.multiple-grid .option-button {
+    min-height: 82px;
+    height: 100%;
+}
+
+/*
+ * Si la question possède un nombre impair de réponses,
+ * la dernière vignette occupe toute la largeur.
+ */
+.options-list.multiple-grid
+.option-button:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    min-height: 65px;
+}
 /* =========================
    NAVIGATION
 ========================= */
@@ -587,6 +607,15 @@ button {
     .question-button {
         width: 100%;
     }
+    
+    .options-list.multiple-grid {
+    grid-template-columns: 1fr;
+}
+
+.options-list.multiple-grid
+.option-button:last-child:nth-child(odd) {
+    grid-column: auto;
+}
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -683,19 +712,9 @@ const questions = {
 
         options: [
             [
-                "ecran_affichage",
-                "Écran défectueux",
-                "Écran cassé ou défaut d’affichage."
-            ],
-            [
                 "tactile",
                 "Écran tactile défectueux",
                 "Le tactile répond mal ou ne fonctionne plus."
-            ],
-            [
-                "batterie_defaut",
-                "Batterie usée",
-                "Autonomie faible ou batterie à remplacer."
             ],
             [
                 "son",
@@ -989,7 +1008,11 @@ function renderQuestion(stepId) {
                 ${escapeHtml(question.text)}
             </p>
 
-            <div class="options-list">
+            <div class="options-list ${
+    question.type === "checkbox"
+        ? "multiple-grid"
+        : ""
+}">
                 ${renderOptions(question)}
             </div>
 
