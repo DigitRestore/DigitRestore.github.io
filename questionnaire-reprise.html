@@ -655,33 +655,17 @@ const MESSAGE_ORIGIN =
         ? "*"
         : window.location.origin;
 
-/* =========================
-   QUESTIONS
-========================= */
-
 const questions = {
     fonctionnement: {
         stepNumber: 1,
         help: "fonctionnement",
         type: "radio",
         key: "fonctionnement",
-
         title: "Fonctionnement général",
-
-        text:
-            "Votre appareil est-il pleinement fonctionnel ?",
-
+        text: "Votre appareil est-il pleinement fonctionnel ?",
         options: [
-            [
-                "oui",
-                "Oui",
-                "L’appareil s’allume, se charge et les fonctions principales sont opérationnelles."
-            ],
-            [
-                "non",
-                "Non",
-                "L’appareil présente un ou plusieurs défauts."
-            ]
+            ["oui", "Oui", "L’appareil s’allume, se charge et les fonctions principales sont opérationnelles."],
+            ["non", "Non", "L’appareil présente un ou plusieurs défauts."]
         ]
     },
 
@@ -690,42 +674,16 @@ const questions = {
         help: "aucune",
         type: "checkbox",
         key: "defauts",
-
         title: "Défauts constatés",
-
-        text:
-            "Sélectionnez tous les défauts présents sur l’appareil.",
-
+        text: "Sélectionnez tous les défauts présents sur l’appareil.",
         options: [
-            [
-                "tactile",
-                "Écran tactile défectueux",
-                "Le tactile répond mal ou ne fonctionne plus."
-            ],
-            [
-                "son",
-                "Haut-parleur ou microphone",
-                "Son défectueux, faible ou bruit parasite."
-            ],
-            [
-                "camera_defaut",
-                "Caméra défectueuse",
-                "Image floue, caméra inactive ou défaut visible."
-            ],
-            [
-                "charge",
-                "Impossible d’allumer ou de charger",
-                "L’appareil ne démarre pas ou ne prend pas la charge."
-            ],
-            [
-                "autre_defaut",
-                "Autre problème",
-                "Un défaut non présent dans cette liste."
-            ]
+            ["tactile", "Écran tactile défectueux", "Le tactile répond mal ou ne fonctionne plus."],
+            ["son", "Haut-parleur ou microphone", "Son défectueux, faible ou bruit parasite."],
+            ["camera_defaut", "Caméra défectueuse", "Image floue, caméra inactive ou défaut visible."],
+            ["charge", "Impossible d’allumer ou de charger", "L’appareil ne démarre pas ou ne prend pas la charge."],
+            ["autre_defaut", "Autre problème", "Un défaut non présent dans cette liste."]
         ],
-
-        note:
-            "Vous pouvez sélectionner plusieurs défauts."
+        note: "Vous pouvez sélectionner plusieurs défauts."
     },
 
     batterie: {
@@ -733,38 +691,14 @@ const questions = {
         help: "aucune",
         type: "radio",
         key: "batterie",
-
         title: "Batterie",
-
-        text:
-            "Quelle est la capacité maximale de la batterie ?",
-
+        text: "Quelle est la capacité maximale de la batterie ?",
         options: [
-            [
-                "90_100",
-                "90 % à 100 %",
-                "La batterie est en très bon état."
-            ],
-            [
-                "80_89",
-                "80 % à 89 %",
-                "La batterie présente une usure normale."
-            ],
-            [
-                "moins_80",
-                "Inférieure à 80 %",
-                "La batterie est considérée comme usée."
-            ],
-            [
-                "gonflee",
-                "Batterie gonflée",
-                "Un contrôle de sécurité sera obligatoire."
-            ],
-            [
-                "inconnu",
-                "Je ne sais pas",
-                "Une vérification sera effectuée en atelier."
-            ]
+            ["90_100", "90 % à 100 %", "La batterie est en très bon état."],
+            ["80_89", "80 % à 89 %", "La batterie présente une usure normale."],
+            ["moins_80", "Inférieure à 80 %", "La batterie est considérée comme usée."],
+            ["gonflee", "Batterie gonflée", "Un contrôle de sécurité sera obligatoire."],
+            ["inconnu", "Je ne sais pas", "Une vérification sera effectuée en atelier."]
         ]
     },
 
@@ -784,14 +718,17 @@ const questions = {
         },
 
         title: "État de l’écran",
+        text: "Veuillez évaluer l’état de l’écran. Cliquez sur un état pour afficher son exemple, puis validez votre choix.",
 
-        text:
-            "Veuillez évaluer l’état de l’écran. Cliquez sur un état pour afficher son exemple, puis validez votre choix.",
+        options: [
+            ["comme_neuf", "Comme neuf", ""],
+            ["tres_bon", "Très bon état", ""],
+            ["bon", "Bon état", ""],
+            ["correct", "Correct", ""],
+            ["endommage", "Endommagé", ""]
+        ],
 
-        ecran: {
-
-        note:
-            "Le clic affiche l’aide visuelle correspondante. Le passage à l’étape suivante se fait uniquement avec le bouton Valider."
+        note: "Le clic affiche l’aide visuelle correspondante. Le passage à l’étape suivante se fait uniquement avec le bouton Valider."
     },
 
     chassis: {
@@ -800,42 +737,16 @@ const questions = {
         type: "radio",
         key: "chassis",
         requiresManualValidation: true,
-
         title: "Face arrière et châssis",
-
-        text:
-            "Évaluez l’état de la face arrière et du cadre. Cliquez sur un état, puis validez votre choix.",
-
+        text: "Évaluez l’état de la face arrière et du cadre. Cliquez sur un état, puis validez votre choix.",
         options: [
-            [
-                "comme_neuf",
-                "Comme neuf",
-                "Aucune trace visible."
-            ],
-            [
-                "tres_bon",
-                "Très bon état",
-                "Micro-traces très légères."
-            ],
-            [
-                "bon",
-                "Bon état",
-                "Rayures ou marques légères."
-            ],
-            [
-                "correct",
-                "Correct",
-                "Impacts ou rayures visibles."
-            ],
-            [
-                "endommage",
-                "Endommagé",
-                "Dos cassé, cadre tordu ou choc important."
-            ]
+            ["comme_neuf", "Comme neuf", "Aucune trace visible."],
+            ["tres_bon", "Très bon état", "Micro-traces très légères."],
+            ["bon", "Bon état", "Rayures ou marques légères."],
+            ["correct", "Correct", "Impacts ou rayures visibles."],
+            ["endommage", "Endommagé", "Dos cassé, cadre tordu ou choc important."]
         ],
-
-        note:
-            "Le passage à l’étape suivante se fait uniquement avec le bouton Valider."
+        note: "Le passage à l’étape suivante se fait uniquement avec le bouton Valider."
     },
 
     repare: {
@@ -843,32 +754,14 @@ const questions = {
         help: "aucune",
         type: "radio",
         key: "repare",
-
         title: "Historique des réparations",
-
-        text:
-            "Votre appareil a-t-il déjà été réparé ?",
-
+        text: "Votre appareil a-t-il déjà été réparé ?",
         options: [
-            [
-                "non",
-                "Non",
-                "Aucune réparation connue."
-            ],
-            [
-                "oui",
-                "Oui",
-                "Vous pourrez préciser les éléments remplacés."
-            ],
-            [
-                "inconnu",
-                "Je ne sais pas",
-                "Un contrôle sera effectué à réception."
-            ]
+            ["non", "Non", "Aucune réparation connue."],
+            ["oui", "Oui", "Vous pourrez préciser les éléments remplacés."],
+            ["inconnu", "Je ne sais pas", "Un contrôle sera effectué à réception."]
         ],
-
-        note:
-            "Une vérification sera systématiquement réalisée à réception."
+        note: "Une vérification sera systématiquement réalisée à réception."
     },
 
     reparations: {
@@ -876,47 +769,17 @@ const questions = {
         help: "aucune",
         type: "checkbox",
         key: "reparations",
-
         title: "Réparations effectuées",
-
-        text:
-            "Sélectionnez les éléments qui ont déjà été remplacés.",
-
+        text: "Sélectionnez les éléments qui ont déjà été remplacés.",
         options: [
-            [
-                "ecran_remplace",
-                "Écran remplacé",
-                "L’écran a déjà été changé."
-            ],
-            [
-                "batterie_remplacee",
-                "Batterie remplacée",
-                "La batterie a déjà été changée."
-            ],
-            [
-                "face_arriere_remplacee",
-                "Face arrière remplacée",
-                "La face arrière ou le châssis a été remplacé."
-            ],
-            [
-                "connecteur_remplace",
-                "Connecteur remplacé",
-                "Le connecteur de charge a déjà été changé."
-            ],
-            [
-                "camera_remplacee",
-                "Caméra remplacée",
-                "Une caméra avant ou arrière a été remplacée."
-            ],
-            [
-                "autre_reparation",
-                "Autre réparation",
-                "Un autre composant a déjà été remplacé."
-            ]
+            ["ecran_remplace", "Écran remplacé", "L’écran a déjà été changé."],
+            ["batterie_remplacee", "Batterie remplacée", "La batterie a déjà été changée."],
+            ["face_arriere_remplacee", "Face arrière remplacée", "La face arrière ou le châssis a été remplacé."],
+            ["connecteur_remplace", "Connecteur remplacé", "Le connecteur de charge a déjà été changé."],
+            ["camera_remplacee", "Caméra remplacée", "Une caméra avant ou arrière a été remplacée."],
+            ["autre_reparation", "Autre réparation", "Un autre composant a déjà été remplacé."]
         ],
-
-        note:
-            "Les appareils réparés feront l’objet d’un contrôle approfondi."
+        note: "Les appareils réparés feront l’objet d’un contrôle approfondi."
     },
 
     marcheUE: {
@@ -924,93 +787,42 @@ const questions = {
         help: "aucune",
         type: "radio",
         key: "marcheUE",
-
         title: "Conformité européenne",
-
-        text:
-            "Le marquage CE est-il présent sur l’appareil ou dans les informations réglementaires ?",
-
+        text: "Le marquage CE est-il présent sur l’appareil ou dans les informations réglementaires ?",
         options: [
-            [
-                "oui",
-                "Oui",
-                "Le marquage CE semble présent."
-            ],
-            [
-                "non",
-                "Non",
-                "L’appareil pourrait ne pas être éligible à la reprise."
-            ],
-            [
-                "inconnu",
-                "Je ne sais pas",
-                "La conformité sera contrôlée à réception."
-            ]
+            ["oui", "Oui", "Le marquage CE semble présent."],
+            ["non", "Non", "L’appareil pourrait ne pas être éligible à la reprise."],
+            ["inconnu", "Je ne sais pas", "La conformité sera contrôlée à réception."]
         ],
-
-        alert:
-            "DigitRestore vérifiera le marquage CE, les références constructeur et la conformité européenne de l’appareil."
+        alert: "DigitRestore vérifiera le marquage CE, les références constructeur et la conformité européenne de l’appareil."
     }
 };
-
-/* =========================
-   AFFICHAGE
-========================= */
 
 function renderQuestion(stepId) {
     const question = questions[stepId];
 
-    if (!question) {
-        return;
-    }
+    if (!question) return;
 
     questionnaireState.currentStep = stepId;
-
     sendVisualHelp(getVisualHelpForQuestion(question));
 
     qrRender.innerHTML = `
         ${renderProgress(question.stepNumber)}
 
         <div class="question-body">
-            <div class="question-kicker">
-                Étape ${question.stepNumber} sur 6
-            </div>
+            <div class="question-kicker">Étape ${question.stepNumber} sur 6</div>
 
-            <h2 class="question-title">
-                ${escapeHtml(question.title)}
-            </h2>
+            <h2 class="question-title">${escapeHtml(question.title)}</h2>
 
-            <p class="question-description">
-                ${escapeHtml(question.text)}
-            </p>
+            <p class="question-description">${escapeHtml(question.text)}</p>
 
-            <div class="options-list ${
-                question.type === "checkbox"
-                    ? "multiple-grid"
-                    : ""
-            }">
+            <div class="options-list ${question.type === "checkbox" ? "multiple-grid" : ""}">
                 ${renderOptions(question)}
             </div>
 
-            ${
-                question.note
-                    ? `
-                        <div class="question-note">
-                            ${escapeHtml(question.note)}
-                        </div>
-                    `
-                    : ""
-            }
+            ${question.note ? `<div class="question-note">${escapeHtml(question.note)}</div>` : ""}
 
-            ${
-                question.alert
-                    ? `
-                        <div class="question-alert">
-                            ${escapeHtml(question.alert)}
-                        </div>
-                    `
-                    : ""
-            }
+            ${question.alert ? `<div class="question-alert">${escapeHtml(question.alert)}</div>` : ""}
         </div>
 
         <div class="question-actions">
@@ -1018,11 +830,7 @@ function renderQuestion(stepId) {
                 class="question-button back-button"
                 type="button"
                 id="qrBackButton"
-                ${
-                    questionnaireState.history.length === 0
-                        ? "disabled"
-                        : ""
-                }
+                ${questionnaireState.history.length === 0 ? "disabled" : ""}
             >
                 ← Retour
             </button>
@@ -1036,10 +844,7 @@ function renderQuestion(stepId) {
 }
 
 function renderProgress(currentStep) {
-    let html = `
-        <div class="progress-area">
-            <div class="progress-steps">
-    `;
+    let html = `<div class="progress-area"><div class="progress-steps">`;
 
     for (let step = 1; step <= 6; step += 1) {
         let stepClass = "";
@@ -1050,27 +855,14 @@ function renderProgress(currentStep) {
             stepClass = "active";
         }
 
-        html += `
-            <div class="progress-step ${stepClass}">
-                ${step}
-            </div>
-        `;
+        html += `<div class="progress-step ${stepClass}">${step}</div>`;
 
         if (step < 6) {
-            html += `
-                <div
-                    class="progress-line ${
-                        step < currentStep ? "done" : ""
-                    }"
-                ></div>
-            `;
+            html += `<div class="progress-line ${step < currentStep ? "done" : ""}"></div>`;
         }
     }
 
-    html += `
-            </div>
-        </div>
-    `;
+    html += `</div></div>`;
 
     return html;
 }
@@ -1079,32 +871,23 @@ function renderOptions(question) {
     return question.options
         .map(option => {
             const [value, label, detail] = option;
-            const selected =
-                isAnswerSelected(question.key, value);
+            const selected = isAnswerSelected(question.key, value);
 
             return `
                 <button
-                    class="option-button ${
-                        selected ? "selected" : ""
-                    }"
+                    class="option-button ${selected ? "selected" : ""}"
                     type="button"
                     data-key="${escapeHtml(question.key)}"
                     data-value="${escapeHtml(value)}"
                     aria-pressed="${selected}"
                 >
-                    <span class="option-label">
-                        ${escapeHtml(label)}
-                    </span>
+                    <span class="option-label">${escapeHtml(label)}</span>
 
                     ${
-    detail
-        ? `
-            <span class="option-detail">
-                ${escapeHtml(detail)}
-            </span>
-        `
-        : ""
-}
+                        detail
+                            ? `<span class="option-detail">${escapeHtml(detail)}</span>`
+                            : ""
+                    }
                 </button>
             `;
         })
@@ -1116,12 +899,9 @@ function renderContinueButton(question) {
         question.type === "checkbox" ||
         question.requiresManualValidation;
 
-    if (!needsButton) {
-        return "";
-    }
+    if (!needsButton) return "";
 
-    const canContinue =
-        isQuestionAnswered(question);
+    const canContinue = isQuestionAnswered(question);
 
     return `
         <button
@@ -1130,11 +910,7 @@ function renderContinueButton(question) {
             id="qrContinueButton"
             ${canContinue ? "" : "disabled"}
         >
-            ${
-                question.requiresManualValidation
-                    ? "Valider →"
-                    : "Continuer →"
-            }
+            ${question.requiresManualValidation ? "Valider →" : "Continuer →"}
         </button>
     `;
 }
@@ -1142,8 +918,7 @@ function renderContinueButton(question) {
 function renderCompletion() {
     const deviceText = [
         questionnaireState.appareil.marque,
-        questionnaireState.appareil.version ||
-            questionnaireState.appareil.modele,
+        questionnaireState.appareil.version || questionnaireState.appareil.modele,
         questionnaireState.appareil.couleur,
         questionnaireState.appareil.capacite
     ]
@@ -1164,15 +939,7 @@ function renderCompletion() {
                 « Obtenir mon estimation » situé sous le questionnaire.
             </p>
 
-            ${
-                deviceText
-                    ? `
-                        <div class="completion-device">
-                            ${escapeHtml(deviceText)}
-                        </div>
-                    `
-                    : ""
-            }
+            ${deviceText ? `<div class="completion-device">${escapeHtml(deviceText)}</div>` : ""}
 
             <button
                 class="modify-answers-button"
@@ -1191,20 +958,8 @@ function renderCompletion() {
     sendQuestionnaireUpdate(true);
 }
 
-/* =========================
-   ANIMATIONS ENTRE QUESTIONS
-========================= */
-
-function transitionToQuestion(
-    nextStep,
-    {
-        addToHistory = true,
-        direction = "forward"
-    } = {}
-) {
-    if (questionnaireState.transitioning) {
-        return;
-    }
+function transitionToQuestion(nextStep, { addToHistory = true, direction = "forward" } = {}) {
+    if (questionnaireState.transitioning) return;
 
     questionnaireState.transitioning = true;
 
@@ -1213,9 +968,7 @@ function transitionToQuestion(
 
     window.setTimeout(() => {
         if (addToHistory) {
-            questionnaireState.history.push(
-                questionnaireState.currentStep
-            );
+            questionnaireState.history.push(questionnaireState.currentStep);
         }
 
         renderQuestion(nextStep);
@@ -1224,8 +977,7 @@ function transitionToQuestion(
         qrRender.classList.add("entering");
 
         if (direction === "back") {
-            qrRender.style.transform =
-                "translateX(-12px)";
+            qrRender.style.transform = "translateX(-12px)";
         }
 
         requestAnimationFrame(() => {
@@ -1239,12 +991,9 @@ function transitionToQuestion(
 }
 
 function transitionToCompletion() {
-    if (questionnaireState.transitioning) {
-        return;
-    }
+    if (questionnaireState.transitioning) return;
 
     questionnaireState.transitioning = true;
-
     qrRender.classList.add("leaving");
 
     window.setTimeout(() => {
@@ -1262,62 +1011,38 @@ function transitionToCompletion() {
     }, 190);
 }
 
-/* =========================
-   INTERACTIONS
-========================= */
-
 function attachQuestionEvents() {
     document
         .querySelectorAll(".option-button")
         .forEach(button => {
             button.addEventListener("click", () => {
-                selectOption(
-                    button.dataset.key,
-                    button.dataset.value
-                );
+                selectOption(button.dataset.key, button.dataset.value);
             });
         });
 
-    const backButton =
-        document.getElementById("qrBackButton");
+    const backButton = document.getElementById("qrBackButton");
 
     if (backButton) {
-        backButton.addEventListener(
-            "click",
-            goBack
-        );
+        backButton.addEventListener("click", goBack);
     }
 
-    const continueButton =
-        document.getElementById("qrContinueButton");
+    const continueButton = document.getElementById("qrContinueButton");
 
     if (continueButton) {
-        continueButton.addEventListener(
-            "click",
-            validateCurrentQuestion
-        );
+        continueButton.addEventListener("click", validateCurrentQuestion);
     }
 }
 
 function selectOption(key, value) {
-    if (questionnaireState.transitioning) {
-        return;
-    }
+    if (questionnaireState.transitioning) return;
 
-    const question =
-        questions[questionnaireState.currentStep];
+    const question = questions[questionnaireState.currentStep];
 
-    if (!question) {
-        return;
-    }
+    if (!question) return;
 
     if (question.type === "checkbox") {
         toggleCheckboxAnswer(key, value);
-
-        renderQuestion(
-            questionnaireState.currentStep
-        );
-
+        renderQuestion(questionnaireState.currentStep);
         return;
     }
 
@@ -1329,56 +1054,39 @@ function selectOption(key, value) {
     updateSelectedRadioButton(value);
     updateContinueButtonState(question);
 
-    sendVisualHelp(
-        getVisualHelpForQuestion(question)
-    );
+    sendVisualHelp(getVisualHelpForQuestion(question));
 
-    if (question.requiresManualValidation) {
-        return;
-    }
+    if (question.requiresManualValidation) return;
 
     goToNextQuestionFromCurrentAnswer(question);
 }
 
 function toggleCheckboxAnswer(key, value) {
-    const currentValues = Array.isArray(
-        questionnaireState.answers[key]
-    )
+    const currentValues = Array.isArray(questionnaireState.answers[key])
         ? questionnaireState.answers[key]
         : [];
 
     if (currentValues.includes(value)) {
         questionnaireState.answers[key] =
-            currentValues.filter(
-                item => item !== value
-            );
+            currentValues.filter(item => item !== value);
     } else {
-        questionnaireState.answers[key] = [
-            ...currentValues,
-            value
-        ];
+        questionnaireState.answers[key] = [...currentValues, value];
     }
 
     sendQuestionnaireUpdate(false);
 }
 
 function validateCurrentQuestion() {
-    const question =
-        questions[questionnaireState.currentStep];
+    const question = questions[questionnaireState.currentStep];
 
-    if (!question || !isQuestionAnswered(question)) {
-        return;
-    }
+    if (!question || !isQuestionAnswered(question)) return;
 
     goToNextQuestionFromCurrentAnswer(question);
 }
 
 function goToNextQuestionFromCurrentAnswer(question) {
-    const value =
-        questionnaireState.answers[question.key];
-
-    const nextStep =
-        getNextStep(question.key, value);
+    const value = questionnaireState.answers[question.key];
+    const nextStep = getNextStep(question.key, value);
 
     if (nextStep === "complete") {
         transitionToCompletion();
@@ -1392,50 +1100,34 @@ function goToNextQuestionFromCurrentAnswer(question) {
 
 function updateSelectedRadioButton(value) {
     const selectedButton =
-        document.querySelector(
-            `.option-button[data-value="${CSS.escape(value)}"]`
-        );
+        document.querySelector(`.option-button[data-value="${CSS.escape(value)}"]`);
 
-    if (!selectedButton) {
-        return;
-    }
+    if (!selectedButton) return;
 
     document
         .querySelectorAll(".option-button")
         .forEach(button => {
             button.classList.remove("selected");
-            button.setAttribute(
-                "aria-pressed",
-                "false"
-            );
+            button.setAttribute("aria-pressed", "false");
         });
 
     selectedButton.classList.add("selected");
-    selectedButton.setAttribute(
-        "aria-pressed",
-        "true"
-    );
+    selectedButton.setAttribute("aria-pressed", "true");
 }
 
 function updateContinueButtonState(question) {
-    const continueButton =
-        document.getElementById("qrContinueButton");
+    const continueButton = document.getElementById("qrContinueButton");
 
-    if (!continueButton) {
-        return;
-    }
+    if (!continueButton) return;
 
-    continueButton.disabled =
-        !isQuestionAnswered(question);
+    continueButton.disabled = !isQuestionAnswered(question);
 }
 
 function isQuestionAnswered(question) {
-    const answer =
-        questionnaireState.answers[question.key];
+    const answer = questionnaireState.answers[question.key];
 
     if (question.type === "checkbox") {
-        return Array.isArray(answer) &&
-            answer.length > 0;
+        return Array.isArray(answer) && answer.length > 0;
     }
 
     return Boolean(answer);
@@ -1449,97 +1141,57 @@ function goBack() {
         return;
     }
 
-    const previousStep =
-        questionnaireState.history.pop();
+    const previousStep = questionnaireState.history.pop();
 
-    transitionToQuestion(
-        previousStep,
-        {
-            addToHistory: false,
-            direction: "back"
-        }
-    );
+    transitionToQuestion(previousStep, {
+        addToHistory: false,
+        direction: "back"
+    });
 }
 
 function returnFromCompletion() {
-    const lastStep =
-        questionnaireState.currentStep ||
-        "marcheUE";
+    const lastStep = questionnaireState.currentStep || "marcheUE";
 
     sendQuestionnaireUpdate(false);
 
-    transitionToQuestion(
-        lastStep,
-        {
-            addToHistory: false,
-            direction: "back"
-        }
-    );
+    transitionToQuestion(lastStep, {
+        addToHistory: false,
+        direction: "back"
+    });
 }
-
-/* =========================
-   EMBRANCHEMENTS
-========================= */
 
 function getNextStep(key, value) {
     if (key === "fonctionnement") {
-        return value === "non"
-            ? "defauts"
-            : "batterie";
+        return value === "non" ? "defauts" : "batterie";
     }
 
-    if (key === "defauts") {
-        return "batterie";
-    }
-
-    if (key === "batterie") {
-        return "ecran";
-    }
-
-    if (key === "ecran") {
-        return "chassis";
-    }
-
-    if (key === "chassis") {
-        return "repare";
-    }
+    if (key === "defauts") return "batterie";
+    if (key === "batterie") return "ecran";
+    if (key === "ecran") return "chassis";
+    if (key === "chassis") return "repare";
 
     if (key === "repare") {
-        return value === "oui"
-            ? "reparations"
-            : "marcheUE";
+        return value === "oui" ? "reparations" : "marcheUE";
     }
 
-    if (key === "reparations") {
-        return "marcheUE";
-    }
-
-    if (key === "marcheUE") {
-        return "complete";
-    }
+    if (key === "reparations") return "marcheUE";
+    if (key === "marcheUE") return "complete";
 
     return null;
 }
 
 function clearConditionalAnswers(key, value) {
-    if (
-        key === "fonctionnement" &&
-        value === "oui"
-    ) {
+    if (key === "fonctionnement" && value === "oui") {
         questionnaireState.answers.defauts = [];
     }
 
-    if (
-        key === "repare" &&
-        value !== "oui"
-    ) {
+    if (key === "repare" && value !== "oui") {
         questionnaireState.answers.reparations = [];
     }
 }
 
 function isAnswerSelected(key, value) {
-    const answer =
-        questionnaireState.answers[key];
+    const answer = questionnaireState.answers[key];
 
     if (Array.isArray(answer)) {
         return answer.includes(value);
@@ -1548,13 +1200,8 @@ function isAnswerSelected(key, value) {
     return answer === value;
 }
 
-/* =========================
-   AIDE VISUELLE
-========================= */
-
 function getVisualHelpForQuestion(question) {
-    const answer =
-        questionnaireState.answers[question.key];
+    const answer = questionnaireState.answers[question.key];
 
     if (
         question.visualHelpByValue &&
@@ -1566,10 +1213,6 @@ function getVisualHelpForQuestion(question) {
 
     return question.help || "default";
 }
-
-/* =========================
-   COMMUNICATION AVEC LA PAGE
-========================= */
 
 function sendQuestionnaireUpdate(complete) {
     window.parent.postMessage(
@@ -1604,12 +1247,7 @@ window.addEventListener("message", event => {
 
     const data = event.data;
 
-    if (
-        !data ||
-        data.source !== "digitrestore-reprise"
-    ) {
-        return;
-    }
+    if (!data || data.source !== "digitrestore-reprise") return;
 
     if (data.type === "device-update") {
         questionnaireState.appareil = {
@@ -1619,10 +1257,6 @@ window.addEventListener("message", event => {
     }
 });
 
-/* =========================
-   SÉCURITÉ DU HTML
-========================= */
-
 function escapeHtml(value) {
     return String(value)
         .replace(/&/g, "&amp;")
@@ -1631,10 +1265,6 @@ function escapeHtml(value) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
-
-/* =========================
-   DÉMARRAGE
-========================= */
 
 renderQuestion("fonctionnement");
 </script>
