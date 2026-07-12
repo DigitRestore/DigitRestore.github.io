@@ -51,26 +51,14 @@ body {
     color: var(--white);
     font-family: "Poppins", sans-serif;
     background:
-        radial-gradient(
-            circle at 10% 35%,
-            rgba(79, 210, 255, 0.08),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 90% 65%,
-            rgba(255, 75, 92, 0.08),
-            transparent 36%
-        ),
+        radial-gradient(circle at 10% 35%, rgba(79, 210, 255, 0.08), transparent 35%),
+        radial-gradient(circle at 90% 65%, rgba(255, 75, 92, 0.08), transparent 36%),
         linear-gradient(145deg, #03050d, #050814 52%, #060b1b);
 }
 
 button,
 select {
     font: inherit;
-}
-
-button,
-select {
     cursor: pointer;
 }
 
@@ -95,8 +83,7 @@ select {
         linear-gradient(rgba(79, 210, 255, 0.08) 1px, transparent 1px),
         linear-gradient(90deg, rgba(79, 210, 255, 0.08) 1px, transparent 1px);
     background-size: 50px 50px;
-    mask-image:
-        radial-gradient(circle at center, black 10%, transparent 76%);
+    mask-image: radial-gradient(circle at center, black 10%, transparent 76%);
 }
 
 .energy-line {
@@ -344,11 +331,7 @@ main {
     border-radius: 18px;
     border: 1px solid rgba(116, 160, 199, 0.26);
     background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.045),
-            rgba(255, 255, 255, 0.012)
-        ),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
         rgba(5, 10, 24, 0.92);
     box-shadow:
         0 18px 42px rgba(0, 0, 0, 0.42),
@@ -364,27 +347,14 @@ main {
     width: 36%;
     height: 1px;
     pointer-events: none;
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #ffffff,
-            var(--cyan),
-            transparent
-        );
+    background: linear-gradient(90deg, transparent, #ffffff, var(--cyan), transparent);
     box-shadow: 0 0 10px var(--cyan);
     animation: cardLight 6s linear infinite;
 }
 
-.card.red-border::before {
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #ffffff,
-            var(--red),
-            transparent
-        );
+.card.red-border::before,
+.help-card::before {
+    background: linear-gradient(90deg, transparent, #ffffff, var(--red), transparent);
     box-shadow: 0 0 10px var(--red);
     animation-delay: -3s;
 }
@@ -486,14 +456,7 @@ main {
     width: 45%;
     height: 1px;
     pointer-events: none;
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.9),
-            var(--cyan),
-            transparent
-        );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), var(--cyan), transparent);
     opacity: 0;
 }
 
@@ -564,11 +527,7 @@ main {
     border-radius: 13px;
     border: 1px solid rgba(143, 172, 205, 0.28);
     background:
-        linear-gradient(
-            150deg,
-            rgba(79, 210, 255, 0.035),
-            rgba(255, 75, 92, 0.025)
-        ),
+        linear-gradient(150deg, rgba(79, 210, 255, 0.035), rgba(255, 75, 92, 0.025)),
         rgba(4, 8, 19, 0.78);
 }
 
@@ -692,13 +651,7 @@ main {
     width: 50%;
     pointer-events: none;
     transform: skewX(-20deg);
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.14),
-            transparent
-        );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
     animation: estimateSweep 4.5s ease-in-out infinite;
 }
 
@@ -736,6 +689,9 @@ main {
     display: flex;
     flex-direction: column;
     border-color: rgba(255, 75, 92, 0.4);
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease;
 }
 
 .help-content {
@@ -861,19 +817,6 @@ main {
     font-size: 11px;
     text-align: center;
 }
-.help-card {
-    transition:
-        background 0.3s ease,
-        border-color 0.3s ease;
-}
-
-.help-card .section-heading,
-.help-card .help-content {
-    transition:
-        opacity 0.25s ease,
-        transform 0.25s ease,
-        visibility 0.25s ease;
-}
 
 .help-card.empty {
     background: rgba(3, 6, 15, 0.78);
@@ -887,6 +830,7 @@ main {
     transform: translateY(7px);
     pointer-events: none;
 }
+
 /* =========================
    ADAPTATION
 ========================= */
@@ -1069,29 +1013,16 @@ main {
 <main>
     <div class="page-heading">
         <h1>Estimez la valeur de votre appareil</h1>
-
-        <p>
-            Configurez votre appareil et répondez à quelques questions
-            pour obtenir une estimation.
-        </p>
+        <p>Sélectionnez votre appareil, répondez au questionnaire, puis obtenez votre estimation.</p>
     </div>
 
-    <section class="reprise-layout">
-
-        <!-- CONFIGURATION DE L’APPAREIL -->
-
-        <aside class="card red-border device-column">
-            <h2 class="section-heading red">
-                Configuration de l’appareil
-            </h2>
+    <div class="reprise-layout">
+        <section class="card device-column">
+            <h2 class="section-heading">Votre appareil</h2>
 
             <div class="configuration-form">
-
                 <div class="form-group">
-                    <label class="form-label" for="brandSelect">
-                        Marque
-                    </label>
-
+                    <label class="form-label" for="brandSelect">Marque</label>
                     <div class="select-wrapper">
                         <select class="select-field" id="brandSelect">
                             <option value="">Sélectionner</option>
@@ -1101,69 +1032,40 @@ main {
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="modelSelect">
-                        Modèle
-                    </label>
-
+                    <label class="form-label" for="modelSelect">Modèle</label>
                     <div class="select-wrapper">
-                        <select
-                            class="select-field"
-                            id="modelSelect"
-                            disabled
-                        >
+                        <select class="select-field" id="modelSelect" disabled>
                             <option value="">Sélectionner</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="versionSelect">
-                        Version
-                    </label>
-
+                    <label class="form-label" for="versionSelect">Version</label>
                     <div class="select-wrapper">
-                        <select
-                            class="select-field"
-                            id="versionSelect"
-                            disabled
-                        >
+                        <select class="select-field" id="versionSelect" disabled>
                             <option value="">Sélectionner</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="colorSelect">
-                        Couleur
-                    </label>
-
+                    <label class="form-label" for="colorSelect">Couleur</label>
                     <div class="select-wrapper">
-                        <select
-                            class="select-field"
-                            id="colorSelect"
-                            disabled
-                        >
+                        <select class="select-field" id="colorSelect" disabled>
                             <option value="">Sélectionner</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="capacitySelect">
-                        Capacité
-                    </label>
-
+                    <label class="form-label" for="capacitySelect">Capacité</label>
                     <div class="select-wrapper">
-                        <select
-                            class="select-field"
-                            id="capacitySelect"
-                            disabled
-                        >
+                        <select class="select-field" id="capacitySelect" disabled>
                             <option value="">Sélectionner</option>
                         </select>
                     </div>
                 </div>
-
             </div>
 
             <div class="device-preview-title">
@@ -1172,12 +1074,9 @@ main {
 
             <div class="device-preview">
                 <div class="device-image-box">
-                    <span
-                        class="device-placeholder"
-                        id="devicePlaceholder"
-                    >
+                    <div class="device-placeholder" id="devicePlaceholder">
                         Sélectionnez un appareil pour afficher son image.
-                    </span>
+                    </div>
 
                     <img
                         id="deviceImage"
@@ -1190,15 +1089,11 @@ main {
                     Aucun appareil sélectionné
                 </div>
             </div>
-        </aside>
-
-        <!-- QUESTIONNAIRE -->
+        </section>
 
         <section class="questionnaire-column">
             <div class="card questionnaire-card">
-                <h2 class="section-heading">
-                    Questionnaire de reprise
-                </h2>
+                <h2 class="section-heading">Questionnaire de reprise</h2>
 
                 <div class="questionnaire-shell">
                     <iframe
@@ -1208,19 +1103,17 @@ main {
                         title="Questionnaire de reprise DigitRestore"
                     ></iframe>
                 </div>
+
+                <button
+                    class="estimate-btn"
+                    id="estimateButton"
+                    type="button"
+                    disabled
+                >
+                    Obtenir mon estimation
+                </button>
             </div>
-
-            <button
-                class="estimate-btn"
-                type="button"
-                id="estimateButton"
-                disabled
-            >
-                Obtenir mon estimation
-            </button>
         </section>
-
-        <!-- AIDE VISUELLE -->
 
         <aside class="card help-card" id="helpCard">
             <h2 class="section-heading red">
@@ -1229,12 +1122,11 @@ main {
 
             <div class="help-content" id="helpContent">
                 <h3 class="help-title" id="helpTitle">
-                    Fonctionnement général
+                    Aide visuelle
                 </h3>
 
                 <p class="help-intro" id="helpIntro">
-                    Comparez l’état réel de votre appareil avec les
-                    informations affichées.
+                    Les informations affichées évoluent selon la question en cours.
                 </p>
 
                 <div class="wear-levels" id="wearLevels"></div>
@@ -1245,12 +1137,12 @@ main {
                     </div>
 
                     <div class="visual-image">
-                        <span
+                        <div
                             class="visual-placeholder"
                             id="visualPlaceholder"
                         >
                             Une image d’aide pourra être ajoutée ici.
-                        </span>
+                        </div>
 
                         <img
                             id="wearImage"
@@ -1261,8 +1153,7 @@ main {
                 </div>
             </div>
         </aside>
-
-    </section>
+    </div>
 </main>
 
 <script>
@@ -1273,14 +1164,18 @@ const state = {
     color: "",
     capacity: "",
 
+    data: null,
     selectedModelData: null,
     selectedVersionData: null,
-
-    data: null,
 
     questionnaireAnswers: {},
     questionnaireComplete: false
 };
+
+const MESSAGE_ORIGIN =
+    window.location.protocol === "file:"
+        ? "*"
+        : window.location.origin;
 
 const brandSelect = document.getElementById("brandSelect");
 const modelSelect = document.getElementById("modelSelect");
@@ -1292,34 +1187,21 @@ const deviceName = document.getElementById("deviceName");
 const deviceImage = document.getElementById("deviceImage");
 const devicePlaceholder = document.getElementById("devicePlaceholder");
 
-const questionnaireFrame =
-    document.getElementById("questionnaireFrame");
-
-const estimateButton =
-    document.getElementById("estimateButton");
+const questionnaireFrame = document.getElementById("questionnaireFrame");
+const estimateButton = document.getElementById("estimateButton");
 
 const helpCard = document.getElementById("helpCard");
-const visualBox = document.getElementById("visualBox");
 const helpContent = document.getElementById("helpContent");
 const helpTitle = document.getElementById("helpTitle");
 const helpIntro = document.getElementById("helpIntro");
 const wearLevels = document.getElementById("wearLevels");
+const visualBox = document.getElementById("visualBox");
 const visualCaption = document.getElementById("visualCaption");
 const wearImage = document.getElementById("wearImage");
-const visualPlaceholder =
-    document.getElementById("visualPlaceholder");
-
-/*
- * Sur GitHub Pages, l’iframe et la page principale ont la même origine.
- * Le mode "*" reste uniquement utilisé lors d’un test local en file://.
- */
-const MESSAGE_ORIGIN =
-    window.location.protocol === "file:"
-        ? "*"
-        : window.location.origin;
+const visualPlaceholder = document.getElementById("visualPlaceholder");
 
 /* =========================
-   ÉVÉNEMENTS DES LISTES
+   ÉVÉNEMENTS DE SÉLECTION
 ========================= */
 
 brandSelect.addEventListener("change", async () => {
@@ -1328,24 +1210,20 @@ brandSelect.addEventListener("change", async () => {
     state.version = "";
     state.color = "";
     state.capacity = "";
-
     state.selectedModelData = null;
     state.selectedVersionData = null;
 
     resetAllAfterBrand();
-    updateDeviceDisplay();
-    sendDeviceStateToQuestionnaire();
-    updateEstimateButtonState();
 
     if (state.brand === "Apple") {
         await loadAppleData();
-
         renderModelSelect();
-
-        if (state.data) {
-            modelSelect.disabled = false;
-        }
+        modelSelect.disabled = false;
     }
+
+    updateDeviceDisplay();
+    sendDeviceStateToQuestionnaire();
+    updateEstimateButtonState();
 });
 
 modelSelect.addEventListener("change", () => {
@@ -1354,9 +1232,7 @@ modelSelect.addEventListener("change", () => {
     state.color = "";
     state.capacity = "";
 
-    state.selectedModelData =
-        findSelectedModel(state.model);
-
+    state.selectedModelData = findSelectedModel(state.model);
     state.selectedVersionData = null;
 
     resetSelect(versionSelect, "Sélectionner");
@@ -1382,8 +1258,7 @@ versionSelect.addEventListener("change", () => {
     state.color = "";
     state.capacity = "";
 
-    state.selectedVersionData =
-        findSelectedVersion(state.version);
+    state.selectedVersionData = findSelectedVersion(state.version);
 
     resetSelect(colorSelect, "Sélectionner");
     resetSelect(capacitySelect, "Sélectionner");
@@ -1432,34 +1307,22 @@ async function loadAppleData() {
         );
 
         if (!response.ok) {
-            throw new Error(
-                "Le fichier donnees/reprise-apple.json est introuvable."
-            );
+            throw new Error("Le fichier donnees/reprise-apple.json est introuvable.");
         }
 
         const data = await response.json();
 
         if (!data || !Array.isArray(data.modeles)) {
-            throw new Error(
-                "La structure JSON est invalide : " +
-                "la propriété modeles est absente."
-            );
+            throw new Error("La structure JSON est invalide : la propriété modeles est absente.");
         }
 
         state.data = data;
     } catch (error) {
-        console.error(
-            "Erreur de chargement des données Apple :",
-            error
-        );
+        console.error("Erreur de chargement des données Apple :", error);
 
         state.data = null;
 
-        resetSelect(
-            modelSelect,
-            "Impossible de charger les modèles"
-        );
-
+        resetSelect(modelSelect, "Impossible de charger les modèles");
         modelSelect.disabled = true;
     }
 }
@@ -1479,28 +1342,35 @@ function renderModelSelect() {
     );
 
     modeles.forEach(model => {
-        addOption(
-            modelSelect,
-            model.nom,
-            model.nom
-        );
+        addOption(modelSelect, model.nom, model.nom);
     });
 }
 
 function renderVersionSelect(model) {
     resetSelect(versionSelect, "Sélectionner");
 
-    if (!model || !Array.isArray(model.versions)) {
+    if (!model) {
         return;
     }
 
-    model.versions.forEach(version => {
-        addOption(
-            versionSelect,
-            version.nom,
-            version.nom
-        );
-    });
+    if (Array.isArray(model.versions) && model.versions.length > 0) {
+        model.versions.forEach(version => {
+            addOption(versionSelect, version.nom, version.nom);
+        });
+
+        return;
+    }
+
+    /*
+     * Sécurité : si un ancien JSON contient directement
+     * les couleurs/capacités au niveau du modèle.
+     */
+    if (
+        Array.isArray(model.couleurs) ||
+        Array.isArray(model.capacites)
+    ) {
+        addOption(versionSelect, model.nom, model.nom);
+    }
 }
 
 function renderColorSelect(version) {
@@ -1511,11 +1381,7 @@ function renderColorSelect(version) {
     }
 
     version.couleurs.forEach(color => {
-        addOption(
-            colorSelect,
-            color,
-            color
-        );
+        addOption(colorSelect, color, color);
     });
 }
 
@@ -1527,11 +1393,7 @@ function renderCapacitySelect(version) {
     }
 
     version.capacites.forEach(capacity => {
-        addOption(
-            capacitySelect,
-            capacity,
-            capacity
-        );
+        addOption(capacitySelect, capacity, capacity);
     });
 }
 
@@ -1546,12 +1408,7 @@ function addOption(selectElement, value, text) {
 
 function resetSelect(selectElement, placeholder) {
     selectElement.innerHTML = "";
-
-    addOption(
-        selectElement,
-        "",
-        placeholder
-    );
+    addOption(selectElement, "", placeholder);
 }
 
 function resetAllAfterBrand() {
@@ -1567,10 +1424,7 @@ function resetAllAfterBrand() {
 }
 
 function findSelectedModel(modelName) {
-    if (
-        !state.data ||
-        !Array.isArray(state.data.modeles)
-    ) {
+    if (!state.data || !Array.isArray(state.data.modeles)) {
         return null;
     }
 
@@ -1580,16 +1434,24 @@ function findSelectedModel(modelName) {
 }
 
 function findSelectedVersion(versionName) {
-    if (
-        !state.selectedModelData ||
-        !Array.isArray(state.selectedModelData.versions)
-    ) {
+    if (!state.selectedModelData) {
         return null;
     }
 
-    return state.selectedModelData.versions.find(
-        version => version.nom === versionName
-    ) || null;
+    if (
+        Array.isArray(state.selectedModelData.versions) &&
+        state.selectedModelData.versions.length > 0
+    ) {
+        return state.selectedModelData.versions.find(
+            version => version.nom === versionName
+        ) || null;
+    }
+
+    if (state.selectedModelData.nom === versionName) {
+        return state.selectedModelData;
+    }
+
+    return null;
 }
 
 /* =========================
@@ -1613,10 +1475,6 @@ function updateDeviceDisplay() {
 }
 
 function updateDeviceImage() {
-    /*
-     * Le chemin de l’image peut se trouver dans la version
-     * ou directement dans le modèle.
-     */
     const imagePath =
         state.selectedVersionData?.image ||
         state.selectedModelData?.image ||
@@ -1637,8 +1495,7 @@ function updateDeviceImage() {
         };
 
         deviceImage.src = imagePath;
-        deviceImage.alt =
-            `Aperçu de ${displayedDeviceName()}`;
+        deviceImage.alt = `Aperçu de ${displayedDeviceName()}`;
     } else {
         deviceImage.removeAttribute("src");
         deviceImage.style.display = "none";
@@ -1711,19 +1568,14 @@ window.addEventListener("message", event => {
     }
 
     if (data.type === "questionnaire-update") {
-        state.questionnaireAnswers =
-            data.answers || {};
-
-        state.questionnaireComplete =
-            Boolean(data.complete);
+        state.questionnaireAnswers = data.answers || {};
+        state.questionnaireComplete = Boolean(data.complete);
 
         updateEstimateButtonState();
     }
 
     if (data.type === "visual-help") {
-        updateVisualHelp(
-            data.help || "default"
-        );
+        updateVisualHelp(data.help || "default");
     }
 });
 
@@ -1792,8 +1644,7 @@ estimateButton.addEventListener("click", () => {
         JSON.stringify(payload)
     );
 
-    window.location.href =
-        "estimation-reprise.html";
+    window.location.href = "estimation-reprise.html";
 });
 
 /* =========================
@@ -1802,52 +1653,47 @@ estimateButton.addEventListener("click", () => {
 
 const visualHelpData = {
     fonctionnement: {
-    title: "Fonctionnement général",
+        title: "Fonctionnement général",
 
-    intro:
-        "Un appareil pleinement fonctionnel doit pouvoir être utilisé normalement, sans panne ni anomalie.",
+        intro:
+            "Un appareil pleinement fonctionnel doit pouvoir être utilisé normalement, sans panne ni anomalie.",
 
-    caption: "",
+        caption: "",
+        image: "",
+        showVisual: false,
 
-    image: "",
-
-    showVisual: false,
-
-    levels: [
-        [
-            "Mise en marche et charge",
-            "L’appareil s’allume, s’éteint, redémarre et se charge correctement."
-        ],
-        [
-            "Écran, tactile et boutons",
-            "Le tactile répond normalement et tous les boutons physiques fonctionnent correctement."
-        ],
-        [
-            "Son et communications",
-            "Les microphones et les haut-parleurs fonctionnent sans coupure ni grésillement. Le réseau mobile, le Wi-Fi et le Bluetooth fonctionnent normalement."
-        ],
-        [
-            "Caméras",
-            "Les caméras avant et arrière fonctionnent correctement. Les photos ne présentent aucune tache, zone floue permanente ou anomalie visible."
-        ],
-        [
-            "Fonctionnalités générales",
-            "Toutes les fonctionnalités de l’appareil doivent être opérationnelles et utilisables normalement."
+        levels: [
+            [
+                "Mise en marche et charge",
+                "L’appareil s’allume, s’éteint, redémarre et se charge correctement."
+            ],
+            [
+                "Écran, tactile et boutons",
+                "Le tactile répond normalement et tous les boutons physiques fonctionnent correctement."
+            ],
+            [
+                "Son et communications",
+                "Les microphones et les haut-parleurs fonctionnent sans coupure ni grésillement. Le réseau mobile, le Wi-Fi et le Bluetooth fonctionnent normalement."
+            ],
+            [
+                "Caméras",
+                "Les caméras avant et arrière fonctionnent correctement. Les photos ne présentent aucune tache, zone floue permanente ou anomalie visible."
+            ],
+            [
+                "Fonctionnalités générales",
+                "Toutes les fonctionnalités de l’appareil doivent être opérationnelles et utilisables normalement."
+            ]
         ]
-    ]
-},
-	batterie: {
+    },
+
+    batterie: {
         title: "État de la batterie",
 
         intro:
-            "La capacité maximale se trouve dans les réglages iOS, " +
-            "dans la rubrique Batterie.",
+            "La capacité maximale se trouve dans les réglages iOS, dans la rubrique Batterie.",
 
-        caption:
-            "Exemple : état de la batterie",
-
-        image:
-            "images/reprise/usure/batterie-exemple.png",
+        caption: "Exemple : état de la batterie",
+        image: "images/reprise/usure/batterie-exemple.png",
 
         levels: [
             [
@@ -1869,27 +1715,154 @@ const visualHelpData = {
         title: "État de l’écran",
 
         intro:
-            "Comparez l’état réel de votre écran avec " +
-            "les exemples ci-dessous.",
+            "Sélectionnez un état dans le questionnaire pour afficher l’explication précise et l’image correspondante.",
 
-        caption:
-            "Exemple : rayures légères",
-
-        image:
-            "images/reprise/usure/ecran-exemple.png",
+        caption: "Exemple visuel de l’état sélectionné",
+        image: "",
 
         levels: [
             [
-                "Très bon état",
-                "Micro-rayures très légères, difficiles à distinguer."
+                "Choisissez une condition",
+                "Comme neuf, très bon état, bon état, correct ou endommagé."
             ],
             [
-                "Bon état",
-                "Rayures visibles à la lumière, sans fissure."
+                "Validation manuelle",
+                "Le choix doit être validé dans le questionnaire avant de passer à l’étape suivante."
+            ]
+        ]
+    },
+
+    ecranCommeNeuf: {
+        title: "Écran — Comme neuf",
+
+        intro:
+            "L’écran doit être impeccable, sans marque visible et sans défaut d’affichage.",
+
+        caption: "Exemple : écran comme neuf",
+
+        image:
+            "images/reprise/aide-visuelle/ecran/ecran-comme-neuf.png",
+
+        levels: [
+            [
+                "Aucune rayure",
+                "Aucune rayure visible, même en regardant l’écran sous la lumière."
             ],
             [
-                "État usé",
-                "Rayures marquées, impacts ou traces importantes."
+                "Aucune trace",
+                "Pas d’égratignure, pas d’éclat, pas de point d’impact."
+            ],
+            [
+                "Aspect attendu",
+                "L’écran doit donner l’impression d’être neuf."
+            ]
+        ]
+    },
+
+    ecranTresBonEtat: {
+        title: "Écran — Très bon état",
+
+        intro:
+            "L’écran est en excellent état général. Une seule micro-rayure très légère peut être tolérée.",
+
+        caption: "Exemple : écran en très bon état",
+
+        image:
+            "images/reprise/aide-visuelle/ecran/ecran-tres-bon-etat.png",
+
+        levels: [
+            [
+                "Micro-rayure tolérée",
+                "Une micro-rayure très légère peut être présente."
+            ],
+            [
+                "Non détectable à l’ongle",
+                "La marque doit être à peine perceptible et ne doit pas accrocher à l’ongle."
+            ],
+            [
+                "Aucun dommage",
+                "Aucun éclat, aucune fissure, aucun défaut d’affichage."
+            ]
+        ]
+    },
+
+    ecranBonEtat: {
+        title: "Écran — Bon état",
+
+        intro:
+            "L’écran reste propre, mais il peut présenter une ou deux rayures légères.",
+
+        caption: "Exemple : écran en bon état",
+
+        image:
+            "images/reprise/aide-visuelle/ecran/ecran-bon-etat.png",
+
+        levels: [
+            [
+                "Rayures légères",
+                "Une ou deux rayures peuvent être visibles."
+            ],
+            [
+                "Légèrement perceptibles",
+                "Elles peuvent être tout juste détectables à l’ongle."
+            ],
+            [
+                "Pas de casse",
+                "Aucune fissure profonde, aucun éclat, aucun défaut d’affichage."
+            ]
+        ]
+    },
+
+    ecranCorrect: {
+        title: "Écran — Correct",
+
+        intro:
+            "L’écran est utilisable, mais les traces d’usure sont clairement visibles.",
+
+        caption: "Exemple : écran en état correct",
+
+        image:
+            "images/reprise/aide-visuelle/ecran/ecran-correct.png",
+
+        levels: [
+            [
+                "Rayures visibles",
+                "Plusieurs rayures peuvent être présentes."
+            ],
+            [
+                "Usure marquée",
+                "Les rayures peuvent être prononcées et perceptibles à l’ongle."
+            ],
+            [
+                "Écran utilisable",
+                "L’écran n’est pas forcément cassé, mais son usure est évidente."
+            ]
+        ]
+    },
+
+    ecranEndommage: {
+        title: "Écran — Endommagé",
+
+        intro:
+            "À choisir dès qu’il y a une casse, un impact ou une dégradation importante visible.",
+
+        caption: "Exemple : écran endommagé",
+
+        image:
+            "images/reprise/aide-visuelle/ecran/ecran-endommage.png",
+
+        levels: [
+            [
+                "Fissures ou impacts",
+                "Présence possible de fissures, éclats, impacts ou rayures profondes."
+            ],
+            [
+                "État fortement dégradé",
+                "L’écran peut rester utilisable, mais son état visuel est très abîmé."
+            ],
+            [
+                "Choix obligatoire en cas de casse",
+                "S’il y a un impact visible ou une fissure, il faut sélectionner cet état."
             ]
         ]
     },
@@ -1898,14 +1871,10 @@ const visualHelpData = {
         title: "Face arrière et châssis",
 
         intro:
-            "Vérifiez la face arrière, les coins, " +
-            "les tranches et les traces de chute.",
+            "Vérifiez la face arrière, les coins, les tranches et les traces de chute.",
 
-        caption:
-            "Exemple : châssis marqué",
-
-        image:
-            "images/reprise/usure/chassis-exemple.png",
+        caption: "Exemple : châssis marqué",
+        image: "images/reprise/usure/chassis-exemple.png",
 
         levels: [
             [
@@ -1927,14 +1896,10 @@ const visualHelpData = {
         title: "Historique des réparations",
 
         intro:
-            "Les réparations déjà effectuées seront " +
-            "contrôlées à réception.",
+            "Les réparations déjà effectuées seront contrôlées à réception.",
 
-        caption:
-            "Contrôle des éléments remplacés",
-
-        image:
-            "images/reprise/usure/reparation-exemple.png",
+        caption: "Contrôle des éléments remplacés",
+        image: "images/reprise/usure/reparation-exemple.png",
 
         levels: [
             [
@@ -1956,14 +1921,10 @@ const visualHelpData = {
         title: "Conformité européenne",
 
         intro:
-            "Le marquage CE et les références constructeur " +
-            "seront contrôlés à réception.",
+            "Le marquage CE et les références constructeur seront contrôlés à réception.",
 
-        caption:
-            "Exemple : informations réglementaires",
-
-        image:
-            "images/reprise/usure/conformite-exemple.png",
+        caption: "Exemple : informations réglementaires",
+        image: "images/reprise/usure/conformite-exemple.png",
 
         levels: [
             [
@@ -1985,18 +1946,15 @@ const visualHelpData = {
         title: "Aide visuelle",
 
         intro:
-            "Les informations affichées évoluent " +
-            "selon la question en cours.",
+            "Les informations affichées évoluent selon la question en cours.",
 
-        caption:
-            "Exemple visuel",
-
+        caption: "Exemple visuel",
         image: "",
 
         levels: [
             [
                 "Sélectionnez votre appareil",
-                "Configurez d’abord le modèle, la version et la capacité."
+                "Configurez d’abord le modèle, la version, la couleur et la capacité."
             ],
             [
                 "Répondez précisément",
@@ -2007,11 +1965,6 @@ const visualHelpData = {
 };
 
 function updateVisualHelp(type) {
-    /*
-     * Certaines questions ne nécessitent aucune aide.
-     * La colonne reste présente afin d’éviter un déplacement
-     * de toute la mise en page.
-     */
     if (type === "aucune") {
         helpCard.classList.add("empty");
 
@@ -2037,14 +1990,9 @@ function updateVisualHelp(type) {
     helpContent.classList.add("changing");
 
     window.setTimeout(() => {
-        helpTitle.textContent =
-            selected.title || "";
-
-        helpIntro.textContent =
-            selected.intro || "";
-
-        visualCaption.textContent =
-            selected.caption || "";
+        helpTitle.textContent = selected.title || "";
+        helpIntro.textContent = selected.intro || "";
+        visualCaption.textContent = selected.caption || "";
 
         wearLevels.innerHTML =
             (selected.levels || [])
@@ -2056,9 +2004,6 @@ function updateVisualHelp(type) {
                 `)
                 .join("");
 
-        /*
-         * Certaines aides sont uniquement constituées de texte.
-         */
         if (selected.showVisual === false) {
             visualBox.style.display = "none";
 
@@ -2098,6 +2043,7 @@ function updateVisualHelp(type) {
         helpContent.classList.remove("changing");
     }, 180);
 }
+
 function escapeHtml(value) {
     return String(value)
         .replace(/&/g, "&amp;")
