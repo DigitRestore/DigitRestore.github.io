@@ -67,16 +67,8 @@ button {
     flex-direction: column;
     overflow: hidden;
     background:
-        radial-gradient(
-            circle at 8% 10%,
-            rgba(79, 210, 255, 0.045),
-            transparent 34%
-        ),
-        radial-gradient(
-            circle at 92% 90%,
-            rgba(255, 75, 92, 0.04),
-            transparent 35%
-        );
+        radial-gradient(circle at 8% 10%, rgba(79, 210, 255, 0.045), transparent 34%),
+        radial-gradient(circle at 92% 90%, rgba(255, 75, 92, 0.04), transparent 35%);
 }
 
 #qrRender {
@@ -216,9 +208,7 @@ button {
     padding-right: 5px;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color:
-        rgba(79, 210, 255, 0.35)
-        transparent;
+    scrollbar-color: rgba(79, 210, 255, 0.35) transparent;
 }
 
 .question-body::-webkit-scrollbar {
@@ -389,15 +379,12 @@ button {
     height: 100%;
 }
 
-/*
- * Si la question possède un nombre impair de réponses,
- * la dernière vignette occupe toute la largeur.
- */
 .options-list.multiple-grid
 .option-button:last-child:nth-child(odd) {
     grid-column: 1 / -1;
     min-height: 65px;
 }
+
 /* =========================
    NAVIGATION
 ========================= */
@@ -607,15 +594,15 @@ button {
     .question-button {
         width: 100%;
     }
-    
-    .options-list.multiple-grid {
-    grid-template-columns: 1fr;
-}
 
-.options-list.multiple-grid
-.option-button:last-child:nth-child(odd) {
-    grid-column: auto;
-}
+    .options-list.multiple-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .options-list.multiple-grid
+    .option-button:last-child:nth-child(odd) {
+        grid-column: auto;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -629,7 +616,6 @@ button {
 }
 </style>
 </head>
-
 <body>
 
 <div class="questionnaire">
@@ -787,39 +773,51 @@ const questions = {
         help: "ecran",
         type: "radio",
         key: "ecran",
+        requiresManualValidation: true,
+
+        visualHelpByValue: {
+            comme_neuf: "ecranCommeNeuf",
+            tres_bon: "ecranTresBonEtat",
+            bon: "ecranBonEtat",
+            correct: "ecranCorrect",
+            endommage: "ecranEndommage"
+        },
 
         title: "État de l’écran",
 
         text:
-            "Veuillez évaluer l’état de l’écran.",
+            "Veuillez évaluer l’état de l’écran. Cliquez sur un état pour afficher son exemple, puis validez votre choix.",
 
         options: [
             [
                 "comme_neuf",
                 "Comme neuf",
-                "Aucune rayure visible."
+                "Aucune rayure, aucune trace, aucun éclat."
             ],
             [
                 "tres_bon",
                 "Très bon état",
-                "Micro-rayures très légères."
+                "Une micro-rayure très légère peut être tolérée."
             ],
             [
                 "bon",
                 "Bon état",
-                "Rayures visibles mais légères."
+                "Une ou deux rayures légères peuvent être visibles."
             ],
             [
                 "correct",
                 "Correct",
-                "Rayures marquées ou traces visibles."
+                "Rayures plus marquées ou traces d’usure visibles."
             ],
             [
                 "endommage",
                 "Endommagé",
-                "Fissure, impact ou défaut important."
+                "Fissure, impact, éclat ou défaut important."
             ]
-        ]
+        ],
+
+        note:
+            "Le clic affiche l’aide visuelle correspondante. Le passage à l’étape suivante se fait uniquement avec le bouton Valider."
     },
 
     chassis: {
@@ -827,11 +825,12 @@ const questions = {
         help: "chassis",
         type: "radio",
         key: "chassis",
+        requiresManualValidation: true,
 
         title: "Face arrière et châssis",
 
         text:
-            "Évaluez l’état de la face arrière et du cadre.",
+            "Évaluez l’état de la face arrière et du cadre. Cliquez sur un état, puis validez votre choix.",
 
         options: [
             [
@@ -859,12 +858,15 @@ const questions = {
                 "Endommagé",
                 "Dos cassé, cadre tordu ou choc important."
             ]
-        ]
+        ],
+
+        note:
+            "Le passage à l’étape suivante se fait uniquement avec le bouton Valider."
     },
 
     repare: {
         stepNumber: 5,
-        help: "reparations",
+        help: "aucune",
         type: "radio",
         key: "repare",
 
@@ -897,7 +899,7 @@ const questions = {
 
     reparations: {
         stepNumber: 5,
-        help: "reparations",
+        help: "aucune",
         type: "checkbox",
         key: "reparations",
 
@@ -945,7 +947,7 @@ const questions = {
 
     marcheUE: {
         stepNumber: 6,
-        help: "ue",
+        help: "aucune",
         type: "radio",
         key: "marcheUE",
 
@@ -990,7 +992,7 @@ function renderQuestion(stepId) {
 
     questionnaireState.currentStep = stepId;
 
-    sendVisualHelp(question.help);
+    sendVisualHelp(getVisualHelpForQuestion(question));
 
     qrRender.innerHTML = `
         ${renderProgress(question.stepNumber)}
@@ -1009,10 +1011,10 @@ function renderQuestion(stepId) {
             </p>
 
             <div class="options-list ${
-    question.type === "checkbox"
-        ? "multiple-grid"
-        : ""
-}">
+                question.type === "checkbox"
+                    ? "multiple-grid"
+                    : ""
+            }">
                 ${renderOptions(question)}
             </div>
 
@@ -1130,21 +1132,29 @@ function renderOptions(question) {
 }
 
 function renderContinueButton(question) {
-    if (question.type !== "checkbox") {
+    const needsButton =
+        question.type === "checkbox" ||
+        question.requiresManualValidation;
+
+    if (!needsButton) {
         return "";
     }
 
-    const values =
-        questionnaireState.answers[question.key] || [];
+    const canContinue =
+        isQuestionAnswered(question);
 
     return `
         <button
             class="question-button continue-button"
             type="button"
             id="qrContinueButton"
-            ${values.length === 0 ? "disabled" : ""}
+            ${canContinue ? "" : "disabled"}
         >
-            Continuer →
+            ${
+                question.requiresManualValidation
+                    ? "Valider →"
+                    : "Continuer →"
+            }
         </button>
     `;
 }
@@ -1159,6 +1169,8 @@ function renderCompletion() {
     ]
         .filter(Boolean)
         .join(" — ");
+
+    sendVisualHelp("aucune");
 
     qrRender.innerHTML = `
         <div class="completion-screen">
@@ -1187,7 +1199,7 @@ function renderCompletion() {
                 type="button"
                 id="modifyAnswersButton"
             >
-                Modifier ma dernière réponse
+                Retour
             </button>
         </div>
     `;
@@ -1302,7 +1314,7 @@ function attachQuestionEvents() {
     if (continueButton) {
         continueButton.addEventListener(
             "click",
-            validateCheckboxQuestion
+            validateCurrentQuestion
         );
     }
 }
@@ -1334,42 +1346,18 @@ function selectOption(key, value) {
     clearConditionalAnswers(key, value);
     sendQuestionnaireUpdate(false);
 
-    const selectedButton =
-        document.querySelector(
-            `.option-button[data-value="${CSS.escape(value)}"]`
-        );
+    updateSelectedRadioButton(value);
+    updateContinueButtonState(question);
 
-    if (selectedButton) {
-        document
-            .querySelectorAll(".option-button")
-            .forEach(button => {
-                button.classList.remove("selected");
-                button.setAttribute(
-                    "aria-pressed",
-                    "false"
-                );
-            });
+    sendVisualHelp(
+        getVisualHelpForQuestion(question)
+    );
 
-        selectedButton.classList.add("selected");
-        selectedButton.setAttribute(
-            "aria-pressed",
-            "true"
-        );
+    if (question.requiresManualValidation) {
+        return;
     }
 
-    const nextStep =
-        getNextStep(key, value);
-
-    window.setTimeout(() => {
-        if (nextStep === "complete") {
-            transitionToCompletion();
-            return;
-        }
-
-        if (nextStep) {
-            transitionToQuestion(nextStep);
-        }
-    }, 230);
+    goToNextQuestionFromCurrentAnswer(question);
 }
 
 function toggleCheckboxAnswer(key, value) {
@@ -1394,28 +1382,23 @@ function toggleCheckboxAnswer(key, value) {
     sendQuestionnaireUpdate(false);
 }
 
-function validateCheckboxQuestion() {
+function validateCurrentQuestion() {
     const question =
         questions[questionnaireState.currentStep];
 
-    if (!question || question.type !== "checkbox") {
+    if (!question || !isQuestionAnswered(question)) {
         return;
     }
 
-    const selectedValues =
+    goToNextQuestionFromCurrentAnswer(question);
+}
+
+function goToNextQuestionFromCurrentAnswer(question) {
+    const value =
         questionnaireState.answers[question.key];
 
-    if (
-        !Array.isArray(selectedValues) ||
-        selectedValues.length === 0
-    ) {
-        return;
-    }
-
-    const nextStep = getNextStep(
-        question.key,
-        selectedValues
-    );
+    const nextStep =
+        getNextStep(question.key, value);
 
     if (nextStep === "complete") {
         transitionToCompletion();
@@ -1425,6 +1408,57 @@ function validateCheckboxQuestion() {
     if (nextStep) {
         transitionToQuestion(nextStep);
     }
+}
+
+function updateSelectedRadioButton(value) {
+    const selectedButton =
+        document.querySelector(
+            `.option-button[data-value="${CSS.escape(value)}"]`
+        );
+
+    if (!selectedButton) {
+        return;
+    }
+
+    document
+        .querySelectorAll(".option-button")
+        .forEach(button => {
+            button.classList.remove("selected");
+            button.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+        });
+
+    selectedButton.classList.add("selected");
+    selectedButton.setAttribute(
+        "aria-pressed",
+        "true"
+    );
+}
+
+function updateContinueButtonState(question) {
+    const continueButton =
+        document.getElementById("qrContinueButton");
+
+    if (!continueButton) {
+        return;
+    }
+
+    continueButton.disabled =
+        !isQuestionAnswered(question);
+}
+
+function isQuestionAnswered(question) {
+    const answer =
+        questionnaireState.answers[question.key];
+
+    if (question.type === "checkbox") {
+        return Array.isArray(answer) &&
+            answer.length > 0;
+    }
+
+    return Boolean(answer);
 }
 
 function goBack() {
@@ -1535,23 +1569,35 @@ function isAnswerSelected(key, value) {
 }
 
 /* =========================
+   AIDE VISUELLE
+========================= */
+
+function getVisualHelpForQuestion(question) {
+    const answer =
+        questionnaireState.answers[question.key];
+
+    if (
+        question.visualHelpByValue &&
+        typeof answer === "string" &&
+        question.visualHelpByValue[answer]
+    ) {
+        return question.visualHelpByValue[answer];
+    }
+
+    return question.help || "default";
+}
+
+/* =========================
    COMMUNICATION AVEC LA PAGE
 ========================= */
 
 function sendQuestionnaireUpdate(complete) {
     window.parent.postMessage(
         {
-            source:
-                "digitrestore-questionnaire",
-
-            type:
-                "questionnaire-update",
-
-            complete:
-                Boolean(complete),
-
-            answers:
-                questionnaireState.answers
+            source: "digitrestore-questionnaire",
+            type: "questionnaire-update",
+            complete: Boolean(complete),
+            answers: questionnaireState.answers
         },
         MESSAGE_ORIGIN
     );
@@ -1560,14 +1606,9 @@ function sendQuestionnaireUpdate(complete) {
 function sendVisualHelp(helpType) {
     window.parent.postMessage(
         {
-            source:
-                "digitrestore-questionnaire",
-
-            type:
-                "visual-help",
-
-            help:
-                helpType
+            source: "digitrestore-questionnaire",
+            type: "visual-help",
+            help: helpType
         },
         MESSAGE_ORIGIN
     );
