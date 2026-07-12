@@ -788,33 +788,7 @@ const questions = {
         text:
             "Veuillez évaluer l’état de l’écran. Cliquez sur un état pour afficher son exemple, puis validez votre choix.",
 
-        options: [
-            [
-                "comme_neuf",
-                "Comme neuf",
-                "Aucune rayure, aucune trace, aucun éclat."
-            ],
-            [
-                "tres_bon",
-                "Très bon état",
-                "Une micro-rayure très légère peut être tolérée."
-            ],
-            [
-                "bon",
-                "Bon état",
-                "Une ou deux rayures légères peuvent être visibles."
-            ],
-            [
-                "correct",
-                "Correct",
-                "Rayures plus marquées ou traces d’usure visibles."
-            ],
-            [
-                "endommage",
-                "Endommagé",
-                "Fissure, impact, éclat ou défaut important."
-            ]
-        ],
+        ecran: {
 
         note:
             "Le clic affiche l’aide visuelle correspondante. Le passage à l’étape suivante se fait uniquement avec le bouton Valider."
@@ -1122,9 +1096,15 @@ function renderOptions(question) {
                         ${escapeHtml(label)}
                     </span>
 
-                    <span class="option-detail">
-                        ${escapeHtml(detail)}
-                    </span>
+                    ${
+    detail
+        ? `
+            <span class="option-detail">
+                ${escapeHtml(detail)}
+            </span>
+        `
+        : ""
+}
                 </button>
             `;
         })
