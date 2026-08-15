@@ -3,30 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>DigitRestore – Atelier</title>
+<meta name="description" content="Obtenez une estimation claire pour la réparation de votre smartphone avec DigitRestore.">
+<title>DigitRestore - Réparation de smartphones</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --red: #ff4b5c;
-    --cyan: #4fd2ff;
-    --green: #20d5a0;
-    --blue: #1e9bff;
-    --purple: #a45cff;
-    --orange: #f3a51b;
-    --teal: #23d6c8;
-
-    --text-main: #f5f5f7;
-    --text-soft: #d2d6e8;
-    --text-muted: #a0a7c2;
-
-    --bg-main: #050814;
-    --bg-alt: #070c1c;
+    --bleu-nuit: #031224;
+    --bleu-encre: #061a33;
+    --bleu: #18aaf4;
+    --bleu-clair: #4ecbff;
+    --violet: #7253b9;
+    --rouge: #ff554b;
+    --ivoire: #fff8ee;
+    --texte-secondaire: rgba(244, 242, 240, 0.82);
+    --ligne: rgba(255, 255, 255, 0.12);
+    --ombre: rgba(0, 0, 0, 0.46);
 }
 
 * {
@@ -35,2323 +30,962 @@
     padding: 0;
 }
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    background: var(--bleu-nuit);
 }
 
 body {
-    position: relative;
-
-    font-family: "Poppins", sans-serif;
-    color: var(--text-main);
-
+    min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--ivoire);
+    font-family: "Manrope", Arial, sans-serif;
     background:
-        radial-gradient(
-            circle at 7% 15%,
-            rgba(79, 210, 255, 0.18),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 92% 19%,
-            rgba(255, 75, 92, 0.16),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            var(--bg-main),
-            var(--bg-alt)
-        );
+        radial-gradient(ellipse at 92% 88%, rgba(196, 37, 74, 0.35), transparent 39%),
+        radial-gradient(ellipse at 79% 7%, rgba(86, 56, 151, 0.40), transparent 43%),
+        linear-gradient(116deg, #031426 0%, #061a35 46%, #10183c 72%, #26152f 100%);
 }
 
-/* Grille de fond */
 body::before {
     content: "";
-
     position: fixed;
     inset: 0;
-    z-index: 0;
-
+    z-index: -1;
     pointer-events: none;
-
     background:
-        linear-gradient(
-            rgba(255, 255, 255, 0.025) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.025) 1px,
-            transparent 1px
-        );
-
-    background-size: 52px 52px;
-
-    mask-image:
-        radial-gradient(
-            circle at center,
-            black,
-            transparent 80%
-        );
-
-    opacity: 0.18;
+        radial-gradient(circle at 13% 64%, rgba(24, 170, 244, 0.10), transparent 31%),
+        linear-gradient(120deg, rgba(255, 255, 255, 0.018), transparent 38% 74%, rgba(255, 255, 255, 0.02));
 }
 
-/* Halos mobiles */
-body::after {
-    content: "";
+a {
+    color: inherit;
+}
 
+.skip-link {
     position: fixed;
-    inset: -20%;
-    z-index: 0;
-
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle at 25% 42%,
-            rgba(79, 210, 255, 0.08),
-            transparent 26%
-        ),
-        radial-gradient(
-            circle at 78% 47%,
-            rgba(255, 75, 92, 0.08),
-            transparent 28%
-        );
-
-    animation:
-        ambientMove 18s
-        ease-in-out infinite alternate;
+    z-index: 100;
+    top: 12px;
+    left: 12px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #031224;
+    background: #ffffff;
+    transform: translateY(-170%);
+    transition: transform 0.2s ease;
 }
 
-/* Grand cercle décoratif */
-.background-orbit {
-    position: fixed;
-
-    z-index: 0;
-    top: 60px;
-    right: -70px;
-
-    width: min(650px, 50vw);
-    aspect-ratio: 1;
-
-    border-radius: 50%;
-
-    pointer-events: none;
-
-    background:
-        conic-gradient(
-            from 0deg,
-            transparent 0deg 20deg,
-            var(--cyan) 47deg,
-            transparent 78deg 188deg,
-            var(--red) 224deg,
-            transparent 262deg 360deg
-        );
-
-    mask-image:
-        radial-gradient(
-            circle,
-            transparent 0 68%,
-            black 68.3% 69%,
-            transparent 69.5%
-        );
-
-    opacity: 0.58;
-
-    filter:
-        drop-shadow(
-            0 0 14px
-            rgba(79, 210, 255, 0.45)
-        )
-        drop-shadow(
-            0 0 14px
-            rgba(255, 75, 92, 0.38)
-        );
-
-    animation:
-        backgroundOrbit 24s
-        linear infinite;
+.skip-link:focus {
+    transform: translateY(0);
 }
 
-.background-orbit::before {
-    content: "";
-
-    position: absolute;
-    inset: 9%;
-
-    border-radius: 50%;
-
-    border:
-        1px dashed
-        rgba(79, 210, 255, 0.25);
-
-    animation:
-        orbitReverse 29s
-        linear infinite;
-}
-
-/* Page */
 .page {
     position: relative;
-    z-index: 1;
-
-    width: min(1550px, calc(100% - 20px));
-    height: calc(100dvh - 16px);
-
-    margin: 8px auto;
-    padding: 10px 22px 15px;
-
-    display: grid;
-
-    grid-template-rows:
-        auto
-        minmax(90px, 122px)
-        minmax(180px, 235px)
-        minmax(135px, 165px);
-
-    align-content: space-between;
-
-    gap: 11px;
-
+    isolation: isolate;
+    width: min(1920px, 100%);
+    min-height: 100vh;
+    margin: 0 auto;
     overflow: hidden;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.07);
-
-    border-radius: 27px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.04),
-            rgba(7, 12, 28, 0.92)
-        ),
-        rgba(5, 8, 20, 0.78);
-
-    box-shadow:
-        0 28px 90px
-        rgba(0, 0, 0, 0.48);
-
-    backdrop-filter: blur(18px);
-
-    opacity: 0;
-    transform: translateY(14px);
-
-    animation:
-        pageEnter 0.8s
-        cubic-bezier(.16, .8, .33, 1)
-        forwards;
 }
 
-/* En-tête */
 .site-header {
-    min-height: 70px;
-
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 126px;
     display: flex;
     align-items: center;
-
-    gap: 18px;
-
-    border-bottom:
-        1px solid
-        rgba(255, 255, 255, 0.07);
+    justify-content: space-between;
+    gap: 34px;
+    padding: 26px clamp(30px, 4vw, 78px) 18px;
 }
 
-/* Bouton retour */
-.back-btn {
-    width: 44px;
-    height: 44px;
+.header-identity {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 1.8vw, 32px);
+}
 
-    flex: 0 0 44px;
-
-    display: grid;
-    place-items: center;
-
-    color: var(--text-main);
+.home-button {
+    position: relative;
+    min-height: 48px;
+    padding: 0 17px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex: 0 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.27);
+    border-radius: 999px;
+    color: rgba(255, 248, 238, 0.92);
+    background: rgba(3, 15, 31, 0.58);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22), inset 0 0 20px rgba(27, 106, 160, 0.08);
+    backdrop-filter: blur(12px);
     text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
 
-    font-size: 22px;
-
+.home-button::before {
+    content: "";
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(79, 210, 255, 0.35);
-
-    background:
-        radial-gradient(
-            circle at 30% 24%,
-            rgba(255, 255, 255, 0.13),
-            transparent 38%
-        ),
-        rgba(7, 13, 29, 0.9);
-
-    box-shadow:
-        0 0 16px
-        rgba(79, 210, 255, 0.14);
-
-    transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+    background: linear-gradient(135deg, var(--bleu-clair), var(--rouge));
+    box-shadow: 0 0 13px rgba(78, 203, 255, 0.58);
 }
 
-.back-btn:hover {
-    transform:
-        translateX(-4px)
-        scale(1.05);
-
-    border-color:
-        rgba(255, 75, 92, 0.85);
-
-    box-shadow:
-        0 0 20px
-        rgba(79, 210, 255, 0.27),
-
-        0 0 18px
-        rgba(255, 75, 92, 0.27);
+.home-button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(78, 203, 255, 0.74);
+    box-shadow: 0 15px 36px rgba(0, 0, 0, 0.28), 0 0 22px rgba(78, 203, 255, 0.12);
 }
 
-/* Identité DigitRestore */
 .brand {
-    display: flex;
+    min-width: 0;
+    display: inline-flex;
     align-items: center;
-
-    gap: 11px;
-
-    opacity: 0;
-    transform: translateY(-12px);
-
-    animation:
-        fadeDown 0.7s ease
-        0.1s forwards;
+    gap: clamp(12px, 1.2vw, 20px);
+    text-decoration: none;
 }
 
 .brand-logo {
-    width: 56px;
-    height: 56px;
-
+    width: clamp(58px, 4vw, 75px);
+    height: clamp(58px, 4vw, 75px);
+    flex: 0 0 auto;
     object-fit: contain;
-
-    filter:
-        drop-shadow(
-            0 0 11px
-            rgba(79, 210, 255, 0.25)
-        );
+    filter: drop-shadow(0 0 11px rgba(24, 170, 244, 0.30)) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.32));
 }
 
 .brand-copy {
+    min-width: 0;
     display: flex;
     flex-direction: column;
-
-    gap: 4px;
+    gap: 7px;
 }
 
 .brand-name {
     display: flex;
-    align-items: baseline;
-
-    gap: 5px;
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 21px;
-    font-weight: 900;
-
-    letter-spacing: 0.08em;
-    line-height: 1;
-}
-
-.brand-name .restore {
-    color: var(--cyan);
-
-    text-shadow:
-        0 0 13px
-        rgba(79, 210, 255, 0.3);
-}
-
-.brand-tag {
-    color: var(--text-soft);
-
-    font-size: 8px;
+    gap: 0;
+    font-size: clamp(27px, 2vw, 38px);
     font-weight: 600;
+    line-height: 0.92;
+    letter-spacing: 0.005em;
+    white-space: nowrap;
+}
 
-    letter-spacing: 0.16em;
+.brand-digit {
+    color: var(--bleu);
+}
+
+.brand-restore {
+    color: var(--rouge);
+}
+
+.brand-tagline {
+    color: rgba(255, 248, 238, 0.84);
+    font-size: clamp(11px, 0.78vw, 14px);
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
-/* Introduction */
-.intro {
-    min-height: 0;
-
-    padding: 6px 14px;
-
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        230px;
-
-    align-items: center;
-
-    gap: 30px;
-
-    opacity: 0;
-    transform: translateY(14px);
-
-    animation:
-        fadeUp 0.75s ease
-        0.2s forwards;
+.primary-navigation {
+    flex: 0 1 auto;
 }
 
-.intro-line {
-    width: 56px;
-    height: 3px;
-
-    margin-bottom: 8px;
-
-    border-radius: 99px;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--cyan),
-            var(--red)
-        );
-
-    box-shadow:
-        0 0 13px
-        rgba(79, 210, 255, 0.45);
-}
-
-.intro h1 {
-    font-size:
-        clamp(25px, 2.8vw, 38px);
-
-    font-weight: 700;
-
-    line-height: 1.12;
-    letter-spacing: -0.035em;
-}
-
-.intro h1 span {
-    background:
-        linear-gradient(
-            100deg,
-            var(--cyan),
-            var(--red)
-        );
-
-    background-clip: text;
-    -webkit-background-clip: text;
-
-    color: transparent;
-}
-
-.intro p {
-    margin-top: 6px;
-
-    color: var(--text-soft);
-
-    font-size: 14px;
-    line-height: 1.45;
-}
-
-/* Petit visuel animé */
-.intro-visual {
-    position: relative;
-
-    width: 220px;
-    height: 110px;
-
-    display: grid;
-    place-items: center;
-
-    justify-self: end;
-
-    border-radius: 22px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.08);
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(79, 210, 255, 0.09),
-            transparent 58%
-        ),
-        rgba(5, 10, 25, 0.62);
-
-    overflow: hidden;
-}
-
-.intro-orbit {
-    position: absolute;
-
-    width: 155px;
-    height: 155px;
-
-    border-radius: 50%;
-
-    background:
-        conic-gradient(
-            transparent 0 15%,
-            var(--cyan) 28%,
-            transparent 42% 62%,
-            var(--red) 76%,
-            transparent 90%
-        );
-
-    mask-image:
-        radial-gradient(
-            circle,
-            transparent 0 67%,
-            black 68% 69%,
-            transparent 70%
-        );
-
-    animation:
-        backgroundOrbit 10s
-        linear infinite;
-}
-
-.intro-phone {
-    position: relative;
-    z-index: 2;
-
-    width: 54px;
-    height: 94px;
-
-    padding: 3px;
-
-    border-radius: 13px;
-
-    background:
-        linear-gradient(
-            140deg,
-            var(--cyan),
-            var(--red)
-        );
-
-    box-shadow:
-        0 10px 25px
-        rgba(0, 0, 0, 0.5),
-
-        0 0 16px
-        rgba(79, 210, 255, 0.18);
-
-    animation:
-        miniPhoneFloat 4.5s
-        ease-in-out infinite;
-}
-
-.intro-phone-screen {
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-
-    overflow: hidden;
-
-    border-radius: 10px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(79, 210, 255, 0.15),
-            transparent 44%
-        ),
-        #060a14;
-}
-
-.intro-phone-screen::before {
-    content: "";
-
-    position: absolute;
-
-    width: 44px;
-    height: 44px;
-
-    left: 50%;
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    border:
-        2px solid transparent;
-
-    border-top-color:
-        var(--cyan);
-
-    border-right-color:
-        var(--red);
-
-    animation:
-        screenRotate 5s
-        linear infinite;
-}
-
-.intro-island {
-    position: absolute;
-
-    z-index: 2;
-
-    top: 6px;
-    left: 50%;
-
-    width: 26px;
-    height: 6px;
-
-    transform:
-        translateX(-50%);
-
-    border-radius: 99px;
-
-    background: #000;
-}
-
-.visual-dot {
-    position: absolute;
-
-    width: 5px;
-    height: 5px;
-
-    border-radius: 50%;
-
-    background:
-        var(--cyan);
-
-    box-shadow:
-        0 0 10px
-        var(--cyan);
-
-    animation:
-        dotPulse 2.4s
-        ease-in-out infinite;
-}
-
-.visual-dot.one {
-    left: 24px;
-    top: 24px;
-}
-
-.visual-dot.two {
-    right: 27px;
-    bottom: 21px;
-
-    background:
-        var(--red);
-
-    box-shadow:
-        0 0 10px
-        var(--red);
-
-    animation-delay: 1.1s;
-}
-
-/* Grille principale plus compacte */
-.primary-grid {
-    min-height: 0;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 14px;
-}
-
-/* Carte principale */
-.primary-card {
-    --accent: var(--cyan);
-
-    position: relative;
-
-    min-width: 0;
-    min-height: 0;
-
-    padding: 12px 17px;
-
+.primary-navigation ul {
     display: flex;
-    flex-direction: column;
     align-items: center;
-
-    overflow: hidden;
-
-    color: var(--text-main);
-    text-align: center;
-    text-decoration: none;
-
-    border-radius: 20px;
-
-    border:
-        1px solid
-        color-mix(
-            in srgb,
-            var(--accent) 58%,
-            transparent
-        );
-
-    background:
-        radial-gradient(
-            circle at var(--mouse-x, 50%)
-            var(--mouse-y, 0%),
-            color-mix(
-                in srgb,
-                var(--accent) 18%,
-                transparent
-            ),
-            transparent 43%
-        ),
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.055),
-            rgba(255, 255, 255, 0.015)
-        ),
-        rgba(5, 10, 25, 0.9);
-
-    box-shadow:
-        0 18px 38px
-        rgba(0, 0, 0, 0.36),
-
-        0 0 18px
-        color-mix(
-            in srgb,
-            var(--accent) 10%,
-            transparent
-        );
-
-    opacity: 0;
-
-    transform:
-        translateY(17px)
-        scale(0.985);
-
-    animation:
-        cardEnter 0.55s
-        cubic-bezier(.19, .8, .37, 1)
-        forwards;
-
-    transition:
-        transform 0.28s ease,
-        border-color 0.28s ease,
-        box-shadow 0.28s ease;
+    justify-content: flex-end;
+    gap: clamp(10px, 1vw, 18px);
+    list-style: none;
 }
 
-.primary-card:nth-child(1) {
-    --accent: var(--red);
-    animation-delay: 0.33s;
-}
-
-.primary-card:nth-child(2) {
-    --accent: var(--green);
-    animation-delay: 0.43s;
-}
-
-.primary-card:nth-child(3) {
-    --accent: var(--blue);
-    animation-delay: 0.53s;
-}
-
-.primary-card::after {
-    content: "";
-
-    position: absolute;
-
-    left: 12%;
-    right: 12%;
-    bottom: -1px;
-
-    height: 2px;
-
-    border-radius: 99px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--accent),
-            transparent
-        );
-
-    box-shadow:
-        0 0 16px
-        var(--accent);
-}
-
-.primary-card:hover {
-    transform:
-        translateY(-6px)
-        scale(1.012);
-
-    border-color:
-        var(--accent);
-
-    box-shadow:
-        0 24px 46px
-        rgba(0, 0, 0, 0.52),
-
-        0 0 30px
-        color-mix(
-            in srgb,
-            var(--accent) 30%,
-            transparent
-        );
-}
-
-/* Reflet traversant */
-.card-shine {
-    position: absolute;
-    inset: 0;
-
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            112deg,
-            transparent 15%,
-            rgba(255, 255, 255, 0.18),
-            transparent 85%
-        );
-
-    transform:
-        translateX(-130%);
-}
-
-.primary-card:hover .card-shine,
-.secondary-card:hover .card-shine {
-    animation:
-        shineSweep 0.7s ease-out;
-}
-
-/* Cercle de l’icône */
-.icon-circle {
+.navigation-link {
     position: relative;
-
-    width: 59px;
-    height: 59px;
-
-    flex: 0 0 59px;
-
-    display: grid;
-    place-items: center;
-
-    margin-bottom: 6px;
-
-    border-radius: 50%;
-
-    isolation: isolate;
-}
-
-.icon-circle::before {
-    content: "";
-
-    position: absolute;
-    inset: -3px;
-
-    z-index: -2;
-
-    border-radius: 50%;
-
-    background:
-        conic-gradient(
-            transparent 0 13%,
-            var(--accent) 28%,
-            transparent 43% 61%,
-            var(--accent) 76%,
-            transparent 90%
-        );
-
-    filter:
-        drop-shadow(
-            0 0 8px
-            var(--accent)
-        );
-
-    animation:
-        iconOrbit 5s
-        linear infinite;
-}
-
-.icon-circle::after {
-    content: "";
-
-    position: absolute;
-    inset: 3px;
-
-    z-index: -1;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 25%,
-            color-mix(
-                in srgb,
-                var(--accent) 18%,
-                transparent
-            ),
-            transparent 44%
-        ),
-        #07101f;
-
-    border:
-        1px solid
-        color-mix(
-            in srgb,
-            var(--accent) 43%,
-            transparent
-        );
-}
-
-.primary-card:hover .icon-circle::before {
-    animation-duration: 1.7s;
-}
-
-.icon-circle svg {
-    width: 29px;
-    height: 29px;
-
-    color: var(--accent);
-
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-
-    filter:
-        drop-shadow(
-            0 0 7px
-            var(--accent)
-        );
-
-    transition:
-        transform 0.28s ease;
-}
-
-.primary-card:hover .icon-circle svg {
-    transform:
-        scale(1.1)
-        rotate(-4deg);
-}
-
-.card-title {
-    font-size: 19px;
-    font-weight: 700;
-
-    line-height: 1.2;
-}
-
-.card-description {
-    max-width: 420px;
-
-    margin-top: 6px;
-
-    color: var(--text-soft);
-
-    font-size: 14px;
-    line-height: 1.45;
-}
-
-.primary-action {
-    min-width: 245px;
-
-    margin-top: auto;
-    padding: 8px 15px;
-
+    min-height: 50px;
+    padding: 0 clamp(16px, 1.35vw, 25px);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
-    gap: 13px;
-
-    text-align: center;
-
-    border-radius: 11px;
-
-    color: var(--text-main);
-
-    font-size: 11px;
-    font-weight: 650;
-
-    border:
-        1px solid
-        color-mix(
-            in srgb,
-            var(--accent) 68%,
-            transparent
-        );
-
+    border: 1px solid transparent;
+    border-radius: 13px;
+    color: rgba(255, 248, 238, 0.93);
     background:
-        color-mix(
-            in srgb,
-            var(--accent) 8%,
-            rgba(5, 10, 25, 0.94)
-        );
-
-    box-shadow:
-        0 0 13px
-        color-mix(
-            in srgb,
-            var(--accent) 17%,
-            transparent
-        );
-
-    transition:
-        color 0.25s ease,
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-.primary-card:hover .primary-action {
-    color: var(--accent);
-
-    transform:
-        translateY(-2px);
-
-    border-color:
-        var(--accent);
-
-    box-shadow:
-        0 0 20px
-        color-mix(
-            in srgb,
-            var(--accent) 30%,
-            transparent
-        );
-}
-
-.action-arrow {
-    font-size: 18px;
-
-    transition:
-        transform 0.25s ease;
-}
-
-.primary-card:hover .action-arrow,
-.secondary-card:hover .action-arrow {
-    transform:
-        translateX(4px);
-}
-
-/* Quatre cartes inférieures agrandies */
-.secondary-grid {
-    min-height: 0;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    gap: 12px;
-}
-
-.secondary-card {
-    --accent: var(--purple);
-
-    position: relative;
-
-    min-width: 0;
-    min-height: 0;
-
-    padding: 13px 15px;
-
-    display: grid;
-
-    grid-template-columns:
-        56px minmax(0, 1fr);
-
-    grid-template-rows:
-        1fr auto;
-
-    column-gap: 13px;
-    row-gap: 8px;
-
-    overflow: hidden;
-
-    color: var(--text-main);
+        linear-gradient(rgba(4, 17, 35, 0.72), rgba(4, 17, 35, 0.72)) padding-box,
+        linear-gradient(110deg, rgba(78, 203, 255, 0.70), rgba(114, 83, 185, 0.52), rgba(255, 85, 75, 0.66)) border-box;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.20), inset 0 0 24px rgba(34, 80, 131, 0.07);
+    backdrop-filter: blur(12px);
     text-decoration: none;
-
-    border-radius: 17px;
-
-    border:
-        1px solid
-        color-mix(
-            in srgb,
-            var(--accent) 55%,
-            transparent
-        );
-
-    background:
-        radial-gradient(
-            circle at var(--mouse-x, 0%)
-            var(--mouse-y, 50%),
-            color-mix(
-                in srgb,
-                var(--accent) 14%,
-                transparent
-            ),
-            transparent 48%
-        ),
-        rgba(5, 10, 25, 0.9);
-
-    box-shadow:
-        0 14px 30px
-        rgba(0, 0, 0, 0.3),
-
-        0 0 14px
-        color-mix(
-            in srgb,
-            var(--accent) 9%,
-            transparent
-        );
-
-    opacity: 0;
-
-    transform:
-        translateY(13px)
-        scale(0.985);
-
-    animation:
-        cardEnter 0.5s
-        cubic-bezier(.19, .8, .37, 1)
-        forwards;
-
-    transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-.secondary-card:nth-child(1) {
-    --accent: var(--purple);
-    animation-delay: 0.61s;
-}
-
-.secondary-card:nth-child(2) {
-    --accent: var(--teal);
-    animation-delay: 0.69s;
-}
-
-.secondary-card:nth-child(3) {
-    --accent: var(--orange);
-    animation-delay: 0.77s;
-}
-
-.secondary-card:nth-child(4) {
-    --accent: var(--red);
-    animation-delay: 0.85s;
-}
-
-.secondary-card:hover {
-    transform:
-        translateY(-5px)
-        scale(1.015);
-
-    border-color:
-        var(--accent);
-
-    box-shadow:
-        0 19px 37px
-        rgba(0, 0, 0, 0.43),
-
-        0 0 25px
-        color-mix(
-            in srgb,
-            var(--accent) 28%,
-            transparent
-        );
-}
-
-/* Cercle des icônes secondaires */
-.small-icon-circle {
-    position: relative;
-
-    width: 56px;
-    height: 56px;
-
-    grid-row: 1;
-
-    display: grid;
-    place-items: center;
-
-    align-self: center;
-
-    border-radius: 50%;
-
-    isolation: isolate;
-}
-
-.small-icon-circle::before {
-    content: "";
-
-    position: absolute;
-    inset: -2px;
-
-    z-index: -2;
-
-    border-radius: 50%;
-
-    background:
-        conic-gradient(
-            transparent 0 16%,
-            var(--accent) 31%,
-            transparent 47% 68%,
-            var(--accent) 83%,
-            transparent 100%
-        );
-
-    filter:
-        drop-shadow(
-            0 0 7px
-            var(--accent)
-        );
-
-    animation:
-        iconOrbitReverse 5.5s
-        linear infinite;
-}
-
-.small-icon-circle::after {
-    content: "";
-
-    position: absolute;
-    inset: 3px;
-
-    z-index: -1;
-
-    border-radius: 50%;
-
-    background: #07101f;
-
-    border:
-        1px solid
-        color-mix(
-            in srgb,
-            var(--accent) 42%,
-            transparent
-        );
-}
-
-.secondary-card:hover .small-icon-circle::before {
-    animation-duration: 1.6s;
-}
-
-.small-icon-circle svg {
-    width: 28px;
-    height: 28px;
-
-    color: var(--accent);
-
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-
-    filter:
-        drop-shadow(
-            0 0 6px
-            var(--accent)
-        );
-
-    transition:
-        transform 0.25s ease;
-}
-
-.secondary-card:hover .small-icon-circle svg {
-    transform:
-        scale(1.1)
-        rotate(5deg);
-}
-
-.secondary-content {
-    min-width: 0;
-
-    grid-column: 2;
-    grid-row: 1;
-
-    align-self: center;
-}
-
-.secondary-title {
-    font-size: 16px;
-    font-weight: 700;
-
+    font-size: clamp(13px, 0.91vw, 17px);
+    font-weight: 600;
     line-height: 1.2;
+    white-space: nowrap;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
 }
 
-.secondary-description {
-    margin-top: 5px;
-
-    color: var(--text-soft);
-
-    font-size: 12px;
-    line-height: 1.4;
+.navigation-link:hover {
+    transform: translateY(-3px);
+    color: #ffffff;
+    box-shadow: 0 17px 34px rgba(0, 0, 0, 0.28), 0 0 24px rgba(75, 133, 213, 0.16);
 }
 
-/* Bouton En savoir plus des cartes inférieures */
-.secondary-action {
-    grid-column: 1 / -1;
-    grid-row: 2;
-
-    width: 100%;
-
-    min-height: 32px;
-
-    padding: 6px 13px;
-
+.hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding: clamp(154px, 16vh, 184px) clamp(38px, 5.2vw, 100px) clamp(62px, 8vh, 96px);
+    overflow: hidden;
+}
 
-    gap: 13px;
+.repair-visual {
+    position: absolute;
+    z-index: 0;
+    inset: 0 34% 0 0;
+    margin: 0;
+    pointer-events: none;
+    animation: visual-entry 1s cubic-bezier(0.22, 0.78, 0.32, 1) both;
+}
 
-    border-radius: 10px;
+.repair-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
+    filter: saturate(0.98) contrast(1.04) brightness(0.91);
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 63%, rgba(0, 0, 0, 0.88) 75%, rgba(0, 0, 0, 0.34) 90%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 0%, #000 63%, rgba(0, 0, 0, 0.88) 75%, rgba(0, 0, 0, 0.34) 90%, transparent 100%);
+}
 
-    color: var(--text-main);
+.repair-visual::before,
+.repair-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
 
-    font-size: 11px;
-    font-weight: 650;
-
-    border:
-        1px solid
-        color-mix(
-            in srgb,
-            var(--accent) 65%,
-            transparent
-        );
-
+.repair-visual::before {
+    z-index: 1;
     background:
-        color-mix(
-            in srgb,
-            var(--accent) 8%,
-            rgba(5, 10, 25, 0.95)
-        );
-
-    box-shadow:
-        0 0 12px
-        color-mix(
-            in srgb,
-            var(--accent) 14%,
-            transparent
-        );
-
-    transition:
-        color 0.25s ease,
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+        linear-gradient(180deg, rgba(3, 15, 31, 0.78) 0%, transparent 18%, transparent 76%, rgba(3, 14, 29, 0.72) 100%),
+        radial-gradient(ellipse at 8% 52%, rgba(24, 170, 244, 0.12), transparent 40%);
 }
 
-.secondary-card:hover .secondary-action {
-    color: var(--accent);
-
-    transform:
-        translateY(-2px);
-
-    border-color:
-        var(--accent);
-
-    box-shadow:
-        0 0 19px
-        color-mix(
-            in srgb,
-            var(--accent) 29%,
-            transparent
-        );
+.repair-visual::after {
+    z-index: 2;
+    background: linear-gradient(90deg, transparent 0 62%, rgba(5, 18, 37, 0.20) 74%, rgba(7, 20, 43, 0.86) 100%);
 }
 
-/* Animations */
-@keyframes pageEnter {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.hero::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 94% 56%, rgba(221, 38, 72, 0.23), transparent 40%),
+        radial-gradient(ellipse at 78% 20%, rgba(76, 50, 145, 0.23), transparent 42%),
+        linear-gradient(90deg, transparent 0 47%, rgba(4, 17, 36, 0.14) 57%, rgba(5, 17, 36, 0.72) 72%, rgba(12, 17, 45, 0.94) 100%);
 }
 
-@keyframes fadeDown {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.hero-copy {
+    position: relative;
+    z-index: 3;
+    width: min(47%, 770px);
+    animation: copy-entry 0.78s cubic-bezier(0.22, 0.78, 0.32, 1) 0.08s both;
 }
 
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.hero-kicker {
+    margin-bottom: clamp(24px, 3.3vh, 38px);
+    color: var(--bleu-clair);
+    font-size: clamp(16px, 1.12vw, 21px);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
 }
 
-@keyframes cardEnter {
-    to {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
+.hero-title {
+    max-width: 760px;
+    color: var(--ivoire);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(55px, 4.35vw, 82px);
+    font-weight: 500;
+    line-height: 0.97;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
 }
 
-@keyframes ambientMove {
-    from {
-        transform:
-            translate3d(-2%, -1%, 0)
-            scale(1);
-    }
-
-    to {
-        transform:
-            translate3d(4%, 3%, 0)
-            scale(1.08);
-    }
+.hero-title span {
+    display: block;
 }
 
-@keyframes backgroundOrbit {
-    to {
-        transform:
-            rotate(360deg);
-    }
+.hero-title .accent {
+    width: max-content;
+    max-width: 100%;
+    color: transparent;
+    background: linear-gradient(100deg, var(--bleu-clair) 0%, #7e9ee9 45%, var(--rouge) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
 }
 
-@keyframes orbitReverse {
-    to {
-        transform:
-            rotate(-360deg);
-    }
+.hero-text {
+    max-width: 750px;
+    margin-top: clamp(24px, 3.4vh, 36px);
+    color: var(--texte-secondaire);
+    font-size: clamp(18px, 1.2vw, 23px);
+    font-weight: 400;
+    line-height: 1.62;
 }
 
-@keyframes iconOrbit {
-    to {
-        transform:
-            rotate(360deg);
-    }
+.hero-text span {
+    display: block;
 }
 
-@keyframes iconOrbitReverse {
-    to {
-        transform:
-            rotate(-360deg);
-    }
+.quote-button {
+    position: relative;
+    width: min(520px, 100%);
+    min-height: 92px;
+    margin-top: clamp(30px, 4vh, 44px);
+    padding: 12px 12px 12px clamp(24px, 2vw, 38px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    border-radius: 18px;
+    color: #ffffff;
+    background:
+        linear-gradient(rgba(3, 16, 34, 0.92), rgba(3, 16, 34, 0.92)) padding-box,
+        linear-gradient(105deg, var(--bleu-clair), var(--violet), var(--rouge), var(--bleu-clair)) border-box;
+    background-size: 100% 100%, 300% 100%;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.33), 0 0 25px rgba(55, 153, 230, 0.14), inset 0 0 30px rgba(37, 77, 127, 0.11);
+    text-decoration: none;
+    font-size: clamp(17px, 1.25vw, 23px);
+    font-weight: 700;
+    letter-spacing: 0.015em;
+    animation: animated-border 7s linear infinite;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-@keyframes shineSweep {
-    to {
-        transform:
-            translateX(130%);
-    }
+.quote-button::before {
+    content: "";
+    position: absolute;
+    inset: -120% -45%;
+    background: linear-gradient(110deg, transparent 39%, rgba(255, 255, 255, 0.16) 50%, transparent 61%);
+    transform: translateX(-65%);
+    animation: button-shine 5.8s ease-in-out infinite;
+    pointer-events: none;
 }
 
-@keyframes miniPhoneFloat {
-    0%,
-    100% {
-        transform:
-            translateY(3px)
-            rotate(-2deg);
-    }
-
-    50% {
-        transform:
-            translateY(-5px)
-            rotate(2deg);
-    }
+.quote-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.42), 0 0 32px rgba(78, 203, 255, 0.19), 0 0 28px rgba(255, 85, 75, 0.13);
 }
 
-@keyframes screenRotate {
-    to {
-        transform:
-            translate(-50%, -50%)
-            rotate(360deg);
-    }
+.quote-label {
+    position: relative;
+    z-index: 1;
 }
 
-@keyframes dotPulse {
-    0%,
-    100% {
-        opacity: 0.35;
-        transform: scale(0.8);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.3);
-    }
+.quote-arrow {
+    position: relative;
+    z-index: 1;
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 85, 75, 0.86);
+    border-radius: 12px;
+    color: var(--ivoire);
+    background: rgba(22, 19, 42, 0.62);
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1;
+    transition: transform 0.25s ease, background 0.25s ease;
 }
 
-/* Fenêtres moins hautes */
-@media (max-height: 800px) {
-    .page {
-        grid-template-rows:
-            auto
-            minmax(74px, 94px)
-            minmax(165px, 205px)
-            minmax(120px, 145px);
+.quote-button:hover .quote-arrow {
+    transform: translateX(4px);
+    background: rgba(255, 85, 75, 0.10);
+}
 
-        gap: 7px;
-    }
+.confidence-line {
+    margin-top: clamp(25px, 3vh, 34px);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 15px;
+    color: rgba(255, 248, 238, 0.85);
+    font-size: clamp(15px, 1.02vw, 19px);
+    line-height: 1.5;
+}
 
+.confidence-line i {
+    width: 6px;
+    height: 6px;
+    flex: 0 0 6px;
+    border-radius: 50%;
+    background: var(--bleu-clair);
+    box-shadow: 0 0 10px rgba(78, 203, 255, 0.55);
+}
+
+.confidence-line i:last-of-type {
+    background: var(--rouge);
+    box-shadow: 0 0 10px rgba(255, 85, 75, 0.48);
+}
+
+.information-section {
+    position: relative;
+    z-index: 2;
+    padding: clamp(82px, 10vw, 150px) clamp(28px, 5.2vw, 100px);
+    background:
+        radial-gradient(circle at 12% 45%, rgba(24, 170, 244, 0.08), transparent 32%),
+        radial-gradient(circle at 88% 45%, rgba(255, 85, 75, 0.08), transparent 34%),
+        linear-gradient(180deg, rgba(3, 18, 36, 0.98), rgba(6, 13, 29, 1));
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.information-intro {
+    max-width: 840px;
+    margin: 0 auto clamp(38px, 5vw, 62px);
+    text-align: center;
+}
+
+.information-intro p {
+    color: var(--bleu-clair);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.information-intro h2 {
+    margin-top: 12px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(42px, 4vw, 67px);
+    font-weight: 500;
+    line-height: 1;
+}
+
+.information-grid {
+    width: min(1500px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 1.8vw, 28px);
+}
+
+.information-card {
+    min-width: 0;
+    min-height: 250px;
+    padding: clamp(27px, 2.7vw, 42px);
+    border: 1px solid transparent;
+    border-radius: 20px;
+    background:
+        linear-gradient(rgba(5, 18, 37, 0.90), rgba(5, 18, 37, 0.90)) padding-box,
+        linear-gradient(130deg, rgba(78, 203, 255, 0.50), rgba(114, 83, 185, 0.35), rgba(255, 85, 75, 0.48)) border-box;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.22), inset 0 0 40px rgba(31, 79, 132, 0.05);
+    scroll-margin-top: 26px;
+}
+
+.information-card:target {
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.31), 0 0 32px rgba(78, 203, 255, 0.14);
+}
+
+.information-number {
+    display: block;
+    color: var(--bleu-clair);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.information-card h3 {
+    margin-top: 16px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(35px, 2.5vw, 48px);
+    font-weight: 500;
+    line-height: 1;
+}
+
+.information-card p {
+    margin-top: 20px;
+    color: var(--texte-secondaire);
+    font-size: clamp(16px, 1.05vw, 19px);
+    line-height: 1.65;
+}
+
+.contact-links {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.contact-links a {
+    color: var(--ivoire);
+    text-decoration-color: rgba(78, 203, 255, 0.48);
+    text-underline-offset: 4px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+a:focus-visible {
+    outline: 3px solid rgba(78, 203, 255, 0.72);
+    outline-offset: 5px;
+}
+
+@keyframes copy-entry {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes visual-entry {
+    from { opacity: 0; transform: scale(1.018); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes animated-border {
+    from { background-position: 0 0, 0% 50%; }
+    to { background-position: 0 0, 300% 50%; }
+}
+
+@keyframes button-shine {
+    0%, 58% { transform: translateX(-65%); }
+    80%, 100% { transform: translateX(65%); }
+}
+
+@media (max-width: 1240px) {
     .site-header {
-        min-height: 57px;
+        align-items: flex-start;
+        min-height: 170px;
+        padding-top: 22px;
     }
 
-    .brand-logo {
-        width: 45px;
-        height: 45px;
+    .primary-navigation ul {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
     }
 
-    .brand-name {
-        font-size: 18px;
-    }
-
-    .intro {
-        grid-template-columns:
-            minmax(0, 1fr)
-            185px;
-    }
-
-    .intro h1 {
-        font-size:
-            clamp(21px, 2.5vw, 30px);
-    }
-
-    .intro p {
-        font-size: 12px;
-    }
-
-    .intro-visual {
-        width: 180px;
-        height: 82px;
-    }
-
-    .intro-phone {
-        width: 40px;
-        height: 70px;
-    }
-
-    .intro-orbit {
-        width: 115px;
-        height: 115px;
-    }
-
-    .primary-card {
-        padding: 8px 12px;
-    }
-
-    .icon-circle {
-        width: 49px;
-        height: 49px;
-
-        flex-basis: 49px;
-
-        margin-bottom: 4px;
-    }
-
-    .icon-circle svg {
-        width: 24px;
-        height: 24px;
-    }
-
-    .card-title {
-        font-size: 16px;
-    }
-
-    .card-description {
-        font-size: 11px;
-    }
-
-    .primary-action {
-        min-width: 210px;
-
-        padding: 6px 11px;
-
-        font-size: 9px;
-    }
-
-    .secondary-card {
-        padding: 8px 10px;
-
-        grid-template-columns:
-            44px minmax(0, 1fr);
-
-        row-gap: 5px;
-    }
-
-    .small-icon-circle {
-        width: 43px;
-        height: 43px;
-    }
-
-    .small-icon-circle svg {
-        width: 22px;
-        height: 22px;
-    }
-
-    .secondary-title {
+    .navigation-link {
+        min-height: 44px;
+        padding-inline: 14px;
         font-size: 13px;
     }
 
-    .secondary-description {
-        font-size: 10px;
+    .hero {
+        padding-top: 180px;
     }
 
-    .secondary-action {
-        min-height: 27px;
-
-        padding: 4px 9px;
-
-        font-size: 9px;
-    }
-}
-
-/* Tablettes */
-@media (max-width: 1000px) {
-    .page {
-        width: calc(100% - 12px);
-
-        padding-left: 12px;
-        padding-right: 12px;
+    .repair-visual {
+        right: 37%;
     }
 
-    .primary-grid {
-        gap: 7px;
+    .hero-copy {
+        width: min(48%, 650px);
     }
 
-    .primary-card {
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    .card-description {
-        font-size: 11px;
-    }
-
-    .primary-action {
-        min-width: 0;
-
-        width: 94%;
-
-        font-size: 9px;
-    }
-
-    .secondary-grid {
-        gap: 6px;
-    }
-
-    .secondary-card {
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    .secondary-description {
-        font-size: 9px;
+    .hero-title {
+        font-size: clamp(51px, 5.2vw, 69px);
     }
 }
 
-/* Téléphones */
-@media (max-width: 680px) {
+@media (max-width: 940px) {
     .page {
-        height: calc(100dvh - 6px);
-
-        margin: 3px auto;
-
-        padding: 7px 8px 9px;
-
-        border-radius: 18px;
-
-        grid-template-rows:
-            auto
-            minmax(65px, 83px)
-            minmax(155px, 1fr)
-            minmax(160px, 0.92fr);
+        overflow: visible;
     }
 
     .site-header {
-        min-height: 48px;
+        position: relative;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 22px 24px 0;
     }
 
-    .back-btn {
-        width: 35px;
-        height: 35px;
-
-        flex-basis: 35px;
-
-        font-size: 18px;
+    .header-identity {
+        justify-content: space-between;
     }
 
-    .brand-logo {
-        width: 37px;
-        height: 37px;
+    .primary-navigation ul {
+        width: 100%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .brand-name {
-        font-size: 15px;
-    }
-
-    .brand-tag {
-        font-size: 6px;
-    }
-
-    .intro {
-        display: block;
-
+    .navigation-link {
+        width: 100%;
+        min-height: 50px;
+        white-space: normal;
         text-align: center;
     }
 
-    .intro-line {
-        margin-left: auto;
-        margin-right: auto;
+    .hero {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 48px 24px 68px;
     }
 
-    .intro h1 {
-        font-size: 20px;
+    .repair-visual {
+        position: relative;
+        inset: auto;
+        order: 2;
+        width: calc(100% + 48px);
+        height: clamp(430px, 68vw, 650px);
+        margin: 42px -24px -68px;
     }
 
-    .intro p {
-        font-size: 9px;
+    .repair-image {
+        object-position: left center;
+        -webkit-mask-image: radial-gradient(ellipse 88% 74% at 45% 48%, #000 0%, #000 55%, rgba(0, 0, 0, 0.82) 70%, rgba(0, 0, 0, 0.25) 86%, transparent 100%);
+        mask-image: radial-gradient(ellipse 88% 74% at 45% 48%, #000 0%, #000 55%, rgba(0, 0, 0, 0.82) 70%, rgba(0, 0, 0, 0.25) 86%, transparent 100%);
     }
 
-    .intro-visual {
-        display: none;
+    .repair-visual::before {
+        background: linear-gradient(180deg, var(--bleu-nuit) 0%, transparent 22% 73%, rgba(4, 15, 32, 0.82) 100%);
     }
 
-    .primary-grid {
-        gap: 4px;
+    .repair-visual::after {
+        background: linear-gradient(90deg, rgba(4, 17, 35, 0.25), transparent 18% 82%, rgba(15, 19, 46, 0.45));
     }
 
-    .primary-card {
-        padding: 6px 4px;
-
-        border-radius: 12px;
+    .hero::before {
+        background:
+            radial-gradient(ellipse at 92% 26%, rgba(221, 38, 72, 0.18), transparent 42%),
+            linear-gradient(180deg, rgba(4, 17, 36, 0.94) 0%, rgba(5, 18, 37, 0.56) 60%, transparent 100%);
     }
 
-    .icon-circle {
-        width: 38px;
-        height: 38px;
-
-        flex-basis: 38px;
-
-        margin-bottom: 3px;
+    .hero-copy {
+        width: 100%;
+        max-width: 760px;
     }
 
-    .icon-circle svg {
-        width: 18px;
-        height: 18px;
+    .hero-title {
+        font-size: clamp(54px, 9vw, 76px);
     }
 
-    .card-title {
-        font-size: 10px;
+    .information-grid {
+        grid-template-columns: 1fr;
     }
 
-    .card-description {
-        display: none;
-    }
-
-    .primary-action {
-        width: 96%;
-        min-height: 25px;
-
-        padding: 3px;
-
-        font-size: 6px;
-    }
-
-    .action-arrow {
-        display: none;
-    }
-
-    .secondary-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 4px;
-    }
-
-    .secondary-card {
-        padding: 5px 6px;
-
-        grid-template-columns:
-            30px minmax(0, 1fr);
-
-        gap: 4px;
-
-        border-radius: 11px;
-    }
-
-    .small-icon-circle {
-        width: 29px;
-        height: 29px;
-    }
-
-    .small-icon-circle svg {
-        width: 14px;
-        height: 14px;
-    }
-
-    .secondary-title {
-        font-size: 8px;
-    }
-
-    .secondary-description {
-        display: none;
-    }
-
-    .secondary-action {
-        min-height: 21px;
-
-        padding: 2px 4px;
-
-        font-size: 6px;
-    }
-
-    .background-orbit {
-        width: 420px;
-        right: -230px;
+    .information-card {
+        min-height: 0;
     }
 }
 
-/* Accessibilité */
+@media (max-width: 620px) {
+    .site-header {
+        padding-inline: 18px;
+    }
+
+    .header-identity {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .home-button {
+        min-height: 43px;
+        padding-inline: 13px;
+        font-size: 10px;
+    }
+
+    .brand {
+        gap: 9px;
+    }
+
+    .brand-logo {
+        width: 51px;
+        height: 51px;
+    }
+
+    .brand-name {
+        font-size: clamp(22px, 7.3vw, 29px);
+    }
+
+    .brand-tagline {
+        max-width: 190px;
+        white-space: normal;
+        font-size: 9px;
+        line-height: 1.35;
+    }
+
+    .primary-navigation ul {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .primary-navigation li:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .navigation-link {
+        min-height: 47px;
+        padding-inline: 10px;
+        font-size: 12px;
+    }
+
+    .hero {
+        padding: 52px 18px 58px;
+    }
+
+    .hero-kicker {
+        margin-bottom: 26px;
+        font-size: 14px;
+        letter-spacing: 0.11em;
+    }
+
+    .hero-title {
+        font-size: clamp(46px, 14vw, 62px);
+    }
+
+    .hero-text {
+        font-size: 17px;
+        line-height: 1.6;
+    }
+
+    .hero-text span {
+        display: inline;
+    }
+
+    .quote-button {
+        min-height: 78px;
+        padding: 9px 9px 9px 19px;
+        gap: 14px;
+        border-radius: 15px;
+        font-size: 16px;
+    }
+
+    .quote-arrow {
+        width: 56px;
+        height: 56px;
+        flex-basis: 56px;
+        font-size: 32px;
+    }
+
+    .confidence-line {
+        gap: 8px 10px;
+        font-size: 14px;
+    }
+
+    .repair-visual {
+        width: calc(100% + 36px);
+        height: 360px;
+        margin: 30px -18px -58px;
+    }
+
+    .information-section {
+        padding-inline: 18px;
+    }
+
+    .information-card {
+        padding: 28px 24px;
+    }
+}
+
+@media (max-height: 770px) and (min-width: 941px) {
+    .site-header {
+        min-height: 104px;
+        padding-top: 17px;
+        padding-bottom: 10px;
+    }
+
+    .brand-logo {
+        width: 58px;
+        height: 58px;
+    }
+
+    .hero {
+        padding-top: 125px;
+        padding-bottom: 34px;
+    }
+
+    .hero-kicker {
+        margin-bottom: 19px;
+    }
+
+    .hero-title {
+        font-size: clamp(48px, 4.1vw, 66px);
+    }
+
+    .hero-text {
+        margin-top: 20px;
+        font-size: clamp(17px, 1.12vw, 20px);
+    }
+
+    .quote-button {
+        min-height: 76px;
+        margin-top: 23px;
+    }
+
+    .quote-arrow {
+        width: 54px;
+        height: 54px;
+        flex-basis: 54px;
+    }
+
+    .confidence-line {
+        margin-top: 19px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
     *,
     *::before,
     *::after {
-        animation-duration:
-            0.01ms !important;
-
-        animation-iteration-count:
-            1 !important;
-
-        scroll-behavior:
-            auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
 </style>
 </head>
 
 <body>
-
-<div
-    class="background-orbit"
-    aria-hidden="true">
-</div>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 
 <div class="page">
-
     <header class="site-header">
+        <div class="header-identity">
+            <a class="home-button" href="welcome.html" aria-label="Retour à la page d'accueil">
+                <span>Accueil</span>
+            </a>
 
-        <a
-            href="welcome.html"
-            class="back-btn"
-            aria-label="Retour à l’accueil">
-            ←
-        </a>
-
-        <div class="brand">
-
-            <img
-                src="logo.png"
-                class="brand-logo"
-                alt="Logo DigitRestore">
-
-            <div class="brand-copy">
-
-                <div class="brand-name">
-                    <span>DIGIT</span>
-
-                    <span class="restore">
-                        RESTORE
+            <a class="brand" href="welcome.html" aria-label="Accueil DigitRestore">
+                <img class="brand-logo" src="logo.png" alt="">
+                <span class="brand-copy">
+                    <span class="brand-name" aria-label="DigitRestore">
+                        <span class="brand-digit">DIGIT</span><span class="brand-restore">RESTORE</span>
                     </span>
-                </div>
-
-                <span class="brand-tag">
-                    Réparation & reconditionnement
+                    <span class="brand-tagline">Réparation de smartphones</span>
                 </span>
-
-            </div>
-
+            </a>
         </div>
 
+        <nav class="primary-navigation" aria-label="Navigation principale">
+            <ul>
+                <li><a class="navigation-link" href="#qualite">Qualité</a></li>
+                <li><a class="navigation-link" href="#contact">Contact</a></li>
+                <li><a class="navigation-link" href="#conditions">Conditions générales</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section class="intro">
+    <main id="contenu">
+        <section class="hero" aria-labelledby="titre-principal">
+            <figure class="repair-visual">
+                <img
+                    class="repair-image"
+                    src="images/site/Réparation.png"
+                    alt="Réparation d'un smartphone ouvert sur un tapis d'atelier bleu"
+                    width="1680"
+                    height="945"
+                    decoding="async"
+                    fetchpriority="high"
+                >
+                <figcaption class="visually-hidden">
+                    Écran maintenu par un support pendant qu'un technicien intervient à deux mains sur le smartphone.
+                </figcaption>
+            </figure>
 
-        <div class="intro-copy">
+            <div class="hero-copy">
+                <p class="hero-kicker">Réparation de smartphones</p>
 
-            <div
-                class="intro-line"
-                aria-hidden="true">
+                <h1 class="hero-title" id="titre-principal">
+                    <span>Votre réparation commence</span>
+                    <span>par un diagnostic</span>
+                    <span class="accent">clair.</span>
+                </h1>
+
+                <p class="hero-text">
+                    <span>Sélectionnez votre smartphone et décrivez votre besoin.</span>
+                    <span>Vous obtenez une estimation claire, adaptée et sans engagement.</span>
+                </p>
+
+                <a class="quote-button" href="reparation.html">
+                    <span class="quote-label">OBTENIR MON DEVIS</span>
+                    <span class="quote-arrow" aria-hidden="true">→</span>
+                </a>
+
+                <p class="confidence-line" aria-label="Diagnostic clair, pièces adaptées, suivi transparent">
+                    <span>Diagnostic clair</span>
+                    <i aria-hidden="true"></i>
+                    <span>Pièces adaptées</span>
+                    <i aria-hidden="true"></i>
+                    <span>Suivi transparent</span>
+                </p>
+            </div>
+        </section>
+
+        <section class="information-section" aria-labelledby="informations-title">
+            <div class="information-intro">
+                <p>DigitRestore vous accompagne</p>
+                <h2 id="informations-title">Des informations simples et accessibles</h2>
             </div>
 
-            <h1>
-                Bienvenue dans l’Atelier
-                <span>DigitRestore</span>
-            </h1>
+            <div class="information-grid">
+                <article class="information-card" id="qualite">
+                    <span class="information-number">QUALITÉ</span>
+                    <h3>Une intervention soignée</h3>
+                    <p>
+                        Chaque réparation commence par un diagnostic précis. Les pièces sont sélectionnées selon votre besoin et le smartphone est contrôlé avant restitution.
+                    </p>
+                </article>
 
-            <p>
-                Choisissez le service qui correspond à votre besoin.
-            </p>
+                <article class="information-card" id="contact">
+                    <span class="information-number">CONTACT</span>
+                    <h3>Une question&nbsp;?</h3>
+                    <p>
+                        DigitRestore vous répond et vous accompagne avant, pendant et après votre réparation.
+                    </p>
+                    <div class="contact-links">
+                        <a href="tel:+33664891949">06 64 89 19 49</a>
+                        <a href="mailto:digit.restore@outlook.fr">digit.restore@outlook.fr</a>
+                    </div>
+                </article>
 
-        </div>
-
-        <div
-            class="intro-visual"
-            aria-hidden="true">
-
-            <div class="intro-orbit"></div>
-
-            <span class="visual-dot one"></span>
-            <span class="visual-dot two"></span>
-
-            <div class="intro-phone">
-
-                <div class="intro-phone-screen">
-
-                    <div class="intro-island"></div>
-
-                </div>
-
+                <article class="information-card" id="conditions">
+                    <span class="information-number">CONDITIONS GÉNÉRALES</span>
+                    <h3>Une prise en charge transparente</h3>
+                    <p>
+                        Les modalités de réparation, de garantie et de restitution sont présentées clairement avant la validation de l'intervention.
+                    </p>
+                </article>
             </div>
-
-        </div>
-
-    </section>
-
-    <main class="primary-grid">
-
-        <!-- RÉPARATION -->
-        <a
-            href="reparation.html"
-            class="primary-card">
-
-            <span class="card-shine"></span>
-
-            <div class="icon-circle">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
-
-                    <path
-                        d="M14.7 6.3a4 4 0 0 0-5-5
-                        l2.1 2.1-2.8 2.8-2.1-2.1
-                        a4 4 0 0 0 5 5
-                        L5 16a2.1 2.1 0 0 0 3 3
-                        l6.9-6.9a4 4 0 0 0 5-5
-                        l-2.1 2.1-2.8-2.8
-                        2.1-2.1a4 4 0 0 0-2.4 2z">
-                    </path>
-
-                </svg>
-
-            </div>
-
-            <h2 class="card-title">
-                Réparation
-            </h2>
-
-            <p class="card-description">
-                Diagnostic précis et réparations rapides<br>
-                pour tous vos appareils.
-            </p>
-
-            <span class="primary-action">
-                <span>
-                    Faire une demande de devis en ligne
-                </span>
-
-                <span class="action-arrow">→</span>
-            </span>
-
-        </a>
-
-        <!-- REPRISE / ACHAT -->
-        <a
-            href="reprise-achat.html"
-            class="primary-card">
-
-            <span class="card-shine"></span>
-
-            <div class="icon-circle">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
-
-                    <path
-                        d="M20.6 13.6
-                        11 23.2
-                        1.8 14
-                        11.4 4.4
-                        H20.6Z">
-                    </path>
-
-                    <circle
-                        cx="16.7"
-                        cy="8.3"
-                        r="1">
-                    </circle>
-
-                    <path
-                        d="M13.8 11.4
-                        c-.4-.5-1-.8-1.7-.8
-                        -1.2 0-2.1.9-2.1 2.1
-                        s.9 2.1 2.1 2.1
-                        c.7 0 1.3-.3 1.7-.8">
-                    </path>
-
-                    <path d="M8.8 12h3.4"></path>
-                    <path d="M8.8 13.3h3"></path>
-
-                </svg>
-
-            </div>
-
-            <h2 class="card-title">
-                Reprise / Achat
-            </h2>
-
-            <p class="card-description">
-                Nous rachetons vos appareils au meilleur prix,<br>
-                simplement et en toute transparence.
-            </p>
-
-            <span class="primary-action">
-                <span>
-                    Faire estimer votre téléphone
-                </span>
-
-                <span class="action-arrow">→</span>
-            </span>
-
-        </a>
-
-        <!-- TÉLÉPHONES ET ACCESSOIRES -->
-        <a
-            href="#telephonie"
-            id="telephonie"
-            class="primary-card">
-
-            <span class="card-shine"></span>
-
-            <div class="icon-circle">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
-
-                    <rect
-                        x="2.5"
-                        y="3"
-                        width="10"
-                        height="18"
-                        rx="2">
-                    </rect>
-
-                    <path d="M6.2 17.8h2.6"></path>
-
-                    <path
-                        d="M14 10h7
-                        l1 10h-9z">
-                    </path>
-
-                    <path
-                        d="M16 10
-                        a2.5 2.5 0 0 1 5 0">
-                    </path>
-
-                </svg>
-
-            </div>
-
-            <h2 class="card-title">
-                Téléphones & Accessoires
-            </h2>
-
-            <p class="card-description">
-                Téléphones sélectionnés et accessoires utiles,<br>
-                contrôlés avec soin par DigitRestore.
-            </p>
-
-            <span class="primary-action">
-                <span>
-                    Visiter notre boutique
-                </span>
-
-                <span class="action-arrow">→</span>
-            </span>
-
-        </a>
-
+        </section>
     </main>
-
-    <section class="secondary-grid">
-
-        <!-- RECONDITIONNEMENT -->
-        <a
-            href="#reconditionnement"
-            id="reconditionnement"
-            class="secondary-card">
-
-            <span class="card-shine"></span>
-
-            <div class="small-icon-circle">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
-
-                    <path
-                        d="M20 7
-                        a8 8 0 0 0-13-2
-                        L4 8">
-                    </path>
-
-                    <path d="M4 3v5h5"></path>
-
-                    <path
-                        d="M4 17
-                        a8 8 0 0 0 13 2
-                        l3-3">
-                    </path>
-
-                    <path d="M20 21v-5h-5"></path>
-
-                </svg>
-
-            </div>
-
-            <div class="secondary-content">
-
-                <h2 class="secondary-title">
-                    Reconditionnement
-                </h2>
-
-                <p class="secondary-description">
-                    Appareils remis à neuf, testés et garantis.
-                </p>
-
-            </div>
-
-            <span class="secondary-action">
-                <span>En savoir plus</span>
-                <span class="action-arrow">→</span>
-            </span>
-
-        </a>
-
-        <!-- QUALITÉ -->
-        <a
-            href="#qualite"
-            id="qualite"
-            class="secondary-card">
-
-            <span class="card-shine"></span>
-
-            <div class="small-icon-circle">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
-
-                    <path
-                        d="M12 2
-                        20 5.5V11
-                        c0 5-3.4 9-8 11
-                        -4.6-2-8-6-8-11
-                        V5.5z">
-                    </path>
-
-                    <path
-                        d="m8.5 12
-                        2.2 2.2
-                        4.8-5">
-                    </path>
-
-                </svg>
-
-            </div>
-
-            <div class="secondary-content">
-
-                <h2 class="secondary-title">
-                    Qualité
-                </h2>
-
-                <p class="secondary-description">
-                    Contrôles rigoureux et pièces fiables.
-                </p>
-
-            </div>
-
-            <span class="secondary-action">
-                <span>En savoir plus</span>
-                <span class="action-arrow">→</span>
-            </span>
-
-        </a>
-
-        <!-- CONTACT -->
-        <a
-            href="#contact"
-            id="contact"
-            class="secondary-card">
-
-            <span class="card-shine"></span>
-
-            <div class="small-icon-circle">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
-
-                    <path
-                        d="M4 14v-2
-                        a8 8 0 0 1 16 0
-                        v2">
-                    </path>
-
-                    <path
-                        d="M4 13H2v5
-                        a2 2 0 0 0 2 2
-                        h2v-7z">
-                    </path>
-
-                    <path
-                        d="M20 13h2v5
-                        a2 2 0 0 1-2 2
-                        h-2v-7z">
-                    </path>
-
-                    <path
-                        d="M18 20
-                        c-1 2-3 2-5 2">
-                    </path>
-
-                </svg>
-
-            </div>
-
-            <div class="secondary-content">
-
-                <h2 class="secondary-title">
-                    Contact
-                </h2>
-
-                <p class="secondary-description">
-                    Une équipe disponible pour vous accompagner.
-                </p>
-
-            </div>
-
-            <span class="secondary-action">
-                <span>En savoir plus</span>
-                <span class="action-arrow">→</span>
-            </span>
-
-        </a>
-
-        <!-- CONDITIONS GÉNÉRALES -->
-        <a
-            href="#conditions"
-            id="conditions"
-            class="secondary-card">
-
-            <span class="card-shine"></span>
-
-            <div class="small-icon-circle">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
-
-                    <path
-                        d="M6 2h8
-                        l4 4v16H6z">
-                    </path>
-
-                    <path d="M14 2v5h5"></path>
-                    <path d="M9 12h6"></path>
-                    <path d="M9 16h6"></path>
-
-                </svg>
-
-            </div>
-
-            <div class="secondary-content">
-
-                <h2 class="secondary-title">
-                    Conditions générales
-                </h2>
-
-                <p class="secondary-description">
-                    Informations sur les prestations et garanties.
-                </p>
-
-            </div>
-
-            <span class="secondary-action">
-                <span>En savoir plus</span>
-                <span class="action-arrow">→</span>
-            </span>
-
-        </a>
-
-    </section>
-
 </div>
-
-<script>
-const interactiveCards = document.querySelectorAll(
-    ".primary-card, .secondary-card"
-);
-
-interactiveCards.forEach(card => {
-    card.addEventListener("pointermove", event => {
-        const bounds =
-            card.getBoundingClientRect();
-
-        const mouseX =
-            event.clientX - bounds.left;
-
-        const mouseY =
-            event.clientY - bounds.top;
-
-        card.style.setProperty(
-            "--mouse-x",
-            `${mouseX}px`
-        );
-
-        card.style.setProperty(
-            "--mouse-y",
-            `${mouseY}px`
-        );
-    });
-
-    card.addEventListener("pointerleave", () => {
-        card.style.setProperty(
-            "--mouse-x",
-            "50%"
-        );
-
-        card.style.setProperty(
-            "--mouse-y",
-            "0%"
-        );
-    });
-});
-</script>
-
 </body>
 </html>
