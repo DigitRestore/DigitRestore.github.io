@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DigitRestore assure le diagnostic et la réparation soignée de smartphones et tablettes.">
-<title>DigitRestore - Réparation de smartphones et tablettes</title>
+<meta name="description" content="DigitRestore assure le diagnostic et la réparation soignée de smartphones, avec un suivi transparent du début à la fin.">
+<title>DigitRestore - Réparation de smartphones</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-    --fond:#030814;
-    --fond-secondaire:#071120;
-    --texte:#f7f9fc;
-    --texte-secondaire:#c2cada;
-    --cyan:#42ccef;
-    --rouge:#ff3f55;
-    --bordure:rgba(255,255,255,.10);
+    --bleu-nuit:#041426;
+    --bleu-encre:#071d38;
+    --bleu:#18aaf4;
+    --violet:#4b2b79;
+    --rouge:#ff554b;
+    --ivoire:#fff6e8;
+    --texte-secondaire:rgba(242,239,235,.78);
 }
 
 *{
@@ -29,6 +29,7 @@
 
 html{
     color-scheme:dark;
+    background:var(--bleu-nuit);
 }
 
 body{
@@ -36,20 +37,23 @@ body{
     min-height:100vh;
     min-height:100svh;
     overflow-x:hidden;
-    font-family:"Poppins",sans-serif;
-    color:var(--texte);
+    color:var(--ivoire);
+    font-family:"Manrope",Arial,sans-serif;
     background:
-        radial-gradient(circle at 8% 34%,rgba(35,133,181,.13),transparent 31%),
-        radial-gradient(circle at 91% 76%,rgba(190,40,67,.10),transparent 29%),
-        linear-gradient(135deg,var(--fond) 0%,var(--fond-secondaire) 56%,#030712 100%);
+        radial-gradient(ellipse at 99% 103%,rgba(222,47,76,.82) 0%,rgba(155,35,82,.34) 23%,transparent 48%),
+        radial-gradient(ellipse at 83% 5%,rgba(80,44,137,.72) 0%,rgba(42,35,105,.35) 30%,transparent 58%),
+        linear-gradient(112deg,#031426 0%,#061a35 43%,#111943 70%,#251633 100%);
 }
 
 body::before{
     content:"";
     position:fixed;
     inset:0;
+    z-index:0;
     pointer-events:none;
-    background:linear-gradient(115deg,rgba(255,255,255,.018),transparent 34% 72%,rgba(255,255,255,.012));
+    background:
+        radial-gradient(circle at 12% 70%,rgba(19,119,190,.10),transparent 30%),
+        linear-gradient(120deg,rgba(255,255,255,.012),transparent 38% 72%,rgba(255,255,255,.018));
 }
 
 a{
@@ -64,8 +68,8 @@ a{
     padding:10px 14px;
     color:#06101d;
     background:#fff;
-    border-radius:8px;
-    transform:translateY(-160%);
+    border-radius:6px;
+    transform:translateY(-170%);
     transition:transform .2s ease;
 }
 
@@ -76,187 +80,244 @@ a{
 .page{
     position:relative;
     z-index:1;
-    width:min(1720px,100%);
+    isolation:isolate;
+    width:min(1920px,100%);
     min-height:100vh;
     min-height:100svh;
     margin:0 auto;
-    padding:clamp(18px,2.1vw,38px) clamp(20px,3.4vw,68px) clamp(28px,3.2vw,58px);
-    display:grid;
-    grid-template-rows:auto minmax(0,1fr);
+    overflow:hidden;
 }
 
 .site-header{
-    min-height:86px;
+    position:relative;
+    z-index:5;
+    height:clamp(118px,14vh,152px);
     display:flex;
     align-items:center;
-    padding-bottom:18px;
-    border-bottom:1px solid var(--bordure);
+    padding:clamp(24px,3.4vw,54px) clamp(28px,4.4vw,84px) 0;
 }
 
 .brand{
     display:inline-flex;
     align-items:center;
-    gap:15px;
+    gap:clamp(14px,1.4vw,25px);
     text-decoration:none;
 }
 
 .brand-logo{
-    width:64px;
-    height:64px;
+    width:clamp(70px,5vw,94px);
+    height:clamp(70px,5vw,94px);
     flex:0 0 auto;
     object-fit:contain;
-    filter:drop-shadow(0 10px 22px rgba(0,0,0,.32));
-}
-
-.brand-copy{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
+    filter:drop-shadow(0 0 11px rgba(25,168,244,.31)) drop-shadow(0 12px 24px rgba(0,0,0,.32));
 }
 
 .brand-name{
     display:flex;
-    gap:7px;
-    font-family:"Montserrat",sans-serif;
-    font-size:clamp(22px,2vw,31px);
-    font-weight:900;
+    gap:0;
+    font-size:clamp(31px,2.15vw,42px);
+    font-weight:600;
     line-height:1;
-    letter-spacing:.055em;
+    letter-spacing:.005em;
 }
 
-.brand-name span:last-child{
+.brand-digit{
+    color:var(--bleu);
+}
+
+.brand-restore{
     color:var(--rouge);
 }
 
-.brand-tag{
-    color:var(--cyan);
-    font-size:clamp(8px,.78vw,11px);
-    font-weight:600;
-    line-height:1.3;
-    letter-spacing:.22em;
-    text-transform:uppercase;
-}
-
 .hero{
-    min-height:0;
+    position:relative;
+    min-height:calc(100vh - clamp(118px,14vh,152px));
+    min-height:calc(100svh - clamp(118px,14vh,152px));
     display:grid;
-    grid-template-columns:minmax(400px,.82fr) minmax(560px,1.28fr);
+    grid-template-columns:minmax(410px,37%) 1fr;
     align-items:center;
-    gap:clamp(42px,5vw,88px);
-    padding:clamp(44px,7vh,92px) 0 clamp(16px,3vh,38px);
+    padding:clamp(18px,2vh,34px) clamp(28px,4.4vw,84px) clamp(54px,6vh,82px);
 }
 
 .hero-copy{
-    max-width:650px;
-    animation:arrivee-texte .65s ease-out both;
+    position:relative;
+    z-index:3;
+    max-width:620px;
+    animation:arrivee-texte .72s cubic-bezier(.22,.78,.32,1) both;
 }
 
 .hero-kicker{
-    width:170px;
-    height:4px;
-    margin-bottom:30px;
-    border-radius:99px;
-    background:linear-gradient(90deg,var(--cyan),var(--rouge));
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:17px;
+    margin-bottom:clamp(35px,4.8vh,55px);
+    color:rgba(255,249,239,.93);
+    font-size:clamp(15px,1.08vw,20px);
+    font-weight:600;
+    line-height:1.4;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+}
+
+.hero-kicker::after{
+    content:"";
+    width:138px;
+    height:2px;
+    background:linear-gradient(90deg,var(--bleu) 0 49%,var(--rouge) 51% 100%);
+    box-shadow:0 0 16px rgba(24,170,244,.18),0 0 18px rgba(255,85,75,.14);
 }
 
 .hero-title{
-    max-width:650px;
-    font-family:"Poppins",sans-serif;
-    font-size:clamp(42px,4.2vw,69px);
-    font-weight:700;
-    line-height:1.08;
-    letter-spacing:-.045em;
+    max-width:620px;
+    color:var(--ivoire);
+    font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:clamp(60px,5vw,88px);
+    font-weight:500;
+    line-height:.96;
+    letter-spacing:-.035em;
     text-wrap:balance;
 }
 
-.hero-subtitle{
-    margin-top:24px;
-    color:var(--cyan);
-    font-size:clamp(19px,1.65vw,27px);
-    font-weight:600;
-    line-height:1.35;
+.hero-title span,
+.hero-title em{
+    display:block;
+}
+
+.hero-title em{
+    margin-top:.08em;
+    color:var(--rouge);
+    font-weight:500;
+    line-height:.92;
+}
+
+.hero-separator{
+    width:62px;
+    height:1px;
+    margin:clamp(28px,4vh,43px) 0 clamp(23px,3vh,32px);
+    border:0;
+    background:rgba(255,246,232,.24);
 }
 
 .hero-text{
-    max-width:610px;
-    margin-top:20px;
+    max-width:590px;
     color:var(--texte-secondaire);
-    font-size:clamp(14px,1.05vw,17px);
-    line-height:1.75;
+    font-size:clamp(18px,1.24vw,22px);
+    font-weight:400;
+    line-height:1.65;
+}
+
+.hero-text-line{
+    display:block;
 }
 
 .main-cta{
+    position:relative;
     display:inline-flex;
     align-items:center;
-    justify-content:center;
-    gap:24px;
-    min-width:300px;
-    margin-top:32px;
-    padding:17px 25px;
+    justify-content:space-between;
+    gap:34px;
+    min-width:min(360px,100%);
+    margin-top:clamp(28px,4vh,42px);
+    padding:18px 28px;
     border:1px solid transparent;
-    border-radius:15px;
-    color:var(--texte);
+    border-radius:3px;
+    color:#fff8ec;
     background:
-        linear-gradient(#07101f,#07101f) padding-box,
-        linear-gradient(105deg,var(--cyan),var(--rouge)) border-box;
-    box-shadow:0 15px 38px rgba(0,0,0,.26);
+        linear-gradient(rgba(4,20,38,.88),rgba(4,20,38,.88)) padding-box,
+        linear-gradient(105deg,var(--bleu),var(--violet),var(--rouge),var(--bleu)) border-box;
+    background-size:100% 100%,300% 100%;
+    box-shadow:0 16px 42px rgba(0,0,0,.24),inset 0 0 28px rgba(32,63,111,.10);
+    overflow:hidden;
     text-decoration:none;
-    font-size:15px;
-    font-weight:700;
-    transition:transform .22s ease,background-color .22s ease,box-shadow .22s ease;
+    font-size:clamp(16px,1.06vw,19px);
+    font-weight:500;
+    animation:bordure-vivante 7s linear infinite;
+    transition:transform .25s ease,box-shadow .25s ease,background-color .25s ease;
+}
+
+.main-cta::before{
+    content:"";
+    position:absolute;
+    inset:-120% -40%;
+    background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.16) 49%,transparent 60%);
+    transform:translateX(-62%);
+    animation:reflet-bouton 5.6s ease-in-out infinite;
+    pointer-events:none;
 }
 
 .main-cta:hover{
     transform:translateY(-3px);
-    box-shadow:0 20px 44px rgba(0,0,0,.34);
+    box-shadow:0 21px 48px rgba(0,0,0,.34),0 0 27px rgba(84,62,151,.18);
 }
 
 .main-cta:focus-visible{
-    outline:3px solid rgba(66,204,239,.48);
+    outline:3px solid rgba(24,170,244,.55);
     outline-offset:5px;
 }
 
 .main-cta-arrow{
-    font-size:23px;
+    position:relative;
+    z-index:1;
+    color:var(--rouge);
+    font-size:27px;
     font-weight:400;
     line-height:1;
-    transition:transform .22s ease;
+    transition:transform .25s ease;
+}
+
+.main-cta-label{
+    position:relative;
+    z-index:1;
 }
 
 .main-cta:hover .main-cta-arrow{
-    transform:translateX(4px);
+    transform:translateX(6px);
 }
 
-.atelier-card{
-    position:relative;
-    isolation:isolate;
-    width:100%;
-    padding:1px;
-    border-radius:30px;
-    background:linear-gradient(120deg,rgba(66,204,239,.92),rgba(255,255,255,.13) 47%,rgba(255,63,85,.90));
-    box-shadow:0 30px 80px rgba(0,0,0,.46);
-    animation:arrivee-image .75s ease-out .12s both;
-}
-
-.atelier-card::before{
-    content:"";
+.atelier-visual{
     position:absolute;
-    z-index:-1;
-    inset:10% 4% -8%;
-    border-radius:36px;
-    background:linear-gradient(90deg,rgba(66,204,239,.13),rgba(255,63,85,.12));
-    filter:blur(36px);
+    z-index:0;
+    top:clamp(-154px,-14vh,-112px);
+    right:clamp(-150px,-6vw,-72px);
+    bottom:clamp(-100px,-7vh,-60px);
+    left:24%;
+    margin:0;
+    pointer-events:none;
+    animation:arrivee-atelier 1s cubic-bezier(.22,.78,.32,1) .08s both;
 }
 
 .atelier-image{
     display:block;
     width:100%;
-    height:auto;
-    aspect-ratio:16/9;
-    border-radius:29px;
+    height:100%;
     object-fit:cover;
-    object-position:center;
-    background:#080d16;
+    object-position:52% center;
+    filter:saturate(.94) contrast(1.04) brightness(.88);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.05) 7%,rgba(0,0,0,.28) 15%,rgba(0,0,0,.72) 26%,#000 40%,#000 100%);
+    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.05) 7%,rgba(0,0,0,.28) 15%,rgba(0,0,0,.72) 26%,#000 40%,#000 100%);
+}
+
+.atelier-visual::before,
+.atelier-visual::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.05) 7%,rgba(0,0,0,.28) 15%,rgba(0,0,0,.72) 26%,#000 40%,#000 100%);
+    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.05) 7%,rgba(0,0,0,.28) 15%,rgba(0,0,0,.72) 26%,#000 40%,#000 100%);
+}
+
+.atelier-visual::before{
+    background:linear-gradient(180deg,rgba(23,17,75,.76) 0%,rgba(22,20,69,.22) 18%,transparent 31%,transparent 70%,rgba(60,18,66,.28) 82%,rgba(71,18,58,.72) 100%);
+}
+
+.atelier-visual::after{
+    background:
+        radial-gradient(ellipse at 100% 105%,rgba(255,59,77,.36) 0%,rgba(151,36,92,.20) 31%,transparent 59%),
+        radial-gradient(ellipse at 82% -4%,rgba(90,55,160,.30),transparent 52%);
+    mix-blend-mode:screen;
 }
 
 .visually-hidden{
@@ -272,177 +333,67 @@ a{
 }
 
 @keyframes arrivee-texte{
-    from{opacity:0;transform:translateY(14px)}
+    from{opacity:0;transform:translateY(18px)}
     to{opacity:1;transform:translateY(0)}
 }
 
-@keyframes arrivee-image{
-    from{opacity:0;transform:translateY(18px) scale(.99)}
-    to{opacity:1;transform:translateY(0) scale(1)}
+@keyframes arrivee-atelier{
+    from{opacity:0;transform:scale(1.018)}
+    to{opacity:1;transform:scale(1)}
 }
 
-@media(max-width:1180px){
-    .page{
-        min-height:auto;
-    }
-
-    .hero{
-        grid-template-columns:1fr;
-        gap:46px;
-        padding-top:54px;
-    }
-
-    .hero-copy{
-        max-width:760px;
-    }
-
-    .hero-title{
-        max-width:760px;
-        font-size:clamp(42px,7vw,66px);
-    }
-
-    .atelier-card{
-        max-width:980px;
-    }
+@keyframes bordure-vivante{
+    from{background-position:0 0,0% 50%}
+    to{background-position:0 0,300% 50%}
 }
 
-@media(max-width:720px){
+@keyframes reflet-bouton{
+    0%,58%{transform:translateX(-62%)}
+    78%,100%{transform:translateX(62%)}
+}
+
+@media(max-width:1100px){
     .page{
-        padding:15px 18px 32px;
+        min-height:100svh;
+        overflow:hidden;
     }
 
     .site-header{
-        min-height:70px;
-        padding-bottom:13px;
-    }
-
-    .brand{
-        gap:10px;
-    }
-
-    .brand-logo{
-        width:48px;
-        height:48px;
-    }
-
-    .brand-name{
-        font-size:20px;
-    }
-
-    .brand-tag{
-        max-width:250px;
-        font-size:7px;
-        letter-spacing:.16em;
+        height:auto;
+        padding:28px 34px 0;
     }
 
     .hero{
-        gap:34px;
-        padding-top:42px;
+        min-height:auto;
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        padding:70px 34px 0;
     }
 
-    .hero-kicker{
-        width:120px;
-        margin-bottom:22px;
+    .hero-copy{
+        max-width:680px;
     }
 
     .hero-title{
-        font-size:clamp(36px,11vw,50px);
-        line-height:1.1;
+        max-width:680px;
+        font-size:clamp(62px,9vw,86px);
     }
 
-    .hero-subtitle{
-        margin-top:20px;
-    }
-
-    .hero-text{
-        margin-top:16px;
-        line-height:1.65;
-    }
-
-    .main-cta{
-        width:100%;
-        min-width:0;
-        margin-top:26px;
-    }
-
-    .atelier-card,
-    .atelier-image{
-        border-radius:20px;
-    }
-
-    .atelier-card{
-        padding:1px;
+    .atelier-visual{
+        position:relative;
+        inset:auto;
+        width:calc(100% + 68px);
+        height:clamp(430px,64vw,690px);
+        margin:-36px -34px -24px;
     }
 
     .atelier-image{
-        border-radius:19px;
+        object-position:56% center;
+        -webkit-mask-image:radial-gradient(ellipse 79% 69% at 58% 48%,#000 0%,#000 52%,rgba(0,0,0,.90) 67%,rgba(0,0,0,.38) 84%,transparent 100%);
+        mask-image:radial-gradient(ellipse 79% 69% at 58% 48%,#000 0%,#000 52%,rgba(0,0,0,.90) 67%,rgba(0,0,0,.38) 84%,transparent 100%);
     }
-}
 
-@media(prefers-reduced-motion:reduce){
-    *,*::before,*::after{
-        animation-duration:.01ms !important;
-        animation-iteration-count:1 !important;
-        transition-duration:.01ms !important;
-        scroll-behavior:auto !important;
-    }
-}
-</style>
-</head>
-
-<body>
-<a class="skip-link" href="#contenu">Aller au contenu</a>
-
-<div class="page">
-    <header class="site-header">
-        <a class="brand" href="welcome.html" aria-label="Accueil DigitRestore">
-            <img class="brand-logo" src="logo.png" alt="">
-
-            <span class="brand-copy">
-                <span class="brand-name">
-                    <span>DIGIT</span><span>RESTORE</span>
-                </span>
-                <span class="brand-tag">Réparation de smartphones &amp; tablettes</span>
-            </span>
-        </a>
-    </header>
-
-    <main class="hero" id="contenu">
-        <section class="hero-copy" aria-labelledby="titre-principal">
-            <div class="hero-kicker" aria-hidden="true"></div>
-
-            <h1 class="hero-title" id="titre-principal">
-                Réparation de smartphones &amp; tablettes
-            </h1>
-
-            <p class="hero-subtitle">La technologie mérite une seconde vie.</p>
-
-            <p class="hero-text">
-                Diagnostic clair, pièces adaptées et réparation soignée,
-                avec un suivi transparent du début à la fin.
-            </p>
-
-            <a class="main-cta" href="site.html">
-                <span>Découvrir DigitRestore</span>
-                <span class="main-cta-arrow" aria-hidden="true">→</span>
-            </a>
-        </section>
-
-        <figure class="atelier-card">
-            <img
-                class="atelier-image"
-                src="images/site/Atelier.png"
-                alt="Atelier DigitRestore équipé pour la réparation de smartphones et tablettes"
-                width="1672"
-                height="941"
-                decoding="async"
-                fetchpriority="high"
-            >
-            <figcaption class="visually-hidden">
-                Poste de travail DigitRestore avec microscope, tapis de réparation et équipements techniques.
-            </figcaption>
-        </figure>
-    </main>
-</div>
-</body>
-</html>
+    .atelier-visual::before{
+        background:
+          
