@@ -1,1 +1,843 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Découvrez les engagements qualité de DigitRestore pour la sélection des pièces et la réparation de votre smartphone.">
+<title>Notre exigence qualité - DigitRestore</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bleu-nuit: #031224;
+    --bleu-encre: #061a33;
+    --bleu-clair: #4ecbff;
+    --violet: #7253b9;
+    --rouge: #ff554b;
+    --ivoire: #fff8ee;
+    --texte: rgba(244, 242, 240, 0.82);
+    --ligne: rgba(255, 255, 255, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    background: var(--bleu-nuit);
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--ivoire);
+    font-family: "Manrope", Arial, sans-serif;
+    background:
+        radial-gradient(ellipse at 96% 8%, rgba(196, 37, 74, 0.30), transparent 34%),
+        radial-gradient(ellipse at 4% 48%, rgba(24, 170, 244, 0.16), transparent 32%),
+        radial-gradient(ellipse at 72% 58%, rgba(86, 56, 151, 0.22), transparent 37%),
+        linear-gradient(116deg, #031426 0%, #061a35 47%, #10183c 73%, #26152f 100%);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+    background-size: 54px 54px;
+    mask-image: linear-gradient(90deg, #000, transparent 36% 66%, #000);
+}
+
+a {
+    color: inherit;
+}
+
+.skip-link {
+    position: fixed;
+    z-index: 100;
+    top: 12px;
+    left: 12px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: var(--bleu-nuit);
+    background: #ffffff;
+    transform: translateY(-180%);
+    transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+.site-header {
+    width: min(1500px, calc(100% - 64px));
+    min-height: 112px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    border-bottom: 1px solid var(--ligne);
+}
+
+.header-identity,
+.brand {
+    display: flex;
+    align-items: center;
+}
+
+.header-identity {
+    gap: clamp(18px, 2vw, 34px);
+}
+
+.back-button {
+    min-height: 52px;
+    padding: 0 19px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    color: rgba(255, 248, 238, 0.92);
+    background:
+        linear-gradient(rgba(4, 18, 38, 0.90), rgba(4, 18, 38, 0.90)) padding-box,
+        linear-gradient(110deg, var(--bleu-clair), var(--violet), var(--rouge)) border-box;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.back-button:hover {
+    transform: translateX(-3px);
+    box-shadow: 0 15px 34px rgba(0, 0, 0, 0.34), 0 0 22px rgba(78, 203, 255, 0.12);
+}
+
+.back-symbol {
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.brand {
+    gap: 15px;
+    text-decoration: none;
+}
+
+.brand-logo {
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
+    filter: drop-shadow(0 7px 13px rgba(0, 0, 0, 0.42));
+}
+
+.brand-copy,
+.brand-name,
+.brand-tagline {
+    display: block;
+}
+
+.brand-name {
+    font-size: clamp(26px, 2vw, 34px);
+    font-weight: 800;
+    letter-spacing: 0.035em;
+    line-height: 1;
+}
+
+.brand-digit {
+    color: var(--bleu-clair);
+}
+
+.brand-restore {
+    color: var(--rouge);
+}
+
+.brand-tagline {
+    margin-top: 8px;
+    color: rgba(255, 248, 238, 0.72);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.header-marker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 248, 238, 0.72);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.header-marker::before {
+    content: "";
+    width: 54px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--bleu-clair), var(--violet), var(--rouge));
+}
+
+.quality-main {
+    width: min(1450px, calc(100% - 64px));
+    margin: 0 auto;
+    padding: clamp(58px, 7vw, 108px) 0 80px;
+}
+
+.quality-intro {
+    position: relative;
+    min-height: 400px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+    align-items: center;
+    gap: clamp(36px, 6vw, 100px);
+}
+
+.quality-intro::after {
+    content: "";
+    position: absolute;
+    right: 7%;
+    bottom: 0;
+    width: 42%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(78, 203, 255, 0.55), rgba(255, 85, 75, 0.38), transparent);
+}
+
+.quality-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--bleu-clair);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.quality-eyebrow::before {
+    content: "";
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--bleu-clair), var(--rouge));
+}
+
+.quality-title {
+    max-width: 760px;
+    margin-top: 22px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(64px, 7.5vw, 118px);
+    font-weight: 500;
+    line-height: 0.82;
+    letter-spacing: -0.035em;
+}
+
+.quality-title span {
+    display: block;
+}
+
+.quality-title .accent {
+    color: transparent;
+    background: linear-gradient(90deg, var(--bleu-clair), #b7b3eb 48%, var(--rouge));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.quality-lead {
+    max-width: 690px;
+    margin-top: 30px;
+    color: var(--texte);
+    font-size: clamp(17px, 1.25vw, 21px);
+    line-height: 1.72;
+}
+
+.quality-lead strong {
+    color: var(--ivoire);
+}
+
+.mascot-stage {
+    position: relative;
+    min-height: 390px;
+    display: grid;
+    place-items: center;
+}
+
+.mascot-stage::before,
+.mascot-stage::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.mascot-stage::before {
+    width: min(390px, 35vw);
+    aspect-ratio: 1;
+    border: 1px solid rgba(78, 203, 255, 0.26);
+    box-shadow: inset 0 0 70px rgba(78, 203, 255, 0.07), 0 0 60px rgba(114, 83, 185, 0.11);
+}
+
+.mascot-stage::after {
+    width: min(300px, 28vw);
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(78, 203, 255, 0.14), rgba(114, 83, 185, 0.08) 48%, transparent 72%);
+    filter: blur(4px);
+}
+
+.quality-mascot {
+    position: relative;
+    z-index: 1;
+    width: min(320px, 28vw);
+    max-height: 365px;
+    object-fit: contain;
+    filter: drop-shadow(-10px 2px 23px rgba(78, 203, 255, 0.18)) drop-shadow(12px 3px 23px rgba(255, 85, 75, 0.14));
+}
+
+.principles {
+    margin-top: clamp(60px, 8vw, 110px);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.principle-card {
+    position: relative;
+    min-height: 100%;
+    padding: clamp(27px, 2.8vw, 42px);
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 22px;
+    background:
+        linear-gradient(145deg, rgba(5, 22, 44, 0.91), rgba(12, 18, 44, 0.88) 68%, rgba(32, 15, 35, 0.87)) padding-box,
+        linear-gradient(120deg, rgba(78, 203, 255, 0.60), rgba(114, 83, 185, 0.32), rgba(255, 85, 75, 0.52)) border-box;
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.20), inset 0 0 35px rgba(65, 104, 161, 0.045);
+}
+
+.principle-card::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    top: -95px;
+    right: -75px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(78, 203, 255, 0.11), transparent 70%);
+}
+
+.principle-card:nth-child(2n)::after {
+    background: radial-gradient(circle, rgba(255, 85, 75, 0.10), transparent 70%);
+}
+
+.principle-header {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+}
+
+.principle-number {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(78, 203, 255, 0.64);
+    border-radius: 50%;
+    color: var(--bleu-clair);
+    background: rgba(3, 18, 36, 0.72);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+}
+
+.principle-card:nth-child(2n) .principle-number {
+    border-color: rgba(255, 85, 75, 0.58);
+    color: #ff877f;
+}
+
+.principle-title {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(29px, 2.45vw, 40px);
+    font-weight: 600;
+    line-height: 1.02;
+}
+
+.principle-copy {
+    position: relative;
+    z-index: 1;
+    margin-top: 22px;
+    color: var(--texte);
+    font-size: clamp(15px, 1.04vw, 17px);
+    line-height: 1.72;
+}
+
+.principle-copy p + p {
+    margin-top: 15px;
+}
+
+.principle-copy strong {
+    color: var(--ivoire);
+    font-weight: 700;
+}
+
+.wide-card {
+    grid-column: 1 / -1;
+}
+
+.wide-card .principle-copy {
+    columns: 2 320px;
+    column-gap: 52px;
+}
+
+.quality-commitment {
+    position: relative;
+    margin-top: 20px;
+    padding: clamp(34px, 4.2vw, 64px);
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 24px;
+    background:
+        linear-gradient(110deg, rgba(4, 22, 44, 0.96), rgba(13, 20, 48, 0.96) 52%, rgba(47, 16, 33, 0.94)) padding-box,
+        linear-gradient(90deg, var(--bleu-clair), var(--violet), var(--rouge)) border-box;
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32), 0 0 35px rgba(78, 203, 255, 0.07);
+}
+
+.quality-commitment::before {
+    content: "“";
+    position: absolute;
+    top: -30px;
+    right: 4%;
+    color: rgba(255, 85, 75, 0.10);
+    font-family: Georgia, serif;
+    font-size: 250px;
+    line-height: 1;
+}
+
+.commitment-label {
+    color: var(--bleu-clair);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.quality-commitment h2 {
+    position: relative;
+    max-width: 1000px;
+    margin-top: 18px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(38px, 4.3vw, 66px);
+    font-weight: 500;
+    line-height: 1.02;
+}
+
+.quality-commitment p {
+    position: relative;
+    max-width: 1050px;
+    margin-top: 19px;
+    color: var(--texte);
+    font-size: clamp(16px, 1.2vw, 19px);
+    line-height: 1.7;
+}
+
+.quality-commitment blockquote {
+    position: relative;
+    max-width: 1180px;
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+    color: var(--ivoire);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(28px, 3.1vw, 48px);
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.12;
+}
+
+.site-footer {
+    width: min(1450px, calc(100% - 64px));
+    margin: 0 auto;
+    padding: 0 0 38px;
+    color: rgba(255, 248, 238, 0.50);
+    font-size: 12px;
+    text-align: center;
+}
+
+a:focus-visible {
+    outline: 3px solid rgba(78, 203, 255, 0.72);
+    outline-offset: 5px;
+}
+
+@media (max-width: 940px) {
+    .site-header,
+    .quality-main,
+    .site-footer {
+        width: min(100% - 40px, 760px);
+    }
+
+    .site-header {
+        min-height: 96px;
+    }
+
+    .header-marker {
+        display: none;
+    }
+
+    .quality-main {
+        padding-top: 55px;
+    }
+
+    .quality-intro {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .quality-intro::after {
+        display: none;
+    }
+
+    .quality-title {
+        font-size: clamp(64px, 13vw, 92px);
+    }
+
+    .mascot-stage {
+        min-height: 310px;
+    }
+
+    .mascot-stage::before {
+        width: 320px;
+    }
+
+    .mascot-stage::after {
+        width: 250px;
+    }
+
+    .quality-mascot {
+        width: 260px;
+        max-height: 300px;
+    }
+
+    .principles {
+        grid-template-columns: 1fr;
+        margin-top: 60px;
+    }
+
+    .wide-card {
+        grid-column: auto;
+    }
+
+    .wide-card .principle-copy {
+        columns: auto;
+    }
+}
+
+@media (max-width: 620px) {
+    .site-header,
+    .quality-main,
+    .site-footer {
+        width: calc(100% - 30px);
+    }
+
+    .site-header {
+        min-height: 86px;
+    }
+
+    .header-identity {
+        width: 100%;
+        gap: 12px;
+    }
+
+    .back-button {
+        min-width: 48px;
+        min-height: 48px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .back-button span:last-child {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+    }
+
+    .brand {
+        gap: 9px;
+    }
+
+    .brand-logo {
+        width: 52px;
+        height: 52px;
+    }
+
+    .brand-name {
+        font-size: clamp(21px, 7.2vw, 28px);
+    }
+
+    .brand-tagline {
+        font-size: 8px;
+        letter-spacing: 0.12em;
+    }
+
+    .quality-main {
+        padding-top: 44px;
+        padding-bottom: 52px;
+    }
+
+    .quality-title {
+        font-size: clamp(55px, 18vw, 77px);
+    }
+
+    .quality-lead {
+        margin-top: 24px;
+        font-size: 16px;
+        line-height: 1.65;
+    }
+
+    .mascot-stage {
+        min-height: 270px;
+    }
+
+    .mascot-stage::before {
+        width: 270px;
+    }
+
+    .mascot-stage::after {
+        width: 215px;
+    }
+
+    .quality-mascot {
+        width: 220px;
+        max-height: 260px;
+    }
+
+    .principle-card {
+        padding: 25px 21px;
+        border-radius: 18px;
+    }
+
+    .principle-header {
+        grid-template-columns: 46px minmax(0, 1fr);
+        gap: 13px;
+    }
+
+    .principle-number {
+        width: 46px;
+        height: 46px;
+        font-size: 12px;
+    }
+
+    .principle-title {
+        font-size: 28px;
+    }
+
+    .principle-copy {
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+    .quality-commitment {
+        padding: 30px 23px;
+        border-radius: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<header class="site-header">
+    <div class="header-identity">
+        <a class="back-button" href="site.html" aria-label="Retour à la page des services">
+            <span class="back-symbol" aria-hidden="true">‹</span>
+            <span>Retour</span>
+        </a>
+
+        <a class="brand" href="welcome.html" aria-label="Accueil DigitRestore">
+            <img class="brand-logo" src="logo.png" alt="">
+            <span class="brand-copy">
+                <span class="brand-name" aria-label="DigitRestore">
+                    <span class="brand-digit">DIGIT</span><span class="brand-restore">RESTORE</span>
+                </span>
+                <span class="brand-tagline">Réparation de smartphones</span>
+            </span>
+        </a>
+    </div>
+
+    <p class="header-marker">Notre exigence qualité</p>
+</header>
+
+<main class="quality-main" id="contenu">
+    <section class="quality-intro" aria-labelledby="quality-title">
+        <div>
+            <p class="quality-eyebrow">Notre exigence qualité</p>
+            <h1 class="quality-title" id="quality-title">
+                <span>La qualité</span>
+                <span class="accent">avant le prix.</span>
+            </h1>
+
+            <p class="quality-lead">
+                Chez DigitRestore, la qualité d’une réparation commence bien avant le démontage de votre smartphone. Elle commence par la <strong>sélection de la pièce qui sera installée</strong>.
+            </p>
+        </div>
+
+        <div class="mascot-stage" aria-hidden="true">
+            <img class="quality-mascot" src="images/site/Mascotte-DigitRestore.png" alt="" decoding="async">
+        </div>
+    </section>
+
+    <section class="principles" aria-label="Les engagements qualité de DigitRestore">
+        <article class="principle-card">
+            <header class="principle-header">
+                <span class="principle-number">01</span>
+                <h2 class="principle-title">La qualité avant le prix</h2>
+            </header>
+            <div class="principle-copy">
+                <p>Le marché de la pièce détachée propose de nombreuses gammes : composants économiques, pièces compatibles de différentes qualités, pièces reconditionnées et pièces d’origine lorsqu’elles sont disponibles.</p>
+                <p>Ces produits peuvent présenter des différences importantes en matière de fabrication, de performances, de fiabilité et de durabilité.</p>
+                <p><strong>Notre politique est donc simple : le prix d’achat d’une pièce ne doit jamais déterminer, à lui seul, son niveau de qualité.</strong></p>
+            </div>
+        </article>
+
+        <article class="principle-card">
+            <header class="principle-header">
+                <span class="principle-number">02</span>
+                <h2 class="principle-title">Préserver les caractéristiques de votre smartphone</h2>
+            </header>
+            <div class="principle-copy">
+                <p>Notre objectif n’est pas de trouver la pièce la moins chère qui fonctionne. Nous recherchons la solution la plus adaptée à votre appareil, à sa technologie d’origine et à l’utilisation que vous en faites.</p>
+                <p>DigitRestore privilégie des pièces compatibles de gamme supérieure, des composants reconditionnés de qualité ou des pièces d’origine lorsque leur disponibilité et leur prix permettent de les proposer.</p>
+                <p>Nous veillons également à ne pas remplacer volontairement une technologie par une solution inférieure dans le seul but de réduire le coût de la réparation.</p>
+            </div>
+        </article>
+
+        <article class="principle-card">
+            <header class="principle-header">
+                <span class="principle-number">03</span>
+                <h2 class="principle-title">Compatible ne signifie pas bas de gamme</h2>
+            </header>
+            <div class="principle-copy">
+                <p>Une pièce compatible n’est pas nécessairement une pièce de mauvaise qualité.</p>
+                <p>Comme pour de nombreux produits, il existe plusieurs niveaux de fabrication. Certaines pièces sont principalement conçues pour obtenir le prix de vente le plus bas possible. D’autres offrent un excellent niveau de fabrication, de fonctionnement et de fiabilité.</p>
+                <p>DigitRestore sélectionne donc ses pièces selon leurs caractéristiques réelles et leur adaptation au smartphone, et pas uniquement selon leur appellation commerciale ou leur prix.</p>
+            </div>
+        </article>
+
+        <article class="principle-card">
+            <header class="principle-header">
+                <span class="principle-number">04</span>
+                <h2 class="principle-title">Des fournisseurs sélectionnés avec attention</h2>
+            </header>
+            <div class="principle-copy">
+                <p>La qualité d’une pièce dépend également de la fiabilité de son approvisionnement.</p>
+                <p>DigitRestore privilégie des fournisseurs capables de proposer des composants réguliers, correctement identifiés et correspondant réellement au niveau de qualité annoncé.</p>
+                <p>Le prix reste naturellement pris en compte, mais uniquement après avoir déterminé le niveau de qualité nécessaire à la réparation.</p>
+                <p><strong>Notre logique est volontairement inversée : nous choisissons d’abord la qualité recherchée, puis nous recherchons le meilleur approvisionnement possible pour cette qualité.</strong></p>
+            </div>
+        </article>
+
+        <article class="principle-card">
+            <header class="principle-header">
+                <span class="principle-number">05</span>
+                <h2 class="principle-title">Des contrôles avant l’installation</h2>
+            </header>
+            <div class="principle-copy">
+                <p>Une pièce neuve ou compatible n’est pas automatiquement considérée comme satisfaisante simplement parce qu’elle vient d’être reçue.</p>
+                <p>Avant son installation, sa conformité, son état général et sa compatibilité avec l’appareil doivent être vérifiés.</p>
+                <p>Cette attention permet de limiter les mauvaises surprises et d’éviter d’installer un composant présentant un défaut visible ou ne correspondant pas correctement au smartphone concerné.</p>
+            </div>
+        </article>
+
+        <article class="principle-card">
+            <header class="principle-header">
+                <span class="principle-number">06</span>
+                <h2 class="principle-title">La qualité ne dépend pas uniquement de la pièce</h2>
+            </header>
+            <div class="principle-copy">
+                <p>Même une excellente pièce peut donner un mauvais résultat si elle est installée sans précaution.</p>
+                <p>La qualité d’une réparation repose également sur la propreté du démontage, le respect des composants internes, l’utilisation d’outils adaptés et le soin apporté au remontage.</p>
+                <p><strong>DigitRestore considère donc la réparation dans son ensemble : la pièce installée, la méthode de travail et les contrôles réalisés sont indissociables.</strong></p>
+            </div>
+        </article>
+
+        <article class="principle-card">
+            <header class="principle-header">
+                <span class="principle-number">07</span>
+                <h2 class="principle-title">Des tests après la réparation</h2>
+            </header>
+            <div class="principle-copy">
+                <p>Après l’intervention, les principales fonctions concernées par la réparation sont contrôlées afin de vérifier le bon fonctionnement de la pièce installée et son intégration avec le smartphone.</p>
+                <p>Ces vérifications permettent de s’assurer que la réparation ne se limite pas à remplacer un composant, mais qu’elle apporte réellement le résultat attendu.</p>
+            </div>
+        </article>
+
+        <article class="principle-card">
+            <header class="principle-header">
+                <span class="principle-number">08</span>
+                <h2 class="principle-title">La qualité ne doit pas devenir une variable de marge</h2>
+            </header>
+            <div class="principle-copy">
+                <p>Choisir une pièce moins chère tout en conservant le même prix de réparation permettrait naturellement d’augmenter la marge réalisée.</p>
+                <p><strong>Ce n’est pas notre manière de travailler.</strong></p>
+                <p>Une réparation annoncée avec un certain niveau de qualité doit réellement correspondre à ce niveau d’exigence. DigitRestore préfère accepter un coût d’approvisionnement plus élevé plutôt que d’améliorer sa rentabilité au détriment de la fiabilité de la réparation.</p>
+                <p><strong>La marge ne doit jamais être construite sur une baisse cachée de la qualité des composants installés.</strong></p>
+            </div>
+        </article>
+
+        <article class="principle-card wide-card">
+            <header class="principle-header">
+                <span class="principle-number">09</span>
+                <h2 class="principle-title">Une information claire et transparente</h2>
+            </header>
+            <div class="principle-copy">
+                <p>Avant toute réparation, la solution proposée doit pouvoir être expliquée clairement : type de pièce, niveau de qualité, disponibilité et éventuelles différences avec le composant d’origine.</p>
+                <p>Le client doit savoir ce qui sera installé dans son smartphone et pouvoir prendre sa décision en toute connaissance de cause.</p>
+                <p><strong>Cette transparence fait pleinement partie de notre conception d’une réparation professionnelle.</strong></p>
+            </div>
+        </article>
+    </section>
+
+    <section class="quality-commitment" aria-labelledby="commitment-title">
+        <p class="commitment-label">Notre engagement</p>
+        <h2 id="commitment-title">Une exigence que nous sommes prêts à assumer derrière notre nom.</h2>
+        <p>DigitRestore ne cherche pas nécessairement à proposer la réparation la moins chère. Notre priorité est de réaliser une intervention cohérente, propre et durable, que nous sommes prêts à assumer et à garantir derrière notre nom.</p>
+        <blockquote>Nous préférons gagner un peu moins sur une réparation plutôt que de réaliser quelques euros d’économie au détriment de votre appareil.</blockquote>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>DigitRestore — Réparation de smartphones</p>
+</footer>
+</body>
+</html>
