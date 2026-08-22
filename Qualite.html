@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -402,8 +401,24 @@ a {
 }
 
 .wide-card .principle-copy {
-    columns: 2 320px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 52px;
+    row-gap: 15px;
+}
+
+.wide-card .principle-copy p {
+    margin-top: 0;
+}
+
+.wide-card .principle-copy p:first-child {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+}
+
+.wide-card .principle-copy p:nth-child(2),
+.wide-card .principle-copy p:nth-child(3) {
+    grid-column: 2;
 }
 
 .quality-commitment {
@@ -544,7 +559,11 @@ a:focus-visible {
     }
 
     .wide-card .principle-copy {
-        columns: auto;
+        display: block;
+    }
+
+    .wide-card .principle-copy p + p {
+        margin-top: 15px;
     }
 }
 
